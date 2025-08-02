@@ -1,0 +1,8089 @@
+[
+  {
+    "file": "00_apocalypse_tech.txt",
+    "conditions": [
+      "host_has_dlc = \"Apocalypse\""
+    ]
+  },
+  {
+    "file": "00_apocalypse_tech.txt",
+    "conditions": [
+      "host_has_dlc = \"Apocalypse\"",
+      "has_country_flag = colossus_project"
+    ]
+  },
+  {
+    "file": "00_apocalypse_tech.txt",
+    "conditions": [
+      "host_has_dlc = \"Apocalypse\"",
+      "has_country_flag = colossus_project",
+      "is_spiritualist = no",
+      "is_pacifist = no"
+    ]
+  },
+  {
+    "file": "00_apocalypse_tech.txt",
+    "conditions": [
+      "host_has_dlc = \"Apocalypse\"",
+      "has_country_flag = colossus_project",
+      "is_spiritualist = yes",
+      "OR = {",
+      "AND = {",
+      "NOT = { host_has_dlc = \"Utopia\" }",
+      "has_technology = tech_telepathy",
+      "}",
+      "AND = {",
+      "host_has_dlc = \"Utopia\"",
+      "has_ascension_perk = ap_mind_over_matter",
+      "}",
+      "}"
+    ]
+  },
+  {
+    "file": "00_apocalypse_tech.txt",
+    "conditions": [
+      "host_has_dlc = \"Apocalypse\"",
+      "has_country_flag = colossus_project",
+      "has_valid_civic = civic_machine_assimilator"
+    ]
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_biogenesis_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_distant_stars_tech.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "00_distant_stars_tech.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "00_distant_stars_tech.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "00_distant_stars_tech.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "00_first_contact_tech.txt",
+    "conditions": [
+      "is_quarrelsome_species = yes"
+    ]
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": [
+      "always = no",
+      "has_grand_archive_dlc = yes"
+    ]
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "00_grand_archive_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "errorfix.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "sth_augment_tech.txt",
+    "conditions": [
+      "has_country_flag = augment_khanate"
+    ]
+  },
+  {
+    "file": "sth_augment_tech.txt",
+    "conditions": [
+      "has_country_flag = augment_khanate"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_mechanical_empire = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "host_has_dlc = Utopia"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_terran_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_terran_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_country_flag = tholian_assembly"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_romulan_tech_empire = yes",
+      "has_country_flag = cardassian_union",
+      "has_country_flag = breen_confederacy",
+      "has_country_flag = tholian_assembly",
+      "has_country_flag = orion_free_states",
+      "has_country_flag = lyran_star_empire",
+      "is_undine_empire = yes",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_country_flag = vidiian_sodality"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = ferengi_alliance",
+      "has_country_flag = nausicaan_tribes",
+      "has_country_flag = yridian_league",
+      "has_country_flag = hazari_tuatara",
+      "has_country_flag = kzinti_empire",
+      "has_country_flag = orion_free_states",
+      "has_country_flag = augment_khanate",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = FER",
+      "is_species_class = ORI",
+      "is_species_class = NAU",
+      "is_species_class = YRI",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = FER",
+      "is_species_class = ORI",
+      "is_species_class = NAU",
+      "is_species_class = YRI",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "has_access_to_underground_market = yes",
+      "OR = {",
+      "is_species_class = FER",
+      "is_species_class = ORI",
+      "is_species_class = NAU",
+      "is_species_class = YRI",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "host_has_dlc = Megacorp",
+      "OR = {",
+      "is_species_class = FER",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_nomadic_empire = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_nomadic_empire = no",
+      "NOR = {",
+      "is_species_class = FED",
+      "is_species_class = VUL",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_nomadic_empire = no",
+      "OR = {",
+      "is_species_class = FED",
+      "is_species_class = VUL",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "empire_can_study_psionic_techs = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "empire_can_study_psionic_techs = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_ascension_perk = ap_mind_over_matter",
+      "empire_can_study_psionic_techs = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "empire_can_study_psionic_techs = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "empire_can_study_psionic_techs = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "empire_can_study_psionic_techs = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "empire_can_study_psionic_techs = yes",
+      "NOT = { has_relic = r_stone_of_gol }"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "OR = {",
+      "is_species_class = UND",
+      "is_machine_empire = no",
+      "}",
+      "NOT = { has_country_flag = federation_founder }"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_master_geneticist_country = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_master_geneticist_country = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_master_geneticist_country = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_master_geneticist_country = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_xeno_compatible = no",
+      "NOR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_xeno_compatible = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_master_geneticist_country = yes",
+      "NOR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_master_geneticist_country = yes",
+      "NOR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_xeno_compatible = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "host_has_dlc = Megacorp"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "empire_can_not_study_gagarin = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = DOM",
+      "is_species_class = SON",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = sona_command",
+      "has_country_flag = the_dominion",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_nomadic_empire = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = BRU",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_nomadic_empire = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_nomadic_empire = no",
+      "NOR = {",
+      "is_species_class = DOM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_terran_empire = yes",
+      "host_has_dlc = Utopia"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_nomadic_empire = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_machine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_nomadic_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_nomadic_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_nomadic_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "has_country_flag = romulan_star_empire"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "OR = {",
+      "is_species_class = ORI",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_infester = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_nomadic_empire = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "NOR = {",
+      "is_species_class = ROM",
+      "is_species_class = CAR",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = united_earth",
+      "has_country_flag = united_federation_of_planets",
+      "has_country_flag = united_federation_of_planets_tng",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_infester = no",
+      "is_earth_story_empire = no",
+      "is_confederacy_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_biology_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "is_assimilator = no",
+      "uses_cloak_klingons = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "is_assimilator = no",
+      "uses_cloak_klingons = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "uses_cloaks_other = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "is_assimilator = no",
+      "uses_cloak_romulans = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "is_assimilator = no",
+      "uses_cloak_romulans = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "is_assimilator = no",
+      "uses_cloak_romulans = yes",
+      "NOT = { is_country_type = extradimensional }"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "uses_cloaks_other = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "uses_cloaks_other = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "OR = {",
+      "is_species_class = KRA",
+      "is_species_class = KRE",
+      "is_species_class = VOT # Voth",
+      "is_species_class = SUL # Suliban",
+      "is_species_class = CHE # Cheronite",
+      "is_species_class = VID # Vidiians",
+      "is_species_class = YRI # Yridians",
+      "is_species_class = KES # Kessok",
+      "is_species_class = BRE # Breen",
+      "has_country_flag = kessok_heliolatry",
+      "has_country_flag = terran_empire",
+      "has_country_flag = confederacy_of_earth",
+      "has_country_flag = federation_algeron_no",
+      "has_country_flag = suliban_cabal",
+      "has_country_flag = klingon_cardassian_alliance",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "has_country_flag = romulan_attack_country",
+      "has_country_flag = romulan_star_empire",
+      "has_country_flag = romulan_republic",
+      "has_country_flag = romulan_free_republic",
+      "has_country_flag = romulan_free_state",
+      "has_country_flag = reman_free_state",
+      "has_country_flag = reman_rebellion_country",
+      "has_country_flag = garidian_republic",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "OR = {",
+      "is_species_class = KRA",
+      "is_species_class = KRE",
+      "is_species_class = VOT # Voth",
+      "is_species_class = SUL # Suliban",
+      "is_species_class = CHE # Cheronite",
+      "is_species_class = VID # Vidiians",
+      "is_species_class = YRI # Yridians",
+      "is_species_class = KES # Kessok",
+      "is_species_class = BRE # Breen",
+      "has_country_flag = kessok_heliolatry",
+      "has_country_flag = terran_empire",
+      "has_country_flag = confederacy_of_earth",
+      "has_country_flag = federation_algeron_no",
+      "has_country_flag = suliban_cabal",
+      "has_country_flag = klingon_cardassian_alliance",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "has_country_flag = romulan_attack_country",
+      "has_country_flag = romulan_star_empire",
+      "has_country_flag = romulan_republic",
+      "has_country_flag = romulan_free_republic",
+      "has_country_flag = romulan_free_state",
+      "has_country_flag = reman_free_state",
+      "has_country_flag = reman_rebellion_country",
+      "has_country_flag = garidian_republic",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech.txt",
+    "conditions": [
+      "has_country_flag = united_federation_of_planets"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech_b.txt",
+    "conditions": [
+      "has_first_contact_dlc = no",
+      "is_assimilator = no",
+      "uses_cloak_klingons = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech_b.txt",
+    "conditions": [
+      "has_first_contact_dlc = no",
+      "is_assimilator = no",
+      "uses_cloak_klingons = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech_b.txt",
+    "conditions": [
+      "has_first_contact_dlc = no",
+      "uses_cloaks_other = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech_b.txt",
+    "conditions": [
+      "has_first_contact_dlc = no",
+      "is_assimilator = no",
+      "uses_cloak_romulans = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech_b.txt",
+    "conditions": [
+      "has_first_contact_dlc = no",
+      "is_assimilator = no",
+      "uses_cloak_romulans = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech_b.txt",
+    "conditions": [
+      "has_first_contact_dlc = no",
+      "is_assimilator = no",
+      "uses_cloak_romulans = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech_b.txt",
+    "conditions": [
+      "has_first_contact_dlc = no",
+      "uses_cloaks_other = yes"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech_b.txt",
+    "conditions": [
+      "has_first_contact_dlc = no",
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "OR = {",
+      "is_species_class = FED",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech_b.txt",
+    "conditions": [
+      "has_first_contact_dlc = no",
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "OR = {",
+      "is_species_class = FED",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_cloak_tech_b.txt",
+    "conditions": [
+      "has_first_contact_dlc = no",
+      "uses_cloaks_other = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "NOR = {",
+      "has_country_flag = gorn_empire",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "NOR = {",
+      "has_country_flag = the_borg_collective",
+      "has_country_flag = machine_race",
+      "has_country_flag = klingon_empire",
+      "has_country_flag = the_dominion",
+      "has_country_flag = bynar_domains",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_synthetic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "has_organic_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_country_flag = machine_race"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_country_flag = machine_race"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = pralor_auxiliary",
+      "has_country_flag = cravic_imperative",
+      "has_country_flag = machine_race",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = pralor_auxiliary",
+      "has_country_flag = cravic_imperative",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = pralor_auxiliary",
+      "has_country_flag = cravic_imperative",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = pralor_auxiliary",
+      "has_country_flag = cravic_imperative",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = pralor_auxiliary",
+      "has_country_flag = cravic_imperative",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = gorn_empire",
+      "has_country_flag = gorn_raiding_country",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = gorn_empire",
+      "has_country_flag = gorn_raiding_country",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = gorn_empire",
+      "has_country_flag = gorn_raiding_country",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = gorn_empire",
+      "has_country_flag = gorn_raiding_country",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "OR = {",
+      "is_earth_or_ufp_story_empire = yes",
+      "has_country_flag = xindi_council",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_computing_tech.txt",
+    "conditions": [
+      "has_country_flag = krenim_imperium"
+    ]
+  },
+  {
+    "file": "sth_detection_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_detection_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_detection_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_detection_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_detection_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_detection_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_detection_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "is_assimilator = yes"
+    ]
+  },
+  {
+    "file": "sth_detection_tech.txt",
+    "conditions": [
+      "has_first_contact_dlc = yes",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_detection_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "is_assimilator = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_great_house_country = yes",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_country_flag = xahean_tech_complete"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = pakled_big_clans",
+      "has_country_flag = caitian_union",
+      "has_country_flag = kzinti_empire",
+      "has_country_flag = cardassian_union",
+      "has_country_flag = orion_free_states",
+      "has_country_flag = hazari_tuatara",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = pakled_big_clans",
+      "has_country_flag = caitian_union",
+      "has_country_flag = kzinti_empire",
+      "has_country_flag = cardassian_union",
+      "has_country_flag = orion_free_states",
+      "has_country_flag = hazari_tuatara",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = federation_founder",
+      "has_country_flag = united_federation_of_planets",
+      "has_country_flag = terra_prime",
+      "has_country_flag = terran_empire",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = federation_founder",
+      "has_country_flag = united_federation_of_planets",
+      "has_country_flag = terra_prime",
+      "has_country_flag = terran_empire",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "has_country_flag = klingon_cardassian_alliance",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_country_flag = hirogen_hunters"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_country_flag = hirogen_hunters"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_country_flag = hirogen_hunters"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = romulan_star_empire",
+      "has_country_flag = garidian_republic",
+      "has_country_flag = reman_free_state",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "uses_holographic_technology = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "starfleet_graphical_culture = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "starfleet_graphical_culture = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "starfleet_graphical_culture = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "starfleet_graphical_culture = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "starfleet_graphical_culture = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "starfleet_graphical_culture = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "host_has_dlc = \"Apocalypse\"",
+      "has_country_flag = terran_empire",
+      "is_pacifist = no"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "always = no # Just for now",
+      "OR = {",
+      "has_origin = origin_void_dwellers",
+      "host_has_dlc = \"Utopia\"",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "always = no # Just for now",
+      "OR = {",
+      "host_has_dlc = \"Utopia\"",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "always = no # Just for now",
+      "OR = {",
+      "has_origin = origin_void_dwellers",
+      "host_has_dlc = \"Utopia\"",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_cosmic_storms_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_cosmic_storms_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_cosmic_storms_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_cosmic_storms_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_cosmic_storms_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_cosmic_storms_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": [
+      "has_grand_archive_dlc = yes"
+    ]
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_events.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_nomadic_empire = no"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "NOR = {",
+      "has_country_flag = cravic_imperative",
+      "has_country_flag = pralor_auxiliary",
+      "is_borg_empire = yes",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "has_country_flag = suliban_cabal"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "has_synthetic_drone_authority = no",
+      "NOT = {",
+      "has_country_flag = tholian_assembly",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "uses_warp_cores = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "OR = {",
+      "is_species_class = VAA",
+      "has_country_flag = turei_commonwealth",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_terran_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_vulcan_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_vulcan_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_vulcan_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_vulcan_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_vulcan_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_vulcan_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_vulcan_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_vulcan_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "NOR = {",
+      "has_country_flag = tholian_assembly",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "NOR = {",
+      "has_country_flag = tholian_assembly",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "NOR = {",
+      "has_country_flag = tholian_assembly",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "NOR = {",
+      "has_country_flag = tholian_assembly",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "NOR = {",
+      "has_country_flag = tholian_assembly",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "NOR = {",
+      "has_country_flag = tholian_assembly",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "has_country_flag = tholian_assembly"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "has_country_flag = tholian_assembly"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "has_country_flag = tholian_assembly"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "has_country_flag = tholian_assembly"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_borg_empire = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = voth_theocracy",
+      "has_country_flag = suliban_cabal",
+      "has_country_flag = hirogen_hunters",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_field_manipulation_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_future_tech.txt",
+    "conditions": [
+      "is_species_class = VAU"
+    ]
+  },
+  {
+    "file": "sth_future_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_difficulty >= 4"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "use_weapon_cannon = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "has_country_flag = suliban_cabal"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "has_country_flag = suliban_cabal"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "has_country_flag = suliban_cabal"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "has_country_flag = suliban_cabal"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = united_earth",
+      "has_country_flag = terra_prime",
+      "has_country_flag = terran_empire",
+      "has_country_flag = united_human_remnant",
+      "has_country_flag = confederacy_of_earth",
+      "is_earth_or_ufp_story_empire = yes",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = united_earth",
+      "has_country_flag = terra_prime",
+      "has_country_flag = terran_empire",
+      "has_country_flag = united_human_remnant",
+      "has_country_flag = confederacy_of_earth",
+      "is_earth_or_ufp_story_empire = yes",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_country_flag = terran_empire"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "OR = {",
+      "has_country_flag = modin_class_unlocked",
+      "has_country_flag = terran_empire",
+      "has_country_flag = united_federation_of_planets",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "has_country_flag = klingon_empire"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_industry_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_kessok_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = KES",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_krenim_tech.txt",
+    "conditions": [
+      "has_country_flag = krenim_imperium"
+    ]
+  },
+  {
+    "file": "sth_krenim_tech.txt",
+    "conditions": [
+      "has_country_flag = krenim_imperium"
+    ]
+  },
+  {
+    "file": "sth_krenim_tech.txt",
+    "conditions": [
+      "has_country_flag = krenim_imperium"
+    ]
+  },
+  {
+    "file": "sth_krenim_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_krenim_tech.txt",
+    "conditions": [
+      "has_country_flag = krenim_imperium"
+    ]
+  },
+  {
+    "file": "sth_krenim_tech.txt",
+    "conditions": [
+      "has_country_flag = krenim_imperium"
+    ]
+  },
+  {
+    "file": "sth_krenim_tech.txt",
+    "conditions": [
+      "has_country_flag = krenim_imperium"
+    ]
+  },
+  {
+    "file": "sth_krenim_tech.txt",
+    "conditions": [
+      "has_country_flag = krenim_imperium"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = hirogen_hunters",
+      "has_country_flag = hirogen_raiding_country",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_country_flag = klingon_empire"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_nomadic_empire= no",
+      "is_vulcanoid_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_nomadic_empire= no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "NOT = { has_country_flag = federation_founder }"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "uses_cloaks = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_materials_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no",
+      "has_organic_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "species = { is_organic_species = yes }",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = no",
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = no",
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_machine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_country_flag = kobali_republic"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = HIR",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_nomadic_empire = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_habitat_empire = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_country_flag = united_earth",
+      "NOT = { has_country_flag = terran_empire }"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_nomadic_empire = no",
+      "NOT = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = BRE",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_hot_climate_species = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "OR = {",
+      "is_cold_climate_species = yes",
+      "has_country_flag = unlocked_advanced_terraforming_tech",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "is_species_class = SHE",
+      "is_species_class = MED",
+      "is_species_class = CRA",
+      "is_species_class = PRA",
+      "is_species_class = HYDR",
+      "has_country_flag = tech_colonize_y_class_allowed",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "is_species_class = HYDR",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "is_species_class = HYDR",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "is_species_class = HYDR",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = SHE",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = SHE",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = SHE",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = SHE",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = SHE",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = SHE",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = THO",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = SHE",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = SHE",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = sulphuric_colonisation_allowed",
+      "is_species_class = MON",
+      "is_species_class = PAC",
+      "is_species_class = MED",
+      "is_species_class = CHEL",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_machine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_species_class = HUR"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "can_have_religious_utility = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "can_have_religious_retreat_planet = yes"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_new_worlds_tech.txt",
+    "conditions": [
+      "has_country_flag = hurq_stagnancy"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = breen_confederacy",
+      "has_country_flag = unlocked_breen_weapons",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = breen_confederacy"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = breen_confederacy"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = breen_confederacy"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "uses_phaser_weapons_fed = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "uses_disruptor_weapons_klingon = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = klingon_empire",
+      "has_country_flag = klingon_cardassian_alliance",
+      "is_country_type = great_house",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "uses_plasma_disruptor_weapons = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "uses_disruptor_weapons_any = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_romulan_tech_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = breen_confederacy"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "uses_plasma_weapons = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = nausicaan_tribes",
+      "has_country_flag = nausicaan_raiding_country",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = pakled_big_clans"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = haakonian_order",
+      "has_country_flag = turei_commonwealth",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = haakonian_order",
+      "has_country_flag = turei_commonwealth",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = haakonian_order",
+      "has_country_flag = turei_commonwealth",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = haakonian_order",
+      "has_country_flag = turei_commonwealth",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = haakonian_order",
+      "has_country_flag = turei_commonwealth",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = haakonian_order",
+      "has_country_flag = turei_commonwealth",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = haakonian_order",
+      "has_country_flag = turei_commonwealth",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = haakonian_order",
+      "has_country_flag = turei_commonwealth",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "uses_antiproton_weapons = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "uses_antiproton_weapons_any = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_borg_empire = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "uses_polaron_weapons = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = machine_race"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = machine_race"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = machine_race"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = machine_race"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = machine_race"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = machine_race"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = vidiian_sodality"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = vidiian_sodality"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = vidiian_sodality"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = vidiian_sodality"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = vidiian_sodality"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = vidiian_sodality"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = krenim_imperium"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "uses_tetryon_weapons = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "uses_tetryon_weapons_any = yes"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = ferengi_alliance"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = vidiian_sodality"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "has_country_flag = hirogen_hunters"
+    ]
+  },
+  {
+    "file": "sth_particles_tech.txt",
+    "conditions": [
+      "uses_tetryon_weapons_any = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "uses_temporal_torp = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "uses_polaron_weapons = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "uses_polaron_torp = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "has_country_flag = machine_race"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "has_country_flag = machine_race"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = pralor_auxiliary",
+      "has_country_flag = cravic_imperative",
+      "has_country_flag = machine_race",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = pralor_auxiliary",
+      "has_country_flag = cravic_imperative",
+      "has_country_flag = machine_race",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "OR = {",
+      "is_earth_or_ufp_story_empire = yes",
+      "is_cardassia_story_empire = yes",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "starfleet_graphical_culture = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "uses_photonic_torpedo = yes",
+      "is_united_or_UFP_earth = no"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "has_country_flag = orion_free_states"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "has_country_flag = orion_free_states"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "uses_plasma_torpedo = yes"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "uses_photonic_torpedo = yes",
+      "is_earth_or_ufp_story_empire = no"
+    ]
+  },
+  {
+    "file": "sth_propulsion_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_ship_techs = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_ship_techs = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_ship_techs = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_ship_techs = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_ship_techs = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_ship_techs = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_ship_techs = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_ship_techs = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_ship_techs = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_country_flag = voth_theocracy"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = the_dominion",
+      "is_cardassia_story_empire = yes",
+      "has_country_flag = kessok_heliolatry",
+      "has_country_flag = sona_unlocked",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = the_dominion",
+      "is_cardassia_story_empire = yes",
+      "has_country_flag = kessok_heliolatry",
+      "has_country_flag = sona_unlocked",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_fighter_variant = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_fighter_variant = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_fighter_variant = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "has_unique_fighter_variant = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "always = no"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_ship_tech.txt",
+    "conditions": [
+      "is_earth_or_ufp_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_sona_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_sona_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_sona_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_sona_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_sona_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "OR = {",
+      "is_species_class = SON",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = malon_sanctity"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_ai = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "OR = {",
+      "is_machine_empire = yes",
+      "is_undine_empire = yes",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "NOR = {",
+      "has_country_flag = the_dominion",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_synthetic_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "is_undine_empire = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no",
+      "has_any_drone_authority = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_terran_empire = no",
+      "OR = {",
+      "has_country_flag = united_federation_of_planets",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_borg_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_assimilator = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = zakdorn_alliance"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = norcadian_harmony",
+      "has_country_flag = hirogen_hunters",
+      "has_country_flag = hirogen_raiding_country",
+      "has_country_flag = hirogen_hunters_pirates",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = norcadian_harmony",
+      "has_country_flag = hirogen_hunters",
+      "has_country_flag = hirogen_raiding_country",
+      "has_country_flag = hirogen_hunters_pirates",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "is_earth_story_empire = yes",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = bajoran_republic",
+      "has_country_flag = mirror_bajoran_republic",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = kazon_sects",
+      "has_country_flag = nausicaan_tribes",
+      "has_country_flag = hazari_tuatara",
+      "has_country_flag = kzinti_empire",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = ROM",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = ferengi_alliance"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = ferengi_alliance"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = mirror_klingon_empire",
+      "has_country_flag = klingon_empire",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = mirror_klingon_empire",
+      "has_country_flag = klingon_empire",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = mirror_klingon_empire",
+      "has_country_flag = klingon_empire",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = hirogen_hunters"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_vulcan_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = sona_command"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "has_country_flag = hurq_stagnancy",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = karemman_foundation"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = tellarian_technocracy"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = norcadian_harmony"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = bynar_domains"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = orion_free_states"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = yridian_league"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = XINMAM",
+      "is_species_class = XINREP",
+      "is_species_class = XININS",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "is_raiding_country = yes",
+      "has_country_flag = orion_free_states",
+      "has_country_flag = breen_confederacy",
+      "has_country_flag = gorn_empire",
+      "has_country_flag = nausicaan_tribes",
+      "has_country_flag = hazari_tuatara",
+      "has_country_flag = hirogen_hunters",
+      "has_country_flag = sona_command",
+      "has_country_flag = lyran_star_empire",
+      "has_country_flag = husnock_ascendency",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = kobali_republic"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = voth_theocracy"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "OR = {",
+      "is_species_class = KDF",
+      "is_species_class = HIR",
+      "is_species_class = OSC",
+      "is_species_class = ANT",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = husnock_ascendency"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = sheliak_corporate"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = kazon_sects"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_unique_crew = no"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_cardassia_story_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = oschean_hunters"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = andorian_empire"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "has_country_flag = the_dominion"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = talarian_republic",
+      "has_country_flag = talarian_members_of_ufp",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "OR = {",
+      "has_country_flag = pakled_big_clans",
+      "has_country_flag = pakled_members_of_ufp",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_statecraft_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_tech_modified_commented_out_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_tech_modified_commented_out_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_tech_modified_commented_out_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_tech_modified_commented_out_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_tech_modified_commented_out_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_tech_modified_commented_out_tech.txt",
+    "conditions": []
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_undine_empire = yes"
+    ]
+  },
+  {
+    "file": "sth_undine_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_undine_empire = yes",
+      "OR = {",
+      "is_species_class = UND",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_xindi_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "OR = {",
+      "is_species_class = XINARB",
+      "is_species_class = XINAQU",
+      "is_species_class = XININS",
+      "is_species_class = XINMAM",
+      "is_species_class = XINREP",
+      "is_species_class = XINAVI",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_xindi_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "OR = {",
+      "is_species_class = XINARB",
+      "is_species_class = XINAQU",
+      "is_species_class = XININS",
+      "is_species_class = XINMAM",
+      "is_species_class = XINREP",
+      "is_species_class = XINAVI",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_xindi_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "OR = {",
+      "is_species_class = XINARB",
+      "is_species_class = XINAQU",
+      "is_species_class = XININS",
+      "is_species_class = XINMAM",
+      "is_species_class = XINREP",
+      "is_species_class = XINAVI",
+      "}"
+    ]
+  },
+  {
+    "file": "sth_xindi_tech.txt",
+    "conditions": [
+      "is_sth_fallen_empire = no",
+      "is_assimilator = no",
+      "is_xindi = yes"
+    ]
+  }
+]
