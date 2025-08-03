@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetButton = document.getElementById('reset-button');
     const showTierButton = document.getElementById('show-tier-button');
     const techCounter = document.getElementById('tech-counter');
+    const layoutSelect = document.getElementById('layout-select');
     let activeTechId = null;
     let tierFilterActive = false;
 
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 speciesSelect.appendChild(option);
             });
 
-            renderTree('all');
+            updateVisualization('all');
         });
 
     // Hilfsfunktion: Finde alle verbundenen Techs (rekursiv, ancestors + descendants)
@@ -103,12 +104,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         tierFilterActive = true;
-        renderTree(speciesSelect.value, activeTechId);
+        updateVisualization(speciesSelect.value, activeTechId);
     });
 
-    function renderTree(selectedSpecies, newActiveTechId = null) {
+    function updateVisualization(selectedSpecies, newActiveTechId = null) {
         activeTechId = newActiveTechId;
         const selectedArea = areaSelect ? areaSelect.value : 'all';
+        const selectedLayout = layoutSelect.value;
 
         // First, apply species and area filters to get a base list
         let baseTechs = allTechs.filter(tech => {
@@ -140,11 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
         techTreeContainer.innerHTML = '';
         nodes = filteredTechs.map(tech => ({ ...tech }));
         
-        // Remove the duplicate filtering here since it's now handled in filterTechsByTier
         const links = [];
         const nodeIds = new Set(nodes.map(n => n.id));
 
-        // Continue with link creation only for visible nodes
         nodes.forEach(tech => {
             if (tech.prerequisites) {
                 tech.prerequisites.forEach(prereq => {
@@ -155,6 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        if (selectedLayout === 'force-directed') {
+            renderForceDirectedGraph(nodes, links, selectedSpecies);
+        } else if (selectedLayout === 'disjoint-force-directed') {
+            renderDisjointForceDirectedGraph(nodes, links, selectedSpecies);
+        } else if (selectedLayout === 'patent-suits') {
+            renderPatentSuitsGraph(nodes, links, selectedSpecies);
+        }
+    }
+
+    function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies) {
         const width = techTreeContainer.clientWidth;
         const height = techTreeContainer.clientHeight;
 
@@ -169,11 +179,17 @@ document.addEventListener('DOMContentLoaded', () => {
         
         g = svg.append("g");
 
-        simulation = d3.forceSimulation(nodes)
-            .force('link', d3.forceLink(links).id(d => d.id).distance(200))
-            .force('charge', d3.forceManyBody().strength(-400))
-            .force('center', d3.forceCenter(width / 2, height / 2))
+        const simulation = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(links).id(d => d.id).distance(100))
+            .force("charge", d3.forceManyBody().strength(-150))
+            .force("x", d3.forceX(width / 2))
+            .force("y", d3.forceY(height / 2))
             .force('collision', d3.forceCollide().radius(80));
+
+        // Run the simulation for a few ticks to stabilize the layout
+        for (let i = 0; i < 200; ++i) {
+            simulation.tick();
+        }
 
         const link = g.append('g')
             .attr('stroke', '#999')
@@ -190,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .call(drag(simulation))
             .on('mouseover', function(event, d) {
                 tooltip.style.display = 'block';
-                // Nutze clientX/clientY für korrekte Position relativ zum Fenster
                 tooltip.style.left = (event.clientX + 15) + 'px';
                 tooltip.style.top = (event.clientY + 15) + 'px';
                 tooltip.innerHTML = formatTooltip(d);
@@ -203,10 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltip.style.display = 'none';
             })
             .on('click', function(event, d) {
-                // Bei Klick: Nur verbundene Techs anzeigen und zentrieren
-                renderTree(selectedSpecies, d.id);
+                updateVisualization(selectedSpecies, d.id);
                 setTimeout(() => {
-                    // Zentriere die aktive Tech
                     const found = nodes.find(n => n.id === d.id);
                     if (found && found.x !== undefined && found.y !== undefined) {
                         const zoom = d3.zoom().scaleExtent([0.1, 8]);
@@ -265,9 +278,263 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         svg.on('dblclick', function(event) {
-            // Nur Hintergrund (SVG) doppelklicken, nicht auf Knoten
             if (event.target === svg.node()) {
-                renderTree(speciesSelect.value, null);
+                updateVisualization(speciesSelect.value, null);
+            }
+        });
+    }
+
+    function renderPatentSuitsGraph(nodes, links, selectedSpecies) {
+        const width = techTreeContainer.clientWidth;
+        const height = techTreeContainer.clientHeight;
+
+        // The patent suits layout requires a 'size' property on each node.
+        // We'll calculate a size based on the number of connections (prerequisites + dependents).
+        const nodeById = new Map(nodes.map(node => [node.id, node]));
+
+        for (const node of nodes) {
+            node.size = 1; // Start with a base size
+        }
+
+        for (const link of links) {
+            const source = nodeById.get(link.source);
+            const target = nodeById.get(link.target);
+            if (source) source.size++;
+            if (target) target.size++;
+        }
+
+        const zoom = d3.zoom().on("zoom", (event) => {
+            g.attr("transform", event.transform);
+        });
+
+        svg = d3.select(techTreeContainer).append('svg')
+            .attr('width', width)
+            .attr('height', height)
+            .call(zoom);
+
+        g = svg.append("g");
+
+        const simulation = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(links).id(d => d.id).distance(50).strength(1))
+            .force("charge", d3.forceManyBody().strength(-50))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collide", d3.forceCollide().radius(d => d.size * 10 + 40));
+
+        // Run the simulation for a few ticks to stabilize the layout
+        for (let i = 0; i < 200; ++i) {
+            simulation.tick();
+        }
+
+        const link = g.append("g")
+            .attr("stroke", "#999")
+            .attr("stroke-opacity", 0.6)
+            .selectAll("line")
+            .data(links)
+            .join("line")
+            .attr("stroke-width", d => Math.sqrt(d.value));
+
+        const node = g.append('g')
+            .selectAll('g')
+            .data(nodes)
+            .join('g')
+            .attr('class', 'tech-node')
+            .call(drag(simulation))
+            .on('mouseover', function(event, d) {
+                tooltip.style.display = 'block';
+                tooltip.style.left = (event.clientX + 15) + 'px';
+                tooltip.style.top = (event.clientY + 15) + 'px';
+                tooltip.innerHTML = formatTooltip(d);
+            })
+            .on('mousemove', function(event) {
+                tooltip.style.left = (event.clientX + 15) + 'px';
+                tooltip.style.top = (event.clientY + 15) + 'px';
+            })
+            .on('mouseout', function() {
+                tooltip.style.display = 'none';
+            })
+            .on('click', function(event, d) {
+                updateVisualization(selectedSpecies, d.id);
+                setTimeout(() => {
+                    const found = nodes.find(n => n.id === d.id);
+                    if (found && found.x !== undefined && found.y !== undefined) {
+                        const zoom = d3.zoom().scaleExtent([0.1, 8]);
+                        svg.transition().duration(750).call(
+                            zoom.transform,
+                            d3.zoomIdentity.translate(width / 2 - found.x, height / 2 - found.y).scale(1.5)
+                        );
+                    }
+                }, 500);
+            });
+
+        const nodeWidth = d => d.size * 15 + 60;
+        const nodeHeight = d => d.size * 10 + 40;
+
+        node.append('rect')
+            .attr('width', d => nodeWidth(d))
+            .attr('height', d => nodeHeight(d))
+            .attr('x', d => -nodeWidth(d) / 2)
+            .attr('y', d => -nodeHeight(d) / 2)
+            .attr('rx', 10)
+            .attr('ry', 10)
+            .attr('stroke', d => getAreaColor(d.area));
+
+        node.append('text')
+            .attr('y', d => -nodeHeight(d) / 2 + nodeHeight(d) * 0.2)
+            .attr('text-anchor', 'middle')
+            .style('font-weight', 'bold')
+            .style('font-size', d => nodeHeight(d) * 0.15 + 'px')
+            .text(d => d.name ? d.name.substring(0, 18) : d.id);
+
+        node.append('text')
+            .attr('y', d => -nodeHeight(d) / 2 + nodeHeight(d) * 0.4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', d => nodeHeight(d) * 0.12 + 'px')
+            .text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+
+        node.append('text')
+            .attr('y', d => -nodeHeight(d) / 2 + nodeHeight(d) * 0.6)
+            .attr('text-anchor', 'middle')
+            .style('font-size', d => nodeHeight(d) * 0.12 + 'px')
+            .text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
+            
+        node.append('text')
+            .attr('y', d => -nodeHeight(d) / 2 + nodeHeight(d) * 0.8)
+            .attr('text-anchor', 'middle')
+            .style('font-size', d => nodeHeight(d) * 0.1 + 'px')
+            .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+
+        simulation.on('tick', () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node.attr("transform", d => `translate(${d.x},${d.y})`);
+        });
+
+        svg.on('dblclick', function(event) {
+            if (event.target === svg.node()) {
+                updateVisualization(speciesSelect.value, null);
+            }
+        });
+    }
+
+    function renderForceDirectedGraph(nodes, links, selectedSpecies) {
+        const width = techTreeContainer.clientWidth;
+        const height = techTreeContainer.clientHeight;
+
+        const zoom = d3.zoom().on("zoom", (event) => {
+            g.attr("transform", event.transform);
+        });
+
+        svg = d3.select(techTreeContainer).append('svg')
+            .attr('width', width)
+            .attr('height', height)
+            .call(zoom);
+        
+        g = svg.append("g");
+
+        simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(200))
+            .force('charge', d3.forceManyBody().strength(-400))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(80));
+
+        // Run the simulation for a few ticks to stabilize the layout
+        for (let i = 0; i < 200; ++i) {
+            simulation.tick();
+        }
+
+        const link = g.append('g')
+            .attr('stroke', '#999')
+            .attr('stroke-opacity', 0.6)
+            .selectAll('line')
+            .data(links)
+            .join('line');
+
+        const node = g.append('g')
+            .selectAll('g')
+            .data(nodes)
+            .join('g')
+            .attr('class', 'tech-node')
+            .call(drag(simulation))
+            .on('mouseover', function(event, d) {
+                tooltip.style.display = 'block';
+                tooltip.style.left = (event.clientX + 15) + 'px';
+                tooltip.style.top = (event.clientY + 15) + 'px';
+                tooltip.innerHTML = formatTooltip(d);
+            })
+            .on('mousemove', function(event) {
+                tooltip.style.left = (event.clientX + 15) + 'px';
+                tooltip.style.top = (event.clientY + 15) + 'px';
+            })
+            .on('mouseout', function() {
+                tooltip.style.display = 'none';
+            })
+            .on('click', function(event, d) {
+                updateVisualization(selectedSpecies, d.id);
+                setTimeout(() => {
+                    const found = nodes.find(n => n.id === d.id);
+                    if (found && found.x !== undefined && found.y !== undefined) {
+                        const zoom = d3.zoom().scaleExtent([0.1, 8]);
+                        svg.transition().duration(750).call(
+                            zoom.transform,
+                            d3.zoomIdentity.translate(width / 2 - found.x, height / 2 - found.y).scale(1.5)
+                        );
+                    }
+                }, 500);
+            });
+
+        node.each(function(d) { d.gNode = this; });
+
+        const nodeWidth = 140;
+        const nodeHeight = 80;
+
+        node.append('rect')
+            .attr('width', nodeWidth)
+            .attr('height', nodeHeight)
+            .attr('x', -nodeWidth / 2)
+            .attr('y', -nodeHeight / 2)
+            .attr('rx', 10)
+            .attr('ry', 10)
+            .attr('stroke', d => getAreaColor(d.area));
+
+        node.append('text')
+            .attr('y', -nodeHeight / 2 + 15)
+            .attr('text-anchor', 'middle')
+            .style('font-weight', 'bold')
+            .text(d => d.name ? d.name.substring(0, 18) : d.id);
+
+        node.append('text')
+            .attr('y', -nodeHeight / 2 + 30)
+            .attr('text-anchor', 'middle')
+            .text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+
+        node.append('text')
+            .attr('y', -nodeHeight / 2 + 45)
+            .attr('text-anchor', 'middle')
+            .text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
+            
+        node.append('text')
+            .attr('y', -nodeHeight / 2 + 60)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '8px')
+            .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+
+        simulation.on('tick', () => {
+            link
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+
+            node.attr('transform', d => `translate(${d.x},${d.y})`);
+        });
+
+        svg.on('dblclick', function(event) {
+            if (event.target === svg.node()) {
+                updateVisualization(speciesSelect.value, null);
             }
         });
     }
@@ -306,12 +573,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     speciesSelect.addEventListener('change', (event) => {
-        renderTree(event.target.value, activeTechId);
+        updateVisualization(event.target.value, activeTechId);
     });
 
     if (areaSelect) {
         areaSelect.addEventListener('change', () => {
-            renderTree(speciesSelect.value, activeTechId);
+            updateVisualization(speciesSelect.value, activeTechId);
+        });
+    }
+
+    if (layoutSelect) {
+        layoutSelect.addEventListener('change', () => {
+            updateVisualization(speciesSelect.value, activeTechId);
         });
     }
 
@@ -367,7 +640,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .data(searchNodes)
             .join('g')
             .attr('class', 'tech-node')
-            .call(drag(simulation))
             .on('mouseover', function(event, d) {
                 tooltip.style.display = 'block';
                 tooltip.style.left = (event.clientX + 15) + 'px';
@@ -383,7 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .on('click', function(event, d) {
                 searchInput.value = '';
-                renderTree(speciesSelect.value, d.id);
+                updateVisualization(speciesSelect.value, d.id);
             });
 
         node.each(function(d) { d.gNode = this; });
@@ -427,7 +699,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tierFilterActive = false;
         document.getElementById('start-tier-select').value = "0";
         document.getElementById('end-tier-select').value = "0";
-        renderTree(speciesSelect.value, null);
+        updateVisualization(speciesSelect.value, null);
     });
 
     // Event Listener für den Show-Button
@@ -438,6 +710,6 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Start Tier cannot be higher than End Tier');
             return;
         }
-        renderTree(speciesSelect.value, activeTechId);
+        updateVisualization(speciesSelect.value, activeTechId);
     });
 });
