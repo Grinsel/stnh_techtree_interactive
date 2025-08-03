@@ -13,8 +13,17 @@
         #controls {
             margin-bottom: 10px;
         }
+        #main-container {
+            display: flex;
+        }
+        #info-panel {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
         #tech-tree { 
-            width: 100%; 
+            flex-grow: 1;
             height: 800px; 
             border: 1px solid #ccc; 
         }
@@ -93,7 +102,13 @@
         </select>
         <button id="show-tier-button">Show Tier Range</button>
     </div>
-    <div id="tech-tree"></div>
+    <div id="main-container">
+        <div id="info-panel">
+            <h3>Information</h3>
+            <div id="tech-counter">Displayed Technologies: 0</div>
+        </div>
+        <div id="tech-tree"></div>
+    </div>
     <div class="tooltip" id="tooltip" style="display:none;position:absolute;"></div>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>

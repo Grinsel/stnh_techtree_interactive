@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const areaSelect = document.getElementById('area-select');
     const resetButton = document.getElementById('reset-button');
     const showTierButton = document.getElementById('show-tier-button');
+    const techCounter = document.getElementById('tech-counter');
     let activeTechId = null;
     let tierFilterActive = false;
 
@@ -87,19 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Filter techs by tier range
     function filterTechsByTier(techs) {
         const { startTier, endTier } = getSelectedTierRange();
-        // First, get all techs within the tier range
-        const inRangeTechs = techs.filter(t => {
+        return techs.filter(t => {
             const tier = parseInt(t.tier) || 0;
             return tier >= startTier && tier <= endTier;
         });
-        
-        // Then, if we have an active tech, ensure we only show connected techs within the range
-        if (activeTechId) {
-            const connectedIds = getConnectedTechIds(activeTechId, inRangeTechs);
-            return inRangeTechs.filter(t => connectedIds.has(t.id));
-        }
-        
-        return inRangeTechs;
     }
 
     // Verschiebe diese Funktion nach oben, vor renderTree
@@ -118,20 +110,33 @@ document.addEventListener('DOMContentLoaded', () => {
         activeTechId = newActiveTechId;
         const selectedArea = areaSelect ? areaSelect.value : 'all';
 
-        // First apply species and area filters
-        let filteredTechs = allTechs.filter(tech => {
-            let areaMatch = selectedArea === 'all' || tech.area === selectedArea;
-            let speciesMatch = selectedSpecies === 'all' ||
-                (tech.required_species && tech.required_species.length === 0) ||
-                (tech.required_species && tech.required_species.includes(selectedSpecies));
+        // First, apply species and area filters to get a base list
+        let baseTechs = allTechs.filter(tech => {
+            const areaMatch = selectedArea === 'all' || tech.area === selectedArea;
+            const speciesMatch = selectedSpecies === 'all' ||
+                !tech.required_species || tech.required_species.length === 0 ||
+                tech.required_species.includes(selectedSpecies);
             return areaMatch && speciesMatch;
         });
 
-        // Apply tier filter only if active
+        let filteredTechs;
+
+        // If a specific tech is selected, find its entire family first from the complete tech list
+        if (activeTechId) {
+            const connectedIds = getConnectedTechIds(activeTechId, allTechs);
+            // Then, filter this family by the current species/area selection
+            filteredTechs = baseTechs.filter(t => connectedIds.has(t.id));
+        } else {
+            // Otherwise, start with the base filtered list
+            filteredTechs = baseTechs;
+        }
+
+        // Apply tier filter only if active, to the already determined set of techs
         if (tierFilterActive) {
             filteredTechs = filterTechsByTier(filteredTechs);
         }
 
+        techCounter.textContent = `Displayed Technologies: ${filteredTechs.length}`;
         techTreeContainer.innerHTML = '';
         nodes = filteredTechs.map(tech => ({ ...tech }));
         
