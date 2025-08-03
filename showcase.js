@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const tooltip = document.getElementById('tooltip');
     const areaSelect = document.getElementById('area-select');
     const resetButton = document.getElementById('reset-button');
+    const showTierButton = document.getElementById('show-tier-button');
     let activeTechId = null;
+    let tierFilterActive = false;
 
     // Hilfsfunktion: Tooltip-Inhalt generieren
     function formatTooltip(d) {
@@ -75,13 +77,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentSpecies = 'all';
 
-    function renderTree(selectedSpecies, newActiveTechId = null) {
-        // Merke den aktuellen Filter und die Aktivierung
-        activeTechId = newActiveTechId;
+    // Helper: get selected tier range
+    function getSelectedTierRange() {
+        const startTier = parseInt(document.getElementById('start-tier-select').value, 10);
+        const endTier = parseInt(document.getElementById('end-tier-select').value, 10);
+        return { startTier, endTier };
+    }
 
+    // Filter techs by tier range
+    function filterTechsByTier(techs) {
+        const { startTier, endTier } = getSelectedTierRange();
+        // First, get all techs within the tier range
+        const inRangeTechs = techs.filter(t => {
+            const tier = parseInt(t.tier) || 0;
+            return tier >= startTier && tier <= endTier;
+        });
+        
+        // Then, if we have an active tech, ensure we only show connected techs within the range
+        if (activeTechId) {
+            const connectedIds = getConnectedTechIds(activeTechId, inRangeTechs);
+            return inRangeTechs.filter(t => connectedIds.has(t.id));
+        }
+        
+        return inRangeTechs;
+    }
+
+    // Verschiebe diese Funktion nach oben, vor renderTree
+    showTierButton.addEventListener('click', () => {
+        const { startTier, endTier } = getSelectedTierRange();
+        console.log('Show Tier Button clicked', startTier, endTier); // Debug output
+        if (startTier > endTier) {
+            alert('Start Tier cannot be higher than End Tier');
+            return;
+        }
+        tierFilterActive = true;
+        renderTree(speciesSelect.value, activeTechId);
+    });
+
+    function renderTree(selectedSpecies, newActiveTechId = null) {
+        activeTechId = newActiveTechId;
         const selectedArea = areaSelect ? areaSelect.value : 'all';
 
-        const filteredTechs = allTechs.filter(tech => {
+        // First apply species and area filters
+        let filteredTechs = allTechs.filter(tech => {
             let areaMatch = selectedArea === 'all' || tech.area === selectedArea;
             let speciesMatch = selectedSpecies === 'all' ||
                 (tech.required_species && tech.required_species.length === 0) ||
@@ -89,19 +127,20 @@ document.addEventListener('DOMContentLoaded', () => {
             return areaMatch && speciesMatch;
         });
 
-        techTreeContainer.innerHTML = '';
-
-        let displayTechs = filteredTechs;
-        if (activeTechId) {
-            const connectedIds = getConnectedTechIds(activeTechId, filteredTechs);
-            displayTechs = filteredTechs.filter(t => connectedIds.has(t.id));
+        // Apply tier filter only if active
+        if (tierFilterActive) {
+            filteredTechs = filterTechsByTier(filteredTechs);
         }
 
-        nodes = displayTechs.map(tech => ({ ...tech }));
+        techTreeContainer.innerHTML = '';
+        nodes = filteredTechs.map(tech => ({ ...tech }));
+        
+        // Remove the duplicate filtering here since it's now handled in filterTechsByTier
         const links = [];
         const nodeIds = new Set(nodes.map(n => n.id));
 
-        displayTechs.forEach(tech => {
+        // Continue with link creation only for visible nodes
+        nodes.forEach(tech => {
             if (tech.prerequisites) {
                 tech.prerequisites.forEach(prereq => {
                     if (nodeIds.has(prereq)) {
@@ -380,6 +419,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     resetButton.addEventListener('click', () => {
+        tierFilterActive = false;
+        document.getElementById('start-tier-select').value = "0";
+        document.getElementById('end-tier-select').value = "0";
         renderTree(speciesSelect.value, null);
+    });
+
+    // Event Listener für den Show-Button
+    showTierButton.addEventListener('click', () => {
+        const { startTier, endTier } = getSelectedTierRange();
+        console.log('Show Tier Button clicked', startTier, endTier); // Debug output
+        if (startTier > endTier) {
+            alert('Start Tier cannot be higher than End Tier');
+            return;
+        }
+        renderTree(speciesSelect.value, activeTechId);
     });
 });

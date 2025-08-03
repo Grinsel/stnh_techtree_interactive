@@ -8,7 +8,7 @@
         body { 
             font-family: sans-serif; 
             background-color: #23272c;
-            color: #f0f0f0;
+            color: #ffffff;
         }
         #controls {
             margin-bottom: 10px;
@@ -26,7 +26,7 @@
             stroke-width: 4px;
         }
         .tech-node text {
-            fill: #f0f0f0;
+            fill: #ffffff;
             font-size: 10px;
         }
         #tooltip {
@@ -61,6 +61,37 @@
         <input type="text" id="search-input" placeholder="Enter tech name...">
         <button id="search-button">Search</button>
         <button id="reset-button">Reset View</button>
+        <label for="start-tier-select">Start Tier:</label>
+        <select id="start-tier-select">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+        </select>
+        <label for="end-tier-select">End Tier:</label>
+        <select id="end-tier-select">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+        </select>
+        <button id="show-tier-button">Show Tier Range</button>
     </div>
     <div id="tech-tree"></div>
     <div class="tooltip" id="tooltip" style="display:none;position:absolute;"></div>
