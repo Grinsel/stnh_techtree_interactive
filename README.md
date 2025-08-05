@@ -13,24 +13,25 @@ We are currently running a closed beta test of this tool. If you are a tester, p
 
 ## 🧭 Features
 
-- Visualizes the full technology tree
-- Search for specific technologies and view their dependency subtrees
-- Species filtering available in full view (WIP)
+- **Full Tree Visualization**: Displays the entire technology tree.
+- **Technology Search**: Search for technologies by name.
+- **Branch Inspection**: Click on a technology to inspect its specific dependency branch/subtree.
+- **Species Filter**: Filter technologies by species (currently most effective in the full tree view).
+- **Improved Search**: The search now correctly respects species restrictions.
+- **Hide Isolated Techs**: An option to hide technologies with 0 or 1 connection to reduce clutter.
+- **Tier-Level Filter**: Filter the tree to show only technologies of specific tiers.
+- **Start-Tech View**: Select a starting technology and view only its specific progression path.
 
 ## 📌 Planned Features / Roadmap
 
 The following improvements and new features are planned:
 
-- **Improved search** with species-based filtering
-- **Minimap** for easier navigation of the full tree without extreme zooming
-- **Information panel** for the currently selected technology with detailed data (beyond tooltip)
-- **Option to hide isolated technologies** (0 or 1 connections)
-- **Tier-level filter** to narrow down the tree by tech tier
-- **Rarity filter** to show only rare/common techs
-- **Parent/Child toggle** to show/hide entire branches from a selected technology
-- **Refined initial view** when the tree first loads
-- **Zoom optimization**, with rest of the navigation handled via the minimap
-- **Experimental "Start Tech" mode**: select a starting tech and view only its branch (currently limited usefulness)
+- **Minimap**: For better navigation in the full tree view, eliminating the need for endless scrolling.
+- **Info Panel**: A detailed panel for clicked technologies with descriptions that go beyond the simple tooltip.
+- **Rarity Filter**: A filter to distinguish between rare, common, and other technology rarities.
+- **Parent/Child Toggle**: The ability to show or hide entire branches originating from a selected node.
+- **Refined Initial View**: Improvements to the initial presentation of the tree when it first loads.
+- **Smart Zoom Limit**: A more intelligent zoom limit, with navigation primarily handled via the minimap.
 
 ## 🛠 Technologies Used
 
