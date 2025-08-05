@@ -1,6 +1,6 @@
 # Beta Test: STNH Techtree Interactive
 
-Welcome to the first public **beta version** of the interactive technology tree for the **Star Trek: New Horizons** mod.
+Welcome to the **beta version** of the interactive technology tree for the **Star Trek: New Horizons** mod.
 
 ## Preview Link
 
@@ -16,32 +16,29 @@ This release is intended for functional testing and feedback collection. We’re
 
 ## How to Use the Tree
 
-The full tech tree is extremely large and not easily usable as a whole. For this reason, the **recommended approach is to use the search function**:
+The full tech tree can be overwhelming. The **recommended approach is to use the search function** and the available filters to narrow down the view.
 
-1. Type the name of a technology into the search bar.
-2. Click on the relevant result.
-3. A **focused subtree** will be displayed, showing only the relevant path around that technology.
-
-This makes it much easier to explore specific areas of the tree without being overwhelmed.
+1.  **Search**: Type the name of a technology into the search bar and click the result to see a focused subtree. The search now respects species restrictions.
+2.  **Filters**: Use the filters to refine the view:
+    *   **Species Filter**: Restrict the tree to a specific species (most effective in full view).
+    *   **Tier-Level Filter**: Show only technologies of certain tiers.
+    *   **Hide Isolated Techs**: Remove techs with 0 or 1 connection to simplify the graph.
+3.  **Start-Tech View**: Select a starting tech to see only its progression path.
 
 ## Known Limitations
 
-- **Species filtering** is only functional in the **full tree view**.
-- When using the **search function**, all technologies are shown **regardless of species restrictions**.
+- The **Species Filter** is currently most effective and predictable when used in the **full tree view** rather than in a filtered subtree.
 
 ## Planned Features / Roadmap
 
 The following features are currently in development or under consideration:
 
-- Improved search results that respect species filters
-- Minimap for better navigation of the full tree
-- A dedicated information panel with detailed data about the selected technology
-- Toggle to hide loose techs (with 0 or 1 connection)
-- Tier and rarity filters
-- Branch (Parent/Child) toggling from selected nodes
-- Optimized initial view when loading the tree
-- Smart zoom control with minimap for orientation
-- Experimental “Start Tech” view mode (select a starting tech and see its branch only)
+- **Minimap**: For better navigation in the full tree view.
+- **Info Panel**: A detailed panel for clicked technologies with descriptions beyond the tooltip.
+- **Rarity Filter**: A filter to distinguish between rare, common, and other tech rarities.
+- **Parent/Child Toggle**: The ability to show or hide entire branches from a selected node.
+- **Refined Initial View**: Improvements to the initial presentation of the tree when it loads.
+- **Smart Zoom Limit**: A more intelligent zoom limit, with navigation handled via the minimap.
 
 ## Feedback Instructions
 
