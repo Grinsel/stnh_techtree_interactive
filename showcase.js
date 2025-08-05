@@ -1,3 +1,80 @@
+const DEFAULT_STATE = {
+    species: "all",
+    area: "all",
+    layout: "force-directed",
+    search: "",
+    tierStart: "0",
+    tierEnd: "11",
+    focus: null
+};
+
+function loadState() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const stateFromUrl = {
+        layout: urlParams.get("layout"),
+        species: urlParams.get("species"),
+        area: urlParams.get("area"),
+        search: urlParams.get("search"),
+        tierStart: urlParams.get("tierStart"),
+        tierEnd: urlParams.get("tierEnd"),
+        focus: urlParams.get("focus")
+    };
+
+    const hasUrlParams = Object.values(stateFromUrl).some(v => v !== null);
+
+    if (hasUrlParams) {
+        return {
+            layout: stateFromUrl.layout || DEFAULT_STATE.layout,
+            species: stateFromUrl.species || DEFAULT_STATE.species,
+            area: stateFromUrl.area || DEFAULT_STATE.area,
+            search: stateFromUrl.search || DEFAULT_STATE.search,
+            tierStart: stateFromUrl.tierStart || DEFAULT_STATE.tierStart,
+            tierEnd: stateFromUrl.tierEnd || DEFAULT_STATE.tierEnd,
+            focus: stateFromUrl.focus || null
+        };
+    }
+
+    try {
+        const raw = localStorage.getItem("techTreeState");
+        return raw ? JSON.parse(raw) : DEFAULT_STATE;
+    } catch (e) {
+        console.warn("Could not load saved state:", e);
+        return DEFAULT_STATE;
+    }
+}
+
+function saveState() {
+    const state = {
+        species: document.getElementById("species-select").value,
+        area: document.getElementById("area-select").value,
+        layout: document.getElementById("layout-select").value,
+        search: document.getElementById("search-input").value,
+        tierStart: document.getElementById("start-tier-select").value,
+        tierEnd: document.getElementById("end-tier-select").value,
+        focus: window.currentFocusId || null
+    };
+    try {
+        localStorage.setItem("techTreeState", JSON.stringify(state));
+    } catch (e) {
+        console.warn("Could not save state:", e);
+    }
+}
+
+function applyState(state) {
+    document.getElementById("species-select").value = state.species;
+    document.getElementById("area-select").value = state.area;
+    document.getElementById("layout-select").value = state.layout;
+    document.getElementById("search-input").value = state.search;
+    document.getElementById("start-tier-select").value = state.tierStart;
+    document.getElementById("end-tier-select").value = state.tierEnd;
+}
+
+function resetState() {
+    localStorage.removeItem("techTreeState");
+    window.location.search = ''; // Clear URL params and reload
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const speciesSelect = document.getElementById('species-select');
     const searchInput = document.getElementById('search-input');
@@ -9,6 +86,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const showTierButton = document.getElementById('show-tier-button');
     const techCounter = document.getElementById('tech-counter');
     const layoutSelect = document.getElementById('layout-select');
+        const copyBtn = document.getElementById("share-button");
+
+    if (copyBtn) {
+        copyBtn.addEventListener("click", () => {
+            const focus = window.currentFocusId;
+            console.log("Aktueller Fokus:", focus);
+
+            const params = new URLSearchParams({
+                layout: document.getElementById("layout-select").value,
+                species: document.getElementById("species-select").value,
+                area: document.getElementById("area-select").value,
+                tierStart: document.getElementById("start-tier-select").value,
+                tierEnd: document.getElementById("end-tier-select").value
+            });
+
+            if (focus) {
+                params.set("focus", focus);
+            } else {
+                const search = document.getElementById("search-input").value;
+                if (search && search.trim() !== "") {
+                    params.set("search", search);
+                }
+            }
+
+            const shareURL = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+            navigator.clipboard.writeText(shareURL).then(() => {
+                alert(`Link ${focus ? "zum Branch" : ""} kopiert!\n\n${shareURL}`);
+            }, (err) => {
+                alert("Kopieren fehlgeschlagen: " + err);
+            });
+        });
+    } else {
+        console.warn("⚠️ Button mit ID 'share-button' nicht im DOM gefunden.");
+    }
+
     let activeTechId = null;
     let tierFilterActive = false;
 
@@ -46,7 +158,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 speciesSelect.appendChild(option);
             });
 
-            updateVisualization('all');
+            // === INITIALISIERUNG ===
+            // Zustand aus URL/localStorage laden
+            const initialState = loadState();
+            // UI-Filterelemente entsprechend dem Zustand setzen
+            applyState(initialState);
+            // Globale Fokus-ID setzen
+            window.currentFocusId = initialState.focus;
+            // Visualisierung mit den geladenen Parametern aktualisieren
+            updateVisualization(initialState.species, initialState.focus);
         });
 
     // Hilfsfunktion: Finde alle verbundenen Techs (rekursiv, ancestors + descendants)
@@ -107,17 +227,21 @@ document.addEventListener('DOMContentLoaded', () => {
         updateVisualization(speciesSelect.value, activeTechId);
     });
 
-    function updateVisualization(selectedSpecies, newActiveTechId = null) {
+    window.updateVisualization = function(selectedSpecies, highlightId = null, limitToIds = null) {
+        let newActiveTechId = highlightId;
         activeTechId = newActiveTechId;
         const selectedArea = areaSelect ? areaSelect.value : 'all';
         const selectedLayout = layoutSelect.value;
 
         // First, apply species and area filters to get a base list
         let baseTechs = allTechs.filter(tech => {
+           if (limitToIds && !limitToIds.has(tech.id)) return false;
+
             const areaMatch = selectedArea === 'all' || tech.area === selectedArea;
             const speciesMatch = selectedSpecies === 'all' ||
                 !tech.required_species || tech.required_species.length === 0 ||
                 tech.required_species.includes(selectedSpecies);
+
             return areaMatch && speciesMatch;
         });
 
@@ -218,6 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltip.style.display = 'none';
             })
             .on('click', function(event, d) {
+                window.currentFocusId = d.id;
                 updateVisualization(selectedSpecies, d.id);
                 setTimeout(() => {
                     const found = nodes.find(n => n.id === d.id);
@@ -353,6 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltip.style.display = 'none';
             })
             .on('click', function(event, d) {
+                window.currentFocusId = d.id;
                 updateVisualization(selectedSpecies, d.id);
                 setTimeout(() => {
                     const found = nodes.find(n => n.id === d.id);
@@ -473,6 +599,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltip.style.display = 'none';
             })
             .on('click', function(event, d) {
+                window.currentFocusId = d.id;
                 updateVisualization(selectedSpecies, d.id);
                 setTimeout(() => {
                     const found = nodes.find(n => n.id === d.id);
@@ -654,6 +781,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltip.style.display = 'none';
             })
             .on('click', function(event, d) {
+                window.currentFocusId = d.id;
                 searchInput.value = '';
                 updateVisualization(speciesSelect.value, d.id);
             });
@@ -712,4 +840,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         updateVisualization(speciesSelect.value, activeTechId);
     });
+
+    // Save state on change
+    ["species-select", "area-select", "layout-select", "search-input",
+     "start-tier-select", "end-tier-select"].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener("change", saveState);
+            element.addEventListener("input", saveState);
+        }
+    });
+
+    // Reset button support
+    const aResetButton = document.getElementById("reset-button");
+    if (aResetButton) {
+        aResetButton.addEventListener("click", resetState);
+    }
+    
 });
