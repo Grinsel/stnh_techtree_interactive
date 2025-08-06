@@ -91,8 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const landingCard = document.getElementById('landing-card');
     const showTreeButton = document.getElementById('show-tree-button');
     const treeToolbar = document.getElementById('tree-toolbar');
+    const backButton = document.getElementById('back-button');
+    const forwardButton = document.getElementById('forward-button');
 
     // --- State Variables ---
+    let navigationHistory = [];
+    let historyIndex = -1;
     let isTreeInitialized = false;
     let allTechs = [];
     let allSpecies = new Set();
@@ -137,7 +141,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyState(initialState);
                 window.currentFocusId = initialState.focus;
                 activeTechId = initialState.focus;
-                updateVisualization(initialState.species, initialState.focus);
+
+                if (activeTechId) {
+                    navigationHistory = [activeTechId];
+                    historyIndex = 0;
+                }
+
+                updateVisualization(initialState.species, activeTechId, false);
             });
     }
 
@@ -172,6 +182,20 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('keydown', (event) => { if (event.key === 'Enter') searchTech(); });
         searchButton.addEventListener('click', searchTech);
         resetButton.addEventListener('click', resetState);
+
+        backButton.addEventListener('click', () => {
+            if (historyIndex > 0) {
+                historyIndex--;
+                updateVisualization(speciesSelect.value, navigationHistory[historyIndex], false);
+            }
+        });
+
+        forwardButton.addEventListener('click', () => {
+            if (historyIndex < navigationHistory.length - 1) {
+                historyIndex++;
+                updateVisualization(speciesSelect.value, navigationHistory[historyIndex], false);
+            }
+        });
 
         showTierButton.addEventListener('click', () => {
             const { startTier, endTier } = getSelectedTierRange();
@@ -236,6 +260,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return { startTier, endTier };
     }
 
+    function updateHistoryButtons() {
+        backButton.style.display = navigationHistory.length > 1 ? 'inline-block' : 'none';
+        forwardButton.style.display = navigationHistory.length > 1 ? 'inline-block' : 'none';
+        backButton.disabled = historyIndex <= 0;
+        forwardButton.disabled = historyIndex >= navigationHistory.length - 1;
+    }
+
     function filterTechsByTier(techs) {
         const { startTier, endTier } = getSelectedTierRange();
         return techs.filter(t => {
@@ -244,7 +275,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    window.updateVisualization = function(selectedSpecies, highlightId = null) {
+    window.updateVisualization = function(selectedSpecies, highlightId = null, addToHistory = true) {
+        if (addToHistory && highlightId && highlightId !== activeTechId) {
+            if (historyIndex < navigationHistory.length - 1) {
+                navigationHistory = navigationHistory.slice(0, historyIndex + 1);
+            }
+            navigationHistory.push(highlightId);
+            historyIndex = navigationHistory.length - 1;
+        }
+
         activeTechId = highlightId;
         const selectedArea = areaSelect.value;
         const selectedLayout = layoutSelect.value;
@@ -267,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredTechs = filterTechsByTier(filteredTechs);
         }
 
+        updateHistoryButtons();
         techCounter.textContent = `Displayed Technologies: ${filteredTechs.length}`;
         techTreeContainer.innerHTML = '';
         nodes = filteredTechs.map(tech => ({ ...tech }));
@@ -285,7 +325,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (selectedLayout === 'force-directed') renderForceDirectedGraph(nodes, links, selectedSpecies);
         else if (selectedLayout === 'disjoint-force-directed') renderDisjointForceDirectedGraph(nodes, links, selectedSpecies);
-        else if (selectedLayout === 'patent-suits') renderPatentSuitsGraph(nodes, links, selectedSpecies);
     }
 
     function renderForceDirectedGraph(nodes, links, selectedSpecies) {
@@ -313,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .on('mouseout', () => tooltip.style.display = 'none')
             .on('click', (event, d) => {
                 window.currentFocusId = d.id;
-                updateVisualization(selectedSpecies, d.id);
+                updateVisualization(selectedSpecies, d.id, true);
             });
         const nodeWidth = 140, nodeHeight = 80;
         node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10).attr('stroke', d => getAreaColor(d.area));
@@ -327,8 +366,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies) { /* Implementation omitted for brevity, same as original */ }
-    function renderPatentSuitsGraph(nodes, links, selectedSpecies) { /* Implementation omitted for brevity, same as original */ }
+    function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies) {
+        const width = techTreeContainer.clientWidth;
+        const height = techTreeContainer.clientHeight;
+        const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
+        svg = d3.select(techTreeContainer).append('svg').attr('width', width).attr('height', height).call(zoom);
+        g = svg.append("g");
+
+        simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(100).strength(0.5))
+            .force('charge', d3.forceManyBody().strength(-300))
+            .force('x', d3.forceX(width / 2).strength(0.1))
+            .force('y', d3.forceY(height / 2).strength(0.1))
+            .force('collision', d3.forceCollide().radius(60));
+
+        for (let i = 0; i < 150; ++i) simulation.tick();
+
+        const link = g.append('g').attr('stroke', '#999').attr('stroke-opacity', 0.6).selectAll('line').data(links).join('line');
+        const node = g.append('g').selectAll('g').data(nodes).join('g').attr('class', 'tech-node').call(drag(simulation))
+            .on('mouseover', (event, d) => {
+                tooltip.style.display = 'block';
+                tooltip.innerHTML = formatTooltip(d);
+            })
+            .on('mousemove', (event) => {
+                tooltip.style.left = (event.clientX + 15) + 'px';
+                tooltip.style.top = (event.clientY + 15) + 'px';
+            })
+            .on('mouseout', () => tooltip.style.display = 'none')
+            .on('click', (event, d) => {
+                window.currentFocusId = d.id;
+                updateVisualization(selectedSpecies, d.id, true);
+            });
+
+        const nodeWidth = 120, nodeHeight = 70;
+        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 8).attr('ry', 8).attr('stroke', d => getAreaColor(d.area));
+        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').text(d => d.name ? d.name.substring(0, 15) : d.id);
+        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').text(d => `Cost: ${d.cost || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+
+        simulation.on('tick', () => {
+            link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+            node.attr('transform', d => `translate(${d.x},${d.y})`);
+        });
+    }
 
     function getAreaColor(area) {
         switch (area) {
@@ -381,7 +462,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .on('click', (event, d) => {
                 window.currentFocusId = d.id;
                 searchInput.value = '';
-                updateVisualization(speciesSelect.value, d.id);
+                updateVisualization(speciesSelect.value, d.id, true);
             });
         node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10).attr('stroke', 'yellow');
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').text(d => d.name ? d.name.substring(0, 18) : d.id);
