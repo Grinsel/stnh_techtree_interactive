@@ -154,6 +154,62 @@
             box-shadow: 0 0 16px #0009;
             margin-top: 8px;
         }
+        #landing-card {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('pre_tree_bg.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            z-index: 10;
+        }
+        #landing-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(18, 20, 25, 0.75);
+            border-radius: 20px;
+            z-index: -1;
+        }
+        .landing-content {
+            color: #eaf2ff;
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+            background: rgba(35, 39, 44, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px #000a;
+            border: 1px solid #3c80ff66;
+        }
+        .landing-content h2 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            color: var(--primary);
+        }
+        .landing-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        #show-tree-button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #show-tree-button:hover {
+            background: #5a9bff;
+        }
+        .hidden {
+            display: none !important;
+        }
         .tech-node {
             cursor: pointer;
         }
@@ -265,6 +321,27 @@
                     <option value="11">11</option>
                 </select>
                 <button id="show-tier-button">Show Tier Range</button>
+            </div>
+            <div id="landing-card">
+                <div class="landing-content">
+    <h2>Welcome to the Star Trek: New Horizons Tech Tree!</h2>
+    <ul style="text-align: left; max-width: 500px; margin: 18px auto 0 auto; font-size: 1.07rem;">
+        <li>
+            Use the filters (species, area, level range) or search to quickly find technologies or explore the tree.
+        </li>
+        <li>
+            Click any technology to view its branch in detail.
+        </li>
+        <li>
+            Share your current view with others using the <b>Copy Link</b> button.
+        </li>
+    </ul>
+    <div style="background: #222d38dd; border-radius: 8px; padding: 13px 16px 11px 16px; margin-top: 22px; color: #ffe38c; font-size: 1rem;">
+        <b>Tip:</b><br>
+        The more general your search or filters, the bigger (and slower) the tech tree becomes. Try to be specific for best results!
+    </div>
+    <button id="show-tree-button" style="margin-top: 28px;">Show Tech Tree</button>
+</div>
             </div>
             <div id="tech-tree"></div>
         </main>
