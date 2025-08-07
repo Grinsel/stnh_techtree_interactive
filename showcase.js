@@ -219,8 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Visualization and Helper Functions ---
     function formatTooltip(d) {
         let info = '';
+        const excludeKeys = new Set(['x', 'y', 'vx', 'vy', 'index', 'fx', 'fy']);
         for (const key in d) {
-            if (d.hasOwnProperty(key) && d[key]) {
+            if (d.hasOwnProperty(key) && d[key] && !excludeKeys.has(key)) {
                 info += `<strong>${key}:</strong> ${Array.isArray(d[key]) ? d[key].join(', ') : d[key]}<br>`;
             }
         }
@@ -347,8 +348,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltip.innerHTML = formatTooltip(d);
             })
             .on('mousemove', (event) => {
-                tooltip.style.left = (event.clientX + 15) + 'px';
-                tooltip.style.top = (event.clientY + 15) + 'px';
+                const treeRect = techTreeContainer.getBoundingClientRect();
+                const tooltipRect = tooltip.getBoundingClientRect();
+                let x = event.clientX + 15;
+                let y = event.clientY + 15;
+
+                if (x + tooltipRect.width > treeRect.right) {
+                    x = event.clientX - tooltipRect.width - 15;
+                }
+                if (y + tooltipRect.height > treeRect.bottom) {
+                    y = event.clientY - tooltipRect.height - 15;
+                }
+
+                tooltip.style.left = `${Math.max(treeRect.left, x)}px`;
+                tooltip.style.top = `${Math.max(treeRect.top, y)}px`;
             })
             .on('mouseout', () => tooltip.style.display = 'none')
             .on('click', (event, d) => {
@@ -390,8 +403,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltip.innerHTML = formatTooltip(d);
             })
             .on('mousemove', (event) => {
-                tooltip.style.left = (event.clientX + 15) + 'px';
-                tooltip.style.top = (event.clientY + 15) + 'px';
+                const treeRect = techTreeContainer.getBoundingClientRect();
+                const tooltipRect = tooltip.getBoundingClientRect();
+                let x = event.clientX + 15;
+                let y = event.clientY + 15;
+
+                if (x + tooltipRect.width > treeRect.right) {
+                    x = event.clientX - tooltipRect.width - 15;
+                }
+                if (y + tooltipRect.height > treeRect.bottom) {
+                    y = event.clientY - tooltipRect.height - 15;
+                }
+
+                tooltip.style.left = `${Math.max(treeRect.left, x)}px`;
+                tooltip.style.top = `${Math.max(treeRect.top, y)}px`;
             })
             .on('mouseout', () => tooltip.style.display = 'none')
             .on('click', (event, d) => {
@@ -456,8 +481,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltip.innerHTML = formatTooltip(d);
             })
             .on('mousemove', (event) => {
-                tooltip.style.left = (event.clientX + 15) + 'px';
-                tooltip.style.top = (event.clientY + 15) + 'px';
+                const treeRect = techTreeContainer.getBoundingClientRect();
+                const tooltipRect = tooltip.getBoundingClientRect();
+                let x = event.clientX + 15;
+                let y = event.clientY + 15;
+
+                if (x + tooltipRect.width > treeRect.right) {
+                    x = event.clientX - tooltipRect.width - 15;
+                }
+                if (y + tooltipRect.height > treeRect.bottom) {
+                    y = event.clientY - tooltipRect.height - 15;
+                }
+
+                tooltip.style.left = `${Math.max(treeRect.left, x)}px`;
+                tooltip.style.top = `${Math.max(treeRect.top, y)}px`;
             })
             .on('mouseout', () => tooltip.style.display = 'none')
             .on('click', (event, d) => {
