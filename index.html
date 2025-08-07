@@ -106,6 +106,23 @@
             font-size: 1rem;
             font-family: var(--font);
         }
+        #filters button {
+            width: 100%;
+            padding: 8px 10px;
+            background: #232b3d;
+            color: #eaf2ff;
+            border: 1px solid #3c80ff88;
+            border-radius: 8px;
+            margin-top: 4px;
+            font-size: 1rem;
+            font-family: var(--font);
+            cursor: pointer;
+            transition: background 0.15s, border 0.15s;
+        }
+        #filters button:hover {
+            background: #3c4b7a;
+            border-color: #3c80ff;
+        }
         #tree-panel {
             flex: 1;
             background: var(--panel-bg);
@@ -275,17 +292,17 @@
                     <option value="society">Society</option>
                     <option value="engineering">Engineering</option>
                 </select>
-                <label for="search-input">Search:</label>
+                <label for="search-input">Search by name or ID:</label>
                 <input type="text" id="search-input" placeholder="Enter tech name...">
+                <button id="search-button">Search</button>
             </div>
         </aside>
         <main id="tree-panel">
             <div id="tree-toolbar">
-                <button id="search-button">Search</button>
                 <button id="reset-button">Reset View</button>
                 <button id="back-button" style="display: none;">< Back</button>
                 <button id="forward-button" style="display: none;">Forward ></button>
-                <button id="share-button">🔗 Link kopieren</button>
+                <button id="share-button">🔗 Copy Link</button>
                 <label for="layout-select">Layout:</label>
                 <select id="layout-select">
                     <option value="force-directed">Force-directed</option>
