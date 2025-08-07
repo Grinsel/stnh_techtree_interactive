@@ -93,6 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const treeToolbar = document.getElementById('tree-toolbar');
     const backButton = document.getElementById('back-button');
     const forwardButton = document.getElementById('forward-button');
+    const generalTab = document.getElementById('general-tab');
+    const detailsTab = document.getElementById('details-tab');
+    const generalPanel = document.getElementById('general-panel');
+    const detailsPanel = document.getElementById('details-panel');
+    const techDetailsContent = document.getElementById('tech-details-content');
 
     // --- State Variables ---
     let navigationHistory = [];
@@ -153,6 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Event Listener Setup ---
     function setupEventListeners() {
+        generalTab.addEventListener('click', () => switchTab('general'));
+        detailsTab.addEventListener('click', () => switchTab('details'));
+
         if (copyBtn) {
             copyBtn.addEventListener("click", () => {
                 const focus = window.currentFocusId;
@@ -228,6 +236,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return info;
     }
 
+    function switchTab(tab) {
+        if (tab === 'details') {
+            generalTab.classList.remove('active');
+            detailsTab.classList.add('active');
+            generalPanel.classList.add('hidden');
+            detailsPanel.classList.add('active');
+        } else {
+            detailsTab.classList.remove('active');
+            generalTab.classList.add('active');
+            detailsPanel.classList.remove('active');
+            generalPanel.classList.remove('hidden');
+        }
+    }
+
     function getConnectedTechIds(startId, techs) {
         const connected = new Set();
         function findAncestors(id) {
@@ -288,6 +310,14 @@ document.addEventListener('DOMContentLoaded', () => {
         activeTechId = highlightId;
         const selectedArea = areaSelect.value;
         const selectedLayout = layoutSelect.value;
+
+        if (activeTechId) {
+            const tech = allTechs.find(t => t.id === activeTechId);
+            if (tech) {
+                techDetailsContent.innerHTML = formatTooltip(tech);
+                switchTab('details');
+            }
+        }
 
         let baseTechs = allTechs.filter(tech => {
             const areaMatch = selectedArea === 'all' || tech.area === selectedArea;

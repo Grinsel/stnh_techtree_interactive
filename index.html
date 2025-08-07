@@ -58,6 +58,56 @@
             padding: 28px 24px 24px 24px;
             min-height: 600px;
             margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .tab-container {
+            display: flex;
+            margin-bottom: 18px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #2c3138;
+            border-radius: 10px 10px 0 0;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            margin-right: 5px;
+            font-size: 1rem;
+            color: #a0b0c0;
+            transition: background 0.3s, color 0.3s;
+        }
+        .tab.active {
+            background: var(--panel-bg);
+            color: #fff;
+            border-bottom: 1px solid var(--panel-bg);
+        }
+        .tab-content {
+            position: relative;
+        }
+        #general-panel {
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+        #details-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--panel-bg);
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            padding: 20px;
+            border-radius: 0 0 18px 18px;
+        }
+        #details-panel.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        #general-panel.hidden {
+            opacity: 0;
         }
         #sidebar h2 {
             margin-top: 0;
@@ -273,28 +323,42 @@
     </header>
     <div id="main-container">
         <aside id="sidebar">
-            <h2>Information</h2>
-            <div id="tech-counter">Displayed Technologies: 0</div>
-            <div class="legend">
-                <div class="legend-row"><span class="legend-bullet physics"></span> Physics</div>
-                <div class="legend-row"><span class="legend-bullet engineering"></span> Engineering</div>
-                <div class="legend-row"><span class="legend-bullet society"></span> Society</div>
+            <div class="tab-container">
+                <div class="tab active" id="general-tab">General</div>
+                <div class="tab" id="details-tab">Tech Details</div>
             </div>
-            <div id="filters">
-                <label for="species-select">Select Species:</label>
-                <select id="species-select">
-                    <option value="all">All</option>
-                </select>
-                <label for="area-select">Select Area:</label>
-                <select id="area-select">
-                    <option value="all">All</option>
-                    <option value="physics">Physics</option>
-                    <option value="society">Society</option>
-                    <option value="engineering">Engineering</option>
-                </select>
-                <label for="search-input">Search by name or ID:</label>
-                <input type="text" id="search-input" placeholder="Enter tech name...">
-                <button id="search-button">Search</button>
+            <div class="tab-content">
+                <div id="general-panel">
+                    <h2>Information</h2>
+                    <div id="tech-counter">Displayed Technologies: 0</div>
+                    <div class="legend">
+                        <div class="legend-row"><span class="legend-bullet physics"></span> Physics</div>
+                        <div class="legend-row"><span class="legend-bullet engineering"></span> Engineering</div>
+                        <div class="legend-row"><span class="legend-bullet society"></span> Society</div>
+                    </div>
+                    <div id="filters">
+                        <label for="species-select">Select Species:</label>
+                        <select id="species-select">
+                            <option value="all">All</option>
+                        </select>
+                        <label for="area-select">Select Area:</label>
+                        <select id="area-select">
+                            <option value="all">All</option>
+                            <option value="physics">Physics</option>
+                            <option value="society">Society</option>
+                            <option value="engineering">Engineering</option>
+                        </select>
+                        <label for="search-input">Search:</label>
+                        <input type="text" id="search-input" placeholder="Enter tech name...">
+                        <button id="search-button">Search</button>
+                    </div>
+                </div>
+                <div id="details-panel">
+                    <h2>Technology Details</h2>
+                    <div id="tech-details-content">
+                        <p>Click on a technology to see its details here.</p>
+                    </div>
+                </div>
             </div>
         </aside>
         <main id="tree-panel">
