@@ -334,9 +334,10 @@ document.addEventListener('DOMContentLoaded', () => {
         svg = d3.select(techTreeContainer).append('svg').attr('width', width).attr('height', height).call(zoom);
         g = svg.append("g");
         simulation = d3.forceSimulation(nodes)
-            .force('link', d3.forceLink(links).id(d => d.id).distance(200))
-            .force('charge', d3.forceManyBody().strength(-400))
-            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('link', d3.forceLink(links).id(d => d.id).distance(150).strength(0.8))
+            .force('charge', d3.forceManyBody().strength(-450))
+            .force('x', d3.forceX(width / 2).strength(0.05))
+            .force('y', d3.forceY(height / 2).strength(0.05))
             .force('collision', d3.forceCollide().radius(80));
         for (let i = 0; i < 200; ++i) simulation.tick();
         const link = g.append('g').attr('stroke', '#999').attr('stroke-opacity', 0.6).selectAll('line').data(links).join('line');
