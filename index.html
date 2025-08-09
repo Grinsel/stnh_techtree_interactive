@@ -44,21 +44,24 @@
             font-weight: 500;
         }
         #main-container {
+            position: relative;
+            margin: 32px 32px 0 32px;
+            height: calc(100vh - 120px);
             display: flex;
-            margin: 32px auto 0 auto;
-            max-width: 1800px;
-            gap: 32px;
-            min-height: 90vh;
+            flex-direction: column;
         }
         #sidebar {
-            width: 290px;
+            width: 320px;
             background: var(--panel-bg);
             border-radius: 18px;
             box-shadow: var(--shadow);
             padding: 28px 24px 24px 24px;
             min-height: 600px;
-            margin-top: 0;
-            position: relative;
+            position: absolute;
+            top: 15vh;
+            left: 32px;
+            z-index: 100;
+            cursor: move;
             overflow: hidden;
         }
         .tab-container {
@@ -179,8 +182,10 @@
             border-radius: 20px;
             box-shadow: var(--shadow);
             padding: 26px 22px 26px 22px;
-            position: relative;
             min-width: 900px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         #tree-toolbar {
             margin-bottom: 18px;
@@ -188,6 +193,8 @@
             flex-wrap: wrap;
             gap: 12px;
             align-items: center;
+            justify-content: center;
+            padding: 0 32px;
         }
         #tree-toolbar label {
             font-size: 1rem;
@@ -222,16 +229,16 @@
             margin-top: 8px;
         }
         #landing-card {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('pre_tree_bg.png');
+            background-image: none;
             background-size: cover;
             background-position: center;
             border-radius: 20px;
             z-index: 10;
+            margin-top: 8px;
         }
         #landing-card::before {
             content: '';
@@ -407,7 +414,7 @@
             <div id="landing-card">
                 <div class="landing-content">
     <h2>Welcome to the Star Trek: New Horizons Tech Tree!</h2>
-    <ul style="text-align: left; max-width: 500px; margin: 18px auto 0 auto; font-size: 1.07rem;">
+        <ul style="text-align: left; max-width: 500px; margin: 18px auto 0 auto; font-size: 1.07rem;">
         <li>
             Use the filters (species, area, level range) or search to quickly find technologies or explore the tree.
         </li>
@@ -416,6 +423,9 @@
         </li>
         <li>
             Share your current view with others using the <b>Copy Link</b> button.
+        </li>
+        <li>
+            The info panel on the left is now draggable! You can move it around the screen.
         </li>
     </ul>
     <div style="background: #222d38dd; border-radius: 8px; padding: 13px 16px 11px 16px; margin-top: 22px; color: #ffe38c; font-size: 1rem;">
