@@ -295,6 +295,38 @@
             fill: #dddddd;
             font-size: 10px;
         }
+        #popup-viewport {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #popup-content {
+            width: 90%;
+            height: 90%;
+            background: var(--panel-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        #popup-toolbar {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        #popup-tech-tree {
+            flex-grow: 1;
+            border-radius: 14px;
+            border: 1.5px solid #293040;
+            background: linear-gradient(120deg, #23272c 85%, #223449 100%);
+        }
         #tooltip {
             position: absolute;
             display: none;
@@ -374,6 +406,7 @@
                 <button id="back-button" style="display: none;">< Back</button>
                 <button id="forward-button" style="display: none;">Forward ></button>
                 <button id="share-button">🔗 Copy Link</button>
+                <button id="render-path-button" style="display: none;">Render Path</button>
                 <label for="layout-select">Layout:</label>
                 <select id="layout-select">
                     <option value="force-directed">Force-directed</option>
@@ -439,6 +472,15 @@
         </main>
     </div>
     <div id="tooltip"></div>
+    <div id="popup-viewport" class="hidden">
+        <div id="popup-content">
+            <div id="popup-toolbar">
+                <button id="popup-copy-button">🔗 Copy Link</button>
+                <button id="popup-close-button">Close</button>
+            </div>
+            <div id="popup-tech-tree"></div>
+        </div>
+    </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="showcase.js"></script>
 </body>

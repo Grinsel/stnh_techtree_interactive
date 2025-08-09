@@ -101,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
 
     // --- State Variables ---
+    let selectionStartNode = null;
+    let selectionEndNode = null;
     let navigationHistory = [];
     let historyIndex = -1;
     let isTreeInitialized = false;
@@ -223,9 +225,72 @@ document.addEventListener('DOMContentLoaded', () => {
                 element.addEventListener("input", saveState);
             }
         });
+
+        document.getElementById('render-path-button').addEventListener('click', () => {
+            if (selectionStartNode && selectionEndNode) {
+                calculateAndRenderPath(selectionStartNode, selectionEndNode);
+            } else if (selectionStartNode) {
+                calculateAndRenderPath(selectionStartNode);
+            }
+        });
+
+        document.getElementById('popup-close-button').addEventListener('click', () => {
+            document.getElementById('popup-viewport').classList.add('hidden');
+        });
+
+        document.getElementById('popup-copy-button').addEventListener('click', () => {
+            let params;
+            if (selectionStartNode && selectionEndNode) {
+                params = new URLSearchParams({
+                    pathStart: selectionStartNode,
+                    pathEnd: selectionEndNode
+                });
+            } else if (selectionStartNode) {
+                params = new URLSearchParams({
+                    dependenciesFor: selectionStartNode
+                });
+            }
+            const shareURL = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+            navigator.clipboard.writeText(shareURL).then(() => {
+                alert(`URL copied to clipboard!\n\n${shareURL}`);
+            }, (err) => alert("Failed to copy URL: " + err));
+        });
     }
 
     // --- Visualization and Helper Functions ---
+
+    function handleNodeSelection(d) {
+        const renderPathButton = document.getElementById('render-path-button');
+
+        if (!selectionStartNode) {
+            selectionStartNode = d.id;
+            selectionEndNode = null;
+        } else if (!selectionEndNode) {
+            selectionEndNode = d.id;
+        } else {
+            selectionStartNode = d.id;
+            selectionEndNode = null;
+        }
+
+        // Update visual indicators for all nodes
+        g.selectAll('.tech-node rect').attr('stroke', nodeData => {
+            if (nodeData.id === selectionStartNode) return 'lime';
+            if (nodeData.id === selectionEndNode) return 'red';
+            return getAreaColor(nodeData.area);
+        });
+
+        if (selectionStartNode) {
+            renderPathButton.style.display = 'inline-block';
+            if (selectionEndNode) {
+                renderPathButton.textContent = 'Render Path';
+            } else {
+                renderPathButton.textContent = 'Render Dependencies';
+            }
+        } else {
+            renderPathButton.style.display = 'none';
+        }
+    }
+
     function formatTooltip(d) {
         let info = '';
         const excludeKeys = new Set(['x', 'y', 'vx', 'vy', 'index', 'fx', 'fy']);
@@ -359,11 +424,11 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (selectedLayout === 'disjoint-force-directed') renderDisjointForceDirectedGraph(nodes, links, selectedSpecies);
     }
 
-    function renderForceDirectedGraph(nodes, links, selectedSpecies) {
-        const width = techTreeContainer.clientWidth;
-        const height = techTreeContainer.clientHeight;
+    function renderForceDirectedGraph(nodes, links, selectedSpecies, container = techTreeContainer) {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
         const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
-        svg = d3.select(techTreeContainer).append('svg').attr('width', width).attr('height', height).call(zoom);
+        svg = d3.select(container).append('svg').attr('width', width).attr('height', height).call(zoom);
         g = svg.append("g");
 
         const initialScale = Math.min(1.2, 40 / Math.max(1, nodes.length));
@@ -403,6 +468,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .on('click', (event, d) => {
                 window.currentFocusId = d.id;
                 updateVisualization(selectedSpecies, d.id, true);
+            })
+            .on('contextmenu', (event, d) => {
+                event.preventDefault();
+                handleNodeSelection(d);
             });
         const nodeWidth = 140, nodeHeight = 80;
         node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10).attr('stroke', d => getAreaColor(d.area));
@@ -416,11 +485,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies) {
-        const width = techTreeContainer.clientWidth;
-        const height = techTreeContainer.clientHeight;
+    function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies, container = techTreeContainer) {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
         const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
-        svg = d3.select(techTreeContainer).append('svg').attr('width', width).attr('height', height).call(zoom);
+        svg = d3.select(container).append('svg').attr('width', width).attr('height', height).call(zoom);
         g = svg.append("g");
 
         const initialScale = Math.min(1.2, 40 / Math.max(1, nodes.length));
@@ -462,6 +531,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .on('click', (event, d) => {
                 window.currentFocusId = d.id;
                 updateVisualization(selectedSpecies, d.id, true);
+            })
+            .on('contextmenu', (event, d) => {
+                event.preventDefault();
+                handleNodeSelection(d);
             });
 
         const nodeWidth = 120, nodeHeight = 70;
@@ -475,6 +548,202 @@ document.addEventListener('DOMContentLoaded', () => {
             link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
             node.attr('transform', d => `translate(${d.x},${d.y})`);
         });
+    }
+
+    function getPrerequisites(startId) {
+        const prerequisites = new Set();
+        const techMap = new Map(allTechs.map(t => [t.id, t]));
+
+        function findAncestors(id) {
+            if (prerequisites.has(id)) return;
+            prerequisites.add(id);
+            const node = techMap.get(id);
+            if (node && node.prerequisites) {
+                node.prerequisites.forEach(prereq => {
+                    findAncestors(prereq);
+                });
+            }
+        }
+
+        findAncestors(startId);
+        return prerequisites;
+    }
+
+    function renderPopupGraph(nodes, links) {
+        const container = document.getElementById('popup-tech-tree');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        const popupSvg = d3.select(container).append('svg').attr('width', width).attr('height', height);
+        const popupG = popupSvg.append("g");
+        const zoom = d3.zoom().on("zoom", (event) => popupG.attr("transform", event.transform));
+        popupSvg.call(zoom);
+
+        const popupSimulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(100).strength(0.5))
+            .force('charge', d3.forceManyBody().strength(-250))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(80));
+
+        const link = popupG.append('g').attr('stroke', '#e0e0e0ff').attr('stroke-opacity', 0.5).selectAll('line').data(links).join('line');
+        const node = popupG.append('g').selectAll('g').data(nodes).join('g').attr('class', 'tech-node').call(drag(popupSimulation))
+            .on('mouseover', (event, d) => {
+                tooltip.style.display = 'block';
+                tooltip.innerHTML = formatTooltip(d);
+                tooltip.style.zIndex = 1000; // Bring to front
+            })
+            .on('mousemove', (event) => {
+                const treeRect = techTreeContainer.getBoundingClientRect(); // Use main container for bounds
+                const tooltipRect = tooltip.getBoundingClientRect();
+                let x = event.clientX + 15;
+                let y = event.clientY + 15;
+
+                if (x + tooltipRect.width > treeRect.right) {
+                    x = event.clientX - tooltipRect.width - 15;
+                }
+                if (y + tooltipRect.height > treeRect.bottom) {
+                    y = event.clientY - tooltipRect.height - 15;
+                }
+
+                tooltip.style.left = `${Math.max(treeRect.left, x)}px`;
+                tooltip.style.top = `${Math.max(treeRect.top, y)}px`;
+            })
+            .on('mouseout', () => {
+                tooltip.style.display = 'none';
+                tooltip.style.zIndex = ''; // Reset z-index
+            });
+
+        const nodeWidth = 140, nodeHeight = 80;
+        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10).attr('stroke', d => getAreaColor(d.area));
+        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').text(d => d.name ? d.name.substring(0, 18) : d.id);
+        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+
+        popupSimulation.on('tick', () => {
+            link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+            node.attr('transform', d => `translate(${d.x},${d.y})`);
+        });
+    }
+
+    function calculateAndRenderPath(startId, endId) {
+        let pathNodes, pathLinks;
+        if (endId) {
+            const result = calculatePath(startId, endId);
+            pathNodes = result.nodes;
+            pathLinks = result.links;
+        } else {
+            const pathNodeIds = getPrerequisites(startId);
+            pathNodes = allTechs.filter(t => pathNodeIds.has(t.id));
+            pathLinks = [];
+            pathNodes.forEach(tech => {
+                if (tech.prerequisites) {
+                    tech.prerequisites.forEach(prereq => {
+                        if (pathNodeIds.has(prereq)) {
+                            pathLinks.push({ source: prereq, target: tech.id });
+                        }
+                    });
+                }
+            });
+        }
+        
+        const popupContainer = document.getElementById('popup-tech-tree');
+        popupContainer.innerHTML = ''; // Clear previous graph
+        document.getElementById('popup-viewport').classList.remove('hidden');
+
+        renderPopupGraph(pathNodes, pathLinks);
+    }
+
+    function calculatePath(startId, endId) {
+        const techMap = new Map(allTechs.map(t => [t.id, t]));
+        const adj = new Map();
+        allTechs.forEach(t => {
+            if (t.prerequisites) {
+                t.prerequisites.forEach(p => {
+                    if (!adj.has(p)) adj.set(p, []);
+                    adj.get(p).push(t.id);
+                });
+            }
+        });
+
+        // Bidirectional BFS
+        let qF = [startId], qB = [endId];
+        let visitedF = new Map([[startId, [startId]]]), visitedB = new Map([[endId, [endId]]]);
+        let path = [];
+
+        while (qF.length > 0 && qB.length > 0) {
+            // Forward search
+            let currF = qF.shift();
+            if (visitedB.has(currF)) {
+                path = visitedF.get(currF).concat(visitedB.get(currF).reverse().slice(1));
+                break;
+            }
+            // Descendants
+            if (adj.has(currF)) {
+                for (const neighbor of adj.get(currF)) {
+                    if (!visitedF.has(neighbor)) {
+                        let newPath = [...visitedF.get(currF), neighbor];
+                        visitedF.set(neighbor, newPath);
+                        qF.push(neighbor);
+                    }
+                }
+            }
+            // Ancestors
+            const techF = techMap.get(currF);
+            if (techF && techF.prerequisites) {
+                 for (const neighbor of techF.prerequisites) {
+                    if (!visitedF.has(neighbor)) {
+                        let newPath = [...visitedF.get(currF), neighbor];
+                        visitedF.set(neighbor, newPath);
+                        qF.push(neighbor);
+                    }
+                }
+            }
+
+
+            // Backward search
+            let currB = qB.shift();
+            if (visitedF.has(currB)) {
+                path = visitedF.get(currB).concat(visitedB.get(currB).reverse().slice(1));
+                break;
+            }
+            // Ancestors
+            const techB = techMap.get(currB);
+            if (techB && techB.prerequisites) {
+                for (const neighbor of techB.prerequisites) {
+                    if (!visitedB.has(neighbor)) {
+                        let newPath = [...visitedB.get(currB), neighbor];
+                        visitedB.set(neighbor, newPath);
+                        qB.push(neighbor);
+                    }
+                }
+            }
+            // Descendants
+            if (adj.has(currB)) {
+                for (const neighbor of adj.get(currB)) {
+                    if (!visitedB.has(neighbor)) {
+                        let newPath = [...visitedB.get(currB), neighbor];
+                        visitedB.set(neighbor, newPath);
+                        qB.push(neighbor);
+                    }
+                }
+            }
+        }
+
+        const pathNodeIds = new Set(path);
+        const pathNodes = allTechs.filter(t => pathNodeIds.has(t.id));
+        const pathLinks = [];
+        pathNodes.forEach(tech => {
+            if (tech.prerequisites) {
+                tech.prerequisites.forEach(prereq => {
+                    if (pathNodeIds.has(prereq)) {
+                        pathLinks.push({ source: prereq, target: tech.id });
+                    }
+                });
+            }
+        });
+
+        return { nodes: pathNodes, links: pathLinks };
     }
 
     function getAreaColor(area) {
@@ -593,8 +862,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Main Execution Logic ---
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.toString().length > 0) {
-        // If there are URL params, load the tree immediately.
+    const pathStart = urlParams.get('pathStart');
+    const pathEnd = urlParams.get('pathEnd');
+    const dependenciesFor = urlParams.get('dependenciesFor');
+
+    if (pathStart && pathEnd) {
+        // If path params are present, initialize the tree and then render the path.
+        landingCard.classList.add('hidden');
+        treeToolbar.style.display = 'flex';
+        techTreeContainer.classList.remove('hidden');
+        initializeTree(); // This will fetch the data
+        // We need to wait for the data to be loaded before calculating the path.
+        // A simple timeout is a pragmatic way to handle this without complex promise chaining.
+        setTimeout(() => {
+            selectionStartNode = pathStart;
+            selectionEndNode = pathEnd;
+            calculateAndRenderPath(pathStart, pathEnd);
+        }, 1000); // Wait 1 second for data to likely be loaded.
+    } else if (dependenciesFor) {
+        // If dependenciesFor param is present, initialize the tree and then render the dependencies.
+        landingCard.classList.add('hidden');
+        treeToolbar.style.display = 'flex';
+        techTreeContainer.classList.remove('hidden');
+        initializeTree(); // This will fetch the data
+        setTimeout(() => {
+            selectionStartNode = dependenciesFor;
+            calculateAndRenderPath(dependenciesFor);
+        }, 1000);
+    } else if (urlParams.toString().length > 0) {
+        // If there are other URL params, load the tree immediately.
         landingCard.classList.add('hidden');
         treeToolbar.style.display = 'flex';
         techTreeContainer.classList.remove('hidden');
