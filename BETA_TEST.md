@@ -34,11 +34,8 @@ The full tech tree can be overwhelming. The **recommended approach is to use the
 The following features are currently in development or under consideration:
 
 - **Minimap**: For better navigation in the full tree view.
-- **Info Panel**: A detailed panel for clicked technologies with descriptions beyond the tooltip.
 - **Rarity Filter**: A filter to distinguish between rare, common, and other tech rarities.
-- **Parent/Child Toggle**: The ability to show or hide entire branches from a selected node.
-- **Refined Initial View**: Improvements to the initial presentation of the tree when it loads.
-- **Smart Zoom Limit**: A more intelligent zoom limit, with navigation handled via the minimap.
+
 
 ## Feedback Instructions
 

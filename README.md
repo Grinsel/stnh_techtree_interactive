@@ -21,17 +21,20 @@ We are currently running a closed beta test of this tool. If you are a tester, p
 - **Hide Isolated Techs**: An option to hide technologies with 0 or 1 connection to reduce clutter.
 - **Tier-Level Filter**: Filter the tree to show only technologies of specific tiers.
 - **Start-Tech View**: Select a starting technology and view only its specific progression path.
+- **Info Panel**: A detailed panel for clicked technologies with descriptions that go beyond the simple tooltip.
+- **Refined Initial View**: Improvements to the initial presentation of the tree when it first loads.
+- **Smart Zoom Limit**: A more intelligent zoom limit, with navigation primarily handled via the minimap.
+- **Parent/Child Toggle**: (The ability to show or hide entire branches originating from a selected node.)
+                            Switched over to new render window, to show selcted tech dependencies
 
 ## 📌 Planned Features / Roadmap
 
 The following improvements and new features are planned:
 
 - **Minimap**: For better navigation in the full tree view, eliminating the need for endless scrolling.
-- **Info Panel**: A detailed panel for clicked technologies with descriptions that go beyond the simple tooltip.
 - **Rarity Filter**: A filter to distinguish between rare, common, and other technology rarities.
-- **Parent/Child Toggle**: The ability to show or hide entire branches originating from a selected node.
-- **Refined Initial View**: Improvements to the initial presentation of the tree when it first loads.
-- **Smart Zoom Limit**: A more intelligent zoom limit, with navigation primarily handled via the minimap.
+
+
 
 ## 🛠 Technologies Used
 
