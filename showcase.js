@@ -364,14 +364,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
         svg = d3.select(techTreeContainer).append('svg').attr('width', width).attr('height', height).call(zoom);
         g = svg.append("g");
+
+        const initialScale = Math.min(1.2, 40 / Math.max(1, nodes.length));
+        const initialTransform = d3.zoomIdentity.translate(width / 2, height / 2).scale(initialScale).translate(-width/2, -height/2);
+        svg.call(zoom.transform, initialTransform);
+
+
         simulation = d3.forceSimulation(nodes)
-            .force('link', d3.forceLink(links).id(d => d.id).distance(150).strength(0.8))
-            .force('charge', d3.forceManyBody().strength(-450))
-            .force('x', d3.forceX(width / 2).strength(0.05))
-            .force('y', d3.forceY(height / 2).strength(0.05))
+            .force('link', d3.forceLink(links).id(d => d.id).distance(100).strength(0.5))
+            .force('charge', d3.forceManyBody().strength(-250))
+            .force('center', d3.forceCenter(width / 2, height / 2))
             .force('collision', d3.forceCollide().radius(80));
-        for (let i = 0; i < 200; ++i) simulation.tick();
-        const link = g.append('g').attr('stroke', '#999').attr('stroke-opacity', 0.6).selectAll('line').data(links).join('line');
+        for (let i = 0; i < 50; ++i) simulation.tick();
+        const link = g.append('g').attr('stroke', '#e0e0e0ff').attr('stroke-opacity', 0.5).selectAll('line').data(links).join('line');
         const node = g.append('g').selectAll('g').data(nodes).join('g').attr('class', 'tech-node').call(drag(simulation))
             .on('mouseover', (event, d) => {
                 tooltip.style.display = 'block';
@@ -416,6 +421,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
         svg = d3.select(techTreeContainer).append('svg').attr('width', width).attr('height', height).call(zoom);
         g = svg.append("g");
+
+        const initialScale = Math.min(1.2, 40 / Math.max(1, nodes.length));
+        const initialTransform = d3.zoomIdentity.translate(width / 2, height / 2).scale(initialScale).translate(-width/2, -height/2);
+        svg.call(zoom.transform, initialTransform);
 
         simulation = d3.forceSimulation(nodes)
             .force('link', d3.forceLink(links).id(d => d.id).distance(100).strength(0.5))
