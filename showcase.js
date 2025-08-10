@@ -422,6 +422,143 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (selectedLayout === 'force-directed') renderForceDirectedGraph(nodes, links, selectedSpecies);
         else if (selectedLayout === 'disjoint-force-directed') renderDisjointForceDirectedGraph(nodes, links, selectedSpecies);
+        else if (selectedLayout === 'force-directed-arrows') renderForceDirectedArrowsGraph(nodes, links, selectedSpecies);
+    }
+
+    function renderForceDirectedArrowsGraph(nodes, links, selectedSpecies, container = techTreeContainer) {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
+        svg = d3.select(container).append('svg').attr('width', width).attr('height', height).call(zoom);
+
+        const defs = svg.append('defs');
+        const gradients = {
+            'society': ['#3a3a3a', getAreaColor('society')],
+            'engineering': ['#3a3a3a', getAreaColor('engineering')],
+            'physics': ['#3a3a3a', getAreaColor('physics')]
+        };
+
+        for (const [area, colors] of Object.entries(gradients)) {
+            const gradient = defs.append('linearGradient')
+                .attr('id', `gradient-${area}`)
+                .attr('x1', '0%').attr('y1', '0%')
+                .attr('x2', '100%').attr('y2', '0%');
+            gradient.append('stop').attr('offset', '0%').attr('stop-color', colors[0]);
+            gradient.append('stop').attr('offset', '100%').attr('stop-color', colors[1]);
+        }
+        
+        g = svg.append("g");
+
+        const initialScale = Math.min(1.2, 40 / Math.max(1, nodes.length));
+        const initialTransform = d3.zoomIdentity.translate(width / 2, height / 2).scale(initialScale).translate(-width/2, -height/2);
+        svg.call(zoom.transform, initialTransform);
+
+
+        simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(100).strength(0.5))
+            .force('charge', d3.forceManyBody().strength(-250))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(80));
+        for (let i = 0; i < 50; ++i) simulation.tick();
+        
+        const link = g.append('g')
+            .selectAll('polygon')
+            .data(links)
+            .join('polygon')
+            .attr('fill', '#e0e0e0ff')
+            .attr('stroke', 'black')
+            .attr('stroke-width', 1)
+            .attr('stroke-opacity', 0.7);
+
+        const node = g.append('g').selectAll('g').data(nodes).join('g').attr('class', 'tech-node').call(drag(simulation))
+            .on('mouseover', (event, d) => {
+                tooltip.style.display = 'block';
+                tooltip.innerHTML = formatTooltip(d);
+            })
+            .on('mousemove', (event) => {
+                const treeRect = techTreeContainer.getBoundingClientRect();
+                const tooltipRect = tooltip.getBoundingClientRect();
+                let x = event.clientX + 15;
+                let y = event.clientY + 15;
+
+                if (x + tooltipRect.width > treeRect.right) {
+                    x = event.clientX - tooltipRect.width - 15;
+                }
+                if (y + tooltipRect.height > treeRect.bottom) {
+                    y = event.clientY - tooltipRect.height - 15;
+                }
+
+                tooltip.style.left = `${Math.max(treeRect.left, x)}px`;
+                tooltip.style.top = `${Math.max(treeRect.top, y)}px`;
+            })
+            .on('mouseout', () => tooltip.style.display = 'none')
+            .on('click', (event, d) => {
+                window.currentFocusId = d.id;
+                updateVisualization(selectedSpecies, d.id, true);
+            })
+            .on('contextmenu', (event, d) => {
+                event.preventDefault();
+                handleNodeSelection(d);
+            });
+        const nodeWidth = 140, nodeHeight = 80;
+        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
+            .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area));
+        
+        const stripeWidth = 8;
+        const cornerRadius = 10;
+        const x0 = -nodeWidth / 2;
+        const y0 = -nodeHeight / 2;
+        const x1 = -nodeWidth / 2 + stripeWidth;
+        const y1 = nodeHeight / 2;
+        const r = cornerRadius;
+        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
+        node.append('path')
+            .attr('d', pathData)
+            .attr('fill', d => getTierColor(d.tier));
+
+        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
+        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        
+        simulation.on('tick', () => {
+            link.attr('points', d => {
+                const dx = d.target.x - d.source.x;
+                const dy = d.target.y - d.source.y;
+                const length = Math.sqrt(dx * dx + dy * dy);
+                if (length === 0) return `${d.source.x},${d.source.y} ${d.source.x},${d.source.y} ${d.source.x},${d.source.y}`;
+
+                const nx = dx / length;
+                const ny = dy / length;
+                const px = -ny;
+                const py = nx;
+                const baseWidth = 10;
+
+                const halfWidth = nodeWidth / 2;
+                const halfHeight = nodeHeight / 2;
+                const absDx = Math.abs(dx);
+                const absDy = Math.abs(dy);
+
+                let tipX, tipY;
+                if (absDx / halfWidth > absDy / halfHeight) {
+                    const sign = Math.sign(dx);
+                    tipX = d.target.x - sign * halfWidth;
+                    tipY = d.target.y - sign * halfWidth * dy / dx;
+                } else {
+                    const sign = Math.sign(dy);
+                    tipY = d.target.y - sign * halfHeight;
+                    tipX = d.target.x - sign * halfHeight * dx / dy;
+                }
+
+                const base1X = d.source.x + px * baseWidth / 2;
+                const base1Y = d.source.y + py * baseWidth / 2;
+                const base2X = d.source.x - px * baseWidth / 2;
+                const base2Y = d.source.y - py * baseWidth / 2;
+
+                return `${tipX},${tipY} ${base1X},${base1Y} ${base2X},${base2Y}`;
+            });
+            node.attr('transform', d => `translate(${d.x},${d.y})`);
+        });
     }
 
     function renderForceDirectedGraph(nodes, links, selectedSpecies, container = techTreeContainer) {
