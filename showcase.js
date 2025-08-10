@@ -429,6 +429,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const height = container.clientHeight;
         const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
         svg = d3.select(container).append('svg').attr('width', width).attr('height', height).call(zoom);
+
+        const defs = svg.append('defs');
+        const gradients = {
+            'society': ['#3a3a3a', getAreaColor('society')],
+            'engineering': ['#3a3a3a', getAreaColor('engineering')],
+            'physics': ['#3a3a3a', getAreaColor('physics')]
+        };
+
+        for (const [area, colors] of Object.entries(gradients)) {
+            const gradient = defs.append('linearGradient')
+                .attr('id', `gradient-${area}`)
+                .attr('x1', '0%').attr('y1', '0%')
+                .attr('x2', '100%').attr('y2', '0%');
+            gradient.append('stop').attr('offset', '0%').attr('stop-color', colors[0]);
+            gradient.append('stop').attr('offset', '100%').attr('stop-color', colors[1]);
+        }
+        
         g = svg.append("g");
 
         const initialScale = Math.min(1.2, 40 / Math.max(1, nodes.length));
@@ -474,11 +491,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 handleNodeSelection(d);
             });
         const nodeWidth = 140, nodeHeight = 80;
-        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10).attr('stroke', d => getAreaColor(d.area));
-        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').text(d => d.name ? d.name.substring(0, 18) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
+            .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area));
+        
+        const stripeWidth = 8;
+        const cornerRadius = 10;
+        const x0 = -nodeWidth / 2;
+        const y0 = -nodeHeight / 2;
+        const x1 = -nodeWidth / 2 + stripeWidth;
+        const y1 = nodeHeight / 2;
+        const r = cornerRadius;
+        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
+        node.append('path')
+            .attr('d', pathData)
+            .attr('fill', d => getTierColor(d.tier));
+
+        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
+        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
         simulation.on('tick', () => {
             link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
             node.attr('transform', d => `translate(${d.x},${d.y})`);
@@ -490,6 +521,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const height = container.clientHeight;
         const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
         svg = d3.select(container).append('svg').attr('width', width).attr('height', height).call(zoom);
+        
+        const defs = svg.append('defs');
+        const gradients = {
+            'society': ['#3a3a3a', getAreaColor('society')],
+            'engineering': ['#3a3a3a', getAreaColor('engineering')],
+            'physics': ['#3a3a3a', getAreaColor('physics')]
+        };
+
+        for (const [area, colors] of Object.entries(gradients)) {
+            const gradient = defs.append('linearGradient')
+                .attr('id', `gradient-${area}`)
+                .attr('x1', '0%').attr('y1', '0%')
+                .attr('x2', '100%').attr('y2', '0%');
+            gradient.append('stop').attr('offset', '0%').attr('stop-color', colors[0]);
+            gradient.append('stop').attr('offset', '100%').attr('stop-color', colors[1]);
+        }
+
         g = svg.append("g");
 
         const initialScale = Math.min(1.2, 40 / Math.max(1, nodes.length));
@@ -538,11 +586,25 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         const nodeWidth = 120, nodeHeight = 70;
-        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 8).attr('ry', 8).attr('stroke', d => getAreaColor(d.area));
-        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').text(d => d.name ? d.name.substring(0, 15) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').text(d => `Cost: ${d.cost || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 8).attr('ry', 8)
+            .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area));
+
+        const stripeWidth = 8;
+        const cornerRadius = 8;
+        const x0 = -nodeWidth / 2;
+        const y0 = -nodeHeight / 2;
+        const x1 = -nodeWidth / 2 + stripeWidth;
+        const y1 = nodeHeight / 2;
+        const r = cornerRadius;
+        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
+        node.append('path')
+            .attr('d', pathData)
+            .attr('fill', d => getTierColor(d.tier));
+            
+        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 15) : d.id);
+        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Cost: ${d.cost || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
 
         simulation.on('tick', () => {
             link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
@@ -614,11 +676,25 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         const nodeWidth = 140, nodeHeight = 80;
-        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10).attr('stroke', d => getAreaColor(d.area));
-        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').text(d => d.name ? d.name.substring(0, 18) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
+            .attr('fill', d => getAreaColor(d.area));
+
+        const stripeWidth = 8;
+        const cornerRadius = 10;
+        const x0 = -nodeWidth / 2;
+        const y0 = -nodeHeight / 2;
+        const x1 = -nodeWidth / 2 + stripeWidth;
+        const y1 = nodeHeight / 2;
+        const r = cornerRadius;
+        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
+        node.append('path')
+            .attr('d', pathData)
+            .attr('fill', d => getTierColor(d.tier));
+
+        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
+        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
 
         popupSimulation.on('tick', () => {
             link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
@@ -746,14 +822,23 @@ document.addEventListener('DOMContentLoaded', () => {
         return { nodes: pathNodes, links: pathLinks };
     }
 
-    function getAreaColor(area) {
-        switch (area) {
-            case 'physics': return '#2a7fff';
-            case 'society': return '#00a000';
-            case 'engineering': return '#ff8000';
-            default: return '#808080';
-        }
+function getAreaColor(area) {
+    switch (area) {
+        case 'physics': return '#2a7fff';
+        case 'society': return '#36d673';
+        case 'engineering': return '#ffb400';
+        default: return '#666666';
     }
+}
+
+function getTierColor(tier) {
+    const tierNum = parseInt(tier, 10) || 0;
+    if (tierNum < 0) return '#000000';
+    if (tierNum > 11) return '#ffffff';
+    const value = Math.round((tierNum / 11) * 255);
+    const hex = value.toString(16).padStart(2, '0');
+    return `#${hex}${hex}${hex}`;
+}
 
     function drag(simulation) {
         function dragstarted(event, d) {
@@ -779,10 +864,20 @@ document.addEventListener('DOMContentLoaded', () => {
         g = svg.append("g");
         const searchNodes = matchedNodes.map(tech => ({ ...tech }));
         const nodeWidth = 140, nodeHeight = 80, paddingX = 30, paddingY = 30;
-        const cols = Math.max(1, Math.floor(width / (nodeWidth + paddingX)));
-        searchNodes.forEach((d, i) => {
-            d.x = paddingX + (i % cols) * (nodeWidth + paddingX) + nodeWidth / 2;
-            d.y = paddingY + Math.floor(i / cols) * (nodeHeight + paddingY) + nodeHeight / 2;
+        const nodesPerRow = Math.max(1, Math.floor(width / (nodeWidth + paddingX)));
+
+        const rows = [];
+        for (let i = 0; i < searchNodes.length; i += nodesPerRow) {
+            rows.push(searchNodes.slice(i, i + nodesPerRow));
+        }
+
+        rows.forEach((row, rowIndex) => {
+            const rowWidth = row.length * (nodeWidth + paddingX) - paddingX;
+            const startX = (width - rowWidth) / 2;
+            row.forEach((d, nodeIndex) => {
+                d.x = startX + nodeIndex * (nodeWidth + paddingX) + nodeWidth / 2;
+                d.y = paddingY + rowIndex * (nodeHeight + paddingY) + nodeHeight / 2;
+            });
         });
         const node = g.selectAll('g').data(searchNodes).join('g').attr('class', 'tech-node')
             .on('mouseover', (event, d) => {
@@ -811,11 +906,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 searchInput.value = '';
                 updateVisualization(speciesSelect.value, d.id, true);
             });
-        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10).attr('stroke', 'yellow');
-        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').text(d => d.name ? d.name.substring(0, 18) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        
+        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
+            .attr('fill', d => getAreaColor(d.area));
+
+        const stripeWidth = 8;
+        const cornerRadius = 10;
+        const x0 = -nodeWidth / 2;
+        const y0 = -nodeHeight / 2;
+        const x1 = -nodeWidth / 2 + stripeWidth;
+        const y1 = nodeHeight / 2;
+        const r = cornerRadius;
+        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
+        node.append('path')
+            .attr('d', pathData)
+            .attr('fill', d => getTierColor(d.tier));
+            
+        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
+        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
         node.attr('transform', d => `translate(${d.x},${d.y})`);
     }
 

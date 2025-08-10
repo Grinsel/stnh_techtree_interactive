@@ -286,14 +286,15 @@
         }
         .tech-node {
             cursor: pointer;
+            filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.7));
         }
         .tech-node rect {
-            fill: #3c424a;
             stroke-width: 4px;
         }
         .tech-node text {
             fill: #dddddd;
             font-size: 10px;
+            text-shadow: 0 0 3px black, 0 0 3px black;
         }
         #popup-viewport {
             position: fixed;
@@ -455,12 +456,19 @@
             Click any technology to view its branch in detail.
         </li>
         <li>
+            Right-click on a node to see its dependencies and the path between them.
+        </li>
+        <li>
             Share your current view with others using the <b>Copy Link</b> button.
         </li>
         <li>
             The info panel on the left is now draggable! You can move it around the screen.
         </li>
     </ul>
+    <div style="background: #c8373722; border: 1px solid #c8373788; border-radius: 8px; padding: 13px 16px 11px 16px; margin-top: 22px; color: #ffc4c4; font-size: 1rem;">
+        <b>Beta / WIP:</b><br>
+        This tool is still in development. Some features may not be fully functional.
+    </div>
     <div style="background: #222d38dd; border-radius: 8px; padding: 13px 16px 11px 16px; margin-top: 22px; color: #ffe38c; font-size: 1rem;">
         <b>Tip:</b><br>
         The more general your search or filters, the bigger (and slower) the tech tree becomes. Try to be specific for best results!
