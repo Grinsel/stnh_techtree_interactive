@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let navigationHistory = [];
     let historyIndex = -1;
     let isTreeInitialized = false;
+    let isDataLoaded = false;
     let allTechs = [];
     let allSpecies = new Set();
     let nodes = [];
@@ -113,8 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeTechId = null;
     let tierFilterActive = false;
 
-    // --- Core Initialization Function ---
-    function initializeTree() {
+    // --- Core Initialization Functions ---
+    function prepareUI() {
         if (isTreeInitialized) return;
         isTreeInitialized = true;
 
@@ -125,11 +126,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Set up permanent event listeners now that the tree is active
         setupEventListeners();
+    }
 
+    function loadAndRenderTree() {
+        if (isDataLoaded) {
+            // If data is already loaded, just re-render with current filters
+            const currentState = loadState();
+            applyState(currentState);
+            updateVisualization(currentState.species, currentState.focus, false);
+            return;
+        }
+        
         // Fetch data and render the tree for the first time
         fetch('assets/technology.json')
             .then(response => response.json())
             .then(data => {
+                isDataLoaded = true;
                 allTechs = data;
                 allTechs.forEach(tech => {
                     if (tech.required_species && tech.required_species.length > 0) {
@@ -255,6 +267,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(`URL copied to clipboard!\n\n${shareURL}`);
             }, (err) => alert("Failed to copy URL: " + err));
         });
+
+        // This is for the new button you will add in the HTML
+        const loadTreeButton = document.getElementById('load-tree-button');
+        if (loadTreeButton) {
+            loadTreeButton.addEventListener('click', loadAndRenderTree);
+        }
     }
 
     // --- Visualization and Helper Functions ---
@@ -1274,10 +1292,8 @@ function getAreaColor(area) {
 
     if (pathStart && pathEnd) {
         // If path params are present, initialize the tree and then render the path.
-        landingCard.classList.add('hidden');
-        treeToolbar.style.display = 'flex';
-        techTreeContainer.classList.remove('hidden');
-        initializeTree(); // This will fetch the data
+        prepareUI();
+        loadAndRenderTree();
         // We need to wait for the data to be loaded before calculating the path.
         // A simple timeout is a pragmatic way to handle this without complex promise chaining.
         setTimeout(() => {
@@ -1287,36 +1303,31 @@ function getAreaColor(area) {
         }, 1000); // Wait 1 second for data to likely be loaded.
     } else if (dependenciesFor) {
         // If dependenciesFor param is present, initialize the tree and then render the dependencies.
-        landingCard.classList.add('hidden');
-        treeToolbar.style.display = 'flex';
-        techTreeContainer.classList.remove('hidden');
-        initializeTree(); // This will fetch the data
+        prepareUI();
+        loadAndRenderTree();
         setTimeout(() => {
             selectionStartNode = dependenciesFor;
             calculateAndRenderPath(dependenciesFor);
         }, 1000);
     } else if (urlParams.toString().length > 0) {
         // If there are other URL params, load the tree immediately.
-        landingCard.classList.add('hidden');
-        treeToolbar.style.display = 'flex';
-        techTreeContainer.classList.remove('hidden');
-        initializeTree();
-        setupEventListeners();
+        prepareUI();
+        loadAndRenderTree();
     } else {
         // Otherwise, show the landing card and wait for user interaction.
         treeToolbar.style.display = 'none';
         techTreeContainer.classList.add('hidden');
         landingCard.classList.remove('hidden');
 
-        // These listeners will trigger the tree initialization ONCE.
+        // These listeners will trigger the UI preparation ONCE.
         const initOnce = { once: true };
-        showTreeButton.addEventListener('click', initializeTree, initOnce);
-        speciesSelect.addEventListener('mousedown', initializeTree, initOnce);
-        areaSelect.addEventListener('mousedown', initializeTree, initOnce);
-        searchInput.addEventListener('focus', initializeTree, initOnce);
-        layoutSelect.addEventListener('mousedown', initializeTree, initOnce);
-        showTierButton.addEventListener('click', initializeTree, initOnce);
-        searchButton.addEventListener('click', initializeTree, initOnce);
+        showTreeButton.addEventListener('click', prepareUI, initOnce);
+        speciesSelect.addEventListener('mousedown', prepareUI, initOnce);
+        areaSelect.addEventListener('mousedown', prepareUI, initOnce);
+        searchInput.addEventListener('focus', prepareUI, initOnce);
+        layoutSelect.addEventListener('mousedown', prepareUI, initOnce);
+        showTierButton.addEventListener('click', prepareUI, initOnce);
+        searchButton.addEventListener('click', prepareUI, initOnce);
     }
     
     makeDraggable(sidebar);
