@@ -16,16 +16,19 @@ We are currently running a closed beta test of this tool. If you are a tester, p
 - **Full Tree Visualization**: Displays the entire technology tree.
 - **Technology Search**: Search for technologies by name.
 - **Branch Inspection**: Click on a technology to inspect its specific dependency branch/subtree.
-- **Species Filter**: Filter technologies by species (currently most effective in the full tree view).
-- **Improved Search**: The search now correctly respects species restrictions.
-- **Hide Isolated Techs**: An option to hide technologies with 0 or 1 connection to reduce clutter.
+- **Species Filter**: Filter technologies by species.
 - **Tier-Level Filter**: Filter the tree to show only technologies of specific tiers.
-- **Start-Tech View**: Select a starting technology and view only its specific progression path.
-- **Info Panel**: A detailed panel for clicked technologies with descriptions that go beyond the simple tooltip.
+- **Area Filter**: Filter by technology area (Physics, Society, Engineering).
+- **Info Panel**: A detailed, draggable panel for clicked technologies with descriptions that go beyond the simple tooltip.
+- **Shareable Links**: Generate a unique URL that saves your current filters, layout, and focused technology or even a calculated path to share your exact view.
+- **History Navigation**: Use back and forward buttons to navigate through your viewing history, similar to a web browser.
+- **Path & Dependency Analysis**: Right-click to select a start and end technology, then render the direct path or all prerequisites in a separate, focused view.
+- **Visual Tier Indicators**: Each technology node visually displays its tier level with stripes for quick identification.
+- **Multiple Layouts**: Choose between different force-directed graph layouts, including one with arrows to clearly indicate dependency direction.
+- **Save State**: Your filter and layout settings are automatically saved in your browser for your next visit.
 - **Refined Initial View**: Improvements to the initial presentation of the tree when it first loads.
 - **Smart Zoom Limit**: A more intelligent zoom limit, with navigation primarily handled via the minimap.
-- **Parent/Child Toggle**: (The ability to show or hide entire branches originating from a selected node.)
-                            Switched over to new render window, to show selcted tech dependencies
+- **Parent/Child Toggle**: Switched over to the new "Path & Dependency Analysis" feature to show selected tech dependencies in a new render window.
 
 ## 📌 Planned Features / Roadmap
 
