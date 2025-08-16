@@ -133,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // If data is already loaded, just re-render with current filters
             const currentState = loadState();
             applyState(currentState);
+            tierFilterActive = true; // Activate tier filter
             updateVisualization(currentState.species, currentState.focus, false);
             return;
         }
@@ -167,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     historyIndex = 0;
                 }
 
+                tierFilterActive = true; // Activate tier filter
                 updateVisualization(initialState.species, activeTechId, false);
             });
     }
