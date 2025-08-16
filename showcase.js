@@ -502,7 +502,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         const nodeWidth = 140, nodeHeight = 80;
         node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
-            .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area));
+            .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area))
+            .attr('stroke', d => {
+                if (d.id === activeTechId) return 'yellow';
+                if (d.id === selectionStartNode) return 'lime';
+                if (d.id === selectionEndNode) return 'red';
+                return getAreaColor(d.area);
+            })
+            .attr('stroke-width', d => (d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode) ? 3 : 1);
         
         const stripeWidth = 8;
         const cornerRadius = 10;
@@ -658,7 +665,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         const nodeWidth = 140, nodeHeight = 80;
         node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
-            .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area));
+            .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area))
+            .attr('stroke', d => {
+                if (d.id === activeTechId) return 'yellow';
+                if (d.id === selectionStartNode) return 'lime';
+                if (d.id === selectionEndNode) return 'red';
+                return getAreaColor(d.area);
+            })
+            .attr('stroke-width', d => (d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode) ? 3 : 1);
         
         const stripeWidth = 8;
         const cornerRadius = 10;
@@ -782,7 +796,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nodeWidth = 120, nodeHeight = 70;
         node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 8).attr('ry', 8)
-            .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area));
+            .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area))
+            .attr('stroke', d => {
+                if (d.id === activeTechId) return 'yellow';
+                if (d.id === selectionStartNode) return 'lime';
+                if (d.id === selectionEndNode) return 'red';
+                return getAreaColor(d.area);
+            })
+            .attr('stroke-width', d => (d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode) ? 3 : 1);
 
         const stripeWidth = 8;
         const cornerRadius = 8;
