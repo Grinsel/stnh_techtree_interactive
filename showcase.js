@@ -512,9 +512,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const y1 = nodeHeight / 2;
         const r = cornerRadius;
         const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
-        node.append('path')
+        
+        const tierIndicator = node.append('g');
+        tierIndicator.append('path')
             .attr('d', pathData)
-            .attr('fill', d => getTierColor(d.tier));
+            .attr('fill', 'white');
+
+        tierIndicator.each(function(d) {
+            const tier = parseInt(d.tier) || 0;
+            if (tier > 0) {
+                const g = d3.select(this);
+                const clipId = `clip-${d.id.replace(/[^a-zA-Z0-9-_]/g, '_')}`;
+                
+                g.append('defs')
+                 .append('clipPath')
+                 .attr('id', clipId)
+                 .append('path')
+                 .attr('d', pathData);
+
+                const stripes = g.append('g').attr('clip-path', `url(#${clipId})`);
+                const stripeSpacing = 7;
+                for (let i = 0; i < tier; i++) {
+                    const y = y0 + i * stripeSpacing;
+                    stripes.append('line')
+                        .attr('stroke', 'black')
+                        .attr('stroke-width', 3)
+                        .attr('x1', x0 - 5)
+                        .attr('y1', y)
+                        .attr('x2', x1 + 5)
+                        .attr('y2', y + (x1 - x0) + 10);
+                }
+            }
+        });
 
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
         node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
@@ -639,9 +668,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const y1 = nodeHeight / 2;
         const r = cornerRadius;
         const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
-        node.append('path')
+        
+        const tierIndicator = node.append('g');
+        tierIndicator.append('path')
             .attr('d', pathData)
-            .attr('fill', d => getTierColor(d.tier));
+            .attr('fill', 'white');
+
+        tierIndicator.each(function(d) {
+            const tier = parseInt(d.tier) || 0;
+            if (tier > 0) {
+                const g = d3.select(this);
+                const clipId = `clip-${d.id.replace(/[^a-zA-Z0-9-_]/g, '_')}`;
+                
+                g.append('defs')
+                 .append('clipPath')
+                 .attr('id', clipId)
+                 .append('path')
+                 .attr('d', pathData);
+
+                const stripes = g.append('g').attr('clip-path', `url(#${clipId})`);
+                const stripeSpacing = 7;
+                for (let i = 0; i < tier; i++) {
+                    const y = y0 + i * stripeSpacing;
+                    stripes.append('line')
+                        .attr('stroke', 'black')
+                        .attr('stroke-width', 3)
+                        .attr('x1', x0 - 5)
+                        .attr('y1', y)
+                        .attr('x2', x1 + 5)
+                        .attr('y2', y + (x1 - x0) + 10);
+                }
+            }
+        });
 
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
         node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
@@ -734,9 +792,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const y1 = nodeHeight / 2;
         const r = cornerRadius;
         const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
-        node.append('path')
+        
+        const tierIndicator = node.append('g');
+        tierIndicator.append('path')
             .attr('d', pathData)
-            .attr('fill', d => getTierColor(d.tier));
+            .attr('fill', 'white');
+
+        tierIndicator.each(function(d) {
+            const tier = parseInt(d.tier) || 0;
+            if (tier > 0) {
+                const g = d3.select(this);
+                const clipId = `clip-${d.id.replace(/[^a-zA-Z0-9-_]/g, '_')}`;
+                
+                g.append('defs')
+                 .append('clipPath')
+                 .attr('id', clipId)
+                 .append('path')
+                 .attr('d', pathData);
+
+                const stripes = g.append('g').attr('clip-path', `url(#${clipId})`);
+                const stripeSpacing = 7;
+                for (let i = 0; i < tier; i++) {
+                    const y = y0 + i * stripeSpacing;
+                    stripes.append('line')
+                        .attr('stroke', 'black')
+                        .attr('stroke-width', 3)
+                        .attr('x1', x0 - 5)
+                        .attr('y1', y)
+                        .attr('x2', x1 + 5)
+                        .attr('y2', y + (x1 - x0) + 10);
+                }
+            }
+        });
             
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 15) : d.id);
         node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
@@ -824,9 +911,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const y1 = nodeHeight / 2;
         const r = cornerRadius;
         const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
-        node.append('path')
+        
+        const tierIndicator = node.append('g');
+        tierIndicator.append('path')
             .attr('d', pathData)
-            .attr('fill', d => getTierColor(d.tier));
+            .attr('fill', 'white');
+
+        tierIndicator.each(function(d) {
+            const tier = parseInt(d.tier) || 0;
+            if (tier > 0) {
+                const g = d3.select(this);
+                const clipId = `clip-${d.id.replace(/[^a-zA-Z0-9-_]/g, '_')}`;
+                
+                g.append('defs')
+                 .append('clipPath')
+                 .attr('id', clipId)
+                 .append('path')
+                 .attr('d', pathData);
+
+                const stripes = g.append('g').attr('clip-path', `url(#${clipId})`);
+                const stripeSpacing = 7;
+                for (let i = 0; i < tier; i++) {
+                    const y = y0 + i * stripeSpacing;
+                    stripes.append('line')
+                        .attr('stroke', 'black')
+                        .attr('stroke-width', 3)
+                        .attr('x1', x0 - 5)
+                        .attr('y1', y)
+                        .attr('x2', x1 + 5)
+                        .attr('y2', y + (x1 - x0) + 10);
+                }
+            }
+        });
 
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
         node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
@@ -968,14 +1084,6 @@ function getAreaColor(area) {
     }
 }
 
-function getTierColor(tier) {
-    const tierNum = parseInt(tier, 10) || 0;
-    if (tierNum < 0) return '#000000';
-    if (tierNum > 11) return '#ffffff';
-    const value = Math.round((tierNum / 11) * 255);
-    const hex = value.toString(16).padStart(2, '0');
-    return `#${hex}${hex}${hex}`;
-}
 
     function drag(simulation) {
         function dragstarted(event, d) {
@@ -1055,9 +1163,38 @@ function getTierColor(tier) {
         const y1 = nodeHeight / 2;
         const r = cornerRadius;
         const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
-        node.append('path')
+        
+        const tierIndicator = node.append('g');
+        tierIndicator.append('path')
             .attr('d', pathData)
-            .attr('fill', d => getTierColor(d.tier));
+            .attr('fill', 'white');
+
+        tierIndicator.each(function(d) {
+            const tier = parseInt(d.tier) || 0;
+            if (tier > 0) {
+                const g = d3.select(this);
+                const clipId = `clip-${d.id.replace(/[^a-zA-Z0-9-_]/g, '_')}`;
+                
+                g.append('defs')
+                 .append('clipPath')
+                 .attr('id', clipId)
+                 .append('path')
+                 .attr('d', pathData);
+
+                const stripes = g.append('g').attr('clip-path', `url(#${clipId})`);
+                const stripeSpacing = 7;
+                for (let i = 0; i < tier; i++) {
+                    const y = y0 + i * stripeSpacing;
+                    stripes.append('line')
+                        .attr('stroke', 'black')
+                        .attr('stroke-width', 3)
+                        .attr('x1', x0 - 5)
+                        .attr('y1', y)
+                        .attr('x2', x1 + 5)
+                        .attr('y2', y + (x1 - x0) + 10);
+                }
+            }
+        });
             
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
         node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
