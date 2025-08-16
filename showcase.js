@@ -276,7 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
         g.selectAll('.tech-node rect').attr('stroke', nodeData => {
             if (nodeData.id === selectionStartNode) return 'lime';
             if (nodeData.id === selectionEndNode) return 'red';
-            return getAreaColor(nodeData.area);
+            if (nodeData.id === activeTechId) return 'yellow';
+            return 'none';
         });
 
         if (selectionStartNode) {
@@ -507,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (d.id === activeTechId) return 'yellow';
                 if (d.id === selectionStartNode) return 'lime';
                 if (d.id === selectionEndNode) return 'red';
-                return getAreaColor(d.area);
+                return 'none';
             })
             .attr('stroke-width', d => (d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode) ? 3 : 1);
         
@@ -670,7 +671,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (d.id === activeTechId) return 'yellow';
                 if (d.id === selectionStartNode) return 'lime';
                 if (d.id === selectionEndNode) return 'red';
-                return getAreaColor(d.area);
+                return 'none';
             })
             .attr('stroke-width', d => (d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode) ? 3 : 1);
         
@@ -801,7 +802,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (d.id === activeTechId) return 'yellow';
                 if (d.id === selectionStartNode) return 'lime';
                 if (d.id === selectionEndNode) return 'red';
-                return getAreaColor(d.area);
+                return 'none';
             })
             .attr('stroke-width', d => (d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode) ? 3 : 1);
 
