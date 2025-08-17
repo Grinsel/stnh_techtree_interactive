@@ -1,17 +1,3 @@
-    // Shared SVG group reference for LOD and zoom handlers
-    let g = null;
-    // Zoom-based Level of Detail (LOD) toggles
-    function updateLOD(k) {
-        if (!g) return;
-        // Lower thresholds so details appear earlier when zooming in
-        const showLabels = k >= 0.55; // was 0.8
-        const showTiers = k >= 0.85; // was 1.1
-        const showLinks = k >= 0.35; // was 0.5
-
-        g.selectAll('.node-label').style('display', showLabels ? null : 'none');
-        g.selectAll('.tier-indicator').style('display', showTiers ? null : 'none');
-        g.selectAll('.link').style('display', showLinks ? null : 'none');
-    }
 const DEFAULT_STATE = {
     species: "all",
     area: "all",
@@ -19,7 +5,8 @@ const DEFAULT_STATE = {
     search: "",
     tierStart: "0",
     tierEnd: "11",
-    focus: null
+    focus: null,
+    g: null
 };
 
 function loadState() {
@@ -73,6 +60,16 @@ function saveState() {
         console.warn("Could not save state:", e);
     }
 }
+
+function updateLOD(k) {
+    if (!g) return;
+        const showLabels = k >= 0.55; // was 0.8
+        const showTiers = k >= 0.85; // was 1.1
+        const showLinks = k >= 0.35; // was 0.5
+        g.selectAll('.node-label').style('display', showLabels ? null : 'none');
+        g.selectAll('.tier-indicator').style('display', showTiers ? null : 'none');
+        g.selectAll('.link').style('display', showLinks ? null : 'none');
+    }
 
 function applyState(state) {
     document.getElementById("species-select").value = state.species;
