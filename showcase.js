@@ -1,3 +1,17 @@
+    // Shared SVG group reference for LOD and zoom handlers
+    let g = null;
+    // Zoom-based Level of Detail (LOD) toggles
+    function updateLOD(k) {
+        if (!g) return;
+        // Lower thresholds so details appear earlier when zooming in
+        const showLabels = k >= 0.55; // was 0.8
+        const showTiers = k >= 0.85; // was 1.1
+        const showLinks = k >= 0.35; // was 0.5
+
+        g.selectAll('.node-label').style('display', showLabels ? null : 'none');
+        g.selectAll('.tier-indicator').style('display', showTiers ? null : 'none');
+        g.selectAll('.link').style('display', showLinks ? null : 'none');
+    }
 const DEFAULT_STATE = {
     species: "all",
     area: "all",
@@ -115,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let nodes = [];
     let links = [];
     let preSearchState = null;
-    let simulation, svg, g;
+    let simulation, svg;
     let activeTechId = null;
     let tierFilterActive = false;
 
@@ -150,11 +164,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadAndRenderTree() {
+        // Ensure the UI is prepared so the container has a size
+        prepareUI();
         if (isDataLoaded) {
             // If data is already loaded, just re-render with current filters
             const currentState = loadState();
             applyState(currentState);
-            tierFilterActive = true; // Activate tier filter
+            tierFilterActive = false; // Do not activate tier filter by default
             updateVisualization(currentState.species, currentState.focus, false);
             return;
         }
@@ -169,15 +185,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const initialState = loadState();
                 applyState(initialState);
-                window.currentFocusId = initialState.focus;
-                activeTechId = initialState.focus;
+                // Validate initial focus exists in dataset
+                const initialFocusValid = initialState.focus && data.some(t => t.id === initialState.focus);
+                window.currentFocusId = initialFocusValid ? initialState.focus : null;
+                activeTechId = window.currentFocusId;
 
                 if (activeTechId) {
                     navigationHistory = [activeTechId];
                     historyIndex = 0;
                 }
 
-                tierFilterActive = true; // Activate tier filter
+                tierFilterActive = false; // Do not activate tier filter by default
                 updateVisualization(initialState.species, activeTechId, false);
             });
     }
@@ -392,8 +410,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getSelectedTierRange() {
-        const startTier = parseInt(document.getElementById('start-tier-select').value, 10);
-        const endTier = parseInt(document.getElementById('end-tier-select').value, 10);
+        const rawStart = document.getElementById('start-tier-select')?.value;
+        const rawEnd = document.getElementById('end-tier-select')?.value;
+        let startTier = parseInt(rawStart, 10);
+        let endTier = parseInt(rawEnd, 10);
+        if (isNaN(startTier)) startTier = 0;
+        if (isNaN(endTier)) endTier = 99;
         return { startTier, endTier };
     }
 
@@ -413,6 +435,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.updateVisualization = function(selectedSpecies, highlightId = null, addToHistory = true) {
+        // Ensure UI is visible and data is available before attempting to render
+        if (techTreeContainer.classList.contains('hidden')) {
+            prepareUI();
+        }
+        if (!isDataLoaded) {
+            loadAndRenderTree();
+            return;
+        }
         if (addToHistory && highlightId && highlightId !== activeTechId) {
             if (historyIndex < navigationHistory.length - 1) {
                 navigationHistory = navigationHistory.slice(0, historyIndex + 1);
@@ -456,12 +486,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeTechId) {
             const connectedIds = getConnectedTechIds(activeTechId, allTechs);
             filteredTechs = baseTechs.filter(t => connectedIds.has(t.id));
+            // If no nodes found (e.g., stale focus), clear focus and fall back
+            if (filteredTechs.length === 0) {
+                activeTechId = null;
+                window.currentFocusId = null;
+                filteredTechs = baseTechs;
+            }
         } else {
             filteredTechs = baseTechs;
         }
 
+        // Preserve pre-tier-filter set for fallback if tier filter eliminates all nodes
+        const preTierFiltered = filteredTechs;
         if (tierFilterActive) {
             filteredTechs = filterTechsByTier(filteredTechs);
+            if (filteredTechs.length === 0) {
+                // Fallback: render without tier filter to avoid empty view
+                filteredTechs = preTierFiltered;
+            }
         }
 
         updateHistoryButtons();
@@ -489,7 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderForceDirectedArrowsGraph(nodes, links, selectedSpecies, container = techTreeContainer) {
         const width = container.clientWidth;
         const height = container.clientHeight;
-        const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
+        const zoom = d3.zoom().on("zoom", (event) => { g.attr("transform", event.transform); updateLOD(event.transform.k); });
         svg = d3.select(container).append('svg').attr('width', width).attr('height', height).call(zoom);
 
         const defs = svg.append('defs');
@@ -510,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         g = svg.append("g");
 
-        const initialScale = Math.min(1.2, 40 / Math.max(1, nodes.length));
+        const initialScale = Math.max(0.4, Math.min(1.2, 40 / Math.max(1, nodes.length)));
         const initialTransform = d3.zoomIdentity.translate(width / 2, height / 2).scale(initialScale).translate(-width/2, -height/2);
         svg.call(zoom.transform, initialTransform);
 
@@ -526,6 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .selectAll('polygon')
             .data(links)
             .join('polygon')
+            .attr('class', 'link')
             .attr('fill', '#e0e0e0ff')
             .attr('stroke', 'black')
             .attr('stroke-width', 1)
@@ -563,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         const nodeWidth = 140, nodeHeight = 80;
         node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
-            .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area))
+            .attr('fill', d => (d.area === 'society' || d.area === 'engineering' || d.area === 'physics') ? `url(#gradient-${d.area})` : getAreaColor(d.area))
             .attr('stroke', d => {
                 if (d.id === activeTechId) return 'yellow';
                 if (d.id === selectionStartNode) return 'lime';
@@ -581,7 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const r = cornerRadius;
         const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
         
-        const tierIndicator = node.append('g');
+        const tierIndicator = node.append('g').attr('class', 'tier-indicator');
         tierIndicator.append('path')
             .attr('d', pathData)
             .attr('fill', 'white');
@@ -613,11 +656,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
         
+        let tickCountArrows = 0;
         simulation.on('tick', () => {
             link.attr('points', d => {
                 const dx = d.target.x - d.source.x;
@@ -655,13 +699,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `${tipX},${tipY} ${base1X},${base1Y} ${base2X},${base2Y}`;
             });
             node.attr('transform', d => `translate(${d.x},${d.y})`);
+            if (++tickCountArrows > 60 && simulation.alpha() < 0.03) {
+                simulation.stop();
+            }
         });
+
+        // Apply initial LOD after setting initial transform
+        updateLOD(initialScale);
     }
 
     function renderForceDirectedGraph(nodes, links, selectedSpecies, container = techTreeContainer) {
         const width = container.clientWidth;
         const height = container.clientHeight;
-        const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
+        const zoom = d3.zoom().on("zoom", (event) => { g.attr("transform", event.transform); updateLOD(event.transform.k); });
         svg = d3.select(container).append('svg').attr('width', width).attr('height', height).call(zoom);
 
         const defs = svg.append('defs');
@@ -682,7 +732,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         g = svg.append("g");
 
-        const initialScale = Math.min(1.2, 40 / Math.max(1, nodes.length));
+        const initialScale = Math.max(0.4, Math.min(1.2, 40 / Math.max(1, nodes.length)));
         const initialTransform = d3.zoomIdentity.translate(width / 2, height / 2).scale(initialScale).translate(-width/2, -height/2);
         svg.call(zoom.transform, initialTransform);
 
@@ -693,7 +743,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .force('center', d3.forceCenter(width / 2, height / 2))
             .force('collision', d3.forceCollide().radius(80));
         for (let i = 0; i < 50; ++i) simulation.tick();
-        const link = g.append('g').attr('stroke', '#e0e0e0ff').attr('stroke-opacity', 0.5).selectAll('line').data(links).join('line');
+        const link = g.append('g').attr('stroke', '#e0e0e0ff').attr('stroke-opacity', 0.5).selectAll('line').data(links).join('line').attr('class', 'link');
         const node = g.append('g').selectAll('g').data(nodes).join('g').attr('class', 'tech-node').call(drag(simulation))
             .on('mouseover', (event, d) => {
                 tooltip.style.display = 'block';
@@ -744,7 +794,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const r = cornerRadius;
         const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
         
-        const tierIndicator = node.append('g');
+        const tierIndicator = node.append('g').attr('class', 'tier-indicator');
         tierIndicator.append('path')
             .attr('d', pathData)
             .attr('fill', 'white');
@@ -776,20 +826,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        
+        let tickCount = 0;
         simulation.on('tick', () => {
             link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
             node.attr('transform', d => `translate(${d.x},${d.y})`);
+            if (++tickCount > 60 && simulation.alpha() < 0.03) {
+                simulation.stop();
+            }
         });
+
+        // Apply initial LOD after setting initial transform
+        updateLOD(initialScale);
     }
     
     function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies, container = techTreeContainer) {
         const width = container.clientWidth;
         const height = container.clientHeight;
-        const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
+        const zoom = d3.zoom().on("zoom", (event) => { g.attr("transform", event.transform); updateLOD(event.transform.k); });
         svg = d3.select(container).append('svg').attr('width', width).attr('height', height).call(zoom);
         
         const defs = svg.append('defs');
@@ -823,7 +881,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (let i = 0; i < 150; ++i) simulation.tick();
 
-        const link = g.append('g').attr('stroke', '#999').attr('stroke-opacity', 0.6).selectAll('line').data(links).join('line');
+        const link = g.append('g').attr('stroke', '#999').attr('stroke-opacity', 0.6).selectAll('line').data(links).join('line').attr('class', 'link');
         const node = g.append('g').selectAll('g').data(nodes).join('g').attr('class', 'tech-node').call(drag(simulation))
             .on('mouseover', (event, d) => {
                 tooltip.style.display = 'block';
@@ -875,7 +933,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const r = cornerRadius;
         const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
         
-        const tierIndicator = node.append('g');
+        const tierIndicator = node.append('g').attr('class', 'tier-indicator');
         tierIndicator.append('path')
             .attr('d', pathData)
             .attr('fill', 'white');
@@ -907,15 +965,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
             
-        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 15) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Cost: ${d.cost || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 15) : d.id);
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Cost: ${d.cost || 0}`);
+        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
 
+        let tickCountDisjoint = 0;
         simulation.on('tick', () => {
             link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
             node.attr('transform', d => `translate(${d.x},${d.y})`);
+            if (++tickCountDisjoint > 80 && simulation.alpha() < 0.03) {
+                simulation.stop();
+            }
         });
+
+        // Apply initial LOD after setting initial transform
+        updateLOD(initialScale);
     }
 
     function getPrerequisites(startId) {
