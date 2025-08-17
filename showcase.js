@@ -109,7 +109,7 @@ function updateLOD() {
     if (!useLOD) {
         // Eagerly create heavy DOM once if not already present
         if (!flags.labels && !nodesSel.empty()) {
-            const nodeHeight = 80;
+            const nodeHeight = (layout === 'disjoint-force-directed') ? 70 : 80;
             nodesSel.append('text')
                 .attr('class', 'node-label')
                 .attr('y', -nodeHeight / 2 + 15)
@@ -131,7 +131,7 @@ function updateLOD() {
                 .text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
             nodesSel.append('text')
                 .attr('class', 'node-label')
-                .attr('y', -nodeHeight / 2 + 60)
+                .attr('y', -nodeHeight / 2 + (nodeHeight === 70 ? 55 : 60))
                 .attr('text-anchor', 'middle')
                 .style('font-size', '8px')
                 .style('fill', '#ffffff')
@@ -140,15 +140,17 @@ function updateLOD() {
         }
 
         if (!flags.tiers && !nodesSel.empty()) {
-            const nodeWidth = 140, nodeHeight = 80;
+            const nodeWidth = (layout === 'disjoint-force-directed') ? 120 : 140;
+            const nodeHeight = (layout === 'disjoint-force-directed') ? 70 : 80;
             const stripeWidth = 8;
-            const cornerRadius = 10;
+            const cornerRadius = (layout === 'disjoint-force-directed') ? 8 : 10;
             const x0t = -nodeWidth / 2;
             const y0t = -nodeHeight / 2;
             const x1t = -nodeWidth / 2 + stripeWidth;
+            const x1tAdj = x1t + 1; // move wedge slightly into the node to avoid seam
             const y1t = nodeHeight / 2;
             const rt = cornerRadius;
-            const pathDataT = `M ${x0t},${y0t + rt} A ${rt},${rt} 0 0 1 ${x0t + rt},${y0t} L ${x1t},${y0t} L ${x1t},${y1t} L ${x0t + rt},${y1t} A ${rt},${rt} 0 0 1 ${x0t},${y1t - rt} Z`;
+            const pathDataT = `M ${x0t},${y0t + rt} A ${rt},${rt} 0 0 1 ${x0t + rt},${y0t} L ${x1tAdj},${y0t} L ${x1tAdj},${y1t} L ${x0t + rt},${y1t} A ${rt},${rt} 0 0 1 ${x0t},${y1t - rt} Z`;
 
             const tierIndicator = nodesSel.append('g').attr('class', 'tier-indicator');
             tierIndicator.append('path').attr('d', pathDataT).attr('fill', 'white');
@@ -212,7 +214,7 @@ function updateLOD() {
 
     // Initialize labels once when zoom passes threshold
     if (!flags.labels && k >= showLabelsAt && !nodesSel.empty()) {
-        const nodeHeight = 80;
+        const nodeHeight = (layout === 'disjoint-force-directed') ? 70 : 80;
         nodesSel.append('text')
             .attr('class', 'node-label')
             .attr('y', -nodeHeight / 2 + 15)
@@ -234,7 +236,7 @@ function updateLOD() {
             .text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
         nodesSel.append('text')
             .attr('class', 'node-label')
-            .attr('y', -nodeHeight / 2 + 60)
+            .attr('y', -nodeHeight / 2 + (nodeHeight === 70 ? 55 : 60))
             .attr('text-anchor', 'middle')
             .style('font-size', '8px')
             .style('fill', '#ffffff')
@@ -244,15 +246,17 @@ function updateLOD() {
 
     // Initialize tier indicators once when zoom passes threshold
     if (!flags.tiers && k >= showTiersAt && !nodesSel.empty()) {
-        const nodeWidth = 140, nodeHeight = 80;
+        const nodeWidth = (layout === 'disjoint-force-directed') ? 120 : 140;
+        const nodeHeight = (layout === 'disjoint-force-directed') ? 70 : 80;
         const stripeWidth = 8;
-        const cornerRadius = 10;
+        const cornerRadius = (layout === 'disjoint-force-directed') ? 8 : 10;
         const x0 = -nodeWidth / 2;
         const y0 = -nodeHeight / 2;
         const x1 = -nodeWidth / 2 + stripeWidth;
+        const x1Adj = x1 + 1; // move wedge slightly into the node to avoid seam
         const y1 = nodeHeight / 2;
         const r = cornerRadius;
-        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
+        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1Adj},${y0} L ${x1Adj},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
 
         const tierIndicator = nodesSel.append('g').attr('class', 'tier-indicator');
         tierIndicator.append('path').attr('d', pathData).attr('fill', 'white');
@@ -1133,7 +1137,11 @@ document.addEventListener('DOMContentLoaded', () => {
             .force('y', d3.forceY(height / 2).strength(0.1))
             .force('collision', d3.forceCollide().radius(60));
 
-        for (let i = 0; i < 150; ++i) simulation.tick();
+        // Avoid blocking the UI at startup: skip or greatly reduce synchronous pre-ticks
+        const perfToggle = document.getElementById('performance-toggle');
+        const perfOn = !!perfToggle?.checked;
+        const preTicks = perfOn ? 0 : 40; // no blocking when performance mode is on
+        for (let i = 0; i < preTicks; ++i) simulation.tick();
 
         const node = g.select('.nodes-layer').selectAll('g').data(nodes).join('g').attr('class', 'tech-node').call(drag(simulation))
             .on('mouseover', (event, d) => {
@@ -1177,51 +1185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .attr('stroke-width', d => (d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode) ? 3 : 1);
 
-        const stripeWidth = 8;
-        const cornerRadius = 8;
-        const x0 = -nodeWidth / 2;
-        const y0 = -nodeHeight / 2;
-        const x1 = -nodeWidth / 2 + stripeWidth;
-        const y1 = nodeHeight / 2;
-        const r = cornerRadius;
-        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
-        
-        const tierIndicator = node.append('g').attr('class', 'tier-indicator');
-        tierIndicator.append('path')
-            .attr('d', pathData)
-            .attr('fill', 'white');
-
-        tierIndicator.each(function(d) {
-            const tier = parseInt(d.tier) || 0;
-            if (tier > 0) {
-                const g = d3.select(this);
-                const clipId = `clip-${d.id.replace(/[^a-zA-Z0-9-_]/g, '_')}`;
-                
-                g.append('defs')
-                 .append('clipPath')
-                 .attr('id', clipId)
-                 .append('path')
-                 .attr('d', pathData);
-
-                const stripes = g.append('g').attr('clip-path', `url(#${clipId})`);
-                const stripeSpacing = 7;
-                for (let i = 0; i < tier; i++) {
-                    const y = y0 + i * stripeSpacing;
-                    stripes.append('line')
-                        .attr('stroke', 'black')
-                        .attr('stroke-width', 3)
-                        .attr('x1', x0 - 5)
-                        .attr('y1', y)
-                        .attr('x2', x1 + 5)
-                        .attr('y2', y + (x1 - x0) + 10);
-                }
-            }
-        });
-            
-        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 15) : d.id);
-        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Cost: ${d.cost || 0}`);
-        node.append('text').attr('class', 'node-label').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        // Tier indicators and labels are created by updateLOD() (eagerly for small graphs).
 
         let tickCountDisjoint = 0;
         simulation.on('tick', () => {
