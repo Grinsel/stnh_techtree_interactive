@@ -56,13 +56,27 @@
             border-radius: 18px;
             box-shadow: var(--shadow);
             padding: 28px 24px 24px 24px;
-            min-height: 600px;
+            max-height: 800px;
             position: absolute;
             top: 15vh;
             left: 32px;
             z-index: 100;
             cursor: move;
-            overflow: hidden;
+            overflow-y: auto;
+        }
+        #sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        #sidebar::-webkit-scrollbar-track {
+            background: #23272c;
+            border-radius: 10px;
+        }
+        #sidebar::-webkit-scrollbar-thumb {
+            background: #3c80ff;
+            border-radius: 10px;
+        }
+        #sidebar::-webkit-scrollbar-thumb:hover {
+            background: #5a9bff;
         }
         .tab-container {
             display: flex;
@@ -158,6 +172,7 @@
             margin-bottom: 10px;
             font-size: 1rem;
             font-family: var(--font);
+            box-sizing: border-box;
         }
         #filters button {
             width: 100%;
@@ -442,6 +457,39 @@
                             <option value="society">Society</option>
                             <option value="engineering">Engineering</option>
                         </select>
+                        <label for="start-tier-select" style="margin-top: 18px;">Tier Range:</label>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <select id="start-tier-select" style="width: 100%; margin: 0;">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                            </select>
+                            <span style="font-size: 1rem; color: #a0b0c0;">to</span>
+                            <select id="end-tier-select" style="width: 100%; margin: 0;">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                            </select>
+                        </div>
+                        <button id="show-tier-button" style="width: 100%;">Show Tier Range</button>
                         <label for="search-input">Search:</label>
                         <input type="text" id="search-input" placeholder="Enter tech name...">
                         <div class="search-options">
@@ -463,6 +511,7 @@
                 </div>
             </div>
         </aside>
+        
         <main id="tree-panel">
             <div id="tree-toolbar">
                 <button id="reset-button">Reload Page</button>
@@ -476,37 +525,6 @@
                     <option value="force-directed-arrows">Force-directed Arrows</option>
                     <option value="disjoint-force-directed">Disjoint force-directed</option>
                 </select>
-                <label for="start-tier-select">Tier:</label>
-                <select id="start-tier-select">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                </select>
-                <label for="end-tier-select">to</label>
-                <select id="end-tier-select">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                </select>
-                <button id="show-tier-button">Show Tier Range</button>
                 <button id="load-tree-button">Load Tech Tree</button>
             </div>
             <div id="landing-card">
