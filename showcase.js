@@ -442,8 +442,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (selectedSpecies === 'all') {
                 speciesMatch = true;
             } else if (isExclusive) {
-                speciesMatch = tech.required_species && tech.required_species.length === 1 && tech.required_species[0] === selectedSpecies;
+                // Corrected logic: Show if the species is in the list, and the list is not empty (i.e., not global)
+                speciesMatch = tech.required_species && tech.required_species.includes(selectedSpecies);
             } else {
+                // Original logic for non-exclusive: show global techs and techs for the selected species
                 speciesMatch = !tech.required_species || tech.required_species.length === 0 || tech.required_species.includes(selectedSpecies);
             }
             
