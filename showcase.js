@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const speciesSelect = document.getElementById('species-select');
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
+    const searchBackButton = document.getElementById('search-back-button');
+    const searchScopeToggle = document.getElementById('search-scope-toggle');
     const techTreeContainer = document.getElementById('tech-tree');
     const tooltip = document.getElementById('tooltip');
     const areaSelect = document.getElementById('area-select');
@@ -110,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let allTechs = [];
     let allSpecies = new Set();
     let nodes = [];
+    let links = [];
+    let preSearchState = null;
     let simulation, svg, g;
     let activeTechId = null;
     let tierFilterActive = false;
@@ -196,8 +200,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 const shareURL = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
                 navigator.clipboard.writeText(shareURL).then(() => {
-                    alert(`Link ${focus ? "zum Branch" : ""} kopiert!\n\n${shareURL}`);
-                }, (err) => alert("Kopieren fehlgeschlagen: " + err));
+                    alert(`Link ${focus ? "to this Branch" : ""} copied to clipboard!\n\n${shareURL}`);
+                }, (err) => alert("Copy URL failed: " + err));
             });
         }
 
@@ -206,6 +210,23 @@ document.addEventListener('DOMContentLoaded', () => {
         layoutSelect.addEventListener('change', () => updateVisualization(speciesSelect.value, activeTechId));
         searchInput.addEventListener('keydown', (event) => { if (event.key === 'Enter') searchTech(); });
         searchButton.addEventListener('click', searchTech);
+        searchBackButton.addEventListener('click', () => {
+            if (preSearchState) {
+                techTreeContainer.innerHTML = '';
+                const selectedLayout = document.getElementById('layout-select').value;
+                if (selectedLayout === 'force-directed') {
+                    renderForceDirectedGraph(preSearchState.nodes, preSearchState.links, speciesSelect.value);
+                } else if (selectedLayout === 'disjoint-force-directed') {
+                    renderDisjointForceDirectedGraph(preSearchState.nodes, preSearchState.links, speciesSelect.value);
+                } else if (selectedLayout === 'force-directed-arrows') {
+                    renderForceDirectedArrowsGraph(preSearchState.nodes, preSearchState.links, speciesSelect.value);
+                }
+                nodes = preSearchState.nodes;
+                links = preSearchState.links;
+                preSearchState = null;
+                searchBackButton.style.display = 'none';
+            }
+        });
         resetButton.addEventListener('click', resetState);
 
         backButton.addEventListener('click', () => {
@@ -303,9 +324,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectionStartNode) {
             renderPathButton.style.display = 'inline-block';
             if (selectionEndNode) {
-                renderPathButton.textContent = 'Render Path';
+                renderPathButton.textContent = 'Show Research Path';
             } else {
-                renderPathButton.textContent = 'Render Dependencies';
+                renderPathButton.textContent = 'Show Required Research';
             }
         } else {
             renderPathButton.style.display = 'none';
@@ -429,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
         techTreeContainer.innerHTML = '';
         nodes = filteredTechs.map(tech => ({ ...tech }));
         
-        const links = [];
+        links = [];
         const nodeIds = new Set(nodes.map(n => n.id));
         nodes.forEach(tech => {
             if (tech.prerequisites) {
@@ -1143,8 +1164,19 @@ function getAreaColor(area) {
     function searchTech() {
         const searchTerm = searchInput.value.trim().toLowerCase();
         if (!searchTerm) return;
-        const matchedNodes = nodes.filter(n => (n.name && n.name.toLowerCase().includes(searchTerm)) || (n.id && n.id.toLowerCase().includes(searchTerm)));
-        if (matchedNodes.length === 0) return;
+
+        preSearchState = { nodes: [...nodes], links: [...links] };
+
+        const searchScope = searchScopeToggle.checked ? allTechs : nodes;
+        const matchedNodes = searchScope.filter(n => (n.name && n.name.toLowerCase().includes(searchTerm)) || (n.id && n.id.toLowerCase().includes(searchTerm)));
+        
+        if (matchedNodes.length === 0) {
+            alert("No results in the current view. Enable Search all techs to search the entire tree.");
+            preSearchState = null; // Clear pre-search state if nothing was found
+            return;
+        }
+
+        searchBackButton.style.display = 'block';
         techTreeContainer.innerHTML = '';
         const width = techTreeContainer.clientWidth, height = techTreeContainer.clientHeight;
         svg = d3.select(techTreeContainer).append('svg').attr('width', width).attr('height', height);
