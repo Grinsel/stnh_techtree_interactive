@@ -78,6 +78,7 @@ function resetState() {
 document.addEventListener('DOMContentLoaded', () => {
     // --- Element References ---
     const speciesSelect = document.getElementById('species-select');
+    const speciesExclusiveToggle = document.getElementById('species-exclusive-toggle');
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
     const searchBackButton = document.getElementById('search-back-button');
@@ -210,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         speciesSelect.addEventListener('change', (event) => updateVisualization(event.target.value, activeTechId));
+        speciesExclusiveToggle.addEventListener('change', () => updateVisualization(speciesSelect.value, activeTechId));
         areaSelect.addEventListener('change', () => updateVisualization(speciesSelect.value, activeTechId));
         layoutSelect.addEventListener('change', () => updateVisualization(speciesSelect.value, activeTechId));
         searchInput.addEventListener('keydown', (event) => { if (event.key === 'Enter') searchTech(); });
@@ -431,9 +433,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        const isExclusive = speciesExclusiveToggle.checked;
+
         let baseTechs = allTechs.filter(tech => {
             const areaMatch = selectedArea === 'all' || tech.area === selectedArea;
-            const speciesMatch = selectedSpecies === 'all' || !tech.required_species || tech.required_species.length === 0 || tech.required_species.includes(selectedSpecies);
+            
+            let speciesMatch;
+            if (selectedSpecies === 'all') {
+                speciesMatch = true;
+            } else if (isExclusive) {
+                speciesMatch = tech.required_species && tech.required_species.length === 1 && tech.required_species[0] === selectedSpecies;
+            } else {
+                speciesMatch = !tech.required_species || tech.required_species.length === 0 || tech.required_species.includes(selectedSpecies);
+            }
+            
             return areaMatch && speciesMatch;
         });
 
