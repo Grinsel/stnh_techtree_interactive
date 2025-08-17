@@ -132,6 +132,22 @@ document.addEventListener('DOMContentLoaded', () => {
         setupEventListeners();
     }
 
+    function loadSpeciesFilter() {
+        fetch('assets/species.json')
+            .then(response => response.json())
+            .then(speciesList => {
+                speciesList.forEach(species => {
+                    const option = document.createElement('option');
+                    option.value = species;
+                    option.textContent = species;
+                    speciesSelect.appendChild(option);
+                });
+                // Re-apply state in case the species list was loaded after the initial state was applied
+                const initialState = loadState();
+                applyState(initialState);
+            }).catch(error => console.error('Error loading species list:', error));
+    }
+
     function loadAndRenderTree() {
         if (isDataLoaded) {
             // If data is already loaded, just re-render with current filters
@@ -148,19 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 isDataLoaded = true;
                 allTechs = data;
-                allTechs.forEach(tech => {
-                    if (tech.required_species && tech.required_species.length > 0) {
-                        tech.required_species.forEach(species => allSpecies.add(species));
-                    }
-                });
-
-                const sortedSpecies = Array.from(allSpecies).sort();
-                sortedSpecies.forEach(species => {
-                    const option = document.createElement('option');
-                    option.value = species;
-                    option.textContent = species;
-                    speciesSelect.appendChild(option);
-                });
+                // Species list is now loaded separately at startup
 
                 const initialState = loadState();
                 applyState(initialState);
@@ -1319,6 +1323,7 @@ function getAreaColor(area) {
     }
 
     // --- Main Execution Logic ---
+    loadSpeciesFilter(); // Load species filter options at startup
     const urlParams = new URLSearchParams(window.location.search);
     const pathStart = urlParams.get('pathStart');
     const pathEnd = urlParams.get('pathEnd');
