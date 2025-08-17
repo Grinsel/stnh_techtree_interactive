@@ -615,8 +615,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
         node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
         
         simulation.on('tick', () => {
             link.attr('points', d => {
@@ -778,8 +777,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
         node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
         simulation.on('tick', () => {
             link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
             node.attr('transform', d => `translate(${d.x},${d.y})`);
@@ -909,8 +907,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 15) : d.id);
         node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Cost: ${d.cost || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
 
         simulation.on('tick', () => {
             link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
@@ -1028,8 +1025,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
         node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
 
         popupSimulation.on('tick', () => {
             link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
@@ -1291,8 +1287,7 @@ function getAreaColor(area) {
             
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
         node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 60).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
         node.attr('transform', d => `translate(${d.x},${d.y})`);
     }
 
