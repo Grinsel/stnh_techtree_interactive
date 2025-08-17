@@ -1296,47 +1296,6 @@ function getAreaColor(area) {
         node.attr('transform', d => `translate(${d.x},${d.y})`);
     }
 
-    function makeDraggable(element) {
-        let isDragging = false;
-        let offsetX, offsetY;
-
-        element.addEventListener('mousedown', (e) => {
-            // Only drag if the click is on the element itself, not its children like buttons or selects
-            if (e.target !== element && e.target.closest('button, select, input, a, .tab')) {
-                return;
-            }
-            isDragging = true;
-            offsetX = e.clientX - element.getBoundingClientRect().left;
-            offsetY = e.clientY - element.getBoundingClientRect().top;
-            element.style.cursor = 'grabbing';
-            // Prevent text selection while dragging
-            document.body.style.userSelect = 'none';
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            
-            let newX = e.clientX - offsetX;
-            let newY = e.clientY - offsetY;
-
-            // Constrain movement within the viewport
-            const container = document.body;
-            const elRect = element.getBoundingClientRect();
-            
-            newX = Math.max(0, Math.min(newX, container.clientWidth - elRect.width));
-            newY = Math.max(0, Math.min(newY, container.clientHeight - elRect.height));
-
-            element.style.left = `${newX}px`;
-            element.style.top = `${newY}px`;
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            element.style.cursor = 'move';
-            document.body.style.userSelect = '';
-        });
-    }
-
     // --- Main Execution Logic ---
     loadSpeciesFilter(); // Load species filter options at startup
     const urlParams = new URLSearchParams(window.location.search);
@@ -1384,5 +1343,4 @@ function getAreaColor(area) {
         searchButton.addEventListener('click', prepareUI, initOnce);
     }
     
-    makeDraggable(sidebar);
 });

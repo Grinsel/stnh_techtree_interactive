@@ -44,25 +44,23 @@
             font-weight: 500;
         }
         #main-container {
-            position: relative;
-            margin: 32px 32px 0 32px;
-            height: calc(100vh - 120px);
             display: flex;
-            flex-direction: column;
+            margin: 0;
+            height: calc(100vh - 89px); /* Adjusted for header */
+            gap: 20px;
+            padding: 20px;
         }
         #sidebar {
-            width: 320px;
+            width: 340px;
+            flex-shrink: 0;
             background: var(--panel-bg);
             border-radius: 18px;
             box-shadow: var(--shadow);
             padding: 28px 24px 24px 24px;
-            max-height: 800px;
-            position: absolute;
-            top: 15vh;
-            left: 32px;
-            z-index: 100;
-            cursor: move;
             overflow-y: auto;
+            overflow-x: hidden;
+            height: 100%;
+            box-sizing: border-box;
         }
         #sidebar::-webkit-scrollbar {
             width: 8px;
@@ -162,6 +160,11 @@
             margin-bottom: 4px;
             font-size: 1rem;
         }
+        .filters-divider {
+            border-top: 1px solid #34405a;
+            margin-top: 24px;
+            padding-top: 18px;
+        }
         #filters select, #filters input[type="text"] {
             width: 100%;
             padding: 8px 10px;
@@ -244,10 +247,11 @@
             border-radius: 20px;
             box-shadow: var(--shadow);
             padding: 26px 22px 26px 22px;
-            min-width: 900px;
             display: flex;
             flex-direction: column;
             height: 100%;
+            min-width: 0; /* Allow shrinking */
+            box-sizing: border-box;
         }
         #tree-toolbar {
             margin-bottom: 18px;
@@ -405,9 +409,19 @@
             box-shadow: 0 2px 12px #0009;
         }
         @media (max-width: 1300px) {
-            #main-container { flex-direction: column; gap: 0; }
-            #sidebar { margin-bottom: 32px; min-height: unset; }
-            #tree-panel { min-width: unset; }
+            #main-container { 
+                flex-direction: column; 
+                height: auto;
+            }
+            #sidebar { 
+                width: 100%;
+                height: auto;
+                max-height: 50vh; /* Limit height on smaller screens */
+                margin-bottom: 20px;
+            }
+            #tree-panel { 
+                min-width: unset; 
+            }
         }
         @media (max-width: 800px) {
             .header-content { flex-direction: column; gap: 10px; padding: 12px 10px; }
@@ -450,14 +464,14 @@
                                 <span class="slider"></span>
                             </label>
                         </div>
-                        <label for="area-select">Select Research Branch:</label>
+                        <label for="area-select" class="filters-divider">Select Research Branch:</label>
                         <select id="area-select">
                             <option value="all">All</option>
                             <option value="physics">Physics</option>
                             <option value="society">Society</option>
                             <option value="engineering">Engineering</option>
                         </select>
-                        <label for="start-tier-select" style="margin-top: 18px;">Tier Range:</label>
+                        <label for="start-tier-select" class="filters-divider">Select Tier Range:</label>
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
                             <select id="start-tier-select" style="width: 100%; margin: 0;">
                                 <option value="0">0</option>
@@ -490,7 +504,7 @@
                             </select>
                         </div>
                         <button id="show-tier-button" style="width: 100%;">Show Tier Range</button>
-                        <label for="search-input">Search:</label>
+                        <label for="search-input" class="filters-divider">Search: (any word or number)</label>
                         <input type="text" id="search-input" placeholder="Enter tech name...">
                         <div class="search-options">
                             <label for="search-scope-toggle" style="margin: 0;">Search All Techs</label>
