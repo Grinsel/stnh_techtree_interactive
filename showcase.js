@@ -5,7 +5,8 @@ const DEFAULT_STATE = {
     search: "",
     tierStart: "0",
     tierEnd: "11",
-    focus: null
+    focus: null,
+    performanceMode: true
 };
 
 // Global SVG and group so LOD can access current transform and selections
@@ -40,7 +41,10 @@ function loadState() {
 
     try {
         const raw = localStorage.getItem("techTreeState");
-        return raw ? JSON.parse(raw) : DEFAULT_STATE;
+        const parsed = raw ? JSON.parse(raw) : DEFAULT_STATE;
+        // Ensure defaults for any new fields
+        if (parsed.performanceMode === undefined) parsed.performanceMode = true;
+        return parsed;
     } catch (e) {
         console.warn("Could not load saved state:", e);
         return DEFAULT_STATE;
@@ -55,7 +59,8 @@ function saveState() {
         search: document.getElementById("search-input").value,
         tierStart: document.getElementById("start-tier-select").value,
         tierEnd: document.getElementById("end-tier-select").value,
-        focus: window.currentFocusId || null
+        focus: window.currentFocusId || null,
+        performanceMode: !!document.getElementById("performance-toggle")?.checked
     };
     try {
         localStorage.setItem("techTreeState", JSON.stringify(state));
@@ -95,6 +100,115 @@ function updateLOD() {
     const data = g.datum && g.datum() ? g.datum() : { nodes: [], links: [] };
     const nodesSel = g.select('.nodes-layer').selectAll('.tech-node');
     const linksLayer = g.select('.links-layer');
+
+    // Only use LOD when graph is large and Performance mode is ON
+    const totalNodes = (data.nodes || []).length;
+    const performanceMode = !!document.getElementById('performance-toggle')?.checked;
+    const useLOD = performanceMode && totalNodes > 200;
+
+    if (!useLOD) {
+        // Eagerly create heavy DOM once if not already present
+        if (!flags.labels && !nodesSel.empty()) {
+            const nodeHeight = 80;
+            nodesSel.append('text')
+                .attr('class', 'node-label')
+                .attr('y', -nodeHeight / 2 + 15)
+                .attr('text-anchor', 'middle')
+                .style('font-weight', 'bold')
+                .style('fill', '#ffffff')
+                .text(d => d.name ? d.name.substring(0, 18) : d.id);
+            nodesSel.append('text')
+                .attr('class', 'node-label')
+                .attr('y', -nodeHeight / 2 + 30)
+                .attr('text-anchor', 'middle')
+                .style('fill', '#ffffff')
+                .text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+            nodesSel.append('text')
+                .attr('class', 'node-label')
+                .attr('y', -nodeHeight / 2 + 45)
+                .attr('text-anchor', 'middle')
+                .style('fill', '#ffffff')
+                .text(d => `Costs: ${d.cost || 0} - Weight: ${d.weight || 0}`);
+            nodesSel.append('text')
+                .attr('class', 'node-label')
+                .attr('y', -nodeHeight / 2 + 60)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '8px')
+                .style('fill', '#ffffff')
+                .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+            g.property('labelsInitialized', true);
+        }
+
+        if (!flags.tiers && !nodesSel.empty()) {
+            const nodeWidth = 140, nodeHeight = 80;
+            const stripeWidth = 8;
+            const cornerRadius = 10;
+            const x0t = -nodeWidth / 2;
+            const y0t = -nodeHeight / 2;
+            const x1t = -nodeWidth / 2 + stripeWidth;
+            const y1t = nodeHeight / 2;
+            const rt = cornerRadius;
+            const pathDataT = `M ${x0t},${y0t + rt} A ${rt},${rt} 0 0 1 ${x0t + rt},${y0t} L ${x1t},${y0t} L ${x1t},${y1t} L ${x0t + rt},${y1t} A ${rt},${rt} 0 0 1 ${x0t},${y1t - rt} Z`;
+
+            const tierIndicator = nodesSel.append('g').attr('class', 'tier-indicator');
+            tierIndicator.append('path').attr('d', pathDataT).attr('fill', 'white');
+
+            tierIndicator.each(function(d) {
+                const tier = parseInt(d.tier) || 0;
+                if (tier > 0) {
+                    const tg = d3.select(this);
+                    const clipId = `clip-${d.id.replace(/[^a-zA-Z0-9-_]/g, '_')}`;
+
+                    tg.append('defs')
+                      .append('clipPath')
+                      .attr('id', clipId)
+                      .append('path')
+                      .attr('d', pathDataT);
+
+                    const stripes = tg.append('g').attr('clip-path', `url(#${clipId})`);
+                    const stripeSpacing = 7;
+                    for (let i = 0; i < tier; i++) {
+                        const y = y0t + i * stripeSpacing;
+                        stripes.append('line')
+                            .attr('stroke', 'black')
+                            .attr('stroke-width', 3)
+                            .attr('x1', x0t - 5)
+                            .attr('y1', y)
+                            .attr('x2', x1t + 5)
+                            .attr('y2', y + (x1t - x0t) + 10);
+                    }
+                }
+            });
+            g.property('tiersInitialized', true);
+        }
+
+        if (!flags.links && linksLayer.size()) {
+            if (layout === 'force-directed' || layout === 'disjoint-force-directed') {
+                linksLayer.selectAll('.link')
+                    .data(data.links)
+                    .join('line')
+                    .attr('class', 'link')
+                    .attr('stroke', layout === 'force-directed' ? '#e0e0e0ff' : '#999')
+                    .attr('stroke-opacity', layout === 'force-directed' ? 0.5 : 0.6);
+            } else if (layout === 'force-directed-arrows') {
+                linksLayer.selectAll('.link')
+                    .data(data.links)
+                    .join('polygon')
+                    .attr('class', 'link')
+                    .attr('fill', '#e0e0e0ff')
+                    .attr('stroke', 'black')
+                    .attr('stroke-width', 1)
+                    .attr('stroke-opacity', 0.7);
+            }
+            g.property('linksInitialized', true);
+        }
+
+        // Show everything for small graphs
+        g.selectAll('.node-label').style('display', null);
+        g.selectAll('.tier-indicator').style('display', null);
+        g.selectAll('.link').style('display', null);
+        return;
+    }
 
     // Initialize labels once when zoom passes threshold
     if (!flags.labels && k >= showLabelsAt && !nodesSel.empty()) {
@@ -212,6 +326,8 @@ function applyState(state) {
     document.getElementById("search-input").value = state.search;
     document.getElementById("start-tier-select").value = state.tierStart;
     document.getElementById("end-tier-select").value = state.tierEnd;
+    const perf = document.getElementById("performance-toggle");
+    if (perf) perf.checked = state.performanceMode ?? true;
 }
 
 function resetState() {
@@ -408,13 +524,21 @@ document.addEventListener('DOMContentLoaded', () => {
             updateVisualization(speciesSelect.value, activeTechId);
         });
 
-        ["species-select", "area-select", "layout-select", "search-input", "start-tier-select", "end-tier-select"].forEach(id => {
+        ["species-select", "area-select", "layout-select", "search-input", "start-tier-select", "end-tier-select", "performance-toggle"].forEach(id => {
             const element = document.getElementById(id);
             if (element) {
                 element.addEventListener("change", saveState);
                 element.addEventListener("input", saveState);
             }
         });
+
+        const performanceToggle = document.getElementById('performance-toggle');
+        if (performanceToggle) {
+            performanceToggle.addEventListener('change', () => {
+                // Recompute LOD visibility immediately on toggle
+                updateLOD();
+            });
+        }
 
         document.getElementById('render-path-button').addEventListener('click', () => {
             if (selectionStartNode && selectionEndNode) {
