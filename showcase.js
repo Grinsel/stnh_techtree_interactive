@@ -88,7 +88,8 @@ function updateLOD() {
     // Lower thresholds so details appear earlier when zooming in
     const showLabelsAt = 0.45;
     const showTiersAt = 0.85;
-    const showLinksAt = 0.35;
+    const showLinksAt = 0.30;
+    const showCirclesAt = 0.40; // New LOD level for circles
 
     // Lazy-create heavy DOM when thresholds are reached
     const flags = {
@@ -300,8 +301,18 @@ function updateLOD() {
         g.property('linksInitialized', true);
     }
 
-    g.selectAll('.node-label').style('display', d => (k >= showLabelsAt && isVisible(d)) ? null : 'none');
-    g.selectAll('.tier-indicator').style('display', d => (k >= showTiersAt && isVisible(d)) ? null : 'none');
+    // LOD logic
+    const isCircleView = useLOD && k < showCirclesAt;
+
+    g.selectAll('.node-circle').style('display', d => (isCircleView && isVisible(d)) ? null : 'none');
+    g.selectAll('.node-rect, .tier-indicator, .node-label').style('display', d => (isCircleView) ? 'none' : null);
+
+
+    if (!isCircleView) {
+        g.selectAll('.node-label').style('display', d => (k >= showLabelsAt && isVisible(d)) ? null : 'none');
+        g.selectAll('.tier-indicator').style('display', d => (k >= showTiersAt && isVisible(d)) ? null : 'none');
+    }
+
     g.selectAll('.link').style('display', d => {
         // d.source/d.target may be ids before simulation init; guard for objects
         const s = d && (d.source && d.source.x !== undefined ? d.source : null);
@@ -859,7 +870,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 handleNodeSelection(d);
             });
         const nodeWidth = 140, nodeHeight = 80;
-        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
+        node.append('circle')
+            .attr('class', 'node-circle')
+            .attr('r', 30)
+            .attr('fill', d => getAreaColor(d.area))
+            .style('display', 'none');
+
+        node.append('rect').attr('class', 'node-rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
             .attr('fill', d => (d.area === 'society' || d.area === 'engineering' || d.area === 'physics') ? `url(#gradient-${d.area})` : getAreaColor(d.area))
             .attr('stroke', d => {
                 if (d.id === activeTechId) return 'yellow';
@@ -1005,7 +1022,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 handleNodeSelection(d);
             });
         const nodeWidth = 140, nodeHeight = 80;
-        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
+        node.append('circle')
+            .attr('class', 'node-circle')
+            .attr('r', 30)
+            .attr('fill', d => getAreaColor(d.area))
+            .style('display', 'none');
+
+        node.append('rect').attr('class', 'node-rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 10).attr('ry', 10)
             .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area))
             .attr('stroke', d => {
                 if (d.id === activeTechId) return 'yellow';
@@ -1157,7 +1180,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         const nodeWidth = 120, nodeHeight = 70;
-        node.append('rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 8).attr('ry', 8)
+        node.append('circle')
+            .attr('class', 'node-circle')
+            .attr('r', 30)
+            .attr('fill', d => getAreaColor(d.area))
+            .style('display', 'none');
+
+        node.append('rect').attr('class', 'node-rect').attr('width', nodeWidth).attr('height', nodeHeight).attr('x', -nodeWidth / 2).attr('y', -nodeHeight / 2).attr('rx', 8).attr('ry', 8)
             .attr('fill', d => d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area))
             .attr('stroke', d => {
                 if (d.id === activeTechId) return 'yellow';
