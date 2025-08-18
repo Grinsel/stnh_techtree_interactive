@@ -242,6 +242,7 @@
             transform: translateX(26px);
         }
         #tree-panel {
+            position: relative;
             flex: 1;
             background: var(--panel-bg);
             border-radius: 20px;
@@ -362,6 +363,27 @@
             font-size: 10px;
             text-shadow: 0 0 3px black, 0 0 3px black;
         }
+        #view-legend {
+            position: absolute;
+            top: 95px;
+            left: 30px;
+            background: rgba(35, 39, 44, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 10px #000a;
+            z-index: 100;
+        }
+        .view-legend-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .view-legend-bullet {
+            width: 15px;
+            height: 15px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
         #popup-viewport {
             position: fixed;
             top: 0;
@@ -447,11 +469,6 @@
                 <div id="general-panel">
                     <h2>Information</h2>
                     <div id="tech-counter">Displayed Technologies: 0</div>
-                    <div class="legend">
-                        <div class="legend-row"><span class="legend-bullet physics"></span> Physics</div>
-                        <div class="legend-row"><span class="legend-bullet engineering"></span> Engineering</div>
-                        <div class="legend-row"><span class="legend-bullet society"></span> Society</div>
-                    </div>
                     <div id="filters">
                         <label for="species-select">Select Empire:</label>
                         <select id="species-select">
@@ -579,6 +596,11 @@
 </div>
             </div>
             <div id="tech-tree"></div>
+            <div id="view-legend" class="hidden">
+                <div class="view-legend-row"><span class="view-legend-bullet physics"></span> Physics</div>
+                <div class="view-legend-row"><span class="view-legend-bullet engineering"></span> Engineering</div>
+                <div class="view-legend-row"><span class="view-legend-bullet society"></span> Society</div>
+            </div>
         </main>
     </div>
     <div id="tooltip"></div>

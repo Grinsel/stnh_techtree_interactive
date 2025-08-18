@@ -358,6 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const landingCard = document.getElementById('landing-card');
     const showTreeButton = document.getElementById('show-tree-button');
     const treeToolbar = document.getElementById('tree-toolbar');
+    const viewLegend = document.getElementById('view-legend');
     const backButton = document.getElementById('back-button');
     const forwardButton = document.getElementById('forward-button');
     const generalTab = document.getElementById('general-tab');
@@ -392,6 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
         landingCard.classList.add('hidden');
         treeToolbar.style.display = 'flex';
         techTreeContainer.classList.remove('hidden');
+        viewLegend.classList.remove('hidden');
 
         // Set up permanent event listeners now that the tree is active
         setupEventListeners();
