@@ -367,6 +367,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const detailsPanel = document.getElementById('details-panel');
     const techDetailsContent = document.getElementById('tech-details-content');
     const sidebar = document.getElementById('sidebar');
+    const helpButton = document.getElementById('help-button');
+    const helpViewport = document.getElementById('help-viewport');
+    const helpCloseButton = document.getElementById('help-close-button');
 
     // --- State Variables ---
     let selectionStartNode = null;
@@ -488,7 +491,8 @@ document.addEventListener('DOMContentLoaded', () => {
         searchButton.addEventListener('click', searchTech);
         searchBackButton.addEventListener('click', () => {
             if (preSearchState) {
-                techTreeContainer.innerHTML = '';
+                // Preserve glossary inside #tech-tree; only remove previous SVGs
+                techTreeContainer.querySelectorAll('svg').forEach(el => el.remove());
                 const selectedLayout = document.getElementById('layout-select').value;
                 if (selectedLayout === 'force-directed') {
                     renderForceDirectedGraph(preSearchState.nodes, preSearchState.links, speciesSelect.value);
@@ -573,6 +577,30 @@ document.addEventListener('DOMContentLoaded', () => {
             navigator.clipboard.writeText(shareURL).then(() => {
                 alert(`URL copied to clipboard!\n\n${shareURL}`);
             }, (err) => alert("Failed to copy URL: " + err));
+        });
+
+        // Help overlay handlers
+        if (helpButton && helpViewport) {
+            helpButton.addEventListener('click', () => {
+                helpViewport.classList.remove('hidden');
+            });
+        }
+        if (helpCloseButton && helpViewport) {
+            helpCloseButton.addEventListener('click', () => {
+                helpViewport.classList.add('hidden');
+            });
+        }
+        if (helpViewport) {
+            // Close when clicking the dimmed backdrop
+            helpViewport.addEventListener('click', (e) => {
+                if (e.target === helpViewport) helpViewport.classList.add('hidden');
+            });
+        }
+        // Close help on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && helpViewport && !helpViewport.classList.contains('hidden')) {
+                helpViewport.classList.add('hidden');
+            }
         });
 
         // This is for the new button you will add in the HTML
@@ -768,7 +796,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateHistoryButtons();
         techCounter.textContent = `Displayed Technologies: ${filteredTechs.length}`;
-        techTreeContainer.innerHTML = '';
+        // Preserve glossary inside #tech-tree; only remove previous SVGs
+        techTreeContainer.querySelectorAll('svg').forEach(el => el.remove());
         nodes = filteredTechs.map(tech => ({ ...tech }));
         
         links = [];
@@ -1501,7 +1530,8 @@ function getAreaColor(area) {
         try { if (simulation) simulation.stop(); } catch (e) {}
 
         searchBackButton.style.display = 'block';
-        techTreeContainer.innerHTML = '';
+        // Preserve glossary inside #tech-tree; only remove previous SVGs
+        techTreeContainer.querySelectorAll('svg').forEach(el => el.remove());
         const width = techTreeContainer.clientWidth, height = techTreeContainer.clientHeight;
         // Basic zoom/pan for search results
         const zoom = d3.zoom().on("zoom", (event) => { g.attr("transform", event.transform); });
