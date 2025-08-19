@@ -13,6 +13,52 @@ const DEFAULT_STATE = {
 let svg = null;
 let g = null;
 
+// Helper to wrap SVG text into tspans up to a max number of lines
+function wrapText(textSelection, width, lineHeight = 12, maxLines = 2) {
+    textSelection.each(function(d) {
+        const text = d3.select(this);
+        const full = text.text() || '';
+        const words = full.split(/\s+/).filter(Boolean);
+        if (words.length === 0) {
+            d._nameLineCount = 0;
+            return;
+        }
+        let line = [];
+        let lineNumber = 0;
+        const x = +((text.attr('x') ?? 0));
+        const y = +((text.attr('y') ?? 0));
+        text.text(null);
+        let tspan = text.append('tspan').attr('x', x).attr('y', y).attr('dy', 0);
+        for (let i = 0; i < words.length; i++) {
+            const word = words[i];
+            line.push(word);
+            tspan.text(line.join(' '));
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                tspan.text(line.join(' '));
+                line = [word];
+                lineNumber += 1;
+                if (lineNumber >= maxLines) {
+                    // Append ellipsis to the last allowed line
+                    const last = text.select('tspan:last-child');
+                    const current = last.text();
+                    // Ensure the ellipsis fits by trimming if necessary
+                    let trimmed = current;
+                    last.text(trimmed + '…');
+                    while (last.node().getComputedTextLength() > width && trimmed.length > 0) {
+                        trimmed = trimmed.slice(0, -1);
+                        last.text(trimmed + '…');
+                    }
+                    d._nameLineCount = maxLines;
+                    return;
+                }
+                tspan = text.append('tspan').attr('x', x).attr('y', y).attr('dy', lineNumber * lineHeight).text(word);
+            }
+        }
+        d._nameLineCount = lineNumber + 1;
+    });
+}
+
 function loadState() {
     const urlParams = new URLSearchParams(window.location.search);
     const stateFromUrl = {
@@ -111,22 +157,37 @@ function updateLOD() {
         // Eagerly create heavy DOM once if not already present
         if (!flags.labels && !nodesSel.empty()) {
             const nodeHeight = (layout === 'disjoint-force-directed') ? 70 : 80;
-            nodesSel.append('text')
-                .attr('class', 'node-label')
-                .attr('y', -nodeHeight / 2 + 15)
+            const nodeWidth = (layout === 'disjoint-force-directed') ? 120 : 140;
+            const textWidth = nodeWidth - 8 /*wedge*/ - 16 /*padding*/;
+
+            const nameSel = nodesSel.append('text')
+                .attr('class', 'node-label node-name')
+                .attr('x', 0)
+                .attr('y', -nodeHeight / 2 + 14)
                 .attr('text-anchor', 'middle')
                 .style('font-weight', 'bold')
                 .style('fill', '#ffffff')
-                .text(d => d.name ? d.name.substring(0, 18) : d.id);
-            nodesSel.append('text')
-                .attr('class', 'node-label')
-                .attr('y', -nodeHeight / 2 + 30)
+                .text(d => d.name || d.id);
+            wrapText(nameSel, textWidth, 12, 2);
+
+            const areaSel = nodesSel.append('text')
+                .attr('class', 'node-label node-area')
+                .attr('x', 0)
+                .attr('y', d => {
+                    const lines = d && d._nameLineCount ? d._nameLineCount : 1;
+                    return -nodeHeight / 2 + 30 + (lines - 1) * 12;
+                })
                 .attr('text-anchor', 'middle')
                 .style('fill', '#ffffff')
                 .text(d => `${d.area || 'N/A'}`);
+
             nodesSel.append('text')
-                .attr('class', 'node-label')
-                .attr('y', -nodeHeight / 2 + (nodeHeight === 70 ? 45 : 50))
+                .attr('class', 'node-label node-species')
+                .attr('x', 0)
+                .attr('y', d => {
+                    const lines = d && d._nameLineCount ? d._nameLineCount : 1;
+                    return -nodeHeight / 2 + (nodeHeight === 70 ? 45 : 50) + (lines - 1) * 12;
+                })
                 .attr('text-anchor', 'middle')
                 .style('font-size', '8px')
                 .style('fill', '#ffffff')
@@ -211,22 +272,37 @@ function updateLOD() {
     // Initialize labels once when zoom passes threshold
     if (!flags.labels && k >= showLabelsAt && !nodesSel.empty()) {
         const nodeHeight = (layout === 'disjoint-force-directed') ? 70 : 80;
-        nodesSel.append('text')
-            .attr('class', 'node-label')
-            .attr('y', -nodeHeight / 2 + 15)
+        const nodeWidth = (layout === 'disjoint-force-directed') ? 120 : 140;
+        const textWidth = nodeWidth - 8 /*wedge*/ - 16 /*padding*/;
+
+        const nameSel2 = nodesSel.append('text')
+            .attr('class', 'node-label node-name')
+            .attr('x', 0)
+            .attr('y', -nodeHeight / 2 + 14)
             .attr('text-anchor', 'middle')
             .style('font-weight', 'bold')
             .style('fill', '#ffffff')
-            .text(d => d.name ? d.name.substring(0, 18) : d.id);
+            .text(d => d.name || d.id);
+        wrapText(nameSel2, textWidth, 12, 2);
+
         nodesSel.append('text')
-            .attr('class', 'node-label')
-            .attr('y', -nodeHeight / 2 + 30)
+            .attr('class', 'node-label node-area')
+            .attr('x', 0)
+            .attr('y', d => {
+                const lines = d && d._nameLineCount ? d._nameLineCount : 1;
+                return -nodeHeight / 2 + 30 + (lines - 1) * 12;
+            })
             .attr('text-anchor', 'middle')
             .style('fill', '#ffffff')
             .text(d => `${d.area || 'N/A'}`);
+
         nodesSel.append('text')
-            .attr('class', 'node-label')
-            .attr('y', -nodeHeight / 2 + (nodeHeight === 70 ? 55 : 60))
+            .attr('class', 'node-label node-species')
+            .attr('x', 0)
+            .attr('y', d => {
+                const lines = d && d._nameLineCount ? d._nameLineCount : 1;
+                return -nodeHeight / 2 + (nodeHeight === 70 ? 55 : 60) + (lines - 1) * 12;
+            })
             .attr('text-anchor', 'middle')
             .style('font-size', '8px')
             .style('fill', '#ffffff')
@@ -1098,16 +1174,17 @@ document.addEventListener('DOMContentLoaded', () => {
                  .attr('d', pathData);
 
                 const stripes = g.append('g').attr('clip-path', `url(#${clipId})`);
-                const stripeSpacing = 7;
-                for (let i = 0; i < tier; i++) {
-                    const y = y0 + i * stripeSpacing;
+                const stripeSpacing = 6; // fixed spacing to fit up to 11 tiers
+                const strokeW = 2; // fixed stroke width for clarity
+                for (let i = 0; i < Math.min(tier, 11); i++) {
+                    const y = y0 + 3 + i * stripeSpacing; // small top padding
                     stripes.append('line')
                         .attr('stroke', 'black')
-                        .attr('stroke-width', 3)
+                        .attr('stroke-width', strokeW)
                         .attr('x1', x0 - 5)
                         .attr('y1', y)
                         .attr('x2', x1 + 5)
-                        .attr('y2', y + (x1 - x0) + 10);
+                        .attr('y2', y + (x1 - x0) + 6);
                 }
             }
         });
@@ -1346,23 +1423,54 @@ document.addEventListener('DOMContentLoaded', () => {
                  .attr('d', pathData);
 
                 const stripes = g.append('g').attr('clip-path', `url(#${clipId})`);
-                const stripeSpacing = 7;
-                for (let i = 0; i < tier; i++) {
-                    const y = y0 + i * stripeSpacing;
+                const stripeSpacing = 6; // fixed spacing to fit up to 11 tiers
+                const strokeW = 2; // fixed stroke width for clarity
+                for (let i = 0; i < Math.min(tier, 11); i++) {
+                    const y = y0 + 3 + i * stripeSpacing; // small top padding
                     stripes.append('line')
                         .attr('stroke', 'black')
-                        .attr('stroke-width', 3)
+                        .attr('stroke-width', strokeW)
                         .attr('x1', x0 - 5)
                         .attr('y1', y)
                         .attr('x2', x1 + 5)
-                        .attr('y2', y + (x1 - x0) + 10);
+                        .attr('y2', y + (x1 - x0) + 6);
                 }
             }
         });
 
-        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        const nodeTextWidth = nodeWidth - 8 /*wedge*/ - 16 /*padding*/;
+        const nameText = node.append('text')
+            .attr('class', 'node-label node-name')
+            .attr('x', 0)
+            .attr('y', -nodeHeight / 2 + 14)
+            .attr('text-anchor', 'middle')
+            .style('font-weight', 'bold')
+            .style('fill', '#ffffff')
+            .text(d => d.name || d.id);
+        wrapText(nameText, nodeTextWidth, 12, 2);
+
+        node.append('text')
+            .attr('class', 'node-label node-area')
+            .attr('x', 0)
+            .attr('y', d => {
+                const lines = d && d._nameLineCount ? d._nameLineCount : 1;
+                return -nodeHeight / 2 + 30 + (lines - 1) * 12;
+            })
+            .attr('text-anchor', 'middle')
+            .style('fill', '#ffffff')
+            .text(d => `${d.area || 'N/A'}`);
+
+        node.append('text')
+            .attr('class', 'node-label node-species')
+            .attr('x', 0)
+            .attr('y', d => {
+                const lines = d && d._nameLineCount ? d._nameLineCount : 1;
+                return -nodeHeight / 2 + 45 + (lines - 1) * 12;
+            })
+            .attr('text-anchor', 'middle')
+            .style('font-size', '8px')
+            .style('fill', '#ffffff')
+            .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
 
         popupSimulation.on('tick', () => {
             link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
@@ -1651,23 +1759,54 @@ function getAreaColor(area) {
                  .attr('d', pathData);
 
                 const stripes = g.append('g').attr('clip-path', `url(#${clipId})`);
-                const stripeSpacing = 7;
-                for (let i = 0; i < tier; i++) {
-                    const y = y0 + i * stripeSpacing;
+                const stripeSpacing = 6; // fixed spacing to fit up to 11 tiers
+                const strokeW = 2; // fixed stroke width for clarity
+                for (let i = 0; i < Math.min(tier, 11); i++) {
+                    const y = y0 + 3 + i * stripeSpacing; // small top padding
                     stripes.append('line')
                         .attr('stroke', 'black')
-                        .attr('stroke-width', 3)
+                        .attr('stroke-width', strokeW)
                         .attr('x1', x0 - 5)
                         .attr('y1', y)
                         .attr('x2', x1 + 5)
-                        .attr('y2', y + (x1 - x0) + 10);
+                        .attr('y2', y + (x1 - x0) + 6);
                 }
             }
         });
             
-        node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'}`);
-        node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        const nodeTextWidthSearch = nodeWidth - 8 /*wedge*/ - 16 /*padding*/;
+        const nameTextSearch = node.append('text')
+            .attr('class', 'node-label node-name')
+            .attr('x', 0)
+            .attr('y', -nodeHeight / 2 + 14)
+            .attr('text-anchor', 'middle')
+            .style('font-weight', 'bold')
+            .style('fill', '#ffffff')
+            .text(d => d.name || d.id);
+        wrapText(nameTextSearch, nodeTextWidthSearch, 12, 2);
+
+        node.append('text')
+            .attr('class', 'node-label node-area')
+            .attr('x', 0)
+            .attr('y', d => {
+                const lines = d && d._nameLineCount ? d._nameLineCount : 1;
+                return -nodeHeight / 2 + 30 + (lines - 1) * 12;
+            })
+            .attr('text-anchor', 'middle')
+            .style('fill', '#ffffff')
+            .text(d => `${d.area || 'N/A'}`);
+
+        node.append('text')
+            .attr('class', 'node-label node-species')
+            .attr('x', 0)
+            .attr('y', d => {
+                const lines = d && d._nameLineCount ? d._nameLineCount : 1;
+                return -nodeHeight / 2 + 45 + (lines - 1) * 12;
+            })
+            .attr('text-anchor', 'middle')
+            .style('font-size', '8px')
+            .style('fill', '#ffffff')
+            .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
         node.attr('transform', d => `translate(${d.x},${d.y})`);
     }
 
