@@ -163,16 +163,17 @@ function updateLOD() {
                       .attr('d', pathDataT);
 
                     const stripes = tg.append('g').attr('clip-path', `url(#${clipId})`);
-                    const stripeSpacing = 7;
-                    for (let i = 0; i < tier; i++) {
-                        const y = y0t + i * stripeSpacing;
+                    const stripeSpacing = 6; // fixed spacing to fit up to 11 tiers
+                    const strokeW = 2; // fixed stroke width for clarity
+                    for (let i = 0; i < Math.min(tier, 11); i++) {
+                        const y = y0t + 3 + i * stripeSpacing; // small top padding
                         stripes.append('line')
                             .attr('stroke', 'black')
-                            .attr('stroke-width', 3)
+                            .attr('stroke-width', strokeW)
                             .attr('x1', x0t - 5)
                             .attr('y1', y)
                             .attr('x2', x1t + 5)
-                            .attr('y2', y + (x1t - x0t) + 10);
+                            .attr('y2', y + (x1t - x0t) + 6);
                     }
                 }
             });
@@ -263,16 +264,17 @@ function updateLOD() {
                   .attr('d', pathData);
 
                 const stripes = tg.append('g').attr('clip-path', `url(#${clipId})`);
-                const stripeSpacing = 7;
-                for (let i = 0; i < tier; i++) {
-                    const y = y0 + i * stripeSpacing;
+                const stripeSpacing = 6; // fixed spacing to fit up to 11 tiers
+                const strokeW = 2; // fixed stroke width for clarity
+                for (let i = 0; i < Math.min(tier, 11); i++) {
+                    const y = y0 + 3 + i * stripeSpacing; // small top padding
                     stripes.append('line')
                         .attr('stroke', 'black')
-                        .attr('stroke-width', 3)
+                        .attr('stroke-width', strokeW)
                         .attr('x1', x0 - 5)
                         .attr('y1', y)
                         .attr('x2', x1 + 5)
-                        .attr('y2', y + (x1 - x0) + 10);
+                        .attr('y2', y + (x1 - x0) + 6);
                 }
             }
         });
