@@ -690,6 +690,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.target === helpViewport) helpViewport.classList.add('hidden');
             });
         }
+        // Beta/WIP badge opens help overlay as well
+        const betaBadge = document.getElementById('beta-badge');
+        const openHelp = () => { if (helpViewport) helpViewport.classList.remove('hidden'); };
+        if (betaBadge) {
+            betaBadge.addEventListener('click', openHelp);
+            betaBadge.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openHelp(); }
+            });
+        }
         // Close help on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && helpViewport && !helpViewport.classList.contains('hidden')) {
