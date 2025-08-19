@@ -13,6 +13,20 @@ const DEFAULT_STATE = {
 let svg = null;
 let g = null;
 
+// Simple cookie helpers for landing card persistence
+function setCookie(name, value, days) {
+    const expires = days ? '; expires=' + new Date(Date.now() + days * 864e5).toUTCString() : '';
+    document.cookie = name + '=' + encodeURIComponent(value) + expires + '; path=/';
+}
+function getCookie(name) {
+    const prefix = name + '=';
+    const parts = document.cookie.split('; ');
+    for (const part of parts) {
+        if (part.startsWith(prefix)) return decodeURIComponent(part.slice(prefix.length));
+    }
+    return null;
+}
+
 // Helper to wrap SVG text into tspans up to a max number of lines
 function wrapText(textSelection, width, lineHeight = 12, maxLines = 2) {
     textSelection.each(function(d) {
@@ -469,6 +483,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function prepareUI() {
         if (isTreeInitialized) return;
         isTreeInitialized = true;
+        // Mark landing as seen once the UI is prepared
+        try { setCookie('landing_seen', '1', 365); } catch (e) {}
 
         // Hide landing card and show the tree view
         landingCard.classList.add('hidden');
@@ -684,7 +700,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // This is for the new button you will add in the HTML
         const loadTreeButton = document.getElementById('load-tree-button');
         if (loadTreeButton) {
-            loadTreeButton.addEventListener('click', loadAndRenderTree);
+            loadTreeButton.addEventListener('click', () => {
+                try { setCookie('landing_seen', '1', 365); } catch (e) {}
+                loadAndRenderTree();
+            });
         }
     }
 
@@ -1840,11 +1859,15 @@ function getAreaColor(area) {
         // If there are other URL params, load the tree immediately.
         prepareUI();
         loadAndRenderTree();
+    } else if (getCookie('landing_seen') === '1') {
+        // If the user has previously seen the landing card, skip it.
+        prepareUI();
     } else {
         // Otherwise, show the landing card and wait for user interaction.
         treeToolbar.style.display = 'none';
         techTreeContainer.classList.add('hidden');
         landingCard.classList.remove('hidden');
+        try { setCookie('landing_seen', '1', 365); } catch (e) {}
 
         // These listeners will trigger the UI preparation ONCE.
         const initOnce = { once: true };

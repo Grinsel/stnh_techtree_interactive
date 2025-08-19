@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ST: New Horizons Tech Tree</title>
+    <script>
+        (function() {
+            try {
+                var cookie = document.cookie || '';
+                var pair = cookie.split('; ').find(function(r){ return r.indexOf('landing_seen=') === 0; });
+                if (pair && pair.split('=')[1] === '1') {
+                    document.documentElement.setAttribute('data-landing-seen', '1');
+                }
+            } catch(e) { /* no-op */ }
+        })();
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -350,6 +361,10 @@
             background: #5a9bff;
         }
         .hidden {
+            display: none !important;
+        }
+        /* Prevent landing card flicker when cookie indicates it was already seen */
+        html[data-landing-seen="1"] #landing-card {
             display: none !important;
         }
         .tech-node {
