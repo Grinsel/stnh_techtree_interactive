@@ -87,9 +87,9 @@ function updateLOD() {
 
     // Lower thresholds so details appear earlier when zooming in
     const showLabelsAt = 0.45;
-    const showTiersAt = 0.85;
+    const showTiersAt = 0.60;
     const showLinksAt = 0.30;
-    const showCirclesAt = 0.40; // New LOD level for circles
+    const showCirclesAt = 0.45; 
 
     // Lazy-create heavy DOM when thresholds are reached
     const flags = {
