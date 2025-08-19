@@ -123,7 +123,7 @@ function updateLOD() {
                 .attr('y', -nodeHeight / 2 + 30)
                 .attr('text-anchor', 'middle')
                 .style('fill', '#ffffff')
-                .text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+                .text(d => `${d.area || 'N/A'}`);
             nodesSel.append('text')
                 .attr('class', 'node-label')
                 .attr('y', -nodeHeight / 2 + (nodeHeight === 70 ? 45 : 50))
@@ -223,7 +223,7 @@ function updateLOD() {
             .attr('y', -nodeHeight / 2 + 30)
             .attr('text-anchor', 'middle')
             .style('fill', '#ffffff')
-            .text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+            .text(d => `${d.area || 'N/A'}`);
         nodesSel.append('text')
             .attr('class', 'node-label')
             .attr('y', -nodeHeight / 2 + (nodeHeight === 70 ? 55 : 60))
@@ -1361,7 +1361,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'}`);
         node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
 
         popupSimulation.on('tick', () => {
@@ -1666,7 +1666,7 @@ function getAreaColor(area) {
         });
             
         node.append('text').attr('y', -nodeHeight / 2 + 15).attr('text-anchor', 'middle').style('font-weight', 'bold').style('fill', '#ffffff').text(d => d.name ? d.name.substring(0, 18) : d.id);
-        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'} - T${d.tier || 0}`);
+        node.append('text').attr('y', -nodeHeight / 2 + 30).attr('text-anchor', 'middle').style('fill', '#ffffff').text(d => `${d.area || 'N/A'}`);
         node.append('text').attr('y', -nodeHeight / 2 + 45).attr('text-anchor', 'middle').style('font-size', '8px').style('fill', '#ffffff').text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
         node.attr('transform', d => `translate(${d.x},${d.y})`);
     }
