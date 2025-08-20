@@ -276,10 +276,13 @@ function updateLOD() {
             g.property('linksInitialized', true);
         }
 
-        // Show everything for small graphs
+        // Show everything for small graphs or when LOD is disabled
         g.selectAll('.node-label').style('display', null);
         g.selectAll('.tier-indicator').style('display', null);
         g.selectAll('.link').style('display', null);
+        // Ensure we revert to rectangle view and hide circle glyphs when not using LOD
+        g.selectAll('.node-circle').style('display', 'none');
+        g.selectAll('.node-rect').style('display', null);
         return;
     }
 
