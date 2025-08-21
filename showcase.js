@@ -276,10 +276,13 @@ function updateLOD() {
             g.property('linksInitialized', true);
         }
 
-        // Show everything for small graphs
+        // Show everything for small graphs or when LOD is disabled
         g.selectAll('.node-label').style('display', null);
         g.selectAll('.tier-indicator').style('display', null);
         g.selectAll('.link').style('display', null);
+        // Ensure we revert to rectangle view and hide circle glyphs when not using LOD
+        g.selectAll('.node-circle').style('display', 'none');
+        g.selectAll('.node-rect').style('display', null);
         return;
     }
 
@@ -333,10 +336,10 @@ function updateLOD() {
         const x0 = -nodeWidth / 2;
         const y0 = -nodeHeight / 2;
         const x1 = -nodeWidth / 2 + stripeWidth;
-        const x1Adj = x1 + 1; // move wedge slightly into the node to avoid seam
+        
         const y1 = nodeHeight / 2;
         const r = cornerRadius;
-        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1Adj},${y0} L ${x1Adj},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
+        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
 
         const tierIndicator = nodesSel.append('g').attr('class', 'tier-indicator');
         tierIndicator.append('path').attr('d', pathData).attr('fill', 'white');
@@ -966,7 +969,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .force('center', d3.forceCenter(width / 2, height / 2))
             .force('collision', d3.forceCollide().radius(80));
         for (let i = 0; i < 50; ++i) simulation.tick();
-        
+        // After initial settle, frame all nodes
+        zoomToFit(svg, g, zoom, nodes, width, height);
+
         const link = g.select('.links-layer').selectAll('polygon')
             .data(links)
             .join('polygon')
@@ -1141,6 +1146,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .force('center', d3.forceCenter(width / 2, height / 2))
             .force('collision', d3.forceCollide().radius(80));
         for (let i = 0; i < 50; ++i) simulation.tick();
+        // After initial settle, frame all nodes
+        zoomToFit(svg, g, zoom, nodes, width, height);
         const node = g.select('.nodes-layer').selectAll('g').data(nodes).join('g').attr('class', 'tech-node').call(drag(simulation))
             .on('mouseover', (event, d) => {
                 tooltip.style.display = 'block';
@@ -1195,7 +1202,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const x1 = -nodeWidth / 2 + stripeWidth;
         const y1 = nodeHeight / 2;
         const r = cornerRadius;
-        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
+        const x1Adj = x1 + 1; // move wedge slightly into the node to avoid seam
+        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1Adj},${y0} L ${x1Adj},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
         
         const tierIndicator = node.append('g').attr('class', 'tier-indicator');
         tierIndicator.append('path')
@@ -1675,9 +1683,65 @@ function getAreaColor(area) {
 }
 
 
+    // Compute a zoom transform that fits all nodes within the viewport with padding
+    function zoomToFit(svg, g, zoom, nodes, width, height, padding = 60, minScale = 0.02, maxScale = 2) {
+        if (!nodes || nodes.length === 0) return;
+        let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+        for (const n of nodes) {
+            if (n.x == null || n.y == null) continue;
+            if (n.x < x0) x0 = n.x; if (n.x > x1) x1 = n.x;
+            if (n.y < y0) y0 = n.y; if (n.y > y1) y1 = n.y;
+        }
+        if (!isFinite(x0) || !isFinite(y0) || !isFinite(x1) || !isFinite(y1)) return;
+        const w = Math.max(1, x1 - x0);
+        const h = Math.max(1, y1 - y0);
+        const scale = Math.max(minScale, Math.min(maxScale, Math.min(
+            (width - 2 * padding) / w,
+            (height - 2 * padding) / h
+        )));
+        const cx = (x0 + x1) / 2;
+        const cy = (y0 + y1) / 2;
+        const t = d3.zoomIdentity
+            .translate(width / 2, height / 2)
+            .scale(scale)
+            .translate(-cx, -cy);
+        svg.transition().duration(300).call(zoom.transform, t);
+    }
+
+    // Permanently switch a simulation to collision-only (no spread from other forces)
+    function setCollisionOnly(sim) {
+        const fLink = sim.force('link');
+        const fCharge = sim.force('charge');
+        const fCenter = sim.force('center');
+        const fX = sim.force('x');
+        const fY = sim.force('y');
+        if (fLink && typeof fLink.strength === 'function') fLink.strength(0);
+        if (fCharge && typeof fCharge.strength === 'function') fCharge.strength(0);
+        if (fX && typeof fX.strength === 'function') fX.strength(0);
+        if (fY && typeof fY.strength === 'function') fY.strength(0);
+        // Remove center so it doesn't pull after settle
+        if (fCenter) sim.force('center', null);
+        // Slightly higher damping to avoid drift
+        try { sim.velocityDecay(0.5); } catch (e) {}
+    }
+
+    // Keep springs (links) active, but disable charge/center/axis forces so only
+    // link pull + collision affect the layout after initial settle.
+    function setCollisionAndLinkOnly(sim) {
+        const fCharge = sim.force('charge');
+        const fCenter = sim.force('center');
+        const fX = sim.force('x');
+        const fY = sim.force('y');
+        if (fCharge && typeof fCharge.strength === 'function') fCharge.strength(0);
+        if (fX && typeof fX.strength === 'function') fX.strength(0);
+        if (fY && typeof fY.strength === 'function') fY.strength(0);
+        if (fCenter) sim.force('center', null);
+        try { sim.velocityDecay(0.5); } catch (e) {}
+    }
+
     function drag(simulation) {
         function dragstarted(event, d) {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
+            if (!event.active) simulation.alphaTarget(0.05).restart();
             d.fx = d.x; d.fy = d.y;
         }
         function dragged(event, d) { d.fx = event.x; d.fy = event.y; }
