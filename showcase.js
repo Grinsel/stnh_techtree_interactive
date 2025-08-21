@@ -336,10 +336,10 @@ function updateLOD() {
         const x0 = -nodeWidth / 2;
         const y0 = -nodeHeight / 2;
         const x1 = -nodeWidth / 2 + stripeWidth;
-        const x1Adj = x1 + 1; // move wedge slightly into the node to avoid seam
+        
         const y1 = nodeHeight / 2;
         const r = cornerRadius;
-        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1Adj},${y0} L ${x1Adj},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
+        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
 
         const tierIndicator = nodesSel.append('g').attr('class', 'tier-indicator');
         tierIndicator.append('path').attr('d', pathData).attr('fill', 'white');
@@ -1185,7 +1185,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const x1 = -nodeWidth / 2 + stripeWidth;
         const y1 = nodeHeight / 2;
         const r = cornerRadius;
-        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1},${y0} L ${x1},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
+        const x1Adj = x1 + 1; // move wedge slightly into the node to avoid seam
+        const pathData = `M ${x0},${y0 + r} A ${r},${r} 0 0 1 ${x0 + r},${y0} L ${x1Adj},${y0} L ${x1Adj},${y1} L ${x0 + r},${y1} A ${r},${r} 0 0 1 ${x0},${y1 - r} Z`;
         
         const tierIndicator = node.append('g').attr('class', 'tier-indicator');
         tierIndicator.append('path')
