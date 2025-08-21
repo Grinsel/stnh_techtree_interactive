@@ -1034,8 +1034,21 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // labels and tier indicators are lazily created in updateLOD()
         
+        const maxDistance = Math.min(width, height) * 1.5;
+        const center = { x: width / 2, y: height / 2 };
+        function boundingForce() {
+            for (const node of nodes) {
+                const dist = Math.hypot(node.x - center.x, node.y - center.y);
+                if (dist > maxDistance) {
+                    node.vx += (center.x - node.x) * 0.01 * simulation.alpha();
+                    node.vy += (center.y - node.y) * 0.01 * simulation.alpha();
+                }
+            }
+        }
+
         let tickCountArrows = 0;
         simulation.on('tick', () => {
+            boundingForce();
             // Update any existing links (created lazily)
             g.select('.links-layer').selectAll('.link').attr('points', d => {
                 const dx = d.target.x - d.source.x;
@@ -1216,8 +1229,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+        const maxDistanceFD = Math.min(width, height) * 1.5;
+        const centerFD = { x: width / 2, y: height / 2 };
+        function boundingForceFD() {
+            for (const node of nodes) {
+                const dist = Math.hypot(node.x - centerFD.x, node.y - centerFD.y);
+                if (dist > maxDistanceFD) {
+                    node.vx += (centerFD.x - node.x) * 0.01 * simulation.alpha();
+                    node.vy += (centerFD.y - node.y) * 0.01 * simulation.alpha();
+                }
+            }
+        }
+
         let tickCount = 0;
         simulation.on('tick', () => {
+            boundingForceFD();
             // Update any existing links (created lazily)
             g.select('.links-layer').selectAll('.link')
                 .attr('x1', d => d.source.x)
@@ -1336,8 +1362,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Tier indicators and labels are created by updateLOD() (eagerly for small graphs).
 
+        const maxDistanceDJ = Math.min(width, height) * 1.5;
+        const centerDJ = { x: width / 2, y: height / 2 };
+        function boundingForceDJ() {
+            for (const node of nodes) {
+                const dist = Math.hypot(node.x - centerDJ.x, node.y - centerDJ.y);
+                if (dist > maxDistanceDJ) {
+                    node.vx += (centerDJ.x - node.x) * 0.01 * simulation.alpha();
+                    node.vy += (centerDJ.y - node.y) * 0.01 * simulation.alpha();
+                }
+            }
+        }
+
         let tickCountDisjoint = 0;
         simulation.on('tick', () => {
+            boundingForceDJ();
             // Update any existing links (created lazily)
             g.select('.links-layer').selectAll('.link')
                 .attr('x1', d => d.source.x)
