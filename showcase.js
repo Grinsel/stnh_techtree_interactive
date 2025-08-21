@@ -969,7 +969,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .force('center', d3.forceCenter(width / 2, height / 2))
             .force('collision', d3.forceCollide().radius(80));
         for (let i = 0; i < 50; ++i) simulation.tick();
-        
+        // After initial settle, frame all nodes
+        zoomToFit(svg, g, zoom, nodes, width, height);
+
         const link = g.select('.links-layer').selectAll('polygon')
             .data(links)
             .join('polygon')
@@ -1131,6 +1133,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .force('center', d3.forceCenter(width / 2, height / 2))
             .force('collision', d3.forceCollide().radius(80));
         for (let i = 0; i < 50; ++i) simulation.tick();
+        // After initial settle, frame all nodes
+        zoomToFit(svg, g, zoom, nodes, width, height);
         const node = g.select('.nodes-layer').selectAll('g').data(nodes).join('g').attr('class', 'tech-node').call(drag(simulation))
             .on('mouseover', (event, d) => {
                 tooltip.style.display = 'block';
@@ -1640,9 +1644,65 @@ function getAreaColor(area) {
 }
 
 
+    // Compute a zoom transform that fits all nodes within the viewport with padding
+    function zoomToFit(svg, g, zoom, nodes, width, height, padding = 60, minScale = 0.02, maxScale = 2) {
+        if (!nodes || nodes.length === 0) return;
+        let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+        for (const n of nodes) {
+            if (n.x == null || n.y == null) continue;
+            if (n.x < x0) x0 = n.x; if (n.x > x1) x1 = n.x;
+            if (n.y < y0) y0 = n.y; if (n.y > y1) y1 = n.y;
+        }
+        if (!isFinite(x0) || !isFinite(y0) || !isFinite(x1) || !isFinite(y1)) return;
+        const w = Math.max(1, x1 - x0);
+        const h = Math.max(1, y1 - y0);
+        const scale = Math.max(minScale, Math.min(maxScale, Math.min(
+            (width - 2 * padding) / w,
+            (height - 2 * padding) / h
+        )));
+        const cx = (x0 + x1) / 2;
+        const cy = (y0 + y1) / 2;
+        const t = d3.zoomIdentity
+            .translate(width / 2, height / 2)
+            .scale(scale)
+            .translate(-cx, -cy);
+        svg.transition().duration(300).call(zoom.transform, t);
+    }
+
+    // Permanently switch a simulation to collision-only (no spread from other forces)
+    function setCollisionOnly(sim) {
+        const fLink = sim.force('link');
+        const fCharge = sim.force('charge');
+        const fCenter = sim.force('center');
+        const fX = sim.force('x');
+        const fY = sim.force('y');
+        if (fLink && typeof fLink.strength === 'function') fLink.strength(0);
+        if (fCharge && typeof fCharge.strength === 'function') fCharge.strength(0);
+        if (fX && typeof fX.strength === 'function') fX.strength(0);
+        if (fY && typeof fY.strength === 'function') fY.strength(0);
+        // Remove center so it doesn't pull after settle
+        if (fCenter) sim.force('center', null);
+        // Slightly higher damping to avoid drift
+        try { sim.velocityDecay(0.5); } catch (e) {}
+    }
+
+    // Keep springs (links) active, but disable charge/center/axis forces so only
+    // link pull + collision affect the layout after initial settle.
+    function setCollisionAndLinkOnly(sim) {
+        const fCharge = sim.force('charge');
+        const fCenter = sim.force('center');
+        const fX = sim.force('x');
+        const fY = sim.force('y');
+        if (fCharge && typeof fCharge.strength === 'function') fCharge.strength(0);
+        if (fX && typeof fX.strength === 'function') fX.strength(0);
+        if (fY && typeof fY.strength === 'function') fY.strength(0);
+        if (fCenter) sim.force('center', null);
+        try { sim.velocityDecay(0.5); } catch (e) {}
+    }
+
     function drag(simulation) {
         function dragstarted(event, d) {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
+            if (!event.active) simulation.alphaTarget(0.05).restart();
             d.fx = d.x; d.fy = d.y;
         }
         function dragged(event, d) { d.fx = event.x; d.fy = event.y; }
