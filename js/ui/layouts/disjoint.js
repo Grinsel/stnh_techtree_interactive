@@ -70,7 +70,7 @@ export function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies, 
   const perfToggle = document.getElementById('performance-toggle');
   const perfOn = !!perfToggle?.checked;
   const preTicks = perfOn ? 0 : 40; // no blocking when performance mode is on
-  for (let i = 0; i < preTicks; ++i) simulation.tick();
+  for (let i = 0; i < 200; ++i) simulation.tick();
 
   // After initial settle, frame all nodes within the viewport
   zoomToFit(_svg, _g, zoom, nodes, width, height, 300, 0.02, 2);
