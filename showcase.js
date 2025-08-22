@@ -18,6 +18,7 @@ import { attachEventHandlers } from './js/ui/events.js';
 // Global SVG and group so LOD can access current transform and selections
 let svg = null;
 let g = null;
+let zoom = null;
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -51,6 +52,64 @@ document.addEventListener('DOMContentLoaded', () => {
     const helpButton = document.getElementById('help-button');
     const helpViewport = document.getElementById('help-viewport');
     const helpCloseButton = document.getElementById('help-close-button');
+
+    // --- Create persistent UI elements ---
+    const jumpButton = document.createElement('button');
+    jumpButton.id = 'jump-to-tech-btn';
+    jumpButton.textContent = 'Jump to Tech';
+    jumpButton.style.width = '100%';
+    jumpButton.style.padding = '8px 10px';
+    jumpButton.style.background = '#232b3d';
+    jumpButton.style.color = '#eaf2ff';
+    jumpButton.style.border = '1px solid #3c80ff88';
+    jumpButton.style.borderRadius = '8px';
+    jumpButton.style.marginTop = '12px';
+    jumpButton.style.fontSize = '1rem';
+    jumpButton.style.fontFamily = 'var(--font)';
+    jumpButton.style.cursor = 'pointer';
+    jumpButton.style.display = 'none'; // Initially hidden
+    jumpButton.addEventListener('mouseover', () => {
+        jumpButton.style.background = '#3c4b7a';
+        jumpButton.style.borderColor = '#3c80ff';
+    });
+    jumpButton.addEventListener('mouseout', () => {
+        jumpButton.style.background = '#232b3d';
+        jumpButton.style.borderColor = '#3c80ff88';
+    });
+    jumpButton.addEventListener('click', () => {
+        if (!svg || !zoom || !activeTechId) return;
+        
+        // Always use the LATEST nodes array to find the target
+        const targetNode = nodes.find(n => n.id === activeTechId);
+        if (!targetNode || typeof targetNode.x === 'undefined') {
+            alert('Technology is not visible in the current view.');
+            return;
+        }
+
+        const width = svg.node().clientWidth;
+        const height = svg.node().clientHeight;
+        const scale = 1.2;
+        
+        const transform = d3.zoomIdentity
+            .translate(width / 2, height / 2)
+            .scale(scale)
+            .translate(-targetNode.x, -targetNode.y);
+
+        svg.transition()
+            .duration(750)
+            .call(zoom.transform, transform);
+    });
+    
+    const hr = document.createElement('hr');
+    hr.id = 'jump-to-tech-hr';
+    hr.style.display = 'none'; // Initially hidden
+    hr.style.border = 'none';
+    hr.style.borderTop = '1px solid #34405a';
+    hr.style.marginTop = '12px';
+
+    techDetailsContent.appendChild(hr);
+    techDetailsContent.appendChild(jumpButton);
+
 
     // --- State Variables ---
     let selectionStartNode = null;
@@ -300,12 +359,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedArea = areaSelect.value;
         const selectedLayout = layoutSelect.value;
 
+        // Clear previous details and hide the button first
+        const jumpBtn = document.getElementById('jump-to-tech-btn');
+        const hrSep = document.getElementById('jump-to-tech-hr');
+        
+        if (jumpBtn) jumpBtn.style.display = 'none';
+        if (hrSep) hrSep.style.display = 'none';
+        
+        // Find the primary content area within techDetailsContent, assuming the button is last
+        const contentNodes = Array.from(techDetailsContent.childNodes).filter(n => n.id !== 'jump-to-tech-btn' && n.id !== 'jump-to-tech-hr');
+        
         if (activeTechId) {
             const tech = allTechs.find(t => t.id === activeTechId);
             if (tech) {
+                // Replace only the content, not the button
                 techDetailsContent.innerHTML = formatTooltip(tech);
+                techDetailsContent.appendChild(hrSep);
+                techDetailsContent.appendChild(jumpBtn);
+
+                if (jumpBtn) jumpBtn.style.display = 'block';
+                if (hrSep) hrSep.style.display = 'block';
+                
                 switchTab('details');
+            } else {
+                // Tech from activeTechId not found, clear details
+                techDetailsContent.innerHTML = '<p>Click on a technology to see its details here.</p>';
+                techDetailsContent.appendChild(hrSep);
+                techDetailsContent.appendChild(jumpBtn);
             }
+        } else {
+            // No active tech, ensure details are cleared
+            techDetailsContent.innerHTML = '<p>Click on a technology to see its details here.</p>';
+            techDetailsContent.appendChild(hrSep);
+            techDetailsContent.appendChild(jumpBtn);
         }
 
         const isExclusive = speciesExclusiveToggle.checked;
@@ -376,7 +462,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 disjointLayout,
             }
         );
-        if (res && res.svg && res.g) { svg = res.svg; g = res.g; }
+        if (res && res.svg && res.g) {
+            svg = res.svg;
+            g = res.g;
+            zoom = res.zoom;
+        }
     }
 
     

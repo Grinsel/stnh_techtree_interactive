@@ -170,5 +170,5 @@ export function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies, 
 
   applyLOD();
 
-  return { svg: _svg, g: _g };
+  return { svg: _svg, g: _g, zoom: zoom };
 }

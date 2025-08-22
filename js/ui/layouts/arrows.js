@@ -219,5 +219,5 @@ export function renderForceDirectedArrowsGraph(
   // Apply initial LOD after setting initial transform
   applyLOD();
 
-  return { svg: _svg, g: _g };
+  return { svg: _svg, g: _g, zoom: zoom };
 }
