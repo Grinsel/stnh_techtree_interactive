@@ -76,13 +76,28 @@ document.addEventListener('DOMContentLoaded', () => {
         jumpButton.style.background = '#232b3d';
         jumpButton.style.borderColor = '#3c80ff88';
     });
-    jumpButton.addEventListener('click', () => {
-        if (!svg || !zoom || !activeTechId) return;
-        
-        // Always use the LATEST nodes array to find the target
-        const targetNode = nodes.find(n => n.id === activeTechId);
+    jumpButton.addEventListener('click', () => zoomToTech(activeTechId));
+    
+    const hr = document.createElement('hr');
+    hr.id = 'jump-to-tech-hr';
+    hr.style.display = 'none'; // Initially hidden
+    hr.style.border = 'none';
+    hr.style.borderTop = '1px solid #34405a';
+    hr.style.marginTop = '12px';
+
+    techDetailsContent.appendChild(hr);
+    techDetailsContent.appendChild(jumpButton);
+
+    // --- Reusable Actions ---
+    function zoomToTech(techId) {
+        if (!svg || !zoom || !techId) return;
+
+        const targetNode = nodes.find(n => n.id === techId);
         if (!targetNode || typeof targetNode.x === 'undefined') {
-            alert('Technology is not visible in the current view.');
+            // This case is handled by the search logic, but we can keep the alert for the button
+            if (document.activeElement === jumpButton) {
+                alert('Technology is not visible in the current view.');
+            }
             return;
         }
 
@@ -98,17 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
         svg.transition()
             .duration(750)
             .call(zoom.transform, transform);
-    });
-    
-    const hr = document.createElement('hr');
-    hr.id = 'jump-to-tech-hr';
-    hr.style.display = 'none'; // Initially hidden
-    hr.style.border = 'none';
-    hr.style.borderTop = '1px solid #34405a';
-    hr.style.marginTop = '12px';
-
-    techDetailsContent.appendChild(hr);
-    techDetailsContent.appendChild(jumpButton);
+    }
+    window.zoomToTech = zoomToTech; // Make it globally accessible for the search module
 
 
     // --- State Variables ---
@@ -224,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             updateVisualization,
                             simulation,
                             layoutAsGrid,
+                            zoomToTech: window.zoomToTech,
                         });
 
                         if (!result) { preSearchState = null; return; }

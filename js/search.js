@@ -17,12 +17,29 @@ export function runSearch({
   updateVisualization,
   simulation,
   layoutAsGrid,
+  zoomToTech,
 }) {
   const term = (searchTerm || '').trim();
   if (!term) return null;
 
   const scope = searchAll ? allTechs : currentNodes;
   const matchedNodes = findMatchingTechs(scope, term);
+
+  if (matchedNodes.length === 1) {
+    const singleResult = matchedNodes[0];
+    const isAlreadyVisible = currentNodes.some(node => node.id === singleResult.id);
+
+    if (isAlreadyVisible) {
+      // Tech is already on screen. Update selection, zoom to it, and stop the re-render.
+      if (typeof updateVisualization === 'function') {
+        updateVisualization(speciesSelectEl.value, singleResult.id, true);
+      }
+      if (typeof zoomToTech === 'function') {
+        zoomToTech(singleResult.id);
+      }
+      return null; // Prevent the search from re-rendering the view
+    }
+  }
   if (!matchedNodes || matchedNodes.length === 0) {
     alert('No results in the current view. Enable Search all techs to search the entire tree.');
     return null;
@@ -122,6 +139,7 @@ export function handleSearch({
   updateVisualization,
   simulation,
   layoutAsGrid,
+  zoomToTech,
 }) {
   const term = (searchTerm || '').trim();
   if (!term) return null;
@@ -138,5 +156,6 @@ export function handleSearch({
     updateVisualization,
     simulation,
     layoutAsGrid,
+    zoomToTech,
   });
 }
