@@ -1,5 +1,5 @@
 import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController } from './js/render.js';
-import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculatePath as calculatePathData } from './js/data.js';
+import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculatePath as calculatePathData, loadDataOnly, getAllTechsCached, isTechDataLoaded } from './js/data.js';
 import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter } from './js/filters.js';
 import { handleSearch as executeSearch } from './js/search.js';
 import { renderForceDirectedArrowsGraph as arrowsLayout } from './js/ui/layouts/arrows.js';
@@ -123,10 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let navigationHistory = [];
     let historyIndex = -1;
     let isTreeInitialized = false;
-    let isDataLoaded = false;
-    let dataLoadingPromise = null;
     let allTechs = [];
-    let allSpecies = new Set();
     let nodes = [];
     let links = [];
     let preSearchState = null;
@@ -141,18 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setSelection: (start, end) => { selectionStartNode = start; selectionEndNode = end; },
     });
 
-    function loadDataOnly() {
-        if (!dataLoadingPromise) {
-            dataLoadingPromise = fetch('assets/technology.json')
-                .then(response => response.json())
-                .then(data => {
-                    isDataLoaded = true;
-                    allTechs = data;
-                    return allTechs;
-                });
-        }
-        return dataLoadingPromise;
-    }
 
     // --- Core Initialization Functions ---
     function prepareUI() {
@@ -168,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         viewLegend.classList.remove('hidden');
 
         // Pre-load data as soon as the UI is ready
-        loadDataOnly();
+        loadDataOnly().then(data => { if (Array.isArray(data)) { allTechs = data; } });
 
         // Set up permanent event listeners via centralized module
         attachEventHandlers({
@@ -262,34 +247,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadAndRenderTree,
                 onSearchBack: () => {
                     if (preSearchState) {
-                        // Preserve glossary inside #tech-tree; only remove previous SVGs
-                        techTreeContainer.querySelectorAll('svg').forEach(el => el.remove());
                         const selectedLayout = document.getElementById('layout-select').value;
-                        const res = dispatchRenderGraph(
+                        // Re-render from preSearchState nodes; rebuild links for consistency
+                        renderTree({
+                            filteredTechs: preSearchState.nodes,
                             selectedLayout,
-                            preSearchState.nodes,
-                            preSearchState.links,
-                            speciesSelect.value,
-                            techTreeContainer,
-                            {
-                                updateLOD: () => updateLOD(svg, g),
-                                drag,
-                                tooltipEl: tooltip,
-                                techTreeContainerEl: techTreeContainer,
-                                handleNodeSelection,
-                                updateVisualization,
-                                activeTechId,
-                                selectionStartNode,
-                                selectionEndNode,
-                                // layout implementations
-                                arrowsLayout,
-                                forceLayout,
-                                disjointLayout,
-                            }
-                        );
-                        if (res && res.svg && res.g) { svg = res.svg; g = res.g; }
+                            selectedSpecies: speciesSelect.value,
+                        });
                         nodes = preSearchState.nodes;
-                        links = preSearchState.links;
+                        links = buildLinksFromPrereqs(nodes);
                         preSearchState = null;
                         searchBackButton.style.display = 'none';
                     }
@@ -305,6 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
         prepareUI();
         
         loadDataOnly().then(data => {
+            if (Array.isArray(data)) { allTechs = data; }
             // If data is already loaded, just re-render with current filters
             const currentState = loadState();
             applyState(currentState);
@@ -344,68 +311,34 @@ document.addEventListener('DOMContentLoaded', () => {
         forwardButton.disabled = historyIndex >= navigationHistory.length - 1;
     }
 
-
-    window.updateVisualization = function(selectedSpecies, highlightId = null, addToHistory = true) {
-        // Ensure UI is visible and data is available before attempting to render
-        if (techTreeContainer.classList.contains('hidden')) {
-            prepareUI();
-        }
-        if (!isDataLoaded) {
-            loadAndRenderTree();
-            return;
-        }
-        if (addToHistory && highlightId && highlightId !== activeTechId) {
-            if (historyIndex < navigationHistory.length - 1) {
-                navigationHistory = navigationHistory.slice(0, historyIndex + 1);
-            }
-            navigationHistory.push(highlightId);
-            historyIndex = navigationHistory.length - 1;
-        }
-
-        activeTechId = highlightId;
-        const selectedArea = areaSelect.value;
-        const selectedLayout = layoutSelect.value;
-
-        // Clear previous details and hide the button first
+    // --- Streamlined Helpers ---
+    function renderTechDetails(tech) {
         const jumpBtn = document.getElementById('jump-to-tech-btn');
         const hrSep = document.getElementById('jump-to-tech-hr');
-        
-        if (jumpBtn) jumpBtn.style.display = 'none';
-        if (hrSep) hrSep.style.display = 'none';
-        
-        // Find the primary content area within techDetailsContent, assuming the button is last
-        const contentNodes = Array.from(techDetailsContent.childNodes).filter(n => n.id !== 'jump-to-tech-btn' && n.id !== 'jump-to-tech-hr');
-        
-        if (activeTechId) {
-            const tech = allTechs.find(t => t.id === activeTechId);
-            if (tech) {
-                // Replace only the content, not the button
-                techDetailsContent.innerHTML = formatTooltip(tech);
-                techDetailsContent.appendChild(hrSep);
-                techDetailsContent.appendChild(jumpBtn);
 
-                if (jumpBtn) jumpBtn.style.display = 'block';
-                if (hrSep) hrSep.style.display = 'block';
-                
-                switchTab('details');
-            } else {
-                // Tech from activeTechId not found, clear details
-                techDetailsContent.innerHTML = '<p>Click on a technology to see its details here.</p>';
-                techDetailsContent.appendChild(hrSep);
-                techDetailsContent.appendChild(jumpBtn);
-            }
+        const html = tech ? formatTooltip(tech) : '<p>Click on a technology to see its details here.</p>';
+        techDetailsContent.innerHTML = html;
+        if (hrSep) techDetailsContent.appendChild(hrSep);
+        if (jumpBtn) techDetailsContent.appendChild(jumpBtn);
+
+        if (tech) {
+            if (jumpBtn) jumpBtn.style.display = 'block';
+            if (hrSep) hrSep.style.display = 'block';
+            switchTab('details');
         } else {
-            // No active tech, ensure details are cleared
-            techDetailsContent.innerHTML = '<p>Click on a technology to see its details here.</p>';
-            techDetailsContent.appendChild(hrSep);
-            techDetailsContent.appendChild(jumpBtn);
+            if (jumpBtn) jumpBtn.style.display = 'none';
+            if (hrSep) hrSep.style.display = 'none';
         }
+    }
 
+    function applyFilters({ selectedSpecies, activeTechId }) {
+        const selectedArea = areaSelect.value;
         const isExclusive = speciesExclusiveToggle.checked;
 
         // Base species/area filtering via data module (no active focus here yet)
+        const sourceTechs = getAllTechsCached() || allTechs;
         let baseTechs = filterTechs({
-            techs: allTechs,
+            techs: sourceTechs,
             species: selectedSpecies,
             isExclusive,
             area: selectedArea,
@@ -415,13 +348,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Apply connected filter using full graph for traversal, then intersect with base set
         let filteredTechs;
+        let clearedFocus = false;
         if (activeTechId) {
-            const connectedIds = getConnectedTechIds(activeTechId, allTechs);
+            const connectedIds = getConnectedTechIds(activeTechId, sourceTechs);
             filteredTechs = baseTechs.filter(t => connectedIds.has(t.id));
             // If no nodes found (e.g., stale focus), clear focus and fall back
             if (filteredTechs.length === 0) {
-                activeTechId = null;
-                window.currentFocusId = null;
+                clearedFocus = true;
                 filteredTechs = baseTechs;
             }
         } else {
@@ -438,7 +371,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 filteredTechs = preTierFiltered;
             }
         }
+        return { filteredTechs, clearedFocus };
+    }
 
+    function renderTree({ filteredTechs, selectedLayout, selectedSpecies }) {
         updateHistoryButtons();
         techCounter.textContent = `Displayed Technologies: ${filteredTechs.length}`;
         // Preserve glossary inside #tech-tree; only remove previous SVGs
@@ -476,6 +412,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+    window.updateVisualization = function(selectedSpecies, highlightId = null, addToHistory = true) {
+        // Ensure UI is visible and data is available before attempting to render
+        if (techTreeContainer.classList.contains('hidden')) {
+            prepareUI();
+        }
+        if (!isTechDataLoaded()) {
+            loadAndRenderTree();
+            return;
+        }
+        if (addToHistory && highlightId && highlightId !== activeTechId) {
+            if (historyIndex < navigationHistory.length - 1) {
+                navigationHistory = navigationHistory.slice(0, historyIndex + 1);
+            }
+            navigationHistory.push(highlightId);
+            historyIndex = navigationHistory.length - 1;
+        }
+
+        activeTechId = highlightId;
+        // Ensure local cache is up-to-date
+        allTechs = getAllTechsCached() || allTechs;
+        const selectedArea = areaSelect.value;
+        const selectedLayout = layoutSelect.value;
+
+        // Filter and potentially clear focus if disconnected
+        const { filteredTechs, clearedFocus } = applyFilters({ selectedSpecies, activeTechId });
+        if (clearedFocus) {
+            activeTechId = null;
+            window.currentFocusId = null;
+        }
+
+        // Update details panel based on (potentially) updated focus
+        const techSource = getAllTechsCached() || allTechs;
+        const tech = activeTechId ? techSource.find(t => t.id === activeTechId) : null;
+        renderTechDetails(tech);
+
+        // Render tree
+        renderTree({ filteredTechs, selectedLayout, selectedSpecies });
+    }
+
     
 
     
@@ -497,14 +473,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // If path params are present, initialize the tree and then render the path.
         prepareUI();
         loadAndRenderTree();
-        // We need to wait for the data to be loaded before calculating the path.
-        // A simple timeout is a pragmatic way to handle this without complex promise chaining.
-        setTimeout(() => {
+        // Wait for data to be loaded before calculating the path.
+        loadDataOnly().then(() => {
+            allTechs = getAllTechsCached() || allTechs;
             selectionStartNode = pathStart;
             selectionEndNode = pathEnd;
             const popupContainer = document.getElementById('popup-tech-tree');
             const popupViewport = document.getElementById('popup-viewport');
-            calculateAndRenderPathController(pathStart, pathEnd, allTechs, {
+            calculateAndRenderPathController(pathStart, pathEnd, getAllTechsCached() || allTechs, {
                 popupViewportEl: popupViewport,
                 popupContainerEl: popupContainer,
                 tooltipEl: tooltip,
@@ -514,12 +490,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 calculatePathData,
                 drag,
             });
-        }, 1000); // Wait 1 second for data to likely be loaded.
+        });
     } else if (dependenciesFor) {
         // If dependenciesFor param is present, initialize the tree and then render the dependencies.
         prepareUI();
         loadAndRenderTree();
-        setTimeout(() => {
+        loadDataOnly().then(() => {
+            allTechs = getAllTechsCached() || allTechs;
             selectionStartNode = dependenciesFor;
             const popupContainer = document.getElementById('popup-tech-tree');
             const popupViewport = document.getElementById('popup-viewport');
@@ -533,7 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 calculatePathData,
                 drag,
             });
-        }, 1000);
+        });
     } else if (urlParams.toString().length > 0) {
         // If there are other URL params, load the tree immediately.
         prepareUI();

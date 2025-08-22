@@ -44,6 +44,16 @@ export async function initData() {
   return { techs: _techs, species: _species };
 }
 
+// --- Convenience wrappers for consumers ---
+// Keep naming aligned with older callers that expect `loadDataOnly()`.
+export function loadDataOnly() {
+  return loadTechnologyData();
+}
+
+export function isTechDataLoaded() {
+  return Array.isArray(_techs);
+}
+
 // --- Indexing ---
 export function indexTechs(techs) {
   const map = new Map();
