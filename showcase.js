@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let historyIndex = -1;
     let isTreeInitialized = false;
     let isDataLoaded = false;
+    let dataLoadingPromise = null;
     let allTechs = [];
     let allSpecies = new Set();
     let nodes = [];
@@ -75,6 +76,19 @@ document.addEventListener('DOMContentLoaded', () => {
         setSelection: (start, end) => { selectionStartNode = start; selectionEndNode = end; },
     });
 
+    function loadDataOnly() {
+        if (!dataLoadingPromise) {
+            dataLoadingPromise = fetch('assets/technology.json')
+                .then(response => response.json())
+                .then(data => {
+                    isDataLoaded = true;
+                    allTechs = data;
+                    return allTechs;
+                });
+        }
+        return dataLoadingPromise;
+    }
+
     // --- Core Initialization Functions ---
     function prepareUI() {
         if (isTreeInitialized) return;
@@ -87,6 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
         treeToolbar.style.display = 'flex';
         techTreeContainer.classList.remove('hidden');
         viewLegend.classList.remove('hidden');
+
+        // Pre-load data as soon as the UI is ready
+        loadDataOnly();
 
         // Set up permanent event listeners via centralized module
         attachEventHandlers({
@@ -132,29 +149,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     const searchTerm = searchInput.value.trim();
                     if (!searchTerm) return;
 
-                    preSearchState = { nodes: [...nodes], links: [...links] };
+                    loadDataOnly().then(allTechs => {
+                        preSearchState = { nodes: [...nodes], links: [...links] };
 
-                    const result = executeSearch({
-                        searchTerm,
-                        searchAll: !!searchScopeToggle.checked,
-                        allTechs,
-                        currentNodes: nodes,
-                        currentLinks: links,
-                        techTreeContainer,
-                        tooltipEl: tooltip,
-                        searchBackButtonEl: searchBackButton,
-                        speciesSelectEl: speciesSelect,
-                        updateVisualization,
-                        simulation,
-                        layoutAsGrid,
+                        const result = executeSearch({
+                            searchTerm,
+                            searchAll: !!searchScopeToggle.checked,
+                            allTechs,
+                            currentNodes: nodes,
+                            currentLinks: links,
+                            techTreeContainer,
+                            tooltipEl: tooltip,
+                            searchBackButtonEl: searchBackButton,
+                            speciesSelectEl: speciesSelect,
+                            updateVisualization,
+                            simulation,
+                            layoutAsGrid,
+                        });
+
+                        if (!result) { preSearchState = null; return; }
+                        // Update globals for LOD/zoom consistency
+                        svg = result.svg;
+                        g = result.g;
+                        nodes = result.nodes;
+                        links = result.links;
                     });
-
-                    if (!result) { preSearchState = null; return; }
-                    // Update globals for LOD/zoom consistency
-                    svg = result.svg;
-                    g = result.g;
-                    nodes = result.nodes;
-                    links = result.links;
                 },
                 setCookie,
                 calculateAndRenderPath: (startId, endId) => {
@@ -218,38 +237,25 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadAndRenderTree() {
         // Ensure the UI is prepared so the container has a size
         prepareUI();
-        if (isDataLoaded) {
+        
+        loadDataOnly().then(data => {
             // If data is already loaded, just re-render with current filters
             const currentState = loadState();
             applyState(currentState);
             tierFilterActive = false; // Do not activate tier filter by default
-            updateVisualization(currentState.species, currentState.focus, false);
-            return;
-        }
-        
-        // Fetch data and render the tree for the first time
-        fetch('assets/technology.json')
-            .then(response => response.json())
-            .then(data => {
-                isDataLoaded = true;
-                allTechs = data;
-                // Species list is now loaded separately at startup
+            
+            // Validate initial focus exists in dataset
+            const initialFocusValid = currentState.focus && data.some(t => t.id === currentState.focus);
+            window.currentFocusId = initialFocusValid ? currentState.focus : null;
+            activeTechId = window.currentFocusId;
 
-                const initialState = loadState();
-                applyState(initialState);
-                // Validate initial focus exists in dataset
-                const initialFocusValid = initialState.focus && data.some(t => t.id === initialState.focus);
-                window.currentFocusId = initialFocusValid ? initialState.focus : null;
-                activeTechId = window.currentFocusId;
+            if (activeTechId) {
+                navigationHistory = [activeTechId];
+                historyIndex = 0;
+            }
 
-                if (activeTechId) {
-                    navigationHistory = [activeTechId];
-                    historyIndex = 0;
-                }
-
-                tierFilterActive = false; // Do not activate tier filter by default
-                updateVisualization(initialState.species, activeTechId, false);
-            });
+            updateVisualization(currentState.species, activeTechId, false);
+        });
     }
 
     // --- Visualization and Helper Functions ---
@@ -453,7 +459,14 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('focus', prepareUI, initOnce);
         layoutSelect.addEventListener('mousedown', prepareUI, initOnce);
         showTierButton.addEventListener('click', prepareUI, initOnce);
-        searchButton.addEventListener('click', prepareUI, initOnce);
+        
+        // Special handler for the first search click
+        const initialSearchHandler = () => {
+            prepareUI();
+            // The 'real' search handler is now attached, so we can trigger it.
+            searchButton.click();
+        };
+        searchButton.addEventListener('click', initialSearchHandler, initOnce);
     }
     
 });

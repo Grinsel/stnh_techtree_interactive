@@ -161,5 +161,12 @@ export function attachEventHandlers({ elements, state, actions }) {
 
   // Lazy load button on landing
   const loadTreeButton = document.getElementById('load-tree-button');
-  loadTreeButton?.addEventListener('click', () => { try { setCookie('landing_seen', '1', 365); } catch(e) {} actions.loadAndRenderTree?.(); });
+  if (loadTreeButton) {
+      loadTreeButton.addEventListener('click', () => {
+          try {
+              setCookie('landing_seen', '1', 365);
+          } catch(e) {}
+          actions.loadAndRenderTree?.();
+      });
+  }
 }
