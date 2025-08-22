@@ -1,5 +1,5 @@
 import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController } from './js/render.js';
-import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculatePath as calculatePathData, loadDataOnly, getAllTechsCached, isTechDataLoaded } from './js/data.js';
+import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculatePath as calculatePathData, loadTechnologyData, getAllTechsCached, isTechDataLoaded } from './js/data.js';
 import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter } from './js/filters.js';
 import { handleSearch as executeSearch } from './js/search.js';
 import { renderForceDirectedArrowsGraph as arrowsLayout } from './js/ui/layouts/arrows.js';
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         viewLegend.classList.remove('hidden');
 
         // Pre-load data as soon as the UI is ready
-        loadDataOnly().then(data => { if (Array.isArray(data)) { allTechs = data; } });
+        loadTechnologyData().then(data => { if (Array.isArray(data)) { allTechs = data; } });
 
         // Set up permanent event listeners via centralized module
         attachEventHandlers({
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const searchTerm = searchInput.value.trim();
                     if (!searchTerm) return;
 
-                    loadDataOnly().then(allTechs => {
+                    loadTechnologyData().then(allTechs => {
                         preSearchState = { nodes: [...nodes], links: [...links] };
 
                         const result = executeSearch({
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ensure the UI is prepared so the container has a size
         prepareUI();
         
-        loadDataOnly().then(data => {
+        loadTechnologyData().then(data => {
             if (Array.isArray(data)) { allTechs = data; }
             // If data is already loaded, just re-render with current filters
             const currentState = loadState();
@@ -474,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
         prepareUI();
         loadAndRenderTree();
         // Wait for data to be loaded before calculating the path.
-        loadDataOnly().then(() => {
+        loadTechnologyData().then(() => {
             allTechs = getAllTechsCached() || allTechs;
             selectionStartNode = pathStart;
             selectionEndNode = pathEnd;
@@ -495,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // If dependenciesFor param is present, initialize the tree and then render the dependencies.
         prepareUI();
         loadAndRenderTree();
-        loadDataOnly().then(() => {
+        loadTechnologyData().then(() => {
             allTechs = getAllTechsCached() || allTechs;
             selectionStartNode = dependenciesFor;
             const popupContainer = document.getElementById('popup-tech-tree');

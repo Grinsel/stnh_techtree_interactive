@@ -45,10 +45,6 @@ export async function initData() {
 }
 
 // --- Convenience wrappers for consumers ---
-// Keep naming aligned with older callers that expect `loadDataOnly()`.
-export function loadDataOnly() {
-  return loadTechnologyData();
-}
 
 export function isTechDataLoaded() {
   return Array.isArray(_techs);
