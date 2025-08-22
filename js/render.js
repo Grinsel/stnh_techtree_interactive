@@ -496,11 +496,24 @@ export function calculateAndRenderPath(startId, endId, allTechs, deps) {
     calculatePathData,
   } = deps;
 
+  const placeholderEl = document.getElementById('popup-placeholder');
   let pathNodes, pathLinks;
+
+  // Always clear previous graph rendering
+  if (popupContainerEl) {
+    const svg = popupContainerEl.querySelector('svg');
+    if (svg) svg.remove();
+  }
+  
   if (endId) {
     const result = calculatePathData(startId, endId, allTechs);
     pathNodes = result.nodes;
     pathLinks = result.links;
+    const startNode = allTechs.find(t => t.id === startId);
+    const endNode = allTechs.find(t => t.id === endId);
+    if (placeholderEl) {
+      placeholderEl.innerHTML = `Path between ${startNode?.name || startId} and ${endNode?.name || endId}`;
+    }
   } else {
     const pathNodeIds = getPrerequisitesData(startId, allTechs);
     pathNodes = allTechs.filter(t => pathNodeIds.has(t.id));
@@ -514,11 +527,18 @@ export function calculateAndRenderPath(startId, endId, allTechs, deps) {
         });
       }
     });
+    const startNode = allTechs.find(t => t.id === startId);
+    if (placeholderEl) {
+      placeholderEl.innerHTML = `Minimum requirement for ${startNode?.name || startId}`;
+    }
   }
 
-  // Clear and show popup viewport
-  if (popupContainerEl) popupContainerEl.innerHTML = '';
   if (popupViewportEl) popupViewportEl.classList.remove('hidden');
+
+  if (pathNodes.length === 0) {
+    if (placeholderEl) placeholderEl.innerHTML = 'No path or prerequisites found.';
+    return;
+  }
 
   renderPopupGraph(pathNodes, pathLinks, {
     containerEl: popupContainerEl,

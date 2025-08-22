@@ -463,10 +463,23 @@
             text-align: center;
         }
         #popup-tech-tree {
+            position: relative;
             flex-grow: 1;
             border-radius: 14px;
             border: 1.5px solid #293040;
             background: linear-gradient(120deg, #23272c 85%, #223449 100%);
+        }
+        #popup-placeholder {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #a0b0c0;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 0 20px;
+            width: calc(100% - 40px);
+            pointer-events: none;
         }
         #tooltip {
             position: absolute;
@@ -706,7 +719,9 @@
                 <button id="popup-copy-button">🔗 Copy Link</button>
                 <button id="popup-close-button">Close</button>
             </div>
-            <div id="popup-tech-tree"></div>
+            <div id="popup-tech-tree">
+                <div id="popup-placeholder"></div>
+            </div>
         </div>
     </div>
     <!-- Help overlay -->
