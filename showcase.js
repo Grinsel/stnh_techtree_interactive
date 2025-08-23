@@ -14,6 +14,7 @@ import { renderGraph as dispatchRenderGraph } from './js/render.js';
 import { createHandleNodeSelection } from './js/ui/selection.js';
 import { renderPopupGraph } from './js/ui/popup.js';
 import { attachEventHandlers } from './js/ui/events.js';
+import { updateHistoryButtons } from './js/ui/history.js';
 
 // Global SVG and group so LOD can access current transform and selections
 let svg = null;
@@ -338,12 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return info;
     }
 
-    function updateHistoryButtons() {
-        backButton.style.display = navigationHistory.length > 1 ? 'inline-block' : 'none';
-        forwardButton.style.display = navigationHistory.length > 1 ? 'inline-block' : 'none';
-        backButton.disabled = historyIndex <= 0;
-        forwardButton.disabled = historyIndex >= navigationHistory.length - 1;
-    }
+    // History buttons UI is handled in './js/ui/history.js'
 
     // --- Streamlined Helpers ---
     function renderTechDetails(tech) {
@@ -409,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderTree({ filteredTechs, selectedLayout, selectedSpecies, onEnd }) {
-        updateHistoryButtons();
+        updateHistoryButtons({ backButton, forwardButton, navigationHistory, historyIndex });
         techCounter.textContent = `Displayed Technologies: ${filteredTechs.length}`;
         // Preserve glossary inside #tech-tree; only remove previous SVGs
         techTreeContainer.querySelectorAll('svg').forEach(el => el.remove());
