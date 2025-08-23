@@ -166,6 +166,10 @@ export function attachEventHandlers({ elements, state, actions }) {
           try {
               setCookie('landing_seen', '1', 365);
           } catch(e) {}
+          // If the Tech Details tab is currently active, switch back to General
+          if (detailsTab?.classList.contains('active')) {
+            switchTab('general');
+          }
           actions.loadAndRenderTree?.();
       });
   }
