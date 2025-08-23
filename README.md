@@ -19,7 +19,7 @@ We are currently running a closed beta test of this tool. If you are a tester, p
 - **Species Filter**: Filter technologies by species.
 - **Tier-Level Filter**: Filter the tree to show only technologies of specific tiers.
 - **Area Filter**: Filter by technology area (Physics, Society, Engineering).
-- **Info Panel**: A detailed, draggable panel for clicked technologies with descriptions that go beyond the simple tooltip.
+- **Tech Details Panel**: A details tab in the sidebar for clicked technologies with richer information than the tooltip.
 - **Shareable Links**: Generate a unique URL that saves your current filters, layout, and focused technology or even a calculated path to share your exact view.
 - **History Navigation**: Use back and forward buttons to navigate through your viewing history, similar to a web browser.
 - **Path & Dependency Analysis**: Right-click to select a start and end technology, then render the direct path or all prerequisites in a separate, focused view.
@@ -27,7 +27,7 @@ We are currently running a closed beta test of this tool. If you are a tester, p
 - **Multiple Layouts**: Choose between different force-directed graph layouts, including one with arrows to clearly indicate dependency direction.
 - **Save State**: Your filter and layout settings are automatically saved in your browser for your next visit.
 - **Refined Initial View**: Improvements to the initial presentation of the tree when it first loads.
-- **Smart Zoom Limit**: A more intelligent zoom limit, with navigation primarily handled via the minimap.
+- **Zoom & Pan with LOD**: Smooth zoom/pan with adaptive level-of-detail for performance on large views.
 - **Parent/Child Toggle**: Switched over to the new "Path & Dependency Analysis" feature to show selected tech dependencies in a new render window.
 
 ## 📌 Planned Features / Roadmap
