@@ -407,6 +407,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderTree({ filteredTechs, selectedLayout, selectedSpecies, onEnd }) {
         updateHistoryButtons({ backButton, forwardButton, navigationHistory, historyIndex });
         techCounter.textContent = `Displayed Technologies: ${filteredTechs.length}`;
+        // Hide centered button only if nodes are visible
+        const centerBtn = document.getElementById('load-tree-center-button');
+        if (centerBtn && filteredTechs.length > 0) centerBtn.style.display = 'none';
+        // Ensure toolbar reload button is visible after first render
+        const toolbarBtn = document.getElementById('load-tree-button');
+        if (toolbarBtn) toolbarBtn.style.display = '';
         // Preserve glossary inside #tech-tree; only remove previous SVGs
         techTreeContainer.querySelectorAll('svg').forEach(el => el.remove());
         nodes = filteredTechs.map(tech => ({ ...tech }));
