@@ -116,8 +116,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.zoomToTech = zoomToTech; // Make it globally accessible for the search module
 
+    function setActiveTech(techId) {
+        // Clear previous search highlight
+        if (lastSearchedTechId && g) {
+            g.selectAll('.tech-node')
+                .filter(d => d.id === lastSearchedTechId)
+                .select('rect')
+                .attr('stroke', null)
+                .attr('stroke-width', null);
+        }
+
+        if (techId && g) {
+            // Apply new search highlight
+            g.selectAll('.tech-node')
+                .filter(d => d.id === techId)
+                .select('rect')
+                .attr('stroke', 'magenta')
+                .attr('stroke-width', 3);
+        }
+
+        // Update state for the new search
+        lastSearchedTechId = techId;
+        activeTechId = techId;
+        
+        // Update details panel
+        const techSource = getAllTechsCached() || allTechs;
+        const tech = techId ? techSource.find(t => t.id === techId) : null;
+        renderTechDetails(tech);
+
+        // We no longer call handleNodeSelection as it's for the yellow border, 
+        // and we want a distinct magenta border for search.
+    }
+    window.setActiveTech = setActiveTech;
+
 
     // --- State Variables ---
+    let lastSearchedTechId = null;
     let selectionStartNode = null;
     let selectionEndNode = null;
     let navigationHistory = [];

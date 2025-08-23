@@ -30,7 +30,10 @@ export function runSearch({
     const isAlreadyVisible = currentNodes.some(node => node.id === singleResult.id);
 
     if (isAlreadyVisible) {
-      // Tech is already on screen. Just zoom to it.
+      // Tech is already on screen. Activate it and zoom.
+      if (typeof window.setActiveTech === 'function') {
+        window.setActiveTech(singleResult.id);
+      }
       if (typeof zoomToTech === 'function') {
         zoomToTech(singleResult.id);
       }
