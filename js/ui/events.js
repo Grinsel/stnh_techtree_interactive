@@ -159,18 +159,25 @@ export function attachEventHandlers({ elements, state, actions }) {
   betaBadge?.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openHelp(); } });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && helpViewport && !helpViewport.classList.contains('hidden')) helpViewport.classList.add('hidden'); });
 
-  // Lazy load button on landing
-  const loadTreeButton = document.getElementById('load-tree-button');
-  if (loadTreeButton) {
-      loadTreeButton.addEventListener('click', () => {
-          try {
-              setCookie('landing_seen', '1', 365);
-          } catch(e) {}
-          // If the Tech Details tab is currently active, switch back to General
-          if (detailsTab?.classList.contains('active')) {
-            switchTab('general');
-          }
-          actions.loadAndRenderTree?.();
-      });
-  }
+  // Initial load buttons
+  const loadTreeButton = document.getElementById('load-tree-button'); // toolbar (hidden initially)
+  const loadTreeCenterButton = document.getElementById('load-tree-center-button'); // centered inside #tech-tree
+
+  const handleInitialLoad = () => {
+    try { setCookie('landing_seen', '1', 365); } catch(e) {}
+    // If the Tech Details tab is currently active, switch back to General
+    if (detailsTab?.classList.contains('active')) {
+      switchTab('general');
+    }
+    // Toggle buttons visibility: hide center button, show toolbar button
+    const tb = document.getElementById('load-tree-button');
+    const cb = document.getElementById('load-tree-center-button');
+    if (cb) cb.style.display = 'none';
+    if (tb) tb.style.display = '';
+    actions.loadAndRenderTree?.();
+  };
+
+  loadTreeButton?.addEventListener('click', handleInitialLoad);
+  loadTreeCenterButton?.addEventListener('click', handleInitialLoad);
+  showTreeButton?.addEventListener('click', handleInitialLoad);
 }

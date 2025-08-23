@@ -322,6 +322,23 @@
             box-shadow: 0 0 16px #0009;
             margin-top: 8px;
         }
+        /* Centered initial load button inside tech-tree */
+        #load-tree-center-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 12px #0009;
+            z-index: 120; /* above legend */
+        }
+        #load-tree-center-button:hover { background: #5a9bff; }
         #landing-card {
             flex-grow: 1;
             display: flex;
@@ -664,7 +681,7 @@
                     <input type="checkbox" id="performance-toggle" checked>
                     <span class="slider"></span>
                 </label>
-                <button id="load-tree-button">Load Tech Tree</button>
+                <button id="load-tree-button" style="display: none;">Reload Tech Tree</button>
             </div>
             <div id="landing-card">
                 <div class="landing-content">
@@ -699,6 +716,7 @@
                 </div>
             </div>
             <div id="tech-tree">
+                <button id="load-tree-center-button">Show Tech Tree</button>
                 <div id="view-legend" class="hidden">
                     <div class="view-legend-row"><span class="view-legend-bullet physics"></span> Physics</div>
                     <div class="view-legend-row"><span class="view-legend-bullet engineering"></span> Engineering</div>
