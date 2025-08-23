@@ -14,6 +14,7 @@ export function renderForceDirectedGraph(nodes, links, selectedSpecies, containe
     activeTechId,
     selectionStartNode,
     selectionEndNode,
+    onEnd,
   } = deps || {};
 
   if (!drag || !tooltipEl || !techTreeContainerEl || !handleNodeSelection || !updateVisualization) {
@@ -163,6 +164,7 @@ export function renderForceDirectedGraph(nodes, links, selectedSpecies, containe
     if (tickCount > 60 && simulation.alpha() < 0.03) {
       simulation.stop();
       applyLOD();
+      if (typeof onEnd === 'function') onEnd();
     }
   });
 

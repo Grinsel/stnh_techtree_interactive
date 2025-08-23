@@ -408,7 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return { filteredTechs, clearedFocus };
     }
 
-    function renderTree({ filteredTechs, selectedLayout, selectedSpecies }) {
+    function renderTree({ filteredTechs, selectedLayout, selectedSpecies, onEnd }) {
         updateHistoryButtons();
         techCounter.textContent = `Displayed Technologies: ${filteredTechs.length}`;
         // Preserve glossary inside #tech-tree; only remove previous SVGs
@@ -437,6 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 arrowsLayout,
                 forceLayout,
                 disjointLayout,
+                onEnd,
             }
         );
         if (res && res.svg && res.g) {
@@ -447,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    window.updateVisualization = function(selectedSpecies, highlightId = null, addToHistory = true) {
+    window.updateVisualization = function(selectedSpecies, highlightId = null, addToHistory = true, zoomOnEndId = null) {
         // Ensure UI is visible and data is available before attempting to render
         if (techTreeContainer.classList.contains('hidden')) {
             prepareUI();
@@ -483,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTechDetails(tech);
 
         // Render tree
-        renderTree({ filteredTechs, selectedLayout, selectedSpecies });
+        renderTree({ filteredTechs, selectedLayout, selectedSpecies, onEnd: zoomOnEndId ? () => zoomToTech(zoomOnEndId) : null });
     }
 
     

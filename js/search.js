@@ -38,12 +38,10 @@ export function runSearch({
         zoomToTech(singleResult.id);
       }
     } else {
-      // Tech is not visible. Load its branch and then zoom.
+      // Tech is not visible. Load its branch and then zoom via callback.
       if (typeof updateVisualization === 'function') {
-        updateVisualization(speciesSelectEl.value, singleResult.id, true);
-      }
-      if (typeof zoomToTech === 'function') {
-        zoomToTech(singleResult.id);
+        // The 4th argument is the new zoomOnEndId
+        updateVisualization(speciesSelectEl.value, singleResult.id, true, singleResult.id);
       }
     }
     return null; // Prevent the search grid from rendering
