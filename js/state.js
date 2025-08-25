@@ -72,7 +72,7 @@ export function saveState() {
 }
 
 export function applyState(state) {
-  document.getElementById("species-select").value = state.species;
+  document.getElementById("species-select").value = state.species || 'Federation';
   document.getElementById("area-select").value = state.area;
   document.getElementById("layout-select").value = state.layout;
   document.getElementById("search-input").value = state.search;

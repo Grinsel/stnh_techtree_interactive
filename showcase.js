@@ -309,6 +309,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Array.isArray(data)) { allTechs = data; }
             // If data is already loaded, just re-render with current filters
             const currentState = loadState();
+            if (!currentState.species) {
+                currentState.species = 'Federation';
+            }
             applyState(currentState);
             tierFilterActive = false; // Do not activate tier filter by default
             
@@ -333,7 +336,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const excludeKeys = new Set(['x', 'y', 'vx', 'vy', 'index', 'fx', 'fy']);
         for (const key in d) {
             if (d.hasOwnProperty(key) && d[key] && !excludeKeys.has(key)) {
-                info += `<strong>${key}:</strong> ${Array.isArray(d[key]) ? d[key].join(', ') : d[key]}<br>`;
+                if (key === 'unlocks' && Array.isArray(d[key])) {
+                    const unlocks = d[key].map(u => {
+                        if (typeof u === 'object' && u !== null) {
+                            return Object.entries(u).map(([k, v]) => `${k}: ${v}`).join(', ');
+                        }
+                        return u;
+                    }).join('<br>');
+                    info += `<strong>${key}:</strong><br>${unlocks}<br>`;
+                } else {
+                    info += `<strong>${key}:</strong> ${Array.isArray(d[key]) ? d[key].join(', ') : d[key]}<br>`;
+                }
             }
         }
         return info;

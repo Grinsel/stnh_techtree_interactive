@@ -19,13 +19,26 @@ let _indexById = null;        // Map<string, Tech>
 // --- Loaders ---
 export async function loadTechnologyData() {
   if (Array.isArray(_techs)) return _techs;
-  const res = await fetch('assets/technology.json');
-  const data = await res.json();
+  const [physics, engineering, society] = await Promise.all([
+    fetch('assets/technology_physics.json').then(res => res.json()),
+    fetch('assets/technology_engineering.json').then(res => res.json()),
+    fetch('assets/technology_society.json').then(res => res.json()),
+  ]);
+  const data = [...physics, ...engineering, ...society];
+  // Create a map of ID -> name for easy lookup
+  const nameById = new Map();
+  for (const t of data) {
+    if (t.id && t.name) {
+      nameById.set(t.id, t.name);
+    }
+  }
+
   // Normalize
   _techs = (data || []).map(t => ({
     ...t,
     prerequisites: Array.isArray(t.prerequisites) ? t.prerequisites : [],
     required_species: Array.isArray(t.required_species) ? t.required_species : [],
+    unlocks: (Array.isArray(t.unlocks) ? t.unlocks : []).map(id => nameById.get(id) || id),
   }));
   _indexById = null; // reset index
   return _techs;

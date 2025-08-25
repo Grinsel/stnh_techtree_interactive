@@ -191,9 +191,16 @@ export function formatTooltip(d) {
   let info = '';
   const excludeKeys = new Set(['x', 'y', 'vx', 'vy', 'index', 'fx', 'fy']);
   for (const key in d) {
-      if (d.hasOwnProperty(key) && d[key] && !excludeKeys.has(key)) {
-          info += `<strong>${key}:</strong> ${Array.isArray(d[key]) ? d[key].join(', ') : d[key]}<br>`;
+    if (d.hasOwnProperty(key) && d[key] && !excludeKeys.has(key)) {
+      if (key === 'unlocks' && Array.isArray(d[key])) {
+        const unlocksHtml = d[key].map(u => `<li>${u.type}: ${u.id}</li>`).join('');
+        if (unlocksHtml) {
+          info += `<strong>unlocks:</strong><ul>${unlocksHtml}</ul>`;
+        }
+      } else {
+        info += `<strong>${key}:</strong> ${Array.isArray(d[key]) ? d[key].join(', ') : d[key]}<br>`;
       }
+    }
   }
   return info;
 }
