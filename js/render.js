@@ -187,22 +187,41 @@ export function renderNodeLabels(nodeSel, { nodeWidth, nodeHeight }) {
       .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
 }
 
+import { getAllTechsCached } from './data.js';
+
 export function formatTooltip(d) {
-  let info = '';
-  const excludeKeys = new Set(['x', 'y', 'vx', 'vy', 'index', 'fx', 'fy']);
-  for (const key in d) {
-    if (d.hasOwnProperty(key) && d[key] && !excludeKeys.has(key)) {
-      if (key === 'unlocks' && Array.isArray(d[key])) {
-        const unlocksHtml = d[key].map(u => `<li>${u.type}: ${u.id}</li>`).join('');
-        if (unlocksHtml) {
-          info += `<strong>unlocks:</strong><ul>${unlocksHtml}</ul>`;
+    const techSource = getAllTechsCached() || [];
+    const nameById = new Map(techSource.map(t => [t.id, t.name]));
+
+    const prerequisites = (d.prerequisites || []).map(id => nameById.get(id) || id).join(', ');
+    const unlocksByType = (d.unlocks || []).reduce((acc, u) => {
+        if (typeof u === 'object' && u !== null) {
+            const type = u.type || 'unknown';
+            if (!acc[type]) {
+                acc[type] = [];
+            }
+            acc[type].push(u.label || u.id);
         }
-      } else {
-        info += `<strong>${key}:</strong> ${Array.isArray(d[key]) ? d[key].join(', ') : d[key]}<br>`;
-      }
+        return acc;
+    }, {});
+
+    let unlocksHtml = '';
+    for (const type in unlocksByType) {
+        unlocksHtml += `<strong>${type}:</strong> ${unlocksByType[type].join(', ')}<br>`;
     }
-  }
-  return info;
+
+    return `
+        <strong>name:</strong> ${d.name}<br>
+        <strong>id:</strong> ${d.id}<br>
+        <strong>area:</strong> ${d.area}<br>
+        <strong>category:</strong> ${d.category}<br>
+        <strong>tier:</strong> ${d.tier}<br>
+        <strong>cost:</strong> ${d.cost}<br>
+        <strong>prerequisites:</strong> ${prerequisites}<br>
+        <strong>weight:</strong> ${d.weight}<br>
+        <strong>Access:</strong> ${d.required_species ? d.required_species.join(', ') : 'All'}<br>
+        <strong>Unlocks:</strong><br>${unlocksHtml}
+    `;
 }
 
 // Shared Level-of-Detail logic used by layouts and the legacy showcase

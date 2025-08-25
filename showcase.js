@@ -1,4 +1,4 @@
-import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController } from './js/render.js';
+import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController, formatTooltip } from './js/render.js';
 import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculatePath as calculatePathData, loadTechnologyData, getAllTechsCached, isTechDataLoaded } from './js/data.js';
 import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter } from './js/filters.js';
 import { handleSearch as executeSearch } from './js/search.js';
@@ -331,40 +331,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Visualization and Helper Functions ---
 
-    function formatTooltip(d) {
-        const techSource = getAllTechsCached() || allTechs;
-        const nameById = new Map(techSource.map(t => [t.id, t.name]));
-
-        const prerequisites = (d.prerequisites || []).map(id => nameById.get(id) || id).join(', ');
-        const unlocksByType = (d.unlocks || []).reduce((acc, u) => {
-            if (typeof u === 'object' && u !== null) {
-                const type = u.type || 'unknown';
-                if (!acc[type]) {
-                    acc[type] = [];
-                }
-                acc[type].push(u.label || u.id);
-            }
-            return acc;
-        }, {});
-
-        let unlocksHtml = '';
-        for (const type in unlocksByType) {
-            unlocksHtml += `<strong>${type}:</strong> ${unlocksByType[type].join(', ')}<br>`;
-        }
-
-        return `
-            <strong>name:</strong> ${d.name}<br>
-            <strong>id:</strong> ${d.id}<br>
-            <strong>area:</strong> ${d.area}<br>
-            <strong>category:</strong> ${d.category}<br>
-            <strong>tier:</strong> ${d.tier}<br>
-            <strong>cost:</strong> ${d.cost}<br>
-            <strong>prerequisites:</strong> ${prerequisites}<br>
-            <strong>weight:</strong> ${d.weight}<br>
-            <strong>Access:</strong> ${d.required_species ? d.required_species.join(', ') : 'All'}<br>
-            <strong>Unlocks:</strong><br>${unlocksHtml}
-        `;
-    }
 
     // History buttons UI is handled in './js/ui/history.js'
 
