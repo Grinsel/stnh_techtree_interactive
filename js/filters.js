@@ -28,9 +28,15 @@ export function filterConnected(techs, activeTechId) {
   return (techs || []).filter(t => set.has(t.id));
 }
 
-export function filterTechs({ techs, species = 'all', isExclusive = false, area = 'all', tierRange = { startTier: 0, endTier: 99 }, activeTechId = null }) {
+export function filterTechsByCategory(techs, category) {
+  if (!category || category === 'all') return techs;
+  return (techs || []).filter(t => Array.isArray(t.category) && t.category.includes(category));
+}
+
+export function filterTechs({ techs, species = 'all', isExclusive = false, area = 'all', category = 'all', tierRange = { startTier: 0, endTier: 99 }, activeTechId = null }) {
   let result = techs || [];
   result = filterTechsByArea(result, area);
+  result = filterTechsByCategory(result, category);
   result = filterTechsBySpecies(result, species, isExclusive);
   result = filterConnected(result, activeTechId);
   result = filterTechsByTier(result, tierRange);
@@ -56,6 +62,29 @@ export function loadSpeciesFilter(speciesSelectEl, { onLoaded } = {}) {
     })
     .catch(error => {
       console.error('Error loading species list:', error);
+      return [];
+    });
+}
+
+// UI helper: populate category <select> from assets/categories.json and notify when done
+export function loadCategoryFilter(categorySelectEl, { onLoaded } = {}) {
+  if (!categorySelectEl) return Promise.resolve([]);
+  return fetch('assets/categories.json')
+    .then(response => response.json())
+    .then(categoryList => {
+      categoryList.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        categorySelectEl.appendChild(option);
+      });
+      if (typeof onLoaded === 'function') {
+        try { onLoaded(categoryList); } catch (_) {}
+      }
+      return categoryList;
+    })
+    .catch(error => {
+      console.error('Error loading category list:', error);
       return [];
     });
 }

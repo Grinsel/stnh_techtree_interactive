@@ -8,3 +8,5 @@ package.json
 package-lock.json
 icons/dds
 icons
+parser_output.txt
+create_category_list.py

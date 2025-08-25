@@ -4,6 +4,7 @@
 export const DEFAULT_STATE = {
   species: "all",
   area: "all",
+  category: "all",
   layout: "force-directed",
   search: "",
   tierStart: "0",
@@ -22,6 +23,7 @@ export function loadState() {
     layout: urlParams.get("layout"),
     species: urlParams.get("species"),
     area: urlParams.get("area"),
+    category: urlParams.get("category"),
     search: urlParams.get("search"),
     tierStart: urlParams.get("tierStart"),
     tierEnd: urlParams.get("tierEnd"),
@@ -34,6 +36,7 @@ export function loadState() {
       layout: stateFromUrl.layout || DEFAULT_STATE.layout,
       species: stateFromUrl.species || DEFAULT_STATE.species,
       area: stateFromUrl.area || DEFAULT_STATE.area,
+      category: stateFromUrl.category || DEFAULT_STATE.category,
       search: stateFromUrl.search || DEFAULT_STATE.search,
       tierStart: stateFromUrl.tierStart || DEFAULT_STATE.tierStart,
       tierEnd: stateFromUrl.tierEnd || DEFAULT_STATE.tierEnd,
@@ -57,6 +60,7 @@ export function saveState() {
   const state = {
     species: document.getElementById("species-select").value,
     area: document.getElementById("area-select").value,
+    category: document.getElementById("category-select").value,
     layout: document.getElementById("layout-select").value,
     search: document.getElementById("search-input").value,
     tierStart: document.getElementById("start-tier-select").value,
@@ -74,6 +78,7 @@ export function saveState() {
 export function applyState(state) {
   document.getElementById("species-select").value = state.species || 'Federation';
   document.getElementById("area-select").value = state.area;
+  document.getElementById("category-select").value = state.category;
   document.getElementById("layout-select").value = state.layout;
   document.getElementById("search-input").value = state.search;
   document.getElementById("start-tier-select").value = state.tierStart;

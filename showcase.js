@@ -1,6 +1,6 @@
 import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController, formatTooltip } from './js/render.js';
 import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculatePath as calculatePathData, loadTechnologyData, getAllTechsCached, isTechDataLoaded } from './js/data.js';
-import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter } from './js/filters.js';
+import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter, loadCategoryFilter } from './js/filters.js';
 import { handleSearch as executeSearch } from './js/search.js';
 import { renderForceDirectedArrowsGraph as arrowsLayout } from './js/ui/layouts/arrows.js';
 import { renderForceDirectedGraph as forceLayout } from './js/ui/layouts/force.js';
@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const techTreeContainer = document.getElementById('tech-tree');
     const tooltip = document.getElementById('tooltip');
     const areaSelect = document.getElementById('area-select');
+    const categorySelect = document.getElementById('category-select');
     const resetButton = document.getElementById('reset-button');
     const showTierButton = document.getElementById('show-tier-button');
     const techCounter = document.getElementById('tech-counter');
@@ -202,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 techTreeContainer,
                 tooltip,
                 areaSelect,
+                categorySelect,
                 resetButton,
                 showTierButton,
                 techCounter,
@@ -356,6 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function applyFilters({ selectedSpecies, activeTechId }) {
         const selectedArea = areaSelect.value;
+        const selectedCategory = categorySelect.value;
         const isExclusive = speciesExclusiveToggle.checked;
 
         // Base species/area filtering via data module (no active focus here yet)
@@ -365,6 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
             species: selectedSpecies,
             isExclusive,
             area: selectedArea,
+            category: selectedCategory,
             tierRange: { startTier: 0, endTier: 99 },
             activeTechId: null,
         });
@@ -488,10 +492,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Main Execution Logic ---
     // Load species filter options at startup
+    let categoriesLoaded = false;
     loadSpeciesFilter(speciesSelect, {
         onLoaded: () => {
-            const initialState = loadState();
-            applyState(initialState);
+            if (!categoriesLoaded) {
+                categoriesLoaded = true;
+                loadCategoryFilter(categorySelect, {
+                    onLoaded: () => {
+                        const initialState = loadState();
+                        applyState(initialState);
+                        // Add event listener for category select after it's populated
+                        categorySelect.addEventListener('change', () => {
+                            window.updateVisualization(speciesSelect.value, null, false);
+                            saveState();
+                        });
+                    }
+                });
+            }
         }
     });
     const urlParams = new URLSearchParams(window.location.search);
