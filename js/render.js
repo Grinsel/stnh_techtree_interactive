@@ -164,7 +164,7 @@ export function renderNodeLabels(nodeSel, { nodeWidth, nodeHeight }) {
   wrapText(nameText, nodeTextWidth, 12, 2);
 
   nodeSel.append('text')
-      .attr('class', 'node-label node-area')
+      .attr('class', 'node-label node-category')
       .attr('x', 0)
       .attr('y', d => {
           const lines = d && d._nameLineCount ? d._nameLineCount : 1;
@@ -172,7 +172,7 @@ export function renderNodeLabels(nodeSel, { nodeWidth, nodeHeight }) {
       })
       .attr('text-anchor', 'middle')
       .style('fill', '#ffffff')
-      .text(d => `${d.area || 'N/A'}`);
+      .text(d => `${d.category || 'N/A'}`);
 
   nodeSel.append('text')
       .attr('class', 'node-label node-species')
@@ -280,8 +280,8 @@ export function updateLOD(svg, g) {
         .text(d => d.name || d.id);
       wrapText(nameSel, textWidth, 12, 2);
 
-      const areaSel = nodesSel.append('text')
-        .attr('class', 'node-label node-area')
+      const categorySel = nodesSel.append('text')
+        .attr('class', 'node-label node-category')
         .attr('x', 0)
         .attr('y', d => {
           const lines = d && d._nameLineCount ? d._nameLineCount : 1;
@@ -289,7 +289,7 @@ export function updateLOD(svg, g) {
         })
         .attr('text-anchor', 'middle')
         .style('fill', '#ffffff')
-        .text(d => `${d.area || 'N/A'}`);
+        .text(d => `${d.category || 'N/A'}`);
 
       nodesSel.append('text')
         .attr('class', 'node-label node-species')
@@ -399,7 +399,7 @@ export function updateLOD(svg, g) {
     wrapText(nameSel2, textWidth, 12, 2);
 
     nodesSel.append('text')
-      .attr('class', 'node-label node-area')
+      .attr('class', 'node-label node-category')
       .attr('x', 0)
       .attr('y', d => {
         const lines = d && d._nameLineCount ? d._nameLineCount : 1;
@@ -407,7 +407,7 @@ export function updateLOD(svg, g) {
       })
       .attr('text-anchor', 'middle')
       .style('fill', '#ffffff')
-      .text(d => `${d.area || 'N/A'}`);
+      .text(d => `${d.category || 'N/A'}`);
 
     nodesSel.append('text')
       .attr('class', 'node-label node-species')
