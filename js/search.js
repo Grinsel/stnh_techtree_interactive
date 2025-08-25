@@ -127,7 +127,17 @@ export function runSearch({
 export function findMatchingTechs(techs, term) {
   const q = (term || '').trim().toLowerCase();
   if (!q) return [];
-  return (techs || []).filter(n => (n.name && n.name.toLowerCase().includes(q)) || (n.id && n.id.toLowerCase().includes(q)));
+  return (techs || []).filter(n => {
+    if (n.name && n.name.toLowerCase().includes(q)) return true;
+    if (n.id && n.id.toLowerCase().includes(q)) return true;
+    if (n.category && typeof n.category === 'string' && n.category.toLowerCase().includes(q)) return true;
+    if (n.unlocks && Array.isArray(n.unlocks)) {
+      for (const u of n.unlocks) {
+        if (u.label && u.label.toLowerCase().includes(q)) return true;
+      }
+    }
+    return false;
+  });
 }
 
 // High-level search executor to be called from UI code
