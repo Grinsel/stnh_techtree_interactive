@@ -24,3 +24,23 @@ export function zoomToFit(svg, g, zoom, nodes, width, height, padding = 60, minS
     .translate(-cx, -cy);
   svg.transition().duration(300).call(zoom.transform, t);
 }
+
+export function zoomByFactor(svg, zoom, factor) {
+    if (!svg || !zoom) return;
+    const width = svg.node().clientWidth;
+    const height = svg.node().clientHeight;
+    const transform = d3.zoomTransform(svg.node());
+    const newScale = transform.k * factor;
+  
+    // Center of the viewport
+    const centerX = width / 2;
+    const centerY = height / 2;
+  
+    // Translate so the center of the view remains the center
+    const newX = centerX - (centerX - transform.x) * factor;
+    const newY = centerY - (centerY - transform.y) * factor;
+  
+    const newTransform = d3.zoomIdentity.translate(newX, newY).scale(newScale);
+  
+    svg.transition().duration(200).call(zoom.transform, newTransform);
+}

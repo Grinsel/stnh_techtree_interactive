@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const helpViewport = document.getElementById('help-viewport');
     const helpCloseButton = document.getElementById('help-close-button');
     const toggleLayoutButton = document.getElementById('toggle-layout-button');
+    const zoomInButton = document.getElementById('zoom-in-button');
+    const zoomOutButton = document.getElementById('zoom-out-button');
 
     // --- Create persistent UI elements ---
     const jumpButton = document.createElement('button');
@@ -226,6 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 helpButton,
                 helpViewport,
                 helpCloseButton,
+                zoomInButton,
+                zoomOutButton,
             },
             state: {
                 getActiveTechId: () => activeTechId,
@@ -622,6 +626,9 @@ document.addEventListener('DOMContentLoaded', () => {
             svg = res.svg;
             g = res.g;
             zoom = res.zoom;
+            // Expose to window for zoom controls
+            window.svg = svg;
+            window.zoom = zoom;
         }
     }
 

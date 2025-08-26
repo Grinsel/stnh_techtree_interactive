@@ -1,3 +1,5 @@
+import { zoomByFactor } from './zoom.js';
+
 // Attaches all DOM event handlers. Caller provides concrete elements, state accessors, and actions.
 // This module is intentionally decoupled from globals; showcase.js wires dependencies.
 // Usage:
@@ -31,6 +33,8 @@ export function attachEventHandlers({ elements, state, actions }) {
     helpButton,
     helpViewport,
     helpCloseButton,
+    zoomInButton,
+    zoomOutButton,
   } = elements;
 
   const {
@@ -157,7 +161,28 @@ export function attachEventHandlers({ elements, state, actions }) {
   const openHelp = () => { if (helpViewport) helpViewport.classList.remove('hidden'); };
   betaBadge?.addEventListener('click', openHelp);
   betaBadge?.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openHelp(); } });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && helpViewport && !helpViewport.classList.contains('hidden')) helpViewport.classList.add('hidden'); });
+  
+  // Zoom controls
+  zoomInButton?.addEventListener('click', () => zoomByFactor(window.svg, window.zoom, 1.2));
+  zoomOutButton?.addEventListener('click', () => zoomByFactor(window.svg, window.zoom, 0.8));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && helpViewport && !helpViewport.classList.contains('hidden')) {
+      helpViewport.classList.add('hidden');
+    }
+    // Guard against zooming while typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+      return;
+    }
+    if (e.key === '+' || e.key === '=') {
+      e.preventDefault();
+      zoomByFactor(window.svg, window.zoom, 1.2);
+    }
+    if (e.key === '-') {
+      e.preventDefault();
+      zoomByFactor(window.svg, window.zoom, 0.8);
+    }
+  });
 
   // Initial load buttons
   const loadTreeButton = document.getElementById('load-tree-button'); // toolbar (hidden initially)
