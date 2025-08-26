@@ -740,8 +740,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const toggleLayoutButton = document.getElementById('toggle-layout-button');
         if (highlightId) {
             toggleLayoutButton.style.display = 'inline-block';
+            // Only default to tier-based layout if entering a branch from the main view
+            if (activeTechId === null) {
+                isTierBasedLayout = true;
+            }
         } else {
             toggleLayoutButton.style.display = 'none';
+            isTierBasedLayout = false; // Always reset when returning to the main tree
         }
 
         // Ensure UI is visible and data is available before attempting to render
