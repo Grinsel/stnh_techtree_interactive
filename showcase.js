@@ -181,6 +181,62 @@ document.addEventListener('DOMContentLoaded', () => {
         setSelection: (start, end) => { selectionStartNode = start; selectionEndNode = end; },
     });
 
+    // --- Path Highlighting ---
+    function findPathToActive(startNodeId, activeNodeId, allNodes) {
+        if (!startNodeId || !activeNodeId) return { nodes: [], links: [] };
+
+        const nodeMap = new Map(allNodes.map(n => [n.id, n]));
+        const pathNodes = new Set();
+        const pathLinks = new Set();
+        let currentNode = nodeMap.get(startNodeId);
+
+        while (currentNode) {
+            pathNodes.add(currentNode.id);
+            if (currentNode.id === activeNodeId) break;
+
+            let foundPrereq = false;
+            if (currentNode.prerequisites) {
+                for (const prereqId of currentNode.prerequisites) {
+                    const prereqNode = nodeMap.get(prereqId);
+                    // This logic assumes a simple, single path back. 
+                    // For complex trees, you might need a more sophisticated graph traversal (like BFS/DFS).
+                    // For this use case, we'll assume the first prerequisite found in the main data is the path.
+                    if (prereqNode) {
+                        pathLinks.add(`${prereqId}-${currentNode.id}`);
+                        currentNode = prereqNode;
+                        foundPrereq = true;
+                        break; 
+                    }
+                }
+            }
+            if (!foundPrereq) break; // Stop if no prerequisite is found in the current data set
+        }
+        
+        // Only return a path if it successfully reached the active node
+        if (pathNodes.has(activeNodeId)) {
+            return { nodes: Array.from(pathNodes), links: Array.from(pathLinks) };
+        }
+        return { nodes: [], links: [] };
+    }
+
+    function highlightPath(path) {
+        if (!g) return;
+        clearHighlight(); // Clear any previous highlight
+        g.selectAll('.link')
+            .filter(d => path.links.includes(`${d.source.id}-${d.target.id}`))
+            .classed('path-highlight', true);
+        
+        g.selectAll('.tech-node')
+            .filter(d => path.nodes.includes(d.id))
+            .classed('path-highlight', true);
+    }
+
+    function clearHighlight() {
+        if (!g) return;
+        g.selectAll('.link.path-highlight').classed('path-highlight', false);
+        g.selectAll('.tech-node.path-highlight').classed('path-highlight', false);
+    }
+
 
     // --- History Navigation ---
     function navigateBack() {
@@ -330,6 +386,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         preSearchState = null;
                         searchBackButton.style.display = 'none';
                     }
+                },
+                resetViewToFullTree: () => {
+                    isTierBasedLayout = false;
+                    layoutSelect.value = 'force-directed';
+                    saveState();
+                    updateVisualization(speciesSelect.value, null, false);
                 },
             },
         });
@@ -552,6 +614,13 @@ document.addEventListener('DOMContentLoaded', () => {
             .on('mouseover', (event, d) => {
                 tooltipEl.style.display = 'block';
                 tooltipEl.innerHTML = formatTooltip(d);
+
+                if (activeTechId && d.id !== activeTechId) {
+                    const path = findPathToActive(d.id, activeTechId, nodes);
+                    if (path.nodes.length > 0) {
+                        highlightPath(path);
+                    }
+                }
             })
             .on('mousemove', (event) => {
                 const treeRect = techTreeContainerEl.getBoundingClientRect();
@@ -563,7 +632,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltipEl.style.left = `${Math.max(treeRect.left, x)}px`;
                 tooltipEl.style.top = `${Math.max(treeRect.top, y)}px`;
             })
-            .on('mouseout', () => (tooltipEl.style.display = 'none'))
+            .on('mouseout', () => {
+                tooltipEl.style.display = 'none';
+                clearHighlight();
+            })
             .on('click', (event, d) => {
                 window.currentFocusId = d.id;
                 updateVisualization(selectedSpecies, d.id, true);
