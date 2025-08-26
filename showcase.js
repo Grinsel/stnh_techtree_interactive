@@ -1,10 +1,11 @@
-import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController, formatTooltip } from './js/render.js';
+import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController, formatTooltip, createSvgFor, getAreaColor } from './js/render.js';
 import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculatePath as calculatePathData, loadTechnologyData, getAllTechsCached, isTechDataLoaded } from './js/data.js';
 import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter, loadCategoryFilter } from './js/filters.js';
 import { handleSearch as executeSearch } from './js/search.js';
 import { renderForceDirectedArrowsGraph as arrowsLayout } from './js/ui/layouts/arrows.js';
 import { renderForceDirectedGraph as forceLayout } from './js/ui/layouts/force.js';
 import { renderDisjointForceDirectedGraph as disjointLayout } from './js/ui/layouts/disjoint.js';
+import { layoutByTier } from './js/ui/layouts/tier.js';
 import { loadState, saveState, applyState, resetState, setCookie, getCookie } from './js/state.js';
 import { drag } from './js/ui/drag.js';
 import { switchTab } from './js/ui/tabs.js';
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const helpButton = document.getElementById('help-button');
     const helpViewport = document.getElementById('help-viewport');
     const helpCloseButton = document.getElementById('help-close-button');
+    const toggleLayoutButton = document.getElementById('toggle-layout-button');
 
     // --- Create persistent UI elements ---
     const jumpButton = document.createElement('button');
@@ -401,6 +403,129 @@ document.addEventListener('DOMContentLoaded', () => {
         return { filteredTechs, clearedFocus };
     }
 
+    function renderTierBasedGraph(nodes, links, selectedSpecies, container, deps) {
+        const {
+            tooltipEl,
+            techTreeContainerEl,
+            handleNodeSelection,
+            updateVisualization,
+            activeTechId,
+            selectionStartNode,
+            selectionEndNode,
+            onEnd,
+        } = deps || {};
+
+        const { svg: _svg, g: _g, zoom, width, height } = createSvgFor(container, () => applyLOD());
+        let applyLOD = () => updateLOD(_svg, _g);
+
+        const defs = _svg.append('defs');
+        const gradients = {
+            society: ['#3a3a3a', getAreaColor('society')],
+            engineering: ['#3a3a3a', getAreaColor('engineering')],
+            physics: ['#3a3a3a', getAreaColor('physics')],
+        };
+        for (const [area, colors] of Object.entries(gradients)) {
+            const gradient = defs
+                .append('linearGradient')
+                .attr('id', `gradient-${area}`)
+                .attr('x1', '0%')
+                .attr('y1', '0%')
+                .attr('x2', '100%')
+                .attr('y2', '0%');
+            gradient.append('stop').attr('offset', '0%').attr('stop-color', colors[0]);
+            gradient.append('stop').attr('offset', '100%').attr('stop-color', colors[1]);
+        }
+
+        const filter = defs.append('filter')
+            .attr('id', 'drop-shadow')
+            .attr('height', '130%');
+        filter.append('feGaussianBlur')
+            .attr('in', 'SourceAlpha')
+            .attr('stdDeviation', 3)
+            .attr('result', 'blur');
+        filter.append('feOffset')
+            .attr('in', 'blur')
+            .attr('dx', 3)
+            .attr('dy', 3)
+            .attr('result', 'offsetBlur');
+        const feMerge = filter.append('feMerge');
+        feMerge.append('feMergeNode').attr('in', 'offsetBlur');
+        feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+
+        const nodeWidth = 140, nodeHeight = 80;
+        layoutByTier(nodes, width, height, { nodeWidth, nodeHeight });
+
+        const node = _g
+            .select('.nodes-layer')
+            .selectAll('g')
+            .data(nodes)
+            .join('g')
+            .attr('class', 'tech-node')
+            .attr('transform', d => `translate(${d.x},${d.y})`)
+            .on('mouseover', (event, d) => {
+                tooltipEl.style.display = 'block';
+                tooltipEl.innerHTML = formatTooltip(d);
+            })
+            .on('mousemove', (event) => {
+                const treeRect = techTreeContainerEl.getBoundingClientRect();
+                const tooltipRect = tooltipEl.getBoundingClientRect();
+                let x = event.clientX + 15;
+                let y = event.clientY + 15;
+                if (x + tooltipRect.width > treeRect.right) x = event.clientX - tooltipRect.width - 15;
+                if (y + tooltipRect.height > treeRect.bottom) y = event.clientY - tooltipRect.height - 15;
+                tooltipEl.style.left = `${Math.max(treeRect.left, x)}px`;
+                tooltipEl.style.top = `${Math.max(treeRect.top, y)}px`;
+            })
+            .on('mouseout', () => (tooltipEl.style.display = 'none'))
+            .on('click', (event, d) => {
+                window.currentFocusId = d.id;
+                updateVisualization(selectedSpecies, d.id, true);
+            })
+            .on('contextmenu', (event, d) => {
+                event.preventDefault();
+                handleNodeSelection(d);
+            });
+
+        node
+            .append('rect')
+            .attr('class', 'node-rect')
+            .attr('width', nodeWidth)
+            .attr('height', nodeHeight)
+            .attr('x', -nodeWidth / 2)
+            .attr('y', -nodeHeight / 2)
+            .attr('rx', 10)
+            .attr('ry', 10)
+            .attr('fill', (d) => (d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area)))
+            .style('filter', 'url(#drop-shadow)')
+            .attr('stroke', (d) => {
+                if (d.id === activeTechId) return 'yellow';
+                if (d.id === selectionStartNode) return 'lime';
+                if (d.id === selectionEndNode) return 'red';
+                return 'none';
+            })
+            .attr('stroke-width', (d) =>
+                d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode ? 3 : 1
+            );
+
+        _g
+            .select('.links-layer')
+            .selectAll('.link')
+            .data(links)
+            .join('line')
+            .attr('class', 'link')
+            .attr('x1', d => d.source.x)
+            .attr('y1', d => d.source.y)
+            .attr('x2', d => d.target.x)
+            .attr('y2', d => d.target.y)
+            .attr('stroke', '#555')
+            .attr('stroke-width', 1.5);
+
+        applyLOD();
+        if (typeof onEnd === 'function') onEnd();
+
+        return { svg: _svg, g: _g, zoom: zoom };
+    }
+
     function renderTree({ filteredTechs, selectedLayout, selectedSpecies, onEnd }) {
         updateHistoryButtons({ backButton, forwardButton, navigationHistory, historyIndex });
         techCounter.textContent = `Displayed Technologies: ${filteredTechs.length}`;
@@ -416,15 +541,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Build links via data helper
         links = buildLinksFromPrereqs(nodes);
 
-        const res = dispatchRenderGraph(
-            selectedLayout,
-            nodes,
-            links,
-            selectedSpecies,
-            techTreeContainer,
-            {
-                updateLOD: () => updateLOD(svg, g),
-                drag,
+        let res;
+        if (selectedLayout === 'tier-based') {
+            res = renderTierBasedGraph(nodes, links, selectedSpecies, techTreeContainer, {
                 tooltipEl: tooltip,
                 techTreeContainerEl: techTreeContainer,
                 handleNodeSelection,
@@ -432,13 +551,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeTechId,
                 selectionStartNode,
                 selectionEndNode,
-                // layout implementations
-                arrowsLayout,
-                forceLayout,
-                disjointLayout,
                 onEnd,
-            }
-        );
+            });
+        } else {
+            res = dispatchRenderGraph(
+                selectedLayout,
+                nodes,
+                links,
+                selectedSpecies,
+                techTreeContainer,
+                {
+                    updateLOD: () => updateLOD(svg, g),
+                    drag,
+                    tooltipEl: tooltip,
+                    techTreeContainerEl: techTreeContainer,
+                    handleNodeSelection,
+                    updateVisualization,
+                    activeTechId,
+                    selectionStartNode,
+                    selectionEndNode,
+                    // layout implementations
+                    arrowsLayout,
+                    forceLayout,
+                    disjointLayout,
+                    onEnd,
+                }
+            );
+        }
         if (res && res.svg && res.g) {
             svg = res.svg;
             g = res.g;
@@ -589,5 +728,13 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         searchButton.addEventListener('click', initialSearchHandler, initOnce);
     }
-    
+
+    toggleLayoutButton.addEventListener('click', () => {
+        const layoutSelect = document.getElementById('layout-select');
+        const currentIndex = layoutSelect.selectedIndex;
+        const nextIndex = (currentIndex + 1) % layoutSelect.options.length;
+        layoutSelect.selectedIndex = nextIndex;
+        updateVisualization(speciesSelect.value, activeTechId, false);
+        saveState();
+    });
 });
