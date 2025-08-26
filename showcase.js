@@ -186,37 +186,35 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!startNodeId || !activeNodeId) return { nodes: [], links: [] };
 
         const nodeMap = new Map(allNodes.map(n => [n.id, n]));
-        const pathNodes = new Set();
-        const pathLinks = new Set();
-        let currentNode = nodeMap.get(startNodeId);
+        const allPathNodes = new Set();
+        const allPathLinks = new Set();
 
-        while (currentNode) {
-            pathNodes.add(currentNode.id);
-            if (currentNode.id === activeNodeId) break;
+        function findAllPathsRecursive(currentNodeId, currentPathNodes, currentPathLinks, visited) {
+            const currentNode = nodeMap.get(currentNodeId);
+            if (!currentNode || visited.has(currentNodeId)) {
+                return;
+            }
 
-            let foundPrereq = false;
-            if (currentNode.prerequisites) {
+            visited.add(currentNodeId);
+            currentPathNodes.add(currentNodeId);
+
+            if (currentNodeId === activeNodeId) {
+                currentPathNodes.forEach(nodeId => allPathNodes.add(nodeId));
+                currentPathLinks.forEach(linkId => allPathLinks.add(linkId));
+            } else if (currentNode.prerequisites) {
                 for (const prereqId of currentNode.prerequisites) {
-                    const prereqNode = nodeMap.get(prereqId);
-                    // This logic assumes a simple, single path back. 
-                    // For complex trees, you might need a more sophisticated graph traversal (like BFS/DFS).
-                    // For this use case, we'll assume the first prerequisite found in the main data is the path.
-                    if (prereqNode) {
-                        pathLinks.add(`${prereqId}-${currentNode.id}`);
-                        currentNode = prereqNode;
-                        foundPrereq = true;
-                        break; 
+                    if (nodeMap.has(prereqId)) {
+                        const newPathLinks = new Set(currentPathLinks);
+                        newPathLinks.add(`${prereqId}-${currentNodeId}`);
+                        findAllPathsRecursive(prereqId, new Set(currentPathNodes), newPathLinks, new Set(visited));
                     }
                 }
             }
-            if (!foundPrereq) break; // Stop if no prerequisite is found in the current data set
         }
-        
-        // Only return a path if it successfully reached the active node
-        if (pathNodes.has(activeNodeId)) {
-            return { nodes: Array.from(pathNodes), links: Array.from(pathLinks) };
-        }
-        return { nodes: [], links: [] };
+
+        findAllPathsRecursive(startNodeId, new Set(), new Set(), new Set());
+
+        return { nodes: Array.from(allPathNodes), links: Array.from(allPathLinks) };
     }
 
     function highlightPath(path) {
