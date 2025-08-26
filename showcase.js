@@ -487,6 +487,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const nodeWidth = 140, nodeHeight = 80;
         const tierPositions = layoutByTier(nodes, width, height, { nodeWidth, nodeHeight });
 
+        // Hydrate links with node object references now that positions are calculated
+        const nodeMap = new Map(nodes.map(n => [n.id, n]));
+        links.forEach(link => {
+            link.source = nodeMap.get(link.source) || link.source;
+            link.target = nodeMap.get(link.target) || link.target;
+        });
+
+        _g
+            .select('.links-layer')
+            .selectAll('.link')
+            .data(links)
+            .join('line')
+            .attr('class', 'link')
+            .attr('x1', d => d.source.x)
+            .attr('y1', d => d.source.y)
+            .attr('x2', d => d.target.x)
+            .attr('y2', d => d.target.y)
+            .attr('stroke', '#555')
+            .attr('stroke-width', 1.5);
+
         const tierLayer = _g.insert('g', '.nodes-layer').attr('class', 'tier-layer');
 
         function drawTierLines() {
@@ -573,19 +593,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr('stroke-width', (d) =>
                 d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode ? 3 : 1
             );
-
-        _g
-            .select('.links-layer')
-            .selectAll('.link')
-            .data(links)
-            .join('line')
-            .attr('class', 'link')
-            .attr('x1', d => d.source.x)
-            .attr('y1', d => d.source.y)
-            .attr('x2', d => d.target.x)
-            .attr('y2', d => d.target.y)
-            .attr('stroke', '#555')
-            .attr('stroke-width', 1.5);
 
         applyLOD();
         if (typeof onEnd === 'function') onEnd();

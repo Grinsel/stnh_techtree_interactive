@@ -206,7 +206,13 @@ export function attachEventHandlers({ elements, state, actions }) {
     actions.loadAndRenderTree?.();
   };
 
-  loadTreeButton?.addEventListener('click', handleInitialLoad);
+  const resetViewToFullTree = () => {
+    // Directly call updateVisualization, clearing the focus (highlightId = null)
+    // This ensures the full tree is shown, not just the current branch
+    updateVisualization(speciesSelect.value, null, false);
+  };
+
+  loadTreeButton?.addEventListener('click', resetViewToFullTree);
   loadTreeCenterButton?.addEventListener('click', handleInitialLoad);
   showTreeButton?.addEventListener('click', handleInitialLoad);
 }
