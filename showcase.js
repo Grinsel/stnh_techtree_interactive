@@ -458,24 +458,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const tierPositions = layoutByTier(nodes, width, height, { nodeWidth, nodeHeight });
 
         const tierLayer = _g.insert('g', '.nodes-layer').attr('class', 'tier-layer');
-        for (const tier in tierPositions) {
-            const tierX = tierPositions[tier];
-            tierLayer.append('line')
-                .attr('x1', tierX)
-                .attr('y1', 0)
-                .attr('x2', tierX)
-                .attr('y2', height)
-                .attr('stroke', '#444')
-                .attr('stroke-width', 1)
-                .attr('stroke-dasharray', '5,5');
 
-            tierLayer.append('text')
-                .attr('x', tierX)
-                .attr('y', 20)
-                .attr('text-anchor', 'middle')
-                .attr('fill', '#888')
-                .text(`Tier ${tier}`);
+        function drawTierLines() {
+            tierLayer.selectAll('*').remove();
+            const transform = d3.zoomTransform(_svg.node());
+            const topY = -transform.y / transform.k;
+
+            for (const tier in tierPositions) {
+                const tierX = tierPositions[tier];
+                tierLayer.append('line')
+                    .attr('x1', tierX)
+                    .attr('y1', topY)
+                    .attr('x2', tierX)
+                    .attr('y2', topY + height / transform.k)
+                    .attr('stroke', '#444')
+                    .attr('stroke-width', 1 / transform.k)
+                    .attr('stroke-dasharray', '5,5');
+
+                tierLayer.append('text')
+                    .attr('x', tierX)
+                    .attr('y', topY + 20 / transform.k)
+                    .attr('text-anchor', 'middle')
+                    .attr('fill', '#888')
+                    .style('font-size', `${12 / transform.k}px`)
+                    .text(`Tier ${tier}`);
+            }
         }
+
+        drawTierLines();
+        zoom.on('zoom', (event) => {
+            _g.attr('transform', event.transform);
+            drawTierLines();
+            applyLOD();
+        });
 
         const node = _g
             .select('.nodes-layer')
