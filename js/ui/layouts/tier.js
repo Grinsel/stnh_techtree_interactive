@@ -1,6 +1,7 @@
 // Compute tier-based positions for a list of nodes
 export function layoutByTier(nodesArr, width, height, { nodeWidth, nodeHeight }, { padX = 100, padY = 20 } = {}) {
   const tiers = {};
+  const tierPositions = {};
   for (const node of nodesArr) {
     const tier = node.tier || 0;
     if (!tiers[tier]) {
@@ -17,6 +18,7 @@ export function layoutByTier(nodesArr, width, height, { nodeWidth, nodeHeight },
     const tier = tierKeys[i];
     const tierNodes = tiers[tier];
     const tierX = i * (tierWidth + padX) + tierWidth / 2;
+    tierPositions[tier] = tierX;
 
     const totalTierHeight = tierNodes.length * (nodeHeight + padY) - padY;
     const startY = (height - totalTierHeight) / 2;
@@ -27,4 +29,5 @@ export function layoutByTier(nodesArr, width, height, { nodeWidth, nodeHeight },
       node.y = startY + j * (nodeHeight + padY) + nodeHeight / 2;
     }
   }
+  return tierPositions;
 }

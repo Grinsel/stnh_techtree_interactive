@@ -168,6 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let simulation;
     let activeTechId = null;
     let tierFilterActive = false;
+    let lastLayout = 'force-directed';
+    let isTierBasedLayout = false;
     // Selection handler bound to current state (created after state vars exist)
     const handleNodeSelection = createHandleNodeSelection({
         getG: () => g,
@@ -453,7 +455,27 @@ document.addEventListener('DOMContentLoaded', () => {
         feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
 
         const nodeWidth = 140, nodeHeight = 80;
-        layoutByTier(nodes, width, height, { nodeWidth, nodeHeight });
+        const tierPositions = layoutByTier(nodes, width, height, { nodeWidth, nodeHeight });
+
+        const tierLayer = _g.insert('g', '.nodes-layer').attr('class', 'tier-layer');
+        for (const tier in tierPositions) {
+            const tierX = tierPositions[tier];
+            tierLayer.append('line')
+                .attr('x1', tierX)
+                .attr('y1', 0)
+                .attr('x2', tierX)
+                .attr('y2', height)
+                .attr('stroke', '#444')
+                .attr('stroke-width', 1)
+                .attr('stroke-dasharray', '5,5');
+
+            tierLayer.append('text')
+                .attr('x', tierX)
+                .attr('y', 20)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#888')
+                .text(`Tier ${tier}`);
+        }
 
         const node = _g
             .select('.nodes-layer')
@@ -529,6 +551,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderTree({ filteredTechs, selectedLayout, selectedSpecies, onEnd }) {
         updateHistoryButtons({ backButton, forwardButton, navigationHistory, historyIndex });
         techCounter.textContent = `Displayed Technologies: ${filteredTechs.length}`;
+        if (!isTierBasedLayout) {
+            lastLayout = selectedLayout;
+        }
         // Hide centered button only if nodes are visible
         const centerBtn = document.getElementById('load-tree-center-button');
         if (centerBtn && filteredTechs.length > 0) centerBtn.style.display = 'none';
@@ -542,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
         links = buildLinksFromPrereqs(nodes);
 
         let res;
-        if (selectedLayout === 'tier-based') {
+        if (isTierBasedLayout) {
             res = renderTierBasedGraph(nodes, links, selectedSpecies, techTreeContainer, {
                 tooltipEl: tooltip,
                 techTreeContainerEl: techTreeContainer,
@@ -587,6 +612,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     window.updateVisualization = function(selectedSpecies, highlightId = null, addToHistory = true, zoomOnEndId = null) {
+        const toggleLayoutButton = document.getElementById('toggle-layout-button');
+        if (highlightId) {
+            toggleLayoutButton.style.display = 'inline-block';
+        } else {
+            toggleLayoutButton.style.display = 'none';
+        }
+
         // Ensure UI is visible and data is available before attempting to render
         if (techTreeContainer.classList.contains('hidden')) {
             prepareUI();
@@ -730,11 +762,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     toggleLayoutButton.addEventListener('click', () => {
-        const layoutSelect = document.getElementById('layout-select');
-        const currentIndex = layoutSelect.selectedIndex;
-        const nextIndex = (currentIndex + 1) % layoutSelect.options.length;
-        layoutSelect.selectedIndex = nextIndex;
+        isTierBasedLayout = !isTierBasedLayout;
+        const layoutToRender = isTierBasedLayout ? 'tier-based' : lastLayout;
+        document.getElementById('layout-select').value = lastLayout;
         updateVisualization(speciesSelect.value, activeTechId, false);
         saveState();
     });
+
+    // Initially hide the toggle button
+    document.getElementById('toggle-layout-button').style.display = 'none';
 });
