@@ -56,6 +56,10 @@ export function attachEventHandlers({ elements, state, actions }) {
     resetState,
   } = actions;
 
+  // History navigation
+  backButton?.addEventListener('click', actions.navigateBack);
+  forwardButton?.addEventListener('click', actions.navigateForward);
+
   // Tabs
   generalTab?.addEventListener('click', () => switchTab('general'));
   detailsTab?.addEventListener('click', () => switchTab('details'));

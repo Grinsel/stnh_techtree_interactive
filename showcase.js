@@ -181,6 +181,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+    // --- History Navigation ---
+    function navigateBack() {
+        if (historyIndex > 0) {
+            historyIndex--;
+            const species = speciesSelect.value;
+            const techId = navigationHistory[historyIndex];
+            // Call updateVisualization without adding to history
+            window.updateVisualization(species, techId, false);
+        }
+    }
+
+    function navigateForward() {
+        if (historyIndex < navigationHistory.length - 1) {
+            historyIndex++;
+            const species = speciesSelect.value;
+            const techId = navigationHistory[historyIndex];
+            // Call updateVisualization without adding to history
+            window.updateVisualization(species, techId, false);
+        }
+    }
+
+
     // --- Core Initialization Functions ---
     function prepareUI() {
         if (isTreeInitialized) return;
@@ -236,6 +258,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTierFilterActive: (v) => { tierFilterActive = !!v; },
             },
             actions: {
+                navigateBack,
+                navigateForward,
                 updateVisualization: (...args) => window.updateVisualization(...args),
                 saveState,
                 switchTab: (tab) => switchTab(tab),

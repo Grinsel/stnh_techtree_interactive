@@ -674,9 +674,8 @@
         <main id="tree-panel">
             <div id="tree-toolbar">
                 <button id="reset-button">Reload Page</button>
-                <button id="back-button" style="display: none;">< Back</button>
-                <button id="forward-button" style="display: none;">Forward ></button>
-                <button id="share-button">Copy/Share URL</button>
+                <button id="load-tree-button" style="display: none;">Main Tree</button>
+                <button id="share-button">Share View</button>
                 <button id="render-path-button" style="display: none;">Show Tech Path</button>
                 <label for="layout-select">Layout:</label>
                 <select id="layout-select">
@@ -684,13 +683,14 @@
                     <option value="force-directed-arrows">Force-directed Arrows</option>
                     <option value="disjoint-force-directed">Disjoint force-directed</option>
                 </select>
-                <button id="toggle-layout-button">Toggle Layout</button>
+                <button id="toggle-layout-button">Toggle Tiers</button>
                 <label for="performance-toggle" style="margin: 0;">Performance mode</label>
                 <label class="switch">
                     <input type="checkbox" id="performance-toggle" checked>
                     <span class="slider"></span>
                 </label>
-                <button id="load-tree-button" style="display: none;">Reload Tech Tree</button>
+                <button id="back-button" style="display: none;">< Back</button>
+                <button id="forward-button" style="display: none;">Forward ></button>                
             </div>
             <div id="landing-card">
                 <div class="landing-content">
