@@ -7,6 +7,7 @@ import { zoomToFit } from './ui/zoom.js';
 export function runSearch({
   searchTerm,
   searchAll = false,
+  nameOnly = false,
   allTechs = [],
   currentNodes = [],
   currentLinks = [],
@@ -23,7 +24,7 @@ export function runSearch({
   if (!term) return null;
 
   const scope = searchAll ? allTechs : currentNodes;
-  const matchedNodes = findMatchingTechs(scope, term);
+  const matchedNodes = findMatchingTechs(scope, term, nameOnly);
 
   if (matchedNodes.length === 1) {
     const singleResult = matchedNodes[0];
@@ -124,12 +125,13 @@ export function runSearch({
 }
 
 // --- Search ---
-export function findMatchingTechs(techs, term) {
+export function findMatchingTechs(techs, term, nameOnly = false) {
   const q = (term || '').trim().toLowerCase();
   if (!q) return [];
   return (techs || []).filter(n => {
     if (n.name && n.name.toLowerCase().includes(q)) return true;
     if (n.id && n.id.toLowerCase().includes(q)) return true;
+    if (nameOnly) return false; // Stop here if only searching name/ID
     if (n.category && typeof n.category === 'string' && n.category.toLowerCase().includes(q)) return true;
     if (n.unlocks && Array.isArray(n.unlocks)) {
       for (const u of n.unlocks) {
@@ -145,6 +147,7 @@ export function findMatchingTechs(techs, term) {
 export function handleSearch({
   searchTerm,
   searchAll,
+  nameOnly,
   allTechs,
   currentNodes,
   currentLinks,
@@ -162,6 +165,7 @@ export function handleSearch({
   return runSearch({
     searchTerm: term,
     searchAll: !!searchAll,
+    nameOnly: !!nameOnly,
     allTechs,
     currentNodes,
     currentLinks,

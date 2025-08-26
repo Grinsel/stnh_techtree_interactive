@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('search-button');
     const searchBackButton = document.getElementById('search-back-button');
     const searchScopeToggle = document.getElementById('search-scope-toggle');
+    const searchNameOnlyToggle = document.getElementById('search-name-only-toggle');
     const techTreeContainer = document.getElementById('tech-tree');
     const tooltip = document.getElementById('tooltip');
     const areaSelect = document.getElementById('area-select');
@@ -274,6 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const result = executeSearch({
                             searchTerm,
                             searchAll: !!searchScopeToggle.checked,
+                            nameOnly: !!searchNameOnlyToggle.checked,
                             allTechs,
                             currentNodes: nodes,
                             currentLinks: links,
