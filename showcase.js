@@ -1,5 +1,5 @@
 import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController, formatTooltip, createSvgFor, getAreaColor } from './js/render.js';
-import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculatePath as calculatePathData, loadTechnologyData, getAllTechsCached, isTechDataLoaded } from './js/data.js';
+import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculateAllPaths, loadTechnologyData, getAllTechsCached, isTechDataLoaded } from './js/data.js';
 import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter, loadCategoryFilter } from './js/filters.js';
 import { handleSearch as executeSearch } from './js/search.js';
 import { renderForceDirectedArrowsGraph as arrowsLayout } from './js/ui/layouts/arrows.js';
@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         techTreeContainerEl: techTreeContainer,
                         renderPopupGraph,
                         getPrerequisitesData,
-                        calculatePathData,
+                        calculateAllPaths,
                         drag,
                     });
                 },
@@ -835,7 +835,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 techTreeContainerEl: techTreeContainer,
                 renderPopupGraph,
                 getPrerequisitesData,
-                calculatePathData,
+                calculateAllPaths,
                 drag,
             });
         });
@@ -855,7 +855,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 techTreeContainerEl: techTreeContainer,
                 renderPopupGraph,
                 getPrerequisitesData,
-                calculatePathData,
+                calculateAllPaths,
                 drag,
             });
         });

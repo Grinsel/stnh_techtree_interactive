@@ -126,7 +126,51 @@ export function getPrerequisites(startId, techs) {
   return prerequisites;
 }
 
-export function calculatePath(startId, endId, techs) {
+export function calculateAllPaths(startId, endId, techs) {
+  const list = techs || _techs || [];
+  const techMap = new Map(list.map(t => [t.id, t]));
+
+  // 1. Find all prerequisites for the end node
+  const endPrereqs = new Set();
+  function findAncestors(id) {
+    if (endPrereqs.has(id)) return;
+    endPrereqs.add(id);
+    const node = techMap.get(id);
+    if (node && node.prerequisites) {
+      node.prerequisites.forEach(findAncestors);
+    }
+  }
+  findAncestors(endId);
+
+  // 2. Find all descendants of the start node
+  const startDescendants = new Set();
+  function findDescendants(id) {
+    if (startDescendants.has(id)) return;
+    startDescendants.add(id);
+    const children = list.filter(t => t.prerequisites && t.prerequisites.includes(id));
+    children.forEach(c => findDescendants(c.id));
+  }
+  findDescendants(startId);
+
+  // 3. The intersection of these two sets are the nodes in the path
+  const pathNodeIds = new Set([...endPrereqs].filter(id => startDescendants.has(id)));
+  pathNodeIds.add(startId);
+  pathNodeIds.add(endId);
+
+  const pathNodes = list.filter(t => pathNodeIds.has(t.id));
+  const pathLinks = [];
+  pathNodes.forEach(t => {
+    (t.prerequisites || []).forEach(p => {
+      if (pathNodeIds.has(p)) {
+        pathLinks.push({ source: p, target: t.id });
+      }
+    });
+  });
+
+  return { nodes: pathNodes, links: pathLinks };
+}
+
+export function calculateShortestPath(startId, endId, techs) {
   const list = techs || _techs || [];
   const techMap = new Map(list.map(t => [t.id, t]));
   const adj = new Map();

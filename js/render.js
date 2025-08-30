@@ -519,7 +519,7 @@ export function calculateAndRenderPath(startId, endId, allTechs, deps) {
     techTreeContainerEl,
     renderPopupGraph,
     getPrerequisitesData,
-    calculatePathData,
+    calculateAllPaths,
   } = deps;
 
   const placeholderEl = document.getElementById('popup-placeholder');
@@ -532,11 +532,17 @@ export function calculateAndRenderPath(startId, endId, allTechs, deps) {
   }
   
   if (endId) {
-    const result = calculatePathData(startId, endId, allTechs);
+    let startNode = allTechs.find(t => t.id === startId);
+    let endNode = allTechs.find(t => t.id === endId);
+
+    if (startNode && endNode && parseInt(startNode.tier) > parseInt(endNode.tier)) {
+      [startId, endId] = [endId, startId];
+      [startNode, endNode] = [endNode, startNode];
+    }
+
+    const result = calculateAllPaths(startId, endId, allTechs);
     pathNodes = result.nodes;
     pathLinks = result.links;
-    const startNode = allTechs.find(t => t.id === startId);
-    const endNode = allTechs.find(t => t.id === endId);
     if (placeholderEl) {
       placeholderEl.innerHTML = `Path between ${startNode?.name || startId} and ${endNode?.name || endId}`;
     }
@@ -560,6 +566,26 @@ export function calculateAndRenderPath(startId, endId, allTechs, deps) {
   }
 
   if (popupViewportEl) popupViewportEl.classList.remove('hidden');
+
+  if (endId && pathNodes.length <= 2) {
+    const startNode = allTechs.find(t => t.id === startId);
+    const endNode = allTechs.find(t => t.id === endId);
+    if (endNode && endNode.prerequisites && endNode.prerequisites.includes(startId)) {
+      // Special case: the start node is a direct prerequisite. Show all prerequisites.
+      const prereqIds = new Set(endNode.prerequisites);
+      prereqIds.add(endId);
+      pathNodes = allTechs.filter(t => prereqIds.has(t.id));
+      pathLinks = endNode.prerequisites.map(p => ({ source: p, target: endId }));
+    } else {
+      if (placeholderEl) placeholderEl.innerHTML = 'No dependencies detected';
+      // Clear the graph area but keep the popup open
+      if (popupContainerEl) {
+          const svg = popupContainerEl.querySelector('svg');
+          if (svg) svg.remove();
+      }
+      return;
+    }
+  }
 
   if (pathNodes.length === 0) {
     if (placeholderEl) placeholderEl.innerHTML = 'No path or prerequisites found.';
