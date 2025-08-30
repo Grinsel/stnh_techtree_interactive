@@ -2,6 +2,7 @@
 // Usage: import { renderPopupGraph } from './ui/popup.js'
 // renderPopupGraph(nodes, links, { containerEl, tooltipEl, techTreeContainerEl, drag })
 import { wrapText, getAreaColor } from '../render.js';
+import { layoutByTier } from './layouts/tier.js';
 
 export function renderPopupGraph(nodes, links, { containerEl, tooltipEl, techTreeContainerEl, drag }) {
   const container = containerEl;
@@ -16,25 +17,32 @@ export function renderPopupGraph(nodes, links, { containerEl, tooltipEl, techTre
   const zoom = d3.zoom().on('zoom', (event) => popupG.attr('transform', event.transform));
   popupSvg.call(zoom);
 
-  const popupSimulation = d3.forceSimulation(nodes)
-    .force('link', d3.forceLink(links).id(d => d.id).distance(100).strength(0.5))
-    .force('charge', d3.forceManyBody().strength(-250))
-    .force('center', d3.forceCenter(width / 2, height / 2))
-    .force('collision', d3.forceCollide().radius(80));
+  const nodeWidth = 140, nodeHeight = 80;
+  layoutByTier(nodes, width, height, { nodeWidth, nodeHeight });
+
+  const nodeMap = new Map(nodes.map(n => [n.id, n]));
+  links.forEach(link => {
+    link.source = nodeMap.get(link.source) || link.source;
+    link.target = nodeMap.get(link.target) || link.target;
+  });
 
   const link = popupG.append('g')
     .attr('stroke', '#e0e0e0ff')
     .attr('stroke-opacity', 0.5)
     .selectAll('line')
     .data(links)
-    .join('line');
+    .join('line')
+    .attr('x1', d => d.source.x)
+    .attr('y1', d => d.source.y)
+    .attr('x2', d => d.target.x)
+    .attr('y2', d => d.target.y);
 
   const node = popupG.append('g')
     .selectAll('g')
     .data(nodes)
     .join('g')
     .attr('class', 'tech-node')
-    .call(drag(popupSimulation))
+    .attr('transform', d => `translate(${d.x},${d.y})`)
     .on('mouseover', (event, d) => {
       tooltip.style.display = 'block';
       tooltip.innerHTML = formatTooltip(d);
@@ -55,7 +63,6 @@ export function renderPopupGraph(nodes, links, { containerEl, tooltipEl, techTre
       tooltip.style.zIndex = '';
     });
 
-  const nodeWidth = 140, nodeHeight = 80;
   node.append('rect')
     .attr('width', nodeWidth)
     .attr('height', nodeHeight)
@@ -128,11 +135,6 @@ export function renderPopupGraph(nodes, links, { containerEl, tooltipEl, techTre
     .style('font-size', '8px')
     .style('fill', '#ffffff')
     .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
-
-  popupSimulation.on('tick', () => {
-    link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
-    node.attr('transform', d => `translate(${d.x},${d.y})`);
-  });
 }
 
 // Inline copy of formatTooltip to avoid tight coupling. If you prefer, you can pass it in deps.
