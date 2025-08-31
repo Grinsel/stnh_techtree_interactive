@@ -102,6 +102,13 @@ export function renderForceDirectedGraph(nodes, links, selectedSpecies, containe
     .on('click', (event, d) => {
       window.currentFocusId = d.id;
       updateVisualization(selectedSpecies, d.id, true);
+      // GA Event: technology clicked
+      if (typeof gtag === 'function') {
+        gtag('event', 'select_content', {
+          content_type: 'technology',
+          item_id: d.id
+        });
+      }
     })
     .on('contextmenu', (event, d) => {
       event.preventDefault();

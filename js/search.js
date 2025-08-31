@@ -23,6 +23,13 @@ export function runSearch({
   const term = (searchTerm || '').trim();
   if (!term) return null;
 
+  // GA Event: search
+  if (typeof gtag === 'function') {
+    gtag('event', 'search', {
+      search_term: term
+    });
+  }
+
   const scope = searchAll ? allTechs : currentNodes;
   const matchedNodes = findMatchingTechs(scope, term, nameOnly);
 
