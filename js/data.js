@@ -255,13 +255,43 @@ export function filterTechsByFaction(techs, factionId) {
   return techs.filter(tech => {
     const availability = tech.faction_availability;
 
-    // If no faction_availability data, assume available to all
+    // NEW: If faction_availability is empty, fallback to required_species
     if (!availability || Object.keys(availability).length === 0) {
-      return true;
+      // Fallback: Use required_species field
+      const requiredSpecies = tech.required_species || [];
+
+      // If no species restrictions, available to all factions
+      if (requiredSpecies.length === 0) {
+        return true;
+      }
+
+      // Map common species names to faction IDs
+      const speciesMap = {
+        'Federation': 'federation',
+        'Klingon': 'klingon',
+        'Romulan': 'romulan',
+        'Cardassian': 'cardassian',
+        'Dominion': 'dominion',
+        'Borg': 'borg',
+        'Undine': 'undine',
+        'Breen': 'breen',
+        'Ferengi': 'ferengi',
+        "Son'a": 'sona',
+        'Hirogen': 'hirogen',
+        'Voth': 'voth',
+        'Krenim': 'krenim',
+        'Vidiian': 'vidiian',
+        'Suliban': 'suliban',
+      };
+
+      // Check if current faction is in required species
+      return requiredSpecies.some(species => {
+        const mappedFaction = speciesMap[species];
+        return mappedFaction && mappedFaction.toLowerCase() === factionId.toLowerCase();
+      });
     }
 
-    // Check if faction has access
-    // Match by faction ID (normalized to lowercase)
+    // Use faction_availability data if present
     const factionKey = Object.keys(availability).find(
       key => key.toLowerCase() === factionId.toLowerCase()
     );
@@ -325,9 +355,41 @@ export function isFactionExclusive(tech, factionId) {
   if (factionId === 'all' || !factionId) return false;
 
   const availability = tech.faction_availability;
-  if (!availability || Object.keys(availability).length === 0) return false;
 
-  // Count how many factions can access this tech
+  // NEW: Fallback to required_species if faction_availability is empty
+  if (!availability || Object.keys(availability).length === 0) {
+    const requiredSpecies = tech.required_species || [];
+
+    // Not exclusive if no species requirements (available to all)
+    if (requiredSpecies.length === 0) return false;
+
+    // Not exclusive if multiple species can access
+    if (requiredSpecies.length > 1) return false;
+
+    // Exclusive if exactly one species matches current faction
+    const speciesMap = {
+      'Federation': 'federation',
+      'Klingon': 'klingon',
+      'Romulan': 'romulan',
+      'Cardassian': 'cardassian',
+      'Dominion': 'dominion',
+      'Borg': 'borg',
+      'Undine': 'undine',
+      'Breen': 'breen',
+      'Ferengi': 'ferengi',
+      "Son'a": 'sona',
+      'Hirogen': 'hirogen',
+      'Voth': 'voth',
+      'Krenim': 'krenim',
+      'Vidiian': 'vidiian',
+      'Suliban': 'suliban',
+    };
+
+    const mappedFaction = speciesMap[requiredSpecies[0]];
+    return mappedFaction && mappedFaction.toLowerCase() === factionId.toLowerCase();
+  }
+
+  // Use faction_availability data if present
   const availableTo = Object.keys(availability).filter(
     key => availability[key]?.available === true
   );

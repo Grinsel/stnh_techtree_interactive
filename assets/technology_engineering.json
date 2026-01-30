@@ -862,7 +862,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Suliban"
+    ]
   },
   {
     "id": "tech_engineering_12915",
@@ -890,7 +892,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Suliban"
+    ]
   },
   {
     "id": "tech_engineering_12916",
@@ -918,7 +922,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Suliban"
+    ]
   },
   {
     "id": "tech_engineering_12917",
@@ -946,7 +952,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Suliban"
+    ]
   },
   {
     "id": "tech_space_construction",
@@ -1466,7 +1474,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_12901",
@@ -1492,7 +1502,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_engineering_12811",
@@ -2024,7 +2036,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_engineering_undine_cruiser",
@@ -2056,7 +2070,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_engineering_undine_bioship_2",
@@ -2088,7 +2104,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_engineering_undine_battleship",
@@ -2119,7 +2137,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_engineering_02865",
@@ -2151,7 +2171,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_engineering_undine_exterminator",
@@ -2182,7 +2204,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_engineering_undine_vanquish",
@@ -2214,7 +2238,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_engineering_undine_infest",
@@ -2246,7 +2272,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_emette_frigate",
@@ -2275,7 +2303,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_starfleet_design",
@@ -2304,7 +2334,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03503",
@@ -2336,7 +2368,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03504",
@@ -2367,7 +2401,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03505",
@@ -2399,7 +2435,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03506",
@@ -2430,7 +2468,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03507",
@@ -2463,7 +2503,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03508",
@@ -2495,7 +2537,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03509",
@@ -2527,7 +2571,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03510",
@@ -2559,7 +2605,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_12508",
@@ -2592,7 +2640,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03512",
@@ -2623,7 +2673,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_22312",
@@ -2654,7 +2706,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03513",
@@ -2686,7 +2740,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03514",
@@ -2717,7 +2773,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_22315",
@@ -2748,7 +2806,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_22316",
@@ -2779,7 +2839,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03515",
@@ -2812,7 +2874,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03516",
@@ -2844,7 +2908,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_22319",
@@ -2876,7 +2942,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03517",
@@ -2909,7 +2977,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_22321",
@@ -2940,7 +3010,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_22322",
@@ -2971,7 +3043,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03518",
@@ -3003,7 +3077,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_13519",
@@ -3035,7 +3111,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03520",
@@ -3067,7 +3145,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_13521",
@@ -3099,7 +3179,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_13522",
@@ -3130,7 +3212,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_13523",
@@ -3162,7 +3246,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03524",
@@ -3194,7 +3280,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_vigilant",
@@ -3223,7 +3311,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03525",
@@ -3285,7 +3375,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_industry_1302",
@@ -3313,7 +3405,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_22334",
@@ -3341,7 +3435,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_industry_1303",
@@ -3370,7 +3466,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_13551",
@@ -3398,7 +3496,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_industry_1305",
@@ -3426,7 +3526,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_13553",
@@ -3454,7 +3556,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_industry_1304",
@@ -3482,7 +3586,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_13554",
@@ -3511,7 +3617,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_22341",
@@ -3539,7 +3647,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_starfleet_aquarius",
@@ -3568,7 +3678,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_22342",
@@ -3625,7 +3737,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_starfleet_society",
@@ -3682,7 +3796,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03549",
@@ -3708,7 +3824,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03550",
@@ -3734,7 +3852,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03551",
@@ -3760,7 +3880,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_22351",
@@ -3786,7 +3908,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_12352",
@@ -3815,7 +3939,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_12353",
@@ -3844,7 +3970,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_12354",
@@ -3873,7 +4001,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_12355",
@@ -3902,7 +4032,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_akyaz",
@@ -3931,7 +4063,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03530",
@@ -3957,7 +4091,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03531",
@@ -3983,7 +4119,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03532",
@@ -4009,7 +4147,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03527",
@@ -4035,7 +4175,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03528",
@@ -4061,7 +4203,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03529",
@@ -4087,7 +4231,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03533",
@@ -4113,7 +4259,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03534",
@@ -4139,7 +4287,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03535",
@@ -4165,7 +4315,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03536",
@@ -4191,7 +4343,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03537",
@@ -4217,7 +4371,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03538",
@@ -4243,7 +4399,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03539",
@@ -4269,7 +4427,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03540",
@@ -4295,7 +4455,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03541",
@@ -4321,7 +4483,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03542",
@@ -4347,7 +4511,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03543",
@@ -4373,7 +4539,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03544",
@@ -4399,7 +4567,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03545",
@@ -4425,7 +4595,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03546",
@@ -4451,7 +4623,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_03547",
@@ -4477,7 +4651,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_century",
@@ -4506,7 +4682,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_loknar_1",
@@ -4535,7 +4713,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_loknar_2",
@@ -4564,7 +4744,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_spokane",
@@ -4593,7 +4775,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_lexington",
@@ -4622,7 +4806,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_borghel_prey",
@@ -4651,7 +4837,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03602",
@@ -4683,7 +4871,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03603",
@@ -4716,7 +4906,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_13604",
@@ -4748,7 +4940,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03604",
@@ -4779,7 +4973,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03605",
@@ -4812,7 +5008,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_13607",
@@ -4843,7 +5041,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03606",
@@ -4875,7 +5075,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03607",
@@ -4907,7 +5109,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03608",
@@ -4940,7 +5144,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03609",
@@ -4972,7 +5178,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03610",
@@ -5005,7 +5213,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03611",
@@ -5038,7 +5248,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03612",
@@ -5070,7 +5282,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03613",
@@ -5101,7 +5315,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03614",
@@ -5132,7 +5348,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_kdf_design",
@@ -5164,7 +5382,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_klingon_society",
@@ -5195,7 +5415,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_industry_1310",
@@ -5223,7 +5445,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_industry_1311",
@@ -5251,7 +5475,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_industry_1312",
@@ -5280,7 +5506,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_industry_1313",
@@ -5308,7 +5536,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_22422",
@@ -5336,7 +5566,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03615",
@@ -5362,7 +5594,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03616",
@@ -5388,7 +5622,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03617",
@@ -5414,7 +5650,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03618",
@@ -5440,7 +5678,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03619",
@@ -5466,7 +5706,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03620",
@@ -5492,7 +5734,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03621",
@@ -5518,7 +5762,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03622",
@@ -5544,7 +5790,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03623",
@@ -5570,7 +5818,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03624",
@@ -5596,7 +5846,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03625",
@@ -5622,7 +5874,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_03626",
@@ -5648,7 +5902,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_rea_prey",
@@ -5677,7 +5933,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_rom_design",
@@ -5709,7 +5967,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_romulan_society",
@@ -5740,7 +6000,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03653",
@@ -5772,7 +6034,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03654",
@@ -5804,7 +6068,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03655",
@@ -5835,7 +6101,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03656",
@@ -5868,7 +6136,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03657",
@@ -5900,7 +6170,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03658",
@@ -5932,7 +6204,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_praetor_class",
@@ -5963,7 +6237,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03659",
@@ -5994,7 +6270,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03660",
@@ -6026,7 +6304,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03661",
@@ -6058,7 +6338,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03662",
@@ -6091,7 +6373,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03663",
@@ -6124,7 +6408,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03664",
@@ -6157,7 +6443,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03665",
@@ -6188,7 +6476,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_13666",
@@ -6219,7 +6509,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_industry_1314",
@@ -6247,7 +6539,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_industry_1315",
@@ -6276,7 +6570,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_industry_1316",
@@ -6304,7 +6600,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_industry_1317",
@@ -6333,7 +6631,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_industry_1329",
@@ -6365,7 +6665,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03666",
@@ -6391,7 +6693,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03667",
@@ -6417,7 +6721,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03668",
@@ -6443,7 +6749,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03669",
@@ -6469,7 +6777,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03670",
@@ -6495,7 +6805,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03671",
@@ -6521,7 +6833,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03672",
@@ -6547,7 +6861,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03673",
@@ -6573,7 +6889,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03674",
@@ -6599,7 +6917,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03675",
@@ -6625,7 +6945,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03676",
@@ -6651,7 +6973,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03677",
@@ -6677,7 +7001,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_engineering_03599",
@@ -6709,7 +7035,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_sagan",
@@ -6740,7 +7068,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_yoyager_a",
@@ -6769,7 +7099,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_17016",
@@ -6798,7 +7130,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Krenim"
+    ]
   },
   {
     "id": "tech_engineering_17019",
@@ -6827,7 +7161,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Krenim"
+    ]
   },
   {
     "id": "tech_engineering_17017",
@@ -6856,7 +7192,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Krenim"
+    ]
   },
   {
     "id": "tech_engineering_17018",
@@ -6885,7 +7223,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Krenim"
+    ]
   },
   {
     "id": "tech_engineering_17020",
@@ -6914,7 +7254,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Krenim"
+    ]
   },
   {
     "id": "tech_krenim_bombardment",
@@ -6943,7 +7285,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Krenim"
+    ]
   },
   {
     "id": "tech_engineering_13001",
@@ -7344,7 +7688,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Hirogen"
+    ]
   },
   {
     "id": "tech_engineering_private_568",
@@ -7428,7 +7774,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_engineering_13013",
@@ -8912,7 +9260,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1512",
@@ -8943,7 +9293,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1514",
@@ -8974,7 +9326,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1515",
@@ -9005,7 +9359,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1516",
@@ -9036,7 +9392,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1518",
@@ -9067,7 +9425,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1520",
@@ -9098,7 +9458,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1522",
@@ -9129,7 +9491,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1482",
@@ -9157,7 +9521,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1537",
@@ -9186,7 +9552,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1483",
@@ -9215,7 +9583,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_13077",
@@ -9243,7 +9613,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_industry_1551",
@@ -9271,7 +9643,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_13073",
@@ -9300,7 +9674,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_titanium_hull",
@@ -10668,7 +11044,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1523",
@@ -10699,7 +11077,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1524",
@@ -10730,7 +11110,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1525",
@@ -10761,7 +11143,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1526",
@@ -10792,7 +11176,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1527",
@@ -10823,7 +11209,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_03116",
@@ -10854,7 +11242,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_03117",
@@ -10885,7 +11275,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_materials_1448",
@@ -11038,7 +11430,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_industry_1530",
@@ -11872,7 +12266,9 @@
     "category": [
       "propulsion"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_particles_702",
@@ -11901,7 +12297,9 @@
     "category": [
       "propulsion"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_particles_704",
@@ -11929,7 +12327,9 @@
     "category": [
       "propulsion"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_particles_706",
@@ -11957,7 +12357,9 @@
     "category": [
       "propulsion"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_particles_708",
@@ -11985,7 +12387,9 @@
     "category": [
       "propulsion"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_particles_710",
@@ -12013,7 +12417,9 @@
     "category": [
       "propulsion"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_polaron_torp_start",
@@ -12404,7 +12810,10 @@
     "category": [
       "propulsion"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation",
+      "Cardassian"
+    ]
   },
   {
     "id": "tech_engineering_armor_670",
@@ -14198,7 +14607,9 @@
     "category": [
       "propulsion"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_engineering_14031",
@@ -14566,7 +14977,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_proxima_2",
@@ -14595,7 +15008,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_nxdiscovery",
@@ -14624,7 +15039,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_nxbeta",
@@ -14653,7 +15070,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_dauntless",
@@ -14682,7 +15101,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_nx_01",
@@ -14708,7 +15129,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_nx_01_refit",
@@ -14734,7 +15157,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_engineering_metaphasic_3",
@@ -14763,7 +15188,9 @@
     "category": [
       "industry"
     ],
-    "required_species": []
+    "required_species": [
+      "Son'a"
+    ]
   },
   {
     "id": "tech_engineering_metaphasic_core",
@@ -14821,7 +15248,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_thruster_2",
@@ -14852,7 +15281,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_thruster_3",
@@ -14883,7 +15314,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_thruster_4",
@@ -14914,7 +15347,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_thruster_5",
@@ -14945,7 +15380,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_thruster_6",
@@ -14976,7 +15413,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_thruster_7",
@@ -15007,7 +15446,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_thruster_8",
@@ -15038,7 +15479,9 @@
     "category": [
       "materials"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_engineering_17026",

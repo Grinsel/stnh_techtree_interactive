@@ -631,7 +631,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_12541",
@@ -662,7 +664,13 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Breen",
+      "Romulan",
+      "Cardassian",
+      "Undine",
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_12415",
@@ -690,7 +698,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Vidiian"
+    ]
   },
   {
     "id": "tech_society_biology_1020",
@@ -749,7 +759,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_12290",
@@ -1347,7 +1359,10 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Vulcan",
+      "Federation"
+    ]
   },
   {
     "id": "tech_society_21564",
@@ -1409,7 +1424,10 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Vulcan",
+      "Federation"
+    ]
   },
   {
     "id": "tech_society_psycho-history_444",
@@ -2126,7 +2144,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_deep_475",
@@ -2642,7 +2662,10 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Dominion",
+      "Son'a"
+    ]
   },
   {
     "id": "tech_society_scion_663",
@@ -2733,7 +2756,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Dominion"
+    ]
   },
   {
     "id": "tech_society_21612",
@@ -2854,7 +2879,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Dominion"
+    ]
   },
   {
     "id": "tech_society_enhanced_478",
@@ -3934,7 +3961,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_society_21653",
@@ -3965,7 +3994,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_society_21654",
@@ -4112,7 +4143,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_12515",
@@ -4864,7 +4897,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_society_14056",
@@ -4893,7 +4928,10 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Cardassian",
+      "Romulan"
+    ]
   },
   {
     "id": "tech_society_14057",
@@ -4924,7 +4962,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_society_confed_intelligence",
@@ -4984,7 +5024,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_society_14058",
@@ -5016,7 +5058,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Dominion"
+    ]
   },
   {
     "id": "tech_society_12550",
@@ -5564,7 +5608,11 @@
     "category": [
       "military_theory"
     ],
-    "required_species": []
+    "required_species": [
+      "Suliban",
+      "Klingon",
+      "Romulan"
+    ]
   },
   {
     "id": "tech_society_fed_maco_marines",
@@ -5597,7 +5645,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_society_rom_marines",
@@ -5634,7 +5684,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_society_galactic_archivism",
@@ -6483,7 +6535,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1122",
@@ -6815,7 +6869,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_21842",
@@ -6843,7 +6899,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1134",
@@ -6871,7 +6929,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_12544",
@@ -6902,7 +6962,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_21845",
@@ -6933,7 +6995,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1137",
@@ -6965,7 +7029,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_12630",
@@ -6996,7 +7062,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_tholian_514",
@@ -7028,7 +7096,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_21849",
@@ -7056,7 +7126,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_12548",
@@ -7087,7 +7159,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1143",
@@ -7118,7 +7192,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_21852",
@@ -7146,7 +7222,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1190",
@@ -7175,7 +7253,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_21854",
@@ -7204,7 +7284,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_21855",
@@ -7658,7 +7740,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_society_sheliak_517",
@@ -7749,7 +7833,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_12705",
@@ -8562,7 +8648,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_biology_1768",
@@ -8590,7 +8678,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_biology_1749",
@@ -8618,7 +8708,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1704",
@@ -8649,7 +8741,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_assimilation_1",
@@ -8682,7 +8776,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12727",
@@ -8713,7 +8809,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12730",
@@ -8745,7 +8843,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_statecraft_1715",
@@ -8773,7 +8873,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12732",
@@ -8805,7 +8907,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_assimilation_2",
@@ -8836,7 +8940,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12734",
@@ -8864,7 +8970,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_21914",
@@ -8892,7 +9000,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12728",
@@ -8923,7 +9033,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_biology_1717",
@@ -8952,7 +9064,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_statecraft_1714",
@@ -8981,7 +9095,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1708",
@@ -9012,7 +9128,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12731",
@@ -9040,7 +9158,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1709",
@@ -9072,7 +9192,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12661",
@@ -9103,7 +9225,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12664",
@@ -9135,7 +9259,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12662",
@@ -9166,7 +9292,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1756",
@@ -9194,7 +9322,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12724",
@@ -9225,7 +9355,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12723",
@@ -9254,7 +9386,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_statecraft_1721",
@@ -9283,7 +9417,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1735",
@@ -9311,7 +9447,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_21930",
@@ -9337,7 +9475,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21931",
@@ -9368,7 +9508,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21932",
@@ -9396,7 +9538,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21933",
@@ -9424,7 +9568,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21934",
@@ -9455,7 +9601,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21935",
@@ -9486,7 +9634,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21936",
@@ -9515,7 +9665,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21937",
@@ -9546,7 +9698,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21938",
@@ -9578,7 +9732,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21939",
@@ -9607,7 +9763,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21940",
@@ -9635,7 +9793,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21941",
@@ -9663,7 +9823,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21942",
@@ -9691,7 +9853,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21943",
@@ -9719,7 +9883,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21944",
@@ -9748,7 +9914,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21945",
@@ -9776,7 +9944,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21946",
@@ -9808,7 +9978,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_21947",
@@ -9836,7 +10008,9 @@
     "category": [
       "new_worlds"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_12666",
@@ -12021,7 +12195,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_12345",
@@ -12049,7 +12225,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12346",
@@ -12077,7 +12255,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12356",
@@ -12105,7 +12285,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_02217",
@@ -12275,7 +12457,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Dominion"
+    ]
   },
   {
     "id": "tech_society_statecraft_930",
@@ -13477,7 +13661,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_society_12355",
@@ -13506,7 +13692,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_statecraft_1764",
@@ -13535,7 +13723,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_cortical_processing",
@@ -13564,7 +13754,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_statecraft_983",
@@ -13598,7 +13790,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_statecraft_984",
@@ -13629,7 +13823,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_statecraft_1765",
@@ -13660,7 +13856,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_statecraft_986",
@@ -13691,7 +13889,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12353",
@@ -13719,7 +13919,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_02294",
@@ -13747,7 +13949,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_12354",
@@ -13778,7 +13982,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_statecraft_989",
@@ -13807,7 +14013,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_02289",
@@ -13839,7 +14047,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_society_02291",
@@ -13867,7 +14077,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_defense_army",
@@ -14656,7 +14868,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Hirogen"
+    ]
   },
   {
     "id": "tech_society_21290",
@@ -14687,7 +14901,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Hirogen"
+    ]
   },
   {
     "id": "tech_society_12380",
@@ -14800,7 +15016,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_society_02305",
@@ -14826,7 +15044,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Ferengi"
+    ]
   },
   {
     "id": "tech_society_12306",
@@ -14852,7 +15072,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Ferengi"
+    ]
   },
   {
     "id": "tech_society_12294",
@@ -14881,7 +15103,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Cardassian"
+    ]
   },
   {
     "id": "tech_society_statecraft_994",
@@ -14907,7 +15131,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Cardassian"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1184",
@@ -14936,7 +15162,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Cardassian"
+    ]
   },
   {
     "id": "tech_society_12296",
@@ -14965,7 +15193,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_society_the_380",
@@ -14991,7 +15221,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_society_02336",
@@ -15020,7 +15252,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_society_statecraft_1179",
@@ -15049,7 +15283,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Hirogen"
+    ]
   },
   {
     "id": "tech_society_teaching_375",
@@ -15101,7 +15337,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Son'a"
+    ]
   },
   {
     "id": "tech_society_12303",
@@ -15312,7 +15550,11 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Xindi-Insectoid",
+      "Xindi-Reptilian",
+      "Xindi-Primate"
+    ]
   },
   {
     "id": "tech_society_statecraft_1181",
@@ -15341,7 +15583,11 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Hirogen",
+      "Breen",
+      "Son'a"
+    ]
   },
   {
     "id": "tech_society_new_worlds_1188",
@@ -15399,7 +15645,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Voth"
+    ]
   },
   {
     "id": "tech_society_12333",
@@ -15428,7 +15676,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_society_statecraft_923",
@@ -15567,7 +15817,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Cardassian"
+    ]
   },
   {
     "id": "tech_society_12347",
@@ -15645,7 +15897,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_statecraft_931",
@@ -15749,7 +16003,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Dominion"
+    ]
   },
   {
     "id": "tech_society_mod_undine",
@@ -15775,7 +16031,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_society_eugenics",
@@ -16931,7 +17189,9 @@
     "category": [
       "statecraft"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_supreme_genetics_undine",
@@ -16957,7 +17217,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_torpedo_1",
@@ -16983,7 +17245,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_torpedo_2",
@@ -17011,7 +17275,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_torpedo_3",
@@ -17039,7 +17305,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_torpedo_4",
@@ -17067,7 +17335,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_torpedo_5",
@@ -17095,7 +17365,9 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_torpedo_6",
@@ -17123,6 +17395,8 @@
     "category": [
       "biology"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   }
 ]

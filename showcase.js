@@ -1,5 +1,5 @@
 import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController, formatTooltip, createSvgFor, getAreaColor } from './js/render.js';
-import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculateAllPaths, loadTechnologyData, getAllTechsCached, isTechDataLoaded, filterTechsByFaction } from './js/data.js';  // NEW Phase 2: added filterTechsByFaction
+import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculateAllPaths, loadTechnologyData, getAllTechsCached, isTechDataLoaded, filterTechsByFaction, isFactionExclusive } from './js/data.js';  // NEW Phase 2: added filterTechsByFaction, isFactionExclusive
 import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter, loadCategoryFilter } from './js/filters.js';
 import { handleSearch as executeSearch } from './js/search.js';
 import { renderForceDirectedArrowsGraph as arrowsLayout } from './js/ui/layouts/arrows.js';
@@ -671,16 +671,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // NEW Phase 2: Faction-exclusive highlighting (Gold border)
                 const currentFaction = getCurrentFaction();
-                if (currentFaction && currentFaction !== 'all') {
-                    const availability = d.faction_availability || {};
-                    const availableTo = Object.keys(availability).filter(
-                        key => availability[key]?.available === true
-                    );
-
-                    // Gold border if exclusive to current faction
-                    if (availableTo.length === 1 && availableTo[0].toLowerCase() === currentFaction.toLowerCase()) {
-                        return '#ffd700';  // Gold
-                    }
+                if (isFactionExclusive(d, currentFaction)) {
+                    return '#ffd700';  // Gold
                 }
 
                 return 'none';
@@ -692,15 +684,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const currentFaction = getCurrentFaction();
-                if (currentFaction && currentFaction !== 'all') {
-                    const availability = d.faction_availability || {};
-                    const availableTo = Object.keys(availability).filter(
-                        key => availability[key]?.available === true
-                    );
-
-                    if (availableTo.length === 1 && availableTo[0].toLowerCase() === currentFaction.toLowerCase()) {
-                        return 3;  // Thicker for faction-exclusive
-                    }
+                if (isFactionExclusive(d, currentFaction)) {
+                    return 3;  // Thicker for faction-exclusive
                 }
 
                 return 1;

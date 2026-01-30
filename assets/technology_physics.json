@@ -181,7 +181,11 @@
     "category": [
       "military_theory"
     ],
-    "required_species": []
+    "required_species": [
+      "Suliban",
+      "Klingon",
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_loaned_cloak",
@@ -207,7 +211,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_physics_11283b",
@@ -2320,7 +2326,10 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon",
+      "Dominion"
+    ]
   },
   {
     "id": "tech_physics_exo-comps_17",
@@ -2631,7 +2640,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_computing_72",
@@ -2662,7 +2673,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_computing_23",
@@ -2694,7 +2707,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_computing_24",
@@ -2725,7 +2740,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_computing_73",
@@ -2756,7 +2773,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_computing_25",
@@ -2788,7 +2807,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_computing_26",
@@ -2819,7 +2840,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_11035",
@@ -2848,7 +2871,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_11036",
@@ -2879,7 +2904,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_11037",
@@ -2910,7 +2937,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_11038",
@@ -2941,7 +2970,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_11039",
@@ -2972,7 +3003,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_11040",
@@ -3003,7 +3036,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_11041",
@@ -3406,7 +3441,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_physics_transporters_23",
@@ -3642,7 +3679,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Krenim"
+    ]
   },
   {
     "id": "tech_physics_anticloak_1",
@@ -3784,7 +3823,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_close_rifts",
@@ -4382,7 +4423,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_117",
@@ -4559,7 +4602,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_physics_temporal_64",
@@ -5675,7 +5720,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01343",
@@ -5706,7 +5753,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01344",
@@ -5737,7 +5786,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01345",
@@ -5768,7 +5819,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01346",
@@ -5800,7 +5853,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01347",
@@ -5832,7 +5887,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01348",
@@ -5863,7 +5920,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01349",
@@ -5894,7 +5953,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_artificial_70",
@@ -5923,7 +5984,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_applied_75",
@@ -5954,7 +6017,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_01262",
@@ -5985,7 +6050,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_singularity_78",
@@ -6016,7 +6083,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_singularity_81",
@@ -6047,7 +6116,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_169",
@@ -6078,7 +6149,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_170",
@@ -6109,7 +6182,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_195",
@@ -6140,7 +6215,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_transwarp_borg",
@@ -6169,7 +6246,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_172",
@@ -6200,7 +6279,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_01270",
@@ -6231,7 +6312,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_173",
@@ -6262,7 +6345,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_174",
@@ -6294,7 +6379,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_175",
@@ -6326,7 +6413,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_176",
@@ -6357,7 +6446,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_177",
@@ -6388,7 +6479,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_01276",
@@ -6420,7 +6513,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_artificial_gravity",
@@ -6509,7 +6604,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_physics_gravity_121",
@@ -6537,7 +6634,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_236",
@@ -6568,7 +6667,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_232",
@@ -6599,7 +6700,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_physics_advanced_124",
@@ -6627,7 +6730,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_238",
@@ -6658,7 +6763,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_239",
@@ -6687,7 +6794,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_240",
@@ -6718,7 +6827,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_241",
@@ -6749,7 +6860,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_physics_01298",
@@ -6780,7 +6893,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Tholian"
+    ]
   },
   {
     "id": "tech_deflector_field",
@@ -6897,7 +7012,11 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Hirogen",
+      "Voth",
+      "Suliban"
+    ]
   },
   {
     "id": "tech_physics_shield_88",
@@ -7440,7 +7559,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_211",
@@ -7656,7 +7777,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_220",
@@ -7687,7 +7810,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_222",
@@ -7718,7 +7843,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_219",
@@ -7749,7 +7876,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_224",
@@ -7781,7 +7910,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_226",
@@ -7812,7 +7943,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_01340",
@@ -7840,7 +7973,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_223",
@@ -7872,7 +8007,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_01304",
@@ -7903,7 +8040,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_01305",
@@ -7934,7 +8073,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_228",
@@ -7965,7 +8106,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_14008",
@@ -8027,7 +8170,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_148",
@@ -8154,7 +8299,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_14009",
@@ -8185,7 +8332,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_14024",
@@ -8216,7 +8365,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_field_manipulation_14025",
@@ -8247,7 +8398,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_planetary_115",
@@ -8691,7 +8844,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_14051",
@@ -8720,7 +8875,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_dervish_149",
@@ -10073,7 +10230,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Breen"
+    ]
   },
   {
     "id": "tech_physics_particles_322",
@@ -10104,7 +10263,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Breen"
+    ]
   },
   {
     "id": "tech_physics_01555",
@@ -10135,7 +10296,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Breen"
+    ]
   },
   {
     "id": "tech_physics_particles_323",
@@ -10166,7 +10329,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Breen"
+    ]
   },
   {
     "id": "tech_physics_particles_306",
@@ -10385,7 +10550,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_physics_01670",
@@ -10413,7 +10580,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_physics_01671",
@@ -10441,7 +10610,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_physics_particles_407",
@@ -10470,7 +10641,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_physics_particles_14010",
@@ -10528,7 +10701,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_physics_optronically_165",
@@ -10556,7 +10731,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_andorian_phaser_1",
@@ -11658,7 +11835,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Federation"
+    ]
   },
   {
     "id": "tech_physics_phaser-disruptor_182",
@@ -11687,7 +11866,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Cardassian"
+    ]
   },
   {
     "id": "tech_specialization_phaser",
@@ -12426,7 +12607,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_physics_particles_503",
@@ -12511,7 +12694,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_physics_kang_206",
@@ -12539,7 +12724,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Klingon"
+    ]
   },
   {
     "id": "tech_physics_crescent-wave_207",
@@ -13425,7 +13612,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Romulan"
+    ]
   },
   {
     "id": "tech_physics_crm_221",
@@ -13454,7 +13643,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Breen"
+    ]
   },
   {
     "id": "tech_specialization_disruptor",
@@ -15112,7 +15303,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_particles_703",
@@ -15140,7 +15333,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_20902",
@@ -15168,7 +15363,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_particles_705",
@@ -15196,7 +15393,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_20904",
@@ -15224,7 +15423,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_particles_707",
@@ -15252,7 +15453,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_20906",
@@ -15280,7 +15483,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_particles_709",
@@ -15308,7 +15513,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_20908",
@@ -15336,7 +15543,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_particles_711",
@@ -15364,7 +15573,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_20910",
@@ -15392,7 +15603,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_20911",
@@ -15420,7 +15633,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_20912",
@@ -15448,7 +15663,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_11560",
@@ -15476,7 +15693,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_01945",
@@ -15502,7 +15721,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01946",
@@ -15530,7 +15751,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_20916",
@@ -15558,7 +15781,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01947",
@@ -15586,7 +15811,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01951",
@@ -15614,7 +15841,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01948",
@@ -15642,7 +15871,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01952",
@@ -15670,7 +15901,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01949",
@@ -15698,7 +15931,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01954",
@@ -15726,7 +15961,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01950",
@@ -15754,7 +15991,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_20924",
@@ -15782,7 +16021,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_20925",
@@ -15810,7 +16051,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_20926",
@@ -15838,7 +16081,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_20927",
@@ -15866,7 +16111,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01953",
@@ -15895,7 +16142,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_20929",
@@ -15921,7 +16170,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_01936",
@@ -16176,7 +16427,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Son'a"
+    ]
   },
   {
     "id": "tech_physics_01956",
@@ -16204,7 +16457,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Son'a"
+    ]
   },
   {
     "id": "tech_physics_01957",
@@ -16233,7 +16488,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Son'a"
+    ]
   },
   {
     "id": "tech_physics_01958",
@@ -16261,7 +16518,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Son'a"
+    ]
   },
   {
     "id": "tech_physics_01961",
@@ -16290,7 +16549,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Son'a"
+    ]
   },
   {
     "id": "tech_physics_01962",
@@ -16319,7 +16580,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Son'a"
+    ]
   },
   {
     "id": "tech_antiproton_cannon_1",
@@ -17137,7 +17400,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_20918",
@@ -17165,7 +17430,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_20919",
@@ -17193,7 +17460,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_20920",
@@ -17221,7 +17490,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Borg"
+    ]
   },
   {
     "id": "tech_physics_proton_281",
@@ -17836,7 +18107,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Dominion"
+    ]
   },
   {
     "id": "tech_specialization_polaron_beam",
@@ -18446,7 +18719,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Vidiian"
+    ]
   },
   {
     "id": "tech_physics_particles_756",
@@ -18474,7 +18749,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Vidiian"
+    ]
   },
   {
     "id": "tech_physics_particles_758",
@@ -18503,7 +18780,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Vidiian"
+    ]
   },
   {
     "id": "tech_physics_particles_760",
@@ -18531,7 +18810,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Vidiian"
+    ]
   },
   {
     "id": "tech_physics_particles_761",
@@ -18560,7 +18841,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Vidiian"
+    ]
   },
   {
     "id": "tech_physics_particles_762",
@@ -18589,7 +18872,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Vidiian"
+    ]
   },
   {
     "id": "tech_physics_particles_763",
@@ -19386,7 +19671,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Ferengi"
+    ]
   },
   {
     "id": "tech_physics_particles_884",
@@ -19415,7 +19702,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Vidiian"
+    ]
   },
   {
     "id": "tech_physics_tetryon_334",
@@ -19444,7 +19733,9 @@
     "category": [
       "particles"
     ],
-    "required_species": []
+    "required_species": [
+      "Hirogen"
+    ]
   },
   {
     "id": "tech_specialization_tetryon",
@@ -19880,7 +20171,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_defense_1",
@@ -19911,7 +20204,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_defense_2",
@@ -19942,7 +20237,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_defense_3",
@@ -19973,7 +20270,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_defense_4",
@@ -20004,7 +20303,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_defense_5",
@@ -20035,7 +20336,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_defense_6",
@@ -20066,7 +20369,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_defense_7",
@@ -20097,7 +20402,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_defense_8",
@@ -20128,7 +20435,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_defense_9",
@@ -20159,7 +20468,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_reactor_1",
@@ -20191,7 +20502,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_reactor_2",
@@ -20222,7 +20535,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_reactor_3",
@@ -20253,7 +20568,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_reactor_pk",
@@ -20284,7 +20601,9 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_tracking_1",
@@ -20310,7 +20629,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_tracking_2",
@@ -20336,7 +20657,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_undine_tracking_3",
@@ -20364,7 +20687,9 @@
     "category": [
       "computing"
     ],
-    "required_species": []
+    "required_species": [
+      "Undine"
+    ]
   },
   {
     "id": "tech_physics_17023",
@@ -20393,7 +20718,14 @@
     "category": [
       "field_manipulation"
     ],
-    "required_species": []
+    "required_species": [
+      "Xindi-Aquatic",
+      "Xindi-Insectoid",
+      "Xindi-Avian",
+      "Xindi-Primate",
+      "Xindi-Reptilian",
+      "Xindi-Arboreal"
+    ]
   },
   {
     "id": "tech_physics_computing_17024",
