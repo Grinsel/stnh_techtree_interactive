@@ -612,7 +612,22 @@
                     <h2>Information</h2>
                     <div id="tech-counter">Displayed Technologies: 0</div>
                     <div id="filters">
-                        <label for="species-select">Select Empire:</label>
+                        <label for="faction-select">Select Faction:</label>
+                        <select id="faction-select">
+                            <option value="all">All Factions</option>
+                        </select>
+                        <div id="faction-info" style="margin-top: 4px; margin-bottom: 12px; font-size: 0.95rem; color: #a0b0c0;">
+                            <span id="faction-tech-count">Loading factions...</span>
+                        </div>
+                        <div class="search-options" style="margin-top: 8px; margin-bottom: 8px;">
+                            <label for="faction-exclusive-toggle" style="margin: 0;">Faction Exclusive</label>
+                            <label class="switch">
+                                <input type="checkbox" id="faction-exclusive-toggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <label for="species-select" class="filters-divider">Select Empire (Legacy):</label>
                         <select id="species-select">
                             <option value="all">All</option>
                         </select>

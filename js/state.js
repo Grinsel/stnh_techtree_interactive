@@ -2,6 +2,7 @@
 // Exposes default state and helpers for reading/writing/applying state.
 
 export const DEFAULT_STATE = {
+  faction: "federation",  // NEW Phase 2 - UFP as default
   species: "all",
   area: "all",
   category: "all",
@@ -21,6 +22,7 @@ export function loadState() {
   const urlParams = new URLSearchParams(window.location.search);
   const stateFromUrl = {
     layout: urlParams.get("layout"),
+    faction: urlParams.get("faction"),  // NEW Phase 2
     species: urlParams.get("species"),
     area: urlParams.get("area"),
     category: urlParams.get("category"),
@@ -34,6 +36,7 @@ export function loadState() {
   if (hasUrlParams) {
     return {
       layout: stateFromUrl.layout || DEFAULT_STATE.layout,
+      faction: stateFromUrl.faction || DEFAULT_STATE.faction,  // NEW Phase 2
       species: stateFromUrl.species || DEFAULT_STATE.species,
       area: stateFromUrl.area || DEFAULT_STATE.area,
       category: stateFromUrl.category || DEFAULT_STATE.category,
@@ -49,6 +52,7 @@ export function loadState() {
     const raw = localStorage.getItem("techTreeState");
     const parsed = raw ? JSON.parse(raw) : DEFAULT_STATE;
     if (parsed.performanceMode === undefined) parsed.performanceMode = true;
+    if (parsed.faction === undefined) parsed.faction = DEFAULT_STATE.faction;  // NEW Phase 2
     return parsed;
   } catch (e) {
     console.warn("Could not load saved state:", e);
@@ -58,6 +62,7 @@ export function loadState() {
 
 export function saveState() {
   const state = {
+    faction: document.getElementById("faction-select")?.value || DEFAULT_STATE.faction,  // NEW Phase 2
     species: document.getElementById("species-select").value,
     area: document.getElementById("area-select").value,
     category: document.getElementById("category-select").value,
@@ -76,7 +81,10 @@ export function saveState() {
 }
 
 export function applyState(state) {
-  document.getElementById("species-select").value = state.species || 'Federation';
+  const factionSelect = document.getElementById("faction-select");
+  if (factionSelect) factionSelect.value = state.faction || DEFAULT_STATE.faction;  // NEW Phase 2
+
+  document.getElementById("species-select").value = state.species || 'all';
   document.getElementById("area-select").value = state.area;
   document.getElementById("category-select").value = state.category;
   document.getElementById("layout-select").value = state.layout;

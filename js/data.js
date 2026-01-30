@@ -4,6 +4,7 @@
 // --- In-memory caches ---
 let _techs = null;            // Array<Tech>
 let _species = null;          // Array<string>
+let _factions = null;         // Array<Faction> - NEW Phase 2
 let _indexById = null;        // Map<string, Tech>
 
 // --- Types (informal) ---
@@ -51,10 +52,18 @@ export async function loadSpeciesList() {
   return _species;
 }
 
+// --- NEW Phase 2: Faction Data Loading ---
+export async function loadFactionData() {
+  if (Array.isArray(_factions)) return _factions;
+  const res = await fetch('assets/factions.json');
+  _factions = await res.json();
+  return _factions;
+}
+
 export async function initData() {
-  // Best-effort parallel preload
-  await Promise.all([loadTechnologyData(), loadSpeciesList()]);
-  return { techs: _techs, species: _species };
+  // Best-effort parallel preload (including factions - Phase 2)
+  await Promise.all([loadTechnologyData(), loadSpeciesList(), loadFactionData()]);
+  return { techs: _techs, species: _species, factions: _factions };
 }
 
 // --- Convenience wrappers for consumers ---
@@ -229,3 +238,101 @@ export function calculateShortestPath(startId, endId, techs) {
 // --- Getters (optional external use) ---
 export function getAllTechsCached() { return _techs; }
 export function getAllSpeciesCached() { return _species; }
+export function getAllFactionsCached() { return _factions; }  // NEW Phase 2
+
+// --- NEW Phase 2: Faction-Aware Functions ---
+
+/**
+ * Filter technologies by faction availability
+ *
+ * @param {Array<Tech>} techs - Array of technologies
+ * @param {string} factionId - Faction ID (e.g., 'federation', 'klingon', 'all')
+ * @returns {Array<Tech>} Filtered technologies available to the faction
+ */
+export function filterTechsByFaction(techs, factionId) {
+  if (factionId === 'all' || !factionId) return techs;
+
+  return techs.filter(tech => {
+    const availability = tech.faction_availability;
+
+    // If no faction_availability data, assume available to all
+    if (!availability || Object.keys(availability).length === 0) {
+      return true;
+    }
+
+    // Check if faction has access
+    // Match by faction ID (normalized to lowercase)
+    const factionKey = Object.keys(availability).find(
+      key => key.toLowerCase() === factionId.toLowerCase()
+    );
+
+    if (!factionKey) return false;
+
+    return availability[factionKey]?.available === true;
+  });
+}
+
+/**
+ * Get technology name (faction-specific if available)
+ *
+ * @param {Tech} tech - Technology object
+ * @param {string} factionId - Faction ID
+ * @returns {string} Tech name (faction-specific or default)
+ */
+export function getTechName(tech, factionId) {
+  if (!tech) return '';
+
+  // If no faction or 'all', use default name
+  if (factionId === 'all' || !factionId) {
+    return tech.name || tech.id || '';
+  }
+
+  // Check for alternate names
+  if (tech.alternate_names && typeof tech.alternate_names === 'object') {
+    // Try to find matching faction name
+    const altName = Object.keys(tech.alternate_names).find(
+      key => key.toLowerCase() === factionId.toLowerCase()
+    );
+
+    if (altName) {
+      return tech.alternate_names[altName] || tech.name || tech.id || '';
+    }
+  }
+
+  // Fallback to default name
+  return tech.name || tech.id || '';
+}
+
+/**
+ * Get faction by ID
+ *
+ * @param {string} factionId - Faction ID
+ * @returns {Faction|null} Faction object or null
+ */
+export function getFactionById(factionId) {
+  if (!_factions || !Array.isArray(_factions)) return null;
+  return _factions.find(f => f.id === factionId) || null;
+}
+
+/**
+ * Check if a technology is faction-exclusive
+ *
+ * @param {Tech} tech - Technology object
+ * @param {string} factionId - Faction ID
+ * @returns {boolean} True if tech is exclusive to this faction
+ */
+export function isFactionExclusive(tech, factionId) {
+  if (factionId === 'all' || !factionId) return false;
+
+  const availability = tech.faction_availability;
+  if (!availability || Object.keys(availability).length === 0) return false;
+
+  // Count how many factions can access this tech
+  const availableTo = Object.keys(availability).filter(
+    key => availability[key]?.available === true
+  );
+
+  // Exclusive if only ONE faction can access it, and that's the current faction
+  return availableTo.length === 1 &&
+         availableTo[0].toLowerCase() === factionId.toLowerCase();
+}

@@ -16,6 +16,7 @@ import { createHandleNodeSelection } from './js/ui/selection.js';
 import { renderPopupGraph } from './js/ui/popup.js';
 import { attachEventHandlers } from './js/ui/events.js';
 import { updateHistoryButtons } from './js/ui/history.js';
+import { initFactionDropdown, registerFactionEvents } from './js/factions.js';  // NEW Phase 2
 
 // Global SVG and group so LOD can access current transform and selections
 let svg = null;
@@ -792,6 +793,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     // --- Main Execution Logic ---
+    // NEW Phase 2: Initialize faction dropdown
+    initFactionDropdown().then(() => {
+        registerFactionEvents();
+        console.log('[Phase 2] Faction system initialized');
+    }).catch(err => console.error('[Phase 2] Faction initialization failed:', err));
+
     // Load species filter options at startup
     let categoriesLoaded = false;
     loadSpeciesFilter(speciesSelect, {
