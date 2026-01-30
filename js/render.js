@@ -105,6 +105,73 @@ function getEffectIcon(category) {
     return icons[category] || '⚙️';
 }
 
+/**
+ * Format unlocks with grouping by type (similar to effects)
+ */
+function formatUnlocksGrouped(unlocksByType) {
+    if (!unlocksByType || Object.keys(unlocksByType).length === 0) {
+        return '';
+    }
+
+    // Build HTML
+    let html = '<div class="unlocks-section"><strong>Unlocks:</strong>';
+
+    // Sort unlock types alphabetically
+    const sortedTypes = Object.keys(unlocksByType).sort();
+
+    for (const unlockType of sortedTypes) {
+        const items = unlocksByType[unlockType];
+        if (!items || items.length === 0) continue;
+
+        const icon = getUnlockIcon(unlockType);
+        html += `<div class="unlock-category">`;
+        html += `<span class="unlock-category-label">${icon} ${unlockType}:</span>`;
+
+        items.forEach(item => {
+            html += `<div class="unlock-item">${item}</div>`;
+        });
+
+        html += `</div>`;
+    }
+
+    html += '</div>';
+    return html;
+}
+
+/**
+ * Get icon for unlock type
+ */
+function getUnlockIcon(type) {
+    const icons = {
+        'Building': '🏛️',
+        'Ship Type': '🚀',
+        'Ship Section': '🔧',
+        'Tradition': '📜',
+        'Trait': '🧬',
+        'Ascension Perk': '⭐',
+        'Special Project': '🔬',
+        'Megastructure': '🏗️',
+        'District': '🏘️',
+        'Edict': '📋',
+        'Decision': '⚖️',
+        'Policy': '📑',
+        'Strategic Resource': '💎',
+        'Job': '👔',
+        'Army Type': '⚔️',
+        'Technology': '🔬',
+        'Component': '⚙️',
+        'Starbase Building': '🛰️',
+        'Starbase Module': '🔩',
+        'Anomaly': '❓',
+        'Bypass': '🌀',
+        'Faction Type': '🏛️',
+        'Country Limit': '📊',
+        'Deposit': '⛏️',
+        'Other': '📦'
+    };
+    return icons[type] || '📦';
+}
+
 export function createSvgFor(container, onZoom) {
   const width = container.clientWidth;
   const height = container.clientHeight;
@@ -304,14 +371,17 @@ export function formatTooltip(d, currentFactionId = 'all') {
     // Build prerequisites string
     const prerequisites = (d.prerequisites || []).map(id => nameById.get(id) || id).join(', ');
 
-    // Build unlocks string from unlock_details (NEW format from Phases 1+)
+    // Build unlocks HTML using structured data
     let unlocksHtml = '';
 
-    if (d.unlock_details && d.unlock_details.description) {
-        // Use new unlock_details format with localized description
+    if (d.unlock_details && d.unlock_details.unlocks_by_type) {
+        // Use new grouped format
+        unlocksHtml = formatUnlocksGrouped(d.unlock_details.unlocks_by_type);
+    } else if (d.unlock_details && d.unlock_details.description) {
+        // Fallback to description string (legacy)
         unlocksHtml = d.unlock_details.description;
     } else if (d.unlocks && d.unlocks.length > 0) {
-        // Fallback to old unlocks array format (legacy compatibility)
+        // Fallback to very old unlocks array format
         const unlocksByType = d.unlocks.reduce((acc, u) => {
             if (typeof u === 'object' && u !== null) {
                 const type = u.type || 'unknown';
@@ -361,7 +431,7 @@ export function formatTooltip(d, currentFactionId = 'all') {
         ${effectsHtml}
         <strong>Weight:</strong> ${d.weight}<br>
         <strong>Access:</strong> ${d.required_species ? d.required_species.join(', ') : 'All'}<br>
-        <strong>Unlocks:</strong><br>${unlocksHtml || 'None'}
+        ${unlocksHtml || '<strong>Unlocks:</strong> None'}
     `;
 }
 

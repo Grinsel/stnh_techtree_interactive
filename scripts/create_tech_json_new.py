@@ -18,10 +18,11 @@ from pathlib import Path
 from balance_center_bridge import BalanceCenterBridge
 from component_parser import ComponentParser
 from supplemental_tech_parser import SupplementalTechParser
+from reverse_unlock_parser import ReverseUnlockParser
 from config import STNH_MOD_ROOT, OUTPUT_ASSETS_DIR, OUTPUT_ROOT_DIR
 
 
-def transform_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser):
+def transform_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser, reverse_unlocks):
     """
     Transform Balance Center tech format → Website JSON format
 
@@ -30,6 +31,7 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
         faction_mappings: Faction availability mappings from FactionDetector
         loc_loader: LocLoader instance for localization
         component_parser: ComponentParser instance for extracting component effects
+        reverse_unlocks: Dict mapping tech_id -> list of things it unlocks
 
     Returns:
         Enhanced tech dict with all website-required fields
@@ -65,10 +67,10 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
     # STNH techs unlock components, which contain the actual modifiers
     enhanced['effects'] = extract_effects_from_components(tech_id, component_parser)
 
-    # 4. Unlock details
-    # TODO: Implement extract_unlock_details()
+    # 4. Unlock details (combine prereqfor_desc + reverse lookup)
     unlocks = tech.get('unlocks', [])
-    enhanced['unlock_details'] = extract_unlock_details(unlocks, loc_loader)
+    reverse_unlock_data = reverse_unlocks.get(tech_id, [])
+    enhanced['unlock_details'] = extract_unlock_details(unlocks, reverse_unlock_data, loc_loader)
 
     # 5. Faction availability
     # TODO: Implement determine_faction_availability()
@@ -89,7 +91,7 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
     return enhanced
 
 
-def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser):
+def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser, reverse_unlocks):
     """
     Transform Supplemental Parser tech format → Website JSON format
 
@@ -98,6 +100,7 @@ def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_lo
         faction_mappings: Faction availability mappings from FactionDetector
         loc_loader: LocLoader instance for localization
         component_parser: ComponentParser instance for extracting component effects
+        reverse_unlocks: Dict mapping tech_id -> list of things it unlocks
 
     Returns:
         Enhanced tech dict with all website-required fields
@@ -144,9 +147,16 @@ def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_lo
 
     enhanced['effects'] = effects
 
-    # Unlock details from prereqfor_desc
+    # Unlock details from prereqfor_desc + reverse lookup
     prereqfor_desc = tech.get('prereqfor_desc', {})
-    enhanced['unlock_details'] = parse_prereqfor_desc_for_display(prereqfor_desc, loc_loader)
+    unlock_details = parse_prereqfor_desc_for_display(prereqfor_desc, loc_loader)
+
+    # Merge reverse unlock data
+    reverse_unlock_data = reverse_unlocks.get(tech_id, [])
+    if reverse_unlock_data:
+        unlock_details = merge_unlock_details_with_reverse(unlock_details, reverse_unlock_data)
+
+    enhanced['unlock_details'] = unlock_details
 
     # Faction availability (reuse existing function)
     enhanced['faction_availability'] = determine_faction_availability(tech, faction_mappings)
@@ -163,6 +173,48 @@ def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_lo
     enhanced['required_species'] = tech.get('required_species', [])
 
     return enhanced
+
+
+def merge_unlock_details_with_reverse(unlock_details, reverse_unlock_data):
+    """
+    Merge unlock_details from prereqfor_desc with reverse lookup data
+
+    Args:
+        unlock_details: Dict from parse_prereqfor_desc_for_display or extract_unlock_details
+        reverse_unlock_data: List of dicts from reverse parser
+
+    Returns:
+        Merged unlock_details with updated description and structured data
+    """
+    if not reverse_unlock_data:
+        return unlock_details
+
+    # Group reverse unlocks by type
+    from collections import defaultdict
+    by_type = defaultdict(list)
+    for entry in reverse_unlock_data:
+        by_type[entry['type']].append(entry['name'])
+
+    # Store structured unlock data for UI rendering
+    unlock_details['unlocks_by_type'] = dict(by_type)
+
+    # Format reverse parts for description (legacy compatibility)
+    reverse_parts = []
+    for unlock_type, names in sorted(by_type.items()):
+        if len(names) == 1:
+            reverse_parts.append(f"{unlock_type}: {names[0]}")
+        else:
+            # Show ALL names
+            reverse_parts.append(f"{unlock_type}s: {', '.join(names)}")
+
+    # Merge descriptions (keep for backwards compatibility)
+    if unlock_details.get('description'):
+        if reverse_parts:
+            unlock_details['description'] += " | " + " | ".join(reverse_parts)
+    else:
+        unlock_details['description'] = " | ".join(reverse_parts) if reverse_parts else ""
+
+    return unlock_details
 
 
 def parse_prereqfor_desc_for_display(prereqfor_desc, loc_loader):
@@ -475,12 +527,13 @@ def humanize_modifier_key(key):
     return name
 
 
-def extract_unlock_details(unlocks, loc_loader):
+def extract_unlock_details(unlocks, reverse_unlock_data, loc_loader):
     """
-    Extract detailed unlock information from tech unlocks list
+    Extract detailed unlock information from tech unlocks list + reverse lookup
 
     Args:
         unlocks: List of unlock strings from Balance Center (e.g., ["building_capital_2", "tech_advanced_sensors"])
+        reverse_unlock_data: List of dicts from reverse parser (e.g., [{'type': 'Building', 'id': 'building_x', 'name': 'X'}])
         loc_loader: LocLoader instance
 
     Returns:
@@ -492,21 +545,13 @@ def extract_unlock_details(unlocks, loc_loader):
             "description": "Unlocks Advanced Capital, Advanced Sensors, and Sensor Array II"
         }
     """
-    if not unlocks:
-        return {
-            'technologies': [],
-            'components': [],
-            'buildings': [],
-            'description': ''
-        }
-
-    # Categorize unlocks
+    # Categorize prereqfor_desc unlocks from Balance Center
     technologies = []
     components = []
     buildings = []
     other = []
 
-    for unlock in unlocks:
+    for unlock in (unlocks or []):
         if unlock.startswith('tech_'):
             technologies.append(unlock)
         elif unlock.startswith('building_'):
@@ -517,30 +562,97 @@ def extract_unlock_details(unlocks, loc_loader):
         else:
             other.append(unlock)
 
-    # Generate description
+    # Merge reverse lookup data
+    reverse_parts = []
+    if reverse_unlock_data:
+        # Group by type
+        from collections import defaultdict
+        by_type = defaultdict(list)
+        for entry in reverse_unlock_data:
+            by_type[entry['type']].append(entry['name'])
+
+        # Format grouped unlocks - SHOW ALL UNLOCKS COMPLETELY
+        for unlock_type, names in sorted(by_type.items()):
+            if len(names) == 1:
+                reverse_parts.append(f"{unlock_type}: {names[0]}")
+            else:
+                # Show ALL names, not just first 3
+                reverse_parts.append(f"{unlock_type}s: {', '.join(names)}")
+
+    # Generate description combining both sources - SHOW ALL UNLOCKS COMPLETELY
     description_parts = []
 
+    # Add localized names from prereqfor_desc (not just counts!)
     if buildings:
-        building_names = [loc_loader.get(b, b) for b in buildings[:3]]  # Max 3 for brevity
-        description_parts.append(f"{len(buildings)} building(s)")
+        building_names = [loc_loader.get(b, b) for b in buildings]
+        if len(building_names) == 1:
+            description_parts.append(f"Building: {building_names[0]}")
+        else:
+            description_parts.append(f"Buildings: {', '.join(building_names)}")
 
     if components:
-        description_parts.append(f"{len(components)} component(s)")
+        # Components are usually ALL_CAPS IDs, keep as-is
+        if len(components) == 1:
+            description_parts.append(f"Component: {components[0]}")
+        else:
+            description_parts.append(f"Components: {', '.join(components)}")
 
     if technologies:
-        description_parts.append(f"{len(technologies)} follow-up tech(s)")
+        tech_names = [loc_loader.get(t, t) for t in technologies]
+        if len(tech_names) == 1:
+            description_parts.append(f"Technology: {tech_names[0]}")
+        else:
+            description_parts.append(f"Technologies: {', '.join(tech_names)}")
 
     if other:
-        description_parts.append(f"{len(other)} other unlock(s)")
+        # Other unlocks - try to localize
+        other_names = [loc_loader.get(o, o) for o in other]
+        if len(other_names) == 1:
+            description_parts.append(f"Other: {other_names[0]}")
+        else:
+            description_parts.append(f"Other: {', '.join(other_names)}")
 
-    description = "Unlocks: " + ", ".join(description_parts) if description_parts else "No direct unlocks"
+    # Build final description - each part already has its category label
+    all_parts = []
+    if description_parts:
+        all_parts.extend(description_parts)
+    if reverse_parts:
+        all_parts.extend(reverse_parts)
+
+    description = " | ".join(all_parts) if all_parts else ""
+
+    # Build structured unlocks_by_type for UI rendering
+    from collections import defaultdict
+    unlocks_by_type = defaultdict(list)
+
+    # Add prereqfor_desc unlocks
+    if buildings:
+        building_names = [loc_loader.get(b, b) for b in buildings]
+        unlocks_by_type['Building'].extend(building_names)
+
+    if components:
+        unlocks_by_type['Component'].extend(components)
+
+    if technologies:
+        tech_names = [loc_loader.get(t, t) for t in technologies]
+        unlocks_by_type['Technology'].extend(tech_names)
+
+    if other:
+        other_names = [loc_loader.get(o, o) for o in other]
+        unlocks_by_type['Other'].extend(other_names)
+
+    # Merge reverse lookup data
+    if reverse_unlock_data:
+        for entry in reverse_unlock_data:
+            unlocks_by_type[entry['type']].append(entry['name'])
 
     return {
         'technologies': technologies,
         'components': components,
         'buildings': buildings,
         'other': other,
-        'description': description
+        'description': description,
+        'unlocks_by_type': dict(unlocks_by_type) if unlocks_by_type else {}
     }
 
 
@@ -613,6 +725,12 @@ def generate_complete_tech_data():
     components, tech_components = component_parser.parse_all_components()
     print()
 
+    # 1c. Initialize Reverse Unlock Parser (Option 1 - Unlock Fix)
+    print("Step 1c: Scanning game files for reverse unlocks...")
+    reverse_unlock_parser = ReverseUnlockParser(STNH_MOD_ROOT)
+    reverse_unlocks = reverse_unlock_parser.parse_all()
+    print()
+
     # 2. Extract ALL data
     print("Step 2: Extracting data from Balance Center...")
     data = bridge.get_all_technologies_with_metadata()
@@ -639,7 +757,8 @@ def generate_complete_tech_data():
                 tech,
                 faction_mappings,
                 bridge.loc_loader,
-                component_parser
+                component_parser,
+                reverse_unlocks
             )
             techs_enhanced.append(enhanced)
         except Exception as e:
@@ -667,7 +786,8 @@ def generate_complete_tech_data():
                 supp_tech,
                 faction_mappings,
                 bridge.loc_loader,
-                component_parser
+                component_parser,
+                reverse_unlocks
             )
             techs_enhanced.append(enhanced)
             missing_count += 1
