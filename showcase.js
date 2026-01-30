@@ -1,5 +1,5 @@
 import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController, formatTooltip, createSvgFor, getAreaColor } from './js/render.js';
-import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculateAllPaths, loadTechnologyData, getAllTechsCached, isTechDataLoaded } from './js/data.js';
+import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculateAllPaths, loadTechnologyData, getAllTechsCached, isTechDataLoaded, filterTechsByFaction } from './js/data.js';  // NEW Phase 2: added filterTechsByFaction
 import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter, loadCategoryFilter } from './js/filters.js';
 import { handleSearch as executeSearch } from './js/search.js';
 import { renderForceDirectedArrowsGraph as arrowsLayout } from './js/ui/layouts/arrows.js';
@@ -16,7 +16,7 @@ import { createHandleNodeSelection } from './js/ui/selection.js';
 import { renderPopupGraph } from './js/ui/popup.js';
 import { attachEventHandlers } from './js/ui/events.js';
 import { updateHistoryButtons } from './js/ui/history.js';
-import { initFactionDropdown, registerFactionEvents } from './js/factions.js';  // NEW Phase 2
+import { initFactionDropdown, registerFactionEvents, getCurrentFaction } from './js/factions.js';  // NEW Phase 2
 
 // Global SVG and group so LOD can access current transform and selections
 let svg = null;
@@ -436,7 +436,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const jumpBtn = document.getElementById('jump-to-tech-btn');
         const hrSep = document.getElementById('jump-to-tech-hr');
 
-        const html = tech ? formatTooltip(tech) : '<p>Click on a technology to see its details here.</p>';
+        // NEW Phase 2: Pass current faction to tooltip
+        const html = tech ? formatTooltip(tech, getCurrentFaction()) : '<p>Click on a technology to see its details here.</p>';
         techDetailsContent.innerHTML = html;
         if (hrSep) techDetailsContent.appendChild(hrSep);
         if (jumpBtn) techDetailsContent.appendChild(jumpBtn);
@@ -467,6 +468,12 @@ document.addEventListener('DOMContentLoaded', () => {
             tierRange: { startTier: 0, endTier: 99 },
             activeTechId: null,
         });
+
+        // NEW Phase 2: Apply faction filter
+        const currentFaction = getCurrentFaction();
+        if (currentFaction && currentFaction !== 'all') {
+            baseTechs = filterTechsByFaction(baseTechs, currentFaction);
+        }
 
         // Apply connected filter using full graph for traversal, then intersect with base set
         let filteredTechs;
@@ -612,7 +619,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr('transform', d => `translate(${d.x},${d.y})`)
             .on('mouseover', (event, d) => {
                 tooltipEl.style.display = 'block';
-                tooltipEl.innerHTML = formatTooltip(d);
+                // NEW Phase 2: Pass current faction to tooltip
+                tooltipEl.innerHTML = formatTooltip(d, getCurrentFaction());
 
                 if (activeTechId && d.id !== activeTechId) {
                     const path = findPathToActive(d.id, activeTechId, nodes);
@@ -656,10 +664,46 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr('fill', (d) => (d.area ? `url(#gradient-${d.area})` : getAreaColor(d.area)))
             .style('filter', 'url(#drop-shadow)')
             .attr('stroke', (d) => {
+                // Priority: selection states > faction-exclusive > none
                 if (d.id === activeTechId) return 'yellow';
                 if (d.id === selectionStartNode) return 'lime';
                 if (d.id === selectionEndNode) return 'red';
+
+                // NEW Phase 2: Faction-exclusive highlighting (Gold border)
+                const currentFaction = getCurrentFaction();
+                if (currentFaction && currentFaction !== 'all') {
+                    const availability = d.faction_availability || {};
+                    const availableTo = Object.keys(availability).filter(
+                        key => availability[key]?.available === true
+                    );
+
+                    // Gold border if exclusive to current faction
+                    if (availableTo.length === 1 && availableTo[0].toLowerCase() === currentFaction.toLowerCase()) {
+                        return '#ffd700';  // Gold
+                    }
+                }
+
                 return 'none';
+            })
+            .attr('stroke-width', (d) => {
+                // NEW Phase 2: Thicker stroke for faction-exclusive
+                if (d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode) {
+                    return 4;
+                }
+
+                const currentFaction = getCurrentFaction();
+                if (currentFaction && currentFaction !== 'all') {
+                    const availability = d.faction_availability || {};
+                    const availableTo = Object.keys(availability).filter(
+                        key => availability[key]?.available === true
+                    );
+
+                    if (availableTo.length === 1 && availableTo[0].toLowerCase() === currentFaction.toLowerCase()) {
+                        return 3;  // Thicker for faction-exclusive
+                    }
+                }
+
+                return 1;
             })
             .attr('stroke-width', (d) =>
                 d.id === activeTechId || d.id === selectionStartNode || d.id === selectionEndNode ? 3 : 1

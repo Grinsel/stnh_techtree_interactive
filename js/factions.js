@@ -76,8 +76,15 @@ export function registerFactionEvents() {
     // Save state
     saveState();
 
-    // TODO Phase 2.4: Trigger re-render with faction filter
-    // This will be implemented when integrating with render.js
+    // NEW Phase 2.4: Trigger re-render with faction filter
+    if (typeof window.updateVisualization === 'function') {
+      // Get current species filter
+      const speciesSelect = document.getElementById('species-select');
+      const selectedSpecies = speciesSelect ? speciesSelect.value : 'all';
+
+      // Re-render with faction filter applied
+      window.updateVisualization(selectedSpecies, null, false);
+    }
   });
 }
 

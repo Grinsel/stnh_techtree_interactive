@@ -1,6 +1,8 @@
 // Render module: shared rendering helpers
 // TODO: migrate renderStraightLinks, renderNodeBase, renderTierIndicator, renderNodeLabels, tooltip helpers, wrapText
 
+import { getTechName, isFactionExclusive } from './data.js';  // NEW Phase 2
+
 export function createSvgFor(container, onZoom) {
   const width = container.clientWidth;
   const height = container.clientHeight;
@@ -189,11 +191,18 @@ export function renderNodeLabels(nodeSel, { nodeWidth, nodeHeight }) {
 
 import { getAllTechsCached } from './data.js';
 
-export function formatTooltip(d) {
+export function formatTooltip(d, currentFactionId = 'all') {
     const techSource = getAllTechsCached() || [];
     const nameById = new Map(techSource.map(t => [t.id, t.name]));
 
+    // NEW Phase 2: Use faction-specific name if available
+    const displayName = getTechName(d, currentFactionId) || d.name || d.id;
+    const isExclusive = isFactionExclusive(d, currentFactionId);
+
+    // Build prerequisites string
     const prerequisites = (d.prerequisites || []).map(id => nameById.get(id) || id).join(', ');
+
+    // Build unlocks string
     const unlocksByType = (d.unlocks || []).reduce((acc, u) => {
         if (typeof u === 'object' && u !== null) {
             const type = u.type || 'unknown';
@@ -210,17 +219,43 @@ export function formatTooltip(d) {
         unlocksHtml += `<strong>${type}:</strong> ${unlocksByType[type].join(', ')}<br>`;
     }
 
+    // NEW Phase 2: Add description if available (from Phase 1 data)
+    let descriptionHtml = '';
+    if (d.description && d.description.trim()) {
+        descriptionHtml = `<div style="margin: 8px 0; padding: 6px; background: rgba(0,0,0,0.3); border-left: 3px solid var(--primary); font-style: italic;">${d.description}</div>`;
+    }
+
+    // NEW Phase 2: Add effects if available (from Phase 1 data)
+    let effectsHtml = '';
+    if (d.effects && Array.isArray(d.effects) && d.effects.length > 0) {
+        effectsHtml = '<strong>Effects:</strong><br>';
+        d.effects.forEach(effect => {
+            effectsHtml += `<span style="margin-left: 1em;">⚙️ ${effect.display || effect.key}</span><br>`;
+        });
+    }
+
+    // NEW Phase 2: Faction exclusive badge
+    let factionBadge = '';
+    if (isExclusive && currentFactionId !== 'all') {
+        // Capitalize faction name
+        const factionName = currentFactionId.charAt(0).toUpperCase() + currentFactionId.slice(1);
+        factionBadge = `<span style="color: #ffd700; font-weight: bold;">⭐ ${factionName}-exclusive</span><br>`;
+    }
+
     return `
-        <strong>name:</strong> ${d.name}<br>
-        <strong>id:</strong> ${d.id}<br>
-        <strong>area:</strong> ${d.area}<br>
-        <strong>category:</strong> ${d.category}<br>
-        <strong>tier:</strong> ${d.tier}<br>
-        <strong>cost:</strong> ${d.cost}<br>
-        <strong>prerequisites:</strong> ${prerequisites}<br>
-        <strong>weight:</strong> ${d.weight}<br>
+        ${factionBadge}
+        <strong>Name:</strong> ${displayName}<br>
+        <strong>ID:</strong> ${d.id}<br>
+        ${descriptionHtml}
+        <strong>Area:</strong> ${d.area}<br>
+        <strong>Category:</strong> ${d.category || 'N/A'}<br>
+        <strong>Tier:</strong> ${d.tier}<br>
+        <strong>Cost:</strong> ${d.cost}<br>
+        <strong>Prerequisites:</strong> ${prerequisites || 'None'}<br>
+        ${effectsHtml}
+        <strong>Weight:</strong> ${d.weight}<br>
         <strong>Access:</strong> ${d.required_species ? d.required_species.join(', ') : 'All'}<br>
-        <strong>Unlocks:</strong><br>${unlocksHtml}
+        <strong>Unlocks:</strong><br>${unlocksHtml || 'None'}
     `;
 }
 
