@@ -3,6 +3,108 @@
 
 import { getTechName, isFactionExclusive } from './data.js';  // NEW Phase 2
 
+/**
+ * Phase 3: Format effects with grouping by category
+ */
+function formatEffectsGrouped(effects) {
+    if (!effects || effects.length === 0) return '';
+
+    // Group effects by category
+    const grouped = {
+        'Combat': [],
+        'Economy': [],
+        'Science': [],
+        'Ships': [],
+        'Population': [],
+        'Other': []
+    };
+
+    effects.forEach(effect => {
+        const category = determineEffectCategory(effect.key);
+        grouped[category].push(effect);
+    });
+
+    // Build HTML
+    let html = '<div class="effects-section"><strong>Effects:</strong>';
+
+    for (const [category, categoryEffects] of Object.entries(grouped)) {
+        if (categoryEffects.length === 0) continue;
+
+        html += `<div class="effect-category"><span class="effect-category-label">${category}:</span>`;
+
+        categoryEffects.forEach(effect => {
+            const icon = getEffectIcon(category);
+            html += `<div class="effect-item">${icon} ${effect.display || effect.key}</div>`;
+        });
+
+        html += `</div>`;
+    }
+
+    html += '</div>';
+    return html;
+}
+
+/**
+ * Determine effect category based on modifier key
+ */
+function determineEffectCategory(key) {
+    const keyLower = key.toLowerCase();
+
+    // Combat-related
+    if (keyLower.includes('weapon') || keyLower.includes('damage') ||
+        keyLower.includes('armor') || keyLower.includes('hull') ||
+        keyLower.includes('shield') || keyLower.includes('fire') ||
+        keyLower.includes('evasion') || keyLower.includes('accuracy')) {
+        return 'Combat';
+    }
+
+    // Economy-related
+    if (keyLower.includes('resource') || keyLower.includes('mineral') ||
+        keyLower.includes('energy') || keyLower.includes('alloy') ||
+        keyLower.includes('cost') || keyLower.includes('upkeep') ||
+        keyLower.includes('trade')) {
+        return 'Economy';
+    }
+
+    // Science-related
+    if (keyLower.includes('research') || keyLower.includes('physics') ||
+        keyLower.includes('society') || keyLower.includes('engineering') ||
+        keyLower.includes('tech') || keyLower.includes('science')) {
+        return 'Science';
+    }
+
+    // Ship-related
+    if (keyLower.includes('ship') || keyLower.includes('fleet') ||
+        keyLower.includes('naval') || keyLower.includes('starbase') ||
+        keyLower.includes('speed') || keyLower.includes('emergency_ftl')) {
+        return 'Ships';
+    }
+
+    // Population-related
+    if (keyLower.includes('pop') || keyLower.includes('growth') ||
+        keyLower.includes('happiness') || keyLower.includes('amenities') ||
+        keyLower.includes('stability')) {
+        return 'Population';
+    }
+
+    return 'Other';
+}
+
+/**
+ * Get icon for effect category
+ */
+function getEffectIcon(category) {
+    const icons = {
+        'Combat': '⚔️',
+        'Economy': '💰',
+        'Science': '🔬',
+        'Ships': '🚀',
+        'Population': '👥',
+        'Other': '⚙️'
+    };
+    return icons[category] || '⚙️';
+}
+
 export function createSvgFor(container, onZoom) {
   const width = container.clientWidth;
   const height = container.clientHeight;
@@ -202,21 +304,28 @@ export function formatTooltip(d, currentFactionId = 'all') {
     // Build prerequisites string
     const prerequisites = (d.prerequisites || []).map(id => nameById.get(id) || id).join(', ');
 
-    // Build unlocks string
-    const unlocksByType = (d.unlocks || []).reduce((acc, u) => {
-        if (typeof u === 'object' && u !== null) {
-            const type = u.type || 'unknown';
-            if (!acc[type]) {
-                acc[type] = [];
-            }
-            acc[type].push(u.label || u.id);
-        }
-        return acc;
-    }, {});
-
+    // Build unlocks string from unlock_details (NEW format from Phases 1+)
     let unlocksHtml = '';
-    for (const type in unlocksByType) {
-        unlocksHtml += `<strong>${type}:</strong> ${unlocksByType[type].join(', ')}<br>`;
+
+    if (d.unlock_details && d.unlock_details.description) {
+        // Use new unlock_details format with localized description
+        unlocksHtml = d.unlock_details.description;
+    } else if (d.unlocks && d.unlocks.length > 0) {
+        // Fallback to old unlocks array format (legacy compatibility)
+        const unlocksByType = d.unlocks.reduce((acc, u) => {
+            if (typeof u === 'object' && u !== null) {
+                const type = u.type || 'unknown';
+                if (!acc[type]) {
+                    acc[type] = [];
+                }
+                acc[type].push(u.label || u.id);
+            }
+            return acc;
+        }, {});
+
+        for (const type in unlocksByType) {
+            unlocksHtml += `<strong>${type}:</strong> ${unlocksByType[type].join(', ')}<br>`;
+        }
     }
 
     // NEW Phase 2: Add description if available (from Phase 1 data)
@@ -225,13 +334,10 @@ export function formatTooltip(d, currentFactionId = 'all') {
         descriptionHtml = `<div style="margin: 8px 0; padding: 6px; background: rgba(0,0,0,0.3); border-left: 3px solid var(--primary); font-style: italic;">${d.description}</div>`;
     }
 
-    // NEW Phase 2: Add effects if available (from Phase 1 data)
+    // NEW Phase 3: Enhanced effect display with grouping
     let effectsHtml = '';
     if (d.effects && Array.isArray(d.effects) && d.effects.length > 0) {
-        effectsHtml = '<strong>Effects:</strong><br>';
-        d.effects.forEach(effect => {
-            effectsHtml += `<span style="margin-left: 1em;">⚙️ ${effect.display || effect.key}</span><br>`;
-        });
+        effectsHtml = formatEffectsGrouped(d.effects);
     }
 
     // NEW Phase 2: Faction exclusive badge

@@ -13,12 +13,15 @@ Phase 1.3 of STNH Techtree Completion Plan
 """
 
 import json
+import re
 from pathlib import Path
 from balance_center_bridge import BalanceCenterBridge
+from component_parser import ComponentParser
+from supplemental_tech_parser import SupplementalTechParser
 from config import STNH_MOD_ROOT, OUTPUT_ASSETS_DIR, OUTPUT_ROOT_DIR
 
 
-def transform_tech_to_website_format(tech, faction_mappings, loc_loader):
+def transform_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser):
     """
     Transform Balance Center tech format → Website JSON format
 
@@ -26,6 +29,7 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader):
         tech: Technology dict from Balance Center
         faction_mappings: Faction availability mappings from FactionDetector
         loc_loader: LocLoader instance for localization
+        component_parser: ComponentParser instance for extracting component effects
 
     Returns:
         Enhanced tech dict with all website-required fields
@@ -57,10 +61,9 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader):
     # TODO: Implement extract_alternate_names()
     enhanced['alternate_names'] = extract_alternate_names(tech_id, loc_loader)
 
-    # 3. Modifiers → Display format
-    # TODO: Implement parse_modifiers_for_display()
-    modifiers = tech.get('modifiers', {})
-    enhanced['effects'] = parse_modifiers_for_display(modifiers)
+    # 3. Component Effects → Display format
+    # STNH techs unlock components, which contain the actual modifiers
+    enhanced['effects'] = extract_effects_from_components(tech_id, component_parser)
 
     # 4. Unlock details
     # TODO: Implement extract_unlock_details()
@@ -84,6 +87,202 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader):
     enhanced['required_species'] = tech.get('required_species', [])
 
     return enhanced
+
+
+def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser):
+    """
+    Transform Supplemental Parser tech format → Website JSON format
+
+    Args:
+        tech: Technology dict from Supplemental Parser
+        faction_mappings: Faction availability mappings from FactionDetector
+        loc_loader: LocLoader instance for localization
+        component_parser: ComponentParser instance for extracting component effects
+
+    Returns:
+        Enhanced tech dict with all website-required fields
+    """
+    tech_id = tech.get('name', '')
+
+    # Get localized name (fallback to tech_id if not found)
+    localized_name = loc_loader.get(tech_id, tech_id)
+
+    # Basic fields
+    enhanced = {
+        'id': tech_id,
+        'name': localized_name,
+        'area': tech.get('area', ''),
+        'tier': tech.get('tier', 0),
+        'cost': tech.get('cost', 0),
+        'prerequisites': tech.get('prerequisites', []),
+        'weight': tech.get('weight', 0),
+    }
+
+    # Description from localization
+    description_key = f"{tech_id}_desc"
+    description = loc_loader.get(description_key, "")
+    enhanced['description'] = description
+
+    # Faction-specific alternate names (reuse existing function)
+    enhanced['alternate_names'] = extract_alternate_names(tech_id, loc_loader)
+
+    # Effects: Combine component effects + direct modifiers
+    effects = extract_effects_from_components(tech_id, component_parser)
+
+    # Add direct modifiers (some techs have modifiers directly, not via components)
+    direct_modifiers = tech.get('direct_modifiers', {})
+    if direct_modifiers:
+        for modifier_key, value in direct_modifiers.items():
+            display = format_modifier_display(modifier_key, value)
+            effects.append({
+                'type': 'modifier',
+                'key': modifier_key,
+                'value': value,
+                'display': display,
+                'source': 'tech_direct'  # Mark as direct tech modifier
+            })
+
+    enhanced['effects'] = effects
+
+    # Unlock details from prereqfor_desc
+    prereqfor_desc = tech.get('prereqfor_desc', {})
+    enhanced['unlock_details'] = parse_prereqfor_desc_for_display(prereqfor_desc, loc_loader)
+
+    # Faction availability (reuse existing function)
+    enhanced['faction_availability'] = determine_faction_availability(tech, faction_mappings)
+
+    # Additional metadata
+    enhanced['is_rare'] = tech.get('is_rare', False)
+    enhanced['is_dangerous'] = tech.get('is_dangerous', False)
+    enhanced['is_reverse_engineerable'] = tech.get('is_reverse_engineerable', True)
+
+    # Categories
+    enhanced['category'] = tech.get('category', [])
+
+    # Keep required_species for backwards compatibility (will be filled by merge script)
+    enhanced['required_species'] = tech.get('required_species', [])
+
+    return enhanced
+
+
+def parse_prereqfor_desc_for_display(prereqfor_desc, loc_loader):
+    """
+    Parse prereqfor_desc data and convert to display format with localized strings
+
+    Args:
+        prereqfor_desc: Dict from Supplemental Parser with unlock info
+        loc_loader: LocLoader instance for localization
+
+    Returns:
+        unlock_details dict compatible with website format
+    """
+    if not prereqfor_desc:
+        return {
+            'technologies': [],
+            'components': [],
+            'buildings': [],
+            'description': ''
+        }
+
+    unlock_details = {
+        'technologies': prereqfor_desc.get('technologies', []),
+        'components': prereqfor_desc.get('components', []),
+        'buildings': prereqfor_desc.get('buildings', []),
+        'description_parts': []
+    }
+
+    # Parse ship unlocks
+    ship_data = prereqfor_desc.get('ship')
+    if ship_data:
+        title_key = ship_data.get('title_key', '')
+        title = loc_loader.get(title_key, title_key)
+        # Clean up formatting codes: §H ... §!
+        title = re.sub(r'§[HYRGBhyrgb]([^§]+)§!', r'\1', title)
+        unlock_details['description_parts'].append(title)
+
+    # Parse feature unlocks (traits, edicts, etc.)
+    feature_data = prereqfor_desc.get('feature')
+    if feature_data:
+        title_key = feature_data.get('title_key', '')
+        title = loc_loader.get(title_key, title_key)
+        title = re.sub(r'§[HYRGBhyrgb]([^§]+)§!', r'\1', title)
+        unlock_details['description_parts'].append(title)
+
+    # Parse component unlocks
+    components = prereqfor_desc.get('components', [])
+    if components:
+        unlock_details['description_parts'].append(f"{len(components)} component(s)")
+
+    # Parse building unlocks
+    buildings = prereqfor_desc.get('buildings', [])
+    if buildings:
+        building_names = [loc_loader.get(b, b) for b in buildings[:3]]
+        unlock_details['description_parts'].append(f"Buildings: {', '.join(building_names)}")
+
+    # Parse technology unlocks
+    techs = prereqfor_desc.get('technologies', [])
+    if techs:
+        tech_names = [loc_loader.get(t, t) for t in techs[:3]]
+        unlock_details['description_parts'].append(f"Technologies: {', '.join(tech_names)}")
+
+    # Combine into single description
+    if unlock_details['description_parts']:
+        unlock_details['description'] = ' | '.join(unlock_details['description_parts'])
+    else:
+        unlock_details['description'] = ''
+
+    return unlock_details
+
+
+def extract_effects_from_components(tech_id, component_parser):
+    """
+    Extract effects from components unlocked by this technology
+
+    STNH techs don't have direct modifier blocks. Instead, they unlock
+    components (weapons, utilities, etc.) which contain the actual modifiers.
+
+    This function:
+    1. Gets all components linked to this tech via prerequisites
+    2. Extracts modifiers from each component
+    3. Aggregates and converts to display format
+
+    Args:
+        tech_id: Technology identifier (e.g., "tech_physics_11282")
+        component_parser: ComponentParser instance with parsed data
+
+    Returns:
+        List of effect dicts with human-readable display strings
+    """
+    effects = []
+
+    # Get components unlocked by this tech
+    components = component_parser.get_components_for_tech(tech_id)
+
+    if not components:
+        return effects
+
+    # Aggregate all modifiers from all components
+    # We'll show each component's modifiers separately with component name
+    for component in components:
+        modifiers = component.get('modifiers', {})
+        component_key = component.get('key', 'Unknown')
+
+        if not modifiers:
+            continue
+
+        # Convert modifiers to display format
+        for modifier_key, value in modifiers.items():
+            display = format_modifier_display(modifier_key, value)
+
+            effects.append({
+                'type': 'modifier',
+                'key': modifier_key,
+                'value': value,
+                'display': display,
+                'component': component_key  # NEW: Track which component provides this
+            })
+
+    return effects
 
 
 def extract_alternate_names(tech_id, loc_loader):
@@ -408,6 +607,12 @@ def generate_complete_tech_data():
     bridge = BalanceCenterBridge(STNH_MOD_ROOT)
     print()
 
+    # 1b. Initialize Component Parser (Phase 3)
+    print("Step 1b: Initializing Component Parser...")
+    component_parser = ComponentParser(STNH_MOD_ROOT)
+    components, tech_components = component_parser.parse_all_components()
+    print()
+
     # 2. Extract ALL data
     print("Step 2: Extracting data from Balance Center...")
     data = bridge.get_all_technologies_with_metadata()
@@ -433,7 +638,8 @@ def generate_complete_tech_data():
             enhanced = transform_tech_to_website_format(
                 tech,
                 faction_mappings,
-                bridge.loc_loader
+                bridge.loc_loader,
+                component_parser
             )
             techs_enhanced.append(enhanced)
         except Exception as e:
@@ -442,6 +648,55 @@ def generate_complete_tech_data():
             continue
 
     print(f"  Successfully transformed {len(techs_enhanced)} technologies")
+    print()
+
+    # 3b. Add missing techs from Supplemental Parser
+    print("Step 3b: Adding missing techs from Supplemental Parser...")
+    supplemental_parser = SupplementalTechParser(STNH_MOD_ROOT)
+    all_techs_supplemental = supplemental_parser.parse_all_techs()
+
+    # Get tech IDs from Balance Center
+    bc_tech_ids = set(t['id'] for t in techs_enhanced)
+
+    # Find missing techs
+    missing_count = 0
+    for supp_tech in all_techs_supplemental:
+        if supp_tech['name'] not in bc_tech_ids:
+            # Transform supplemental tech to website format
+            enhanced = transform_supplemental_tech_to_website_format(
+                supp_tech,
+                faction_mappings,
+                bridge.loc_loader,
+                component_parser
+            )
+            techs_enhanced.append(enhanced)
+            missing_count += 1
+
+    print(f"  Added {missing_count} missing techs")
+    print(f"  Total techs now: {len(techs_enhanced)}")
+
+    # 3c. Fix malformed area values from Balance Center parsing bug
+    print("Step 3c: Fixing malformed area values...")
+    fixed_count = 0
+    for tech in techs_enhanced:
+        area = tech.get('area', '')
+
+        # Balance Center sometimes returns 'engineering category =' instead of 'engineering'
+        if area.startswith('engineering'):
+            tech['area'] = 'engineering'
+            if area != 'engineering':
+                fixed_count += 1
+        elif area.startswith('physics'):
+            tech['area'] = 'physics'
+            if area != 'physics':
+                fixed_count += 1
+        elif area.startswith('society'):
+            tech['area'] = 'society'
+            if area != 'society':
+                fixed_count += 1
+
+    if fixed_count > 0:
+        print(f"  Fixed {fixed_count} malformed area values")
     print()
 
     # 4. Split by area
@@ -546,13 +801,51 @@ def generate_factions_metadata(factions, technologies):
 
     metadata = []
 
+    # Species-to-faction mapping for fallback
+    species_to_faction = {
+        'Federation': 'Federation',
+        'Klingon': 'Klingon',
+        'Romulan': 'Romulan',
+        'Cardassian': 'Cardassian',
+        'Dominion': 'Dominion',
+        'Borg': 'Borg',
+        'Undine': 'Undine',
+        'Breen': 'Breen',
+        'Ferengi': 'Ferengi',
+        'Hirogen': 'Hirogen',
+        'Vidiian': 'Vidiian',
+        'Suliban': 'Romulan',  # Often grouped with Romulans
+        'Tholian': 'Other',
+        'Krenim': 'Other',
+        'Voth': 'Other',
+    }
+
     for faction_name in sorted(factions):
         # Count techs available to this faction
-        tech_count = sum(
-            1 for tech in technologies
-            if not tech.get('faction_availability') or  # No restrictions = available to all
-               faction_name in tech.get('faction_availability', {})
-        )
+        tech_count = 0
+
+        for tech in technologies:
+            # Check faction_availability first
+            faction_avail = tech.get('faction_availability', {})
+
+            if faction_avail and faction_name in faction_avail:
+                # Use faction_availability if present
+                if faction_avail[faction_name].get('available'):
+                    tech_count += 1
+            else:
+                # Fallback: Use required_species
+                required_species = tech.get('required_species', [])
+
+                if not required_species:
+                    # No restrictions = available to all
+                    tech_count += 1
+                else:
+                    # Check if any required species maps to this faction
+                    for species in required_species:
+                        mapped_faction = species_to_faction.get(species)
+                        if mapped_faction == faction_name:
+                            tech_count += 1
+                            break
 
         # Get faction info or create default
         info = faction_info.get(faction_name, {

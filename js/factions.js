@@ -38,14 +38,13 @@ export async function initFactionDropdown() {
       const option = document.createElement('option');
       option.value = faction.id;
       option.textContent = faction.name;
-
-      // Pre-select Federation
-      if (faction.id === 'federation') {
-        option.selected = true;
-      }
-
       factionSelect.appendChild(option);
     });
+
+    // IMPORTANT: Set value after all options are added
+    // This ensures Federation is selected, not "All Factions"
+    factionSelect.value = 'federation';
+    currentFaction = 'federation';
 
     console.log(`[Factions] Loaded ${playableFactions.length} playable factions`);
 

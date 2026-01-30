@@ -27,7 +27,7 @@ let zoom = null;
 document.addEventListener('DOMContentLoaded', () => {
     // --- Element References ---
     const speciesSelect = document.getElementById('species-select');
-    const speciesExclusiveToggle = document.getElementById('species-exclusive-toggle');
+    const factionExclusiveToggle = document.getElementById('faction-exclusive-toggle');  // Phase 2: Renamed
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
     const searchBackButton = document.getElementById('search-back-button');
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         attachEventHandlers({
             elements: {
                 speciesSelect,
-                speciesExclusiveToggle,
+                factionExclusiveToggle,
                 searchInput,
                 searchButton,
                 searchBackButton,
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyFilters({ selectedSpecies, activeTechId }) {
         const selectedArea = areaSelect.value;
         const selectedCategory = categorySelect.value;
-        const isExclusive = speciesExclusiveToggle.checked;
+        const isExclusive = factionExclusiveToggle.checked;
 
         // Base species/area filtering via data module (no active focus here yet)
         const sourceTechs = getAllTechsCached() || allTechs;
@@ -473,6 +473,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentFaction = getCurrentFaction();
         if (currentFaction && currentFaction !== 'all') {
             baseTechs = filterTechsByFaction(baseTechs, currentFaction);
+
+            // NEW Phase 2: Apply faction-exclusive filter if toggle is active
+            if (isExclusive) {
+                baseTechs = baseTechs.filter(tech => isFactionExclusive(tech, currentFaction));
+            }
         }
 
         // Apply connected filter using full graph for traversal, then intersect with base set
