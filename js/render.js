@@ -419,19 +419,19 @@ export function formatTooltip(d, currentFactionId = 'all') {
     }
 
     return `
-        ${factionBadge}
         <strong>Name:</strong> ${displayName}<br>
-        <strong>ID:</strong> ${d.id}<br>
+        ${factionBadge}
         ${descriptionHtml}
+        ${effectsHtml}
+        ${unlocksHtml || '<strong>Unlocks:</strong> None'}
+        <strong>Prerequisites:</strong> ${prerequisites || 'None'}<br>
+        <strong>ID:</strong> ${d.id}<br>
         <strong>Area:</strong> ${d.area}<br>
         <strong>Category:</strong> ${d.category || 'N/A'}<br>
         <strong>Tier:</strong> ${d.tier}<br>
-        <strong>Cost:</strong> ${d.cost}<br>
-        <strong>Prerequisites:</strong> ${prerequisites || 'None'}<br>
-        ${effectsHtml}
-        <strong>Weight:</strong> ${d.weight}<br>
         <strong>Access:</strong> ${d.required_species ? d.required_species.join(', ') : 'All'}<br>
-        ${unlocksHtml || '<strong>Unlocks:</strong> None'}
+        <strong>Cost:</strong> ${d.cost}<br>
+        <strong>Weight:</strong> ${d.weight}
     `;
 }
 
