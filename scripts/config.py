@@ -47,6 +47,17 @@ TECH_FILE_FILTER = lambda filename: "sth" in filename and filename.endswith('.tx
 LOCALISATION_FILE_PATTERN = "*_l_english.yml"
 
 # ==========================================
+# BALANCE CENTER INTEGRATION (Phase 1)
+# ==========================================
+
+# Balance Center Root Directory (for advanced parsing)
+BALANCE_CENTER_ROOT = os.path.join(STNH_MOD_ROOT, "balance_center")
+
+# Toggle to use Balance Center parsers vs simple parsers
+# Set to False to fall back to simple regex-based parsing
+USE_BALANCE_CENTER = True
+
+# ==========================================
 # VALIDATION
 # ==========================================
 
