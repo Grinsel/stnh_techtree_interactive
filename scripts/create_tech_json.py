@@ -1,6 +1,13 @@
 import os
 import re
 import json
+from config import (
+    MOD_TECHNOLOGY_DIR,
+    OUTPUT_ASSETS_DIR,
+    OUTPUT_ROOT_DIR,
+    TECH_FILE_FILTER,
+    print_config
+)
 
 def get_required_species_recursive(block_content, trigger_map):
     """
@@ -29,15 +36,23 @@ def get_required_species_recursive(block_content, trigger_map):
 
 def parse_stellaris_tech_files():
     """
-    Parses all Stellaris technology files from the 'common/technology/' directory
+    Parses all Stellaris technology files from the STNH mod directory
     and generates a JSON file containing structured data for each technology,
     including species-specific requirements.
+
+    Uses config.py for path configuration.
+    Reads from: git01/New-Horizons-Development/common/technology/ (READ-ONLY)
+    Writes to: git09/stnh_techtree_interactive/assets/ (OUTPUT)
     """
-    tech_dir = 'common/technology'
-    output_dir = 'assets'
+    # Paths from config.py
+    tech_dir = MOD_TECHNOLOGY_DIR
+    output_dir = OUTPUT_ASSETS_DIR
     output_file = os.path.join(output_dir, 'technology.json')
-    trigger_map_file = 'trigger_map.json'
-    loc_map_file = 'localisation_map.json'
+    trigger_map_file = os.path.join(OUTPUT_ROOT_DIR, 'trigger_map.json')
+    loc_map_file = os.path.join(OUTPUT_ROOT_DIR, 'localisation_map.json')
+
+    # Print configuration
+    print_config()
 
     all_technologies = []
     tech_ids = set()
@@ -67,10 +82,13 @@ def parse_stellaris_tech_files():
         print(f"Error: Directory '{tech_dir}' not found.")
         return
 
-    print(f"Scanning for technology files in '{tech_dir}'...")
+    print(f"\nScanning for technology files in '{tech_dir}'...")
 
     for filename in os.listdir(tech_dir):
-        if "sth" in filename and filename.endswith('.txt'):
+        # Use filter from config.py
+        if TECH_FILE_FILTER and not TECH_FILE_FILTER(filename):
+            continue
+        if filename.endswith('.txt'):
             filepath = os.path.join(tech_dir, filename)
             print(f"Processing file: {filepath}")
             with open(filepath, 'r', encoding='utf-8-sig') as f:

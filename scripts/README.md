@@ -6,15 +6,58 @@ Diese Python-Skripte werden verwendet, um Daten aus den STNH Mod-Dateien zu extr
 
 Die Skripte in diesem Verzeichnis sind **Development Tools** und werden NICHT für die Website selbst benötigt. Sie dienen ausschließlich dazu, die Technologie-Daten aus den Stellaris Mod-Dateien zu extrahieren und in das benötigte JSON-Format zu konvertieren.
 
+## Wichtig: Zwei separate Repositories!
+
+Die Skripte arbeiten mit **zwei verschiedenen Git-Repositories**:
+
+1. **STNH Mod (git01 - READ-ONLY)**
+   - Pfad: `C:\Users\marcj\git01\New-Horizons-Development`
+   - **Wird NICHT verändert** - nur gelesen!
+
+2. **Techtree Website (git09 - PROJECT)**
+   - Pfad: `C:\Users\marcj\git09\stnh_techtree_interactive`
+   - Generierte JSON-Dateien werden hier gespeichert
+
+## Konfiguration
+
+Alle Pfade werden in `config.py` konfiguriert. Bei Änderungen der Repository-Pfade:
+
+```python
+# config.py editieren:
+STNH_MOD_ROOT = r"C:\Users\marcj\git01\New-Horizons-Development"
+TECHTREE_PROJECT_ROOT = r"C:\Users\marcj\git09\stnh_techtree_interactive"
+```
+
+**Konfiguration testen:**
+```bash
+python config.py
+```
+
 ## Voraussetzungen
 
 ```bash
 pip install ply
 ```
 
-## Verwendung
+## Schnellstart
 
-Siehe [../docs/DEVELOPMENT.md](../docs/DEVELOPMENT.md) für detaillierte Schritt-für-Schritt-Anweisungen zur Datenaktualisierung.
+```bash
+# 1. Konfiguration testen
+python config.py
+
+# 2. Trigger-Map erstellen (falls neue Species)
+python create_trigger_map.py
+
+# 3. Localization aktualisieren
+python parse_localisation.py
+
+# 4. Tech-JSONs generieren
+python create_tech_json.py
+```
+
+## Detaillierte Anleitung
+
+Siehe [../docs/DATA_UPDATE_WORKFLOW.md](../docs/DATA_UPDATE_WORKFLOW.md) für den kompletten Workflow!
 
 ## Skripte
 

@@ -1,6 +1,14 @@
 import json
+import os
+from config import OUTPUT_ROOT_DIR
 
 def create_trigger_map():
+    """
+    Creates a manually curated mapping of game triggers to species.
+    This file is used by create_tech_json.py to determine species requirements.
+
+    Output: git09/stnh_techtree_interactive/trigger_map.json
+    """
     # This is a manually curated list based on the analysis of potentials_analysis.json
     # It can be extended as needed.
     trigger_map = {
@@ -49,10 +57,12 @@ def create_trigger_map():
         ]
     }
 
-    with open('trigger_map.json', 'w', encoding='utf-8') as f:
+    output_file = os.path.join(OUTPUT_ROOT_DIR, 'trigger_map.json')
+
+    with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(trigger_map, f, indent=2)
-    
-    print("Successfully created trigger_map.json")
+
+    print(f"Successfully created '{output_file}'")
 
 if __name__ == "__main__":
     create_trigger_map()

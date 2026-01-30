@@ -1,12 +1,44 @@
-﻿index_old1.html
+# Legacy HTML files
+index_old1.html
 test.html
-create_species_list.py
-node_modules
-icons/png
-create-atlas.js
+
+# Node.js
+node_modules/
 package.json
 package-lock.json
-icons/dds
-icons
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Parser outputs
 parser_output.txt
+
+# Unused assets
+icons/
+icons/png
+icons/dds
+
+# Legacy scripts (now in archive/ or scripts/)
+create_species_list.py
 create_category_list.py
+create-atlas.js
+
+# IDE (but keep .vscode/ - it's already in the repo!)
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

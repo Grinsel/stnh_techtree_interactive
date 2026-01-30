@@ -2,14 +2,28 @@ import os
 import re
 import json
 import codecs
+from config import (
+    MOD_LOCALISATION_DIR,
+    OUTPUT_ROOT_DIR,
+    LOCALISATION_FILE_PATTERN,
+    print_config
+)
 
 def parse_localisation_files():
     """
-    Parses all Stellaris localisation files from the 'localisation/english/' directory
+    Parses all Stellaris localisation files from the STNH mod directory
     and generates a JSON file mapping localisation keys to their English names.
+
+    Uses config.py for path configuration.
+    Reads from: git01/New-Horizons-Development/localisation/english/ (READ-ONLY)
+    Writes to: git09/stnh_techtree_interactive/localisation_map.json (OUTPUT)
     """
-    loc_dir = 'localisation/english'
-    output_file = 'localisation_map.json'
+    # Paths from config.py
+    loc_dir = MOD_LOCALISATION_DIR
+    output_file = os.path.join(OUTPUT_ROOT_DIR, 'localisation_map.json')
+
+    # Print configuration
+    print_config()
 
     localisation_map = {}
 
@@ -17,7 +31,7 @@ def parse_localisation_files():
         print(f"Error: Directory '{loc_dir}' not found.")
         return
 
-    print(f"Scanning for localisation files in '{loc_dir}'...")
+    print(f"\nScanning for localisation files in '{loc_dir}'...")
 
     for filename in os.listdir(loc_dir):
         if filename.endswith('_l_english.yml'):
