@@ -1,0 +1,37 @@
+STNH Techtree Interactive - Feature Ideas
+==========================================
+
+PLANNED (already in roadmap)
+-----------------------------
+[ ] Rarity Filter - Filter by rare/dangerous/normal techs
+
+
+LOW EFFORT FEATURES
+-------------------
+[ ] Cost Range Filter - Filter techs by research cost (e.g. 1000-5000)
+[ ] Statistics Panel - Overview: tech count per tier/area/faction
+[ ] Keyboard Shortcuts - Quick navigation (e.g. "/" for search, "Esc" to close)
+[ ] Dark/Light Theme - Theme toggle
+[ ] Random Tech Button - "Show me a random tech" for discovery
+
+
+MEDIUM EFFORT FEATURES
+----------------------
+[ ] Unlock-Type Filter - "Show only techs that unlock ships/buildings/etc."
+[ ] Comparison Mode - Compare two techs side by side
+[ ] Tech Highlighting - Highlight all techs of a category (Weapons, Shields, etc.)
+[ ] Export/Screenshot - Export current view as PNG/SVG
+[ ] Faction Comparison - "Which techs does Federation have that Klingon doesn't?"
+[ ] Mobile Touch Support - Better touch gestures for tablets
+[ ] Localization - German/English toggle
+
+
+HIGH EFFORT FEATURES
+--------------------
+[ ] Build Planner - Mark techs as "wanted", shows optimal research path
+
+
+NOTES
+-----
+- Minimap was considered but deemed unnecessary (removed from roadmap)
+- Current features include: icons, unlock indicators, filters, path analysis, shareable links

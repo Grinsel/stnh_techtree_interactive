@@ -1,0 +1,147 @@
+{
+  "session": {
+    "start_time": "2026-01-31T17:02:05.848404",
+    "end_time": "2026-01-31T17:02:20.481843",
+    "duration_seconds": 14.63,
+    "success": true
+  },
+  "environment": {
+    "python_version": "3.14.0",
+    "platform": "Windows",
+    "platform_version": "10.0.26200",
+    "working_directory": "C:\\Users\\marcj\\git09\\stnh_techtree_interactive\\update",
+    "stnh_mod_path": "C:\\Users\\marcj\\git01\\New-Horizons-Development",
+    "techtree_path": "C:\\Users\\marcj\\git09\\stnh_techtree_interactive"
+  },
+  "phases": [
+    {
+      "name": "Validierung",
+      "start_time": "2026-01-31T17:02:05.894113",
+      "end_time": "2026-01-31T17:02:06.023249",
+      "duration_ms": 129,
+      "steps": [
+        {
+          "script": "config.py",
+          "status": "success",
+          "duration_ms": 129,
+          "timestamp": "2026-01-31T17:02:06.023243",
+          "output": {
+            "paths_valid": true,
+            "balance_center_available": false
+          }
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "Daten-Caching",
+      "start_time": "2026-01-31T17:02:06.023263",
+      "end_time": "2026-01-31T17:02:06.903263",
+      "duration_ms": 880,
+      "steps": [
+        {
+          "script": "parse_localisation.py",
+          "status": "success",
+          "duration_ms": 849,
+          "timestamp": "2026-01-31T17:02:06.872437"
+        },
+        {
+          "script": "create_trigger_map.py",
+          "status": "success",
+          "duration_ms": 30,
+          "timestamp": "2026-01-31T17:02:06.903255"
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "Icon-Vorbereitung",
+      "start_time": "2026-01-31T17:02:06.903274",
+      "end_time": "2026-01-31T17:02:07.150256",
+      "duration_ms": 246,
+      "steps": [
+        {
+          "script": "extract_icon_mappings.py",
+          "status": "success",
+          "duration_ms": 246,
+          "timestamp": "2026-01-31T17:02:07.150246"
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "Tech-Generierung",
+      "start_time": "2026-01-31T17:02:07.150268",
+      "end_time": "2026-01-31T17:02:20.017298",
+      "duration_ms": 12867,
+      "steps": [
+        {
+          "script": "create_tech_json_new.py",
+          "status": "success",
+          "duration_ms": 12833,
+          "timestamp": "2026-01-31T17:02:20.017285",
+          "output": {
+            "techs_physics": 739,
+            "techs_engineering": 634,
+            "techs_society": 618,
+            "techs_total": 1991,
+            "factions": 35
+          }
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "Icon-Verifikation",
+      "start_time": "2026-01-31T17:02:20.017498",
+      "end_time": "2026-01-31T17:02:20.481806",
+      "duration_ms": 464,
+      "steps": [
+        {
+          "script": "verify_all_icons.py",
+          "status": "success",
+          "duration_ms": 460,
+          "timestamp": "2026-01-31T17:02:20.481793",
+          "output": {
+            "dds_files_to_convert": 0,
+            "webp_icons_available": 1659
+          }
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "Abschluss",
+      "start_time": "2026-01-31T17:02:20.481826",
+      "end_time": "2026-01-31T17:02:20.481840",
+      "duration_ms": 0,
+      "steps": [
+        {
+          "script": "finalization",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-01-31T17:02:20.481839"
+        }
+      ],
+      "success": true
+    }
+  ],
+  "statistics": {
+    "techs_physics": 739,
+    "techs_engineering": 634,
+    "techs_society": 618,
+    "techs_total": 1991,
+    "factions": 35,
+    "dds_files_to_convert": 0,
+    "icons_webp_available": 1659,
+    "icon_coverage_percent": 83.32
+  },
+  "manual_steps_required": [
+    "Test locally in browser",
+    "Commit and push changes"
+  ],
+  "errors": [],
+  "warnings": [
+    "Balance Center not available, using fallback parser"
+  ]
+}

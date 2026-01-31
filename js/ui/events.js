@@ -8,6 +8,7 @@ export function attachEventHandlers({ elements, state, actions }) {
   const {
     speciesSelect,
     speciesExclusiveToggle,
+    factionExclusiveToggle,
     searchInput,
     searchButton,
     searchBackButton,
@@ -89,6 +90,7 @@ export function attachEventHandlers({ elements, state, actions }) {
   // Filters/layouts
   speciesSelect?.addEventListener('change', (e) => updateVisualization(e.target.value, getActiveTechId()));
   speciesExclusiveToggle?.addEventListener('change', () => updateVisualization(speciesSelect?.value, getActiveTechId()));
+  factionExclusiveToggle?.addEventListener('change', () => updateVisualization(speciesSelect?.value, getActiveTechId()));
   areaSelect?.addEventListener('change', () => updateVisualization(speciesSelect?.value, getActiveTechId()));
   layoutSelect?.addEventListener('change', () => updateVisualization(speciesSelect?.value, getActiveTechId()));
 

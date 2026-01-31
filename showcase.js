@@ -476,7 +476,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // NEW Phase 2: Apply faction-exclusive filter if toggle is active
             if (isExclusive) {
-                baseTechs = baseTechs.filter(tech => isFactionExclusive(tech, currentFaction));
+                const exclusiveTechs = baseTechs.filter(tech => isFactionExclusive(tech, currentFaction));
+                if (exclusiveTechs.length === 0) {
+                    // No exclusive techs for this faction - auto-disable toggle
+                    factionExclusiveToggle.checked = false;
+                    console.log(`No exclusive techs for faction '${currentFaction}' - toggle disabled`);
+                } else {
+                    baseTechs = exclusiveTechs;
+                }
             }
         }
 

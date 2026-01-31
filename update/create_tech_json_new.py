@@ -671,41 +671,74 @@ def determine_faction_availability(tech, faction_mappings):
     """
     Determine which factions can access this technology
 
-    Uses Balance Center's FactionDetector to evaluate potential blocks
-    and determine faction-specific availability.
+    Parses the potential_block from tech data and maps conditions
+    to faction names using faction_mappings.
 
     Args:
         tech: Technology dict from Balance Center
-        faction_mappings: Faction availability mappings from FactionDetector
+        faction_mappings: Dict containing mapping tables:
+            - country_flag_to_faction: {flag_name: faction_name}
+            - civic_to_faction: {civic_name: faction_name}
+            - graphical_culture_to_faction: {culture: faction_name}
 
     Returns:
         Dict mapping faction names to availability info
         Example: {
-            "Federation": {"available": True, "condition": "default"},
-            "Borg": {"available": False, "condition": "excluded"},
-            "Romulan": {"available": True, "condition": "potential_block"}
+            "Federation": {"available": True, "condition": "country_flag"},
+            "Klingon": {"available": True, "condition": "uses_trigger"}
         }
     """
-    tech_id = tech.get('name', '')
+    import re
 
-    # Get faction data from mappings if available
-    if tech_id in faction_mappings:
-        faction_data = faction_mappings[tech_id]
+    potential_block = tech.get('potential_block', '') or tech.get('_potential_raw', '')
 
-        availability = {}
+    if not potential_block or not potential_block.strip():
+        # No restrictions - available to all
+        return {}
 
-        # Faction mappings from FactionDetector indicate which factions CAN access
-        for faction_name in faction_data.get('factions', []):
-            availability[faction_name] = {
-                'available': True,
-                'condition': faction_data.get('condition', 'detected')
-            }
+    # Extract mapping tables
+    country_flag_map = faction_mappings.get('country_flag_to_faction', {})
+    civic_map = faction_mappings.get('civic_to_faction', {})
 
-        return availability
+    availability = {}
 
-    # Default: available to all factions (no restrictions)
-    # This will be shown in UI as "Available to all factions"
-    return {}
+    # Pattern 1: has_country_flag = flag_name
+    flag_matches = re.findall(r'has_country_flag\s*=\s*(\w+)', potential_block)
+    for flag in flag_matches:
+        if flag in country_flag_map:
+            faction = country_flag_map[flag]
+            availability[faction] = {'available': True, 'condition': 'country_flag'}
+
+    # Pattern 2: has_civic = civic_name
+    civic_matches = re.findall(r'has_civic\s*=\s*(\w+)', potential_block)
+    for civic in civic_matches:
+        if civic in civic_map:
+            faction = civic_map[civic]
+            availability[faction] = {'available': True, 'condition': 'civic'}
+
+    # Pattern 3: uses_cloak_klingons, uses_cloak_romulans, etc.
+    uses_patterns = {
+        'uses_cloak_klingons': 'Klingon',
+        'uses_cloak_romulans': 'Romulan',
+        'uses_cloak_federation': 'Federation',
+        'uses_cloak_cardassian': 'Cardassian',
+        'uses_torpedoes_klingon': 'Klingon',
+        'uses_torpedoes_romulan': 'Romulan',
+        'uses_torpedoes_federation': 'Federation',
+        'is_machine_empire': 'Machine',
+        'is_hive_empire': 'Hive',
+        'is_borg_empire': 'Borg',
+    }
+
+    for trigger, faction in uses_patterns.items():
+        if trigger in potential_block:
+            availability[faction] = {'available': True, 'condition': 'uses_trigger'}
+
+    # Pattern 4: OR blocks with multiple country flags
+    # This catches "OR = { has_country_flag = X has_country_flag = Y }"
+    # Already handled by individual flag matching above
+
+    return availability
 
 
 def generate_complete_tech_data():

@@ -29,12 +29,13 @@ We are currently running a closed beta test of this tool. If you are a tester, p
 - **Refined Initial View**: Improvements to the initial presentation of the tree when it first loads.
 - **Zoom & Pan with LOD**: Smooth zoom/pan with adaptive level-of-detail for performance on large views.
 - **Parent/Child Toggle**: Switched over to the new "Path & Dependency Analysis" feature to show selected tech dependencies in a new render window.
+- **Technology Icons**: Each technology displays its unique icon from the game files (WebP format for fast loading).
+- **Unlock Indicators**: Small icons in each tech node show what the technology unlocks (buildings, ships, components, etc.) using original Stellaris icons.
 
 ## 📌 Planned Features / Roadmap
 
 The following improvements and new features are planned:
 
-- **Minimap**: For better navigation in the full tree view, eliminating the need for endless scrolling.
 - **Rarity Filter**: A filter to distinguish between rare, common, and other technology rarities.
 
 

@@ -1301,7 +1301,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Federation": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -2982,7 +2987,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -4336,7 +4346,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Federation": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -4371,7 +4386,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Federation": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -6578,7 +6598,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Federation": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -6818,7 +6843,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Federation": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -7923,7 +7953,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -7966,7 +8001,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8016,7 +8056,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8063,7 +8108,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8115,7 +8165,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8166,7 +8221,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8203,7 +8263,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8251,7 +8316,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8294,7 +8364,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8339,7 +8414,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8396,7 +8476,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8443,7 +8528,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8493,7 +8583,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8534,7 +8629,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8607,7 +8707,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8647,7 +8752,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8685,7 +8795,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8722,7 +8837,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8760,7 +8880,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8791,7 +8916,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8830,7 +8960,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8865,7 +9000,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8903,7 +9043,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8932,7 +9077,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8961,7 +9111,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -8990,7 +9145,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -9019,7 +9179,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -9048,7 +9213,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -9077,7 +9247,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -9106,7 +9281,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -9135,7 +9315,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -9164,7 +9349,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -9193,7 +9383,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -9222,7 +9417,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -9251,7 +9451,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -11638,7 +11843,16 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Delta_Quadrant_Hostile": {
+        "available": true,
+        "condition": "country_flag"
+      },
+      "Hirogen": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -11738,7 +11952,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Klingon": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -12025,7 +12244,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Federation": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -15395,7 +15619,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -15678,7 +15907,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -15968,7 +16202,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -16258,7 +16497,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -16541,7 +16785,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -16824,7 +17073,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -17114,7 +17368,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -17404,7 +17663,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -17435,7 +17699,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -17467,7 +17736,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -17499,7 +17773,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -17530,7 +17809,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -17561,7 +17845,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -17593,7 +17882,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -25009,7 +25303,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -25110,7 +25409,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -25211,7 +25515,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -25312,7 +25621,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -25413,7 +25727,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -25514,7 +25833,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -25615,7 +25939,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -25716,7 +26045,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -26512,7 +26846,12 @@
         ]
       }
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -27913,7 +28252,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -27981,7 +28325,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -28048,7 +28397,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -28115,7 +28469,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -28182,7 +28541,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -28249,7 +28613,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -28790,7 +29159,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Synthetic": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -28857,7 +29231,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Synthetic": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -28924,7 +29303,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Synthetic": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -28991,7 +29375,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Synthetic": {
+        "available": true,
+        "condition": "country_flag"
+      }
+    },
     "is_rare": false,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
@@ -32725,7 +33114,12 @@
       "description": "",
       "unlocks_by_type": {}
     },
-    "faction_availability": {},
+    "faction_availability": {
+      "Borg": {
+        "available": true,
+        "condition": "uses_trigger"
+      }
+    },
     "is_rare": true,
     "is_dangerous": false,
     "is_reverse_engineerable": true,
