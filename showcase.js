@@ -609,10 +609,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         drawTierLines();
+        let tierRafId = null;
         zoom.on('zoom', (event) => {
             _g.attr('transform', event.transform);
-            drawTierLines();
-            applyLOD();
+            if (tierRafId == null) {
+                tierRafId = requestAnimationFrame(() => {
+                    drawTierLines();
+                    applyLOD();
+                    tierRafId = null;
+                });
+            }
         });
 
         const node = _g
