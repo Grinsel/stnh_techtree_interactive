@@ -23,10 +23,12 @@ build/
 # Parser outputs
 parser_output.txt
 
-# Unused assets
-icons/
-icons/png
-icons/dds
+# Icon source files (keep only webp for production)
+icons/*.dds
+icons/*.txt
+icons/*.json
+icons/*.bat
+icons/icons_dds/
 
 # Legacy scripts (now in archive/ or scripts/)
 create_species_list.py
