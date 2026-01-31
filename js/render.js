@@ -172,6 +172,44 @@ function getUnlockIcon(type) {
     return icons[type] || '📦';
 }
 
+/**
+ * Render unlock type icons in bottom-left corner of node
+ * Shows one icon per unlock type, max 3 vertically then wraps horizontally
+ */
+function renderUnlockIcons(selection, nodeWidth, nodeHeight) {
+    const iconSize = 9;
+    const padding = 12;
+    const spacing = 13;
+    const maxPerColumn = 2;
+
+    selection.each(function(d) {
+        const unlockTypes = d.unlock_details?.unlocks_by_type;
+        if (!unlockTypes || Object.keys(unlockTypes).length === 0) return;
+
+        const types = Object.keys(unlockTypes).filter(t => t !== 'Other');
+        if (types.length === 0) return;
+
+        const g = d3.select(this);
+
+        types.forEach((type, i) => {
+            const col = Math.floor(i / maxPerColumn);
+            const row = i % maxPerColumn;
+
+            const x = -nodeWidth / 2 + padding + col * spacing;
+            const y = nodeHeight / 2 - padding - (maxPerColumn - 1 - row) * spacing;
+
+            g.append('text')
+                .attr('class', 'node-label unlock-type-icon')
+                .attr('x', x)
+                .attr('y', y)
+                .attr('font-size', iconSize)
+                .attr('text-anchor', 'start')
+                .attr('dominant-baseline', 'middle')
+                .text(getUnlockIcon(type));
+        });
+    });
+}
+
 export function createSvgFor(container, onZoom) {
   const width = container.clientWidth;
   const height = container.clientHeight;
@@ -345,11 +383,11 @@ export function renderNodeLabels(nodeSel, { nodeWidth, nodeHeight }) {
       .style('fill', '#ffffff')
       .text(d => `${d.category || 'N/A'}`);
 
-  // Tech Icon - centered in lower half of node
+  // Tech Icon - right-aligned in lower half of node
   const iconSize = 28;
   nodeSel.append('image')
       .attr('class', 'node-label node-icon')
-      .attr('x', -iconSize / 2)
+      .attr('x', nodeWidth / 2 - iconSize - 8) // 8px from right edge
       .attr('y', nodeHeight / 2 - iconSize - 8) // 8px from bottom
       .attr('width', iconSize)
       .attr('height', iconSize)
@@ -362,6 +400,9 @@ export function renderNodeLabels(nodeSel, { nodeWidth, nodeHeight }) {
           // Fallback: hide broken images
           d3.select(this).style('display', 'none');
       });
+
+  // Unlock type icons - bottom-left corner
+  renderUnlockIcons(nodeSel, nodeWidth, nodeHeight);
 
   // Species display removed - now only in tooltip
   // Kept for potential future use:
@@ -522,12 +563,12 @@ export function updateLOD(svg, g) {
         .style('fill', '#ffffff')
         .text(d => `${d.category || 'N/A'}`);
 
-      // Tech Icon - centered in lower half of node
+      // Tech Icon - right-aligned in lower half of node
       const iconSize = nodeHeight === 70 ? 24 : 28;
       nodesSel.append('image')
         .attr('class', 'node-label node-icon')
-        .attr('x', -iconSize / 2)
-        .attr('y', nodeHeight / 2 - iconSize - 8)
+        .attr('x', nodeWidth / 2 - iconSize - 8) // 8px from right edge
+        .attr('y', nodeHeight / 2 - iconSize - 8) // 8px from bottom
         .attr('width', iconSize)
         .attr('height', iconSize)
         .attr('href', d => {
@@ -538,6 +579,9 @@ export function updateLOD(svg, g) {
         .on('error', function() {
           d3.select(this).style('display', 'none');
         });
+
+      // Unlock type icons - bottom-left corner
+      renderUnlockIcons(nodesSel, nodeWidth, nodeHeight);
 
       // Species removed - now only in tooltip
       g.property('labelsInitialized', true);
@@ -647,12 +691,12 @@ export function updateLOD(svg, g) {
       .style('fill', '#ffffff')
       .text(d => `${d.category || 'N/A'}`);
 
-    // Tech Icon - centered in lower half of node (LOD mode)
+    // Tech Icon - right-aligned in lower half of node (LOD mode)
     const iconSize = nodeHeight === 70 ? 24 : 28;
     nodesSel.append('image')
       .attr('class', 'node-label node-icon')
-      .attr('x', -iconSize / 2)
-      .attr('y', nodeHeight / 2 - iconSize - 8)
+      .attr('x', nodeWidth / 2 - iconSize - 8) // 8px from right edge
+      .attr('y', nodeHeight / 2 - iconSize - 8) // 8px from bottom
       .attr('width', iconSize)
       .attr('height', iconSize)
       .attr('href', d => {
@@ -663,6 +707,9 @@ export function updateLOD(svg, g) {
       .on('error', function() {
         d3.select(this).style('display', 'none');
       });
+
+    // Unlock type icons - bottom-left corner
+    renderUnlockIcons(nodesSel, nodeWidth, nodeHeight);
 
     // Species removed - now only in tooltip
     g.property('labelsInitialized', true);
