@@ -1,8 +1,8 @@
 """
-Configuration file for STNH Techtree Data Processing Scripts
+Configuration file for STNH Techtree Update Scripts
 
-This configuration allows the scripts to:
-- Run from git09/stnh_techtree_interactive/scripts/
+This configuration allows the update scripts to:
+- Run from git09/stnh_techtree_interactive/update/
 - Read mod data from git01/New-Horizons-Development/ (READ-ONLY)
 - Write generated JSONs to git09/stnh_techtree_interactive/assets/
 """

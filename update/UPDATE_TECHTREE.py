@@ -1,6 +1,19 @@
 """
 =============================================================================
-STNH TECHTREE - MASTER UPDATE SCRIPT
+STNH TECHTREE - MASTER UPDATE SCRIPT (DEPRECATED)
+=============================================================================
+
+*** DEPRECATED: Use UPDATE_TECHTREE_FULL.py instead! ***
+
+UPDATE_TECHTREE_FULL.py provides:
+- Structured JSON logging for each update session
+- Pre-flight validation of all paths
+- Localisation and trigger map caching
+- Detailed statistics and summary
+- Better error handling
+
+This legacy script is kept for backwards compatibility only.
+
 =============================================================================
 
 This script regenerates ALL techtree data after a game/mod update.
@@ -38,13 +51,13 @@ import sys
 import subprocess
 from pathlib import Path
 
-# Script directory
-SCRIPTS_DIR = Path(__file__).parent
+# Update directory
+UPDATE_DIR = Path(__file__).parent
 
 
 def run_script(script_name, description):
     """Run a Python script and handle errors"""
-    script_path = SCRIPTS_DIR / script_name
+    script_path = UPDATE_DIR / script_name
 
     if not script_path.exists():
         print(f"[ERROR] Script not found: {script_name}")
@@ -58,7 +71,7 @@ def run_script(script_name, description):
     try:
         result = subprocess.run(
             [sys.executable, str(script_path)],
-            cwd=str(SCRIPTS_DIR),
+            cwd=str(UPDATE_DIR),
             capture_output=False
         )
         return result.returncode == 0
@@ -68,6 +81,12 @@ def run_script(script_name, description):
 
 
 def main():
+    # Deprecation warning
+    print("\n" + "!" * 70)
+    print("!!! DEPRECATED: Use UPDATE_TECHTREE_FULL.py instead !!!")
+    print("!!! This script lacks logging and validation features !!!")
+    print("!" * 70)
+
     print("""
 =============================================================================
     _____ _____ _   _ _   _   _____ _____ ____ _   _ _____ ____  _____ _____
@@ -108,7 +127,7 @@ def main():
             print(f"  - {step}")
 
     # Check for DDS files needing conversion
-    icons_dir = SCRIPTS_DIR.parent / 'icons'
+    icons_dir = UPDATE_DIR.parent / 'icons'
     dds_files = list(icons_dir.glob('*.dds'))
 
     if dds_files:
