@@ -66,6 +66,14 @@ export function loadSpeciesFilter(speciesSelectEl, { onLoaded } = {}) {
     });
 }
 
+// Helper: format category key to display name (e.g., "field_manipulation" -> "Field Manipulation")
+function formatCategoryName(category) {
+  return category
+    .split('_')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 // UI helper: populate category <select> from assets/categories.json and notify when done
 export function loadCategoryFilter(categorySelectEl, { onLoaded } = {}) {
   if (!categorySelectEl) return Promise.resolve([]);
@@ -75,7 +83,7 @@ export function loadCategoryFilter(categorySelectEl, { onLoaded } = {}) {
       categoryList.forEach(category => {
         const option = document.createElement('option');
         option.value = category;
-        option.textContent = category;
+        option.textContent = formatCategoryName(category);
         categorySelectEl.appendChild(option);
       });
       if (typeof onLoaded === 'function') {

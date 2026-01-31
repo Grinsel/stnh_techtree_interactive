@@ -887,6 +887,19 @@ def generate_complete_tech_data():
     print(f"  Generated metadata for {len(factions_metadata)} factions")
     print()
 
+    # 5b. Extract unique categories from all techs
+    print("Step 5b: Extracting categories...")
+    all_categories = set()
+    for tech in techs_enhanced:
+        cats = tech.get('category', [])
+        if isinstance(cats, list):
+            all_categories.update(cats)
+        elif cats:
+            all_categories.add(cats)
+    categories_list = sorted(list(all_categories))
+    print(f"  Found {len(categories_list)} unique categories")
+    print()
+
     # 6. Write output files
     print("Step 6: Writing output files...")
     output_dir = Path(OUTPUT_ASSETS_DIR)
@@ -900,6 +913,9 @@ def generate_complete_tech_data():
     # Write factions.json
     write_json_file(factions_metadata, output_dir / 'factions.json')
 
+    # Write categories.json
+    write_json_file(categories_list, output_dir / 'categories.json')
+
     print()
     print("=" * 60)
     print("[SUCCESS] Tech data generation complete!")
@@ -910,6 +926,7 @@ def generate_complete_tech_data():
     print(f"  - {output_dir / 'technology_engineering.json'} ({len(engineering)} techs)")
     print(f"  - {output_dir / 'technology_society.json'} ({len(society)} techs)")
     print(f"  - {output_dir / 'factions.json'} ({len(factions_metadata)} factions)")
+    print(f"  - {output_dir / 'categories.json'} ({len(categories_list)} categories)")
     print()
 
 
