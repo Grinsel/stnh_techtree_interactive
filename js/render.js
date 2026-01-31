@@ -345,17 +345,37 @@ export function renderNodeLabels(nodeSel, { nodeWidth, nodeHeight }) {
       .style('fill', '#ffffff')
       .text(d => `${d.category || 'N/A'}`);
 
-  nodeSel.append('text')
-      .attr('class', 'node-label node-species')
-      .attr('x', 0)
-      .attr('y', d => {
-          const lines = d && d._nameLineCount ? d._nameLineCount : 1;
-          return -nodeHeight / 2 + 45 + (lines - 1) * 12;
+  // Tech Icon - centered in lower half of node
+  const iconSize = 28;
+  nodeSel.append('image')
+      .attr('class', 'node-label node-icon')
+      .attr('x', -iconSize / 2)
+      .attr('y', nodeHeight / 2 - iconSize - 8) // 8px from bottom
+      .attr('width', iconSize)
+      .attr('height', iconSize)
+      .attr('href', d => {
+          const iconName = d.icon || d.id;
+          return `icons/icons_webp/${iconName}.webp`;
       })
-      .attr('text-anchor', 'middle')
-      .style('font-size', '8px')
-      .style('fill', '#ffffff')
-      .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+      .attr('preserveAspectRatio', 'xMidYMid meet')
+      .on('error', function() {
+          // Fallback: hide broken images
+          d3.select(this).style('display', 'none');
+      });
+
+  // Species display removed - now only in tooltip
+  // Kept for potential future use:
+  // nodeSel.append('text')
+  //     .attr('class', 'node-label node-species')
+  //     .attr('x', 0)
+  //     .attr('y', d => {
+  //         const lines = d && d._nameLineCount ? d._nameLineCount : 1;
+  //         return -nodeHeight / 2 + 45 + (lines - 1) * 12;
+  //     })
+  //     .attr('text-anchor', 'middle')
+  //     .style('font-size', '8px')
+  //     .style('fill', '#ffffff')
+  //     .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
 }
 
 import { getAllTechsCached } from './data.js';
@@ -502,17 +522,24 @@ export function updateLOD(svg, g) {
         .style('fill', '#ffffff')
         .text(d => `${d.category || 'N/A'}`);
 
-      nodesSel.append('text')
-        .attr('class', 'node-label node-species')
-        .attr('x', 0)
-        .attr('y', d => {
-          const lines = d && d._nameLineCount ? d._nameLineCount : 1;
-          return -nodeHeight / 2 + (nodeHeight === 70 ? 45 : 50) + (lines - 1) * 12;
+      // Tech Icon - centered in lower half of node
+      const iconSize = nodeHeight === 70 ? 24 : 28;
+      nodesSel.append('image')
+        .attr('class', 'node-label node-icon')
+        .attr('x', -iconSize / 2)
+        .attr('y', nodeHeight / 2 - iconSize - 8)
+        .attr('width', iconSize)
+        .attr('height', iconSize)
+        .attr('href', d => {
+          const iconName = d.icon || d.id;
+          return `icons/icons_webp/${iconName}.webp`;
         })
-        .attr('text-anchor', 'middle')
-        .style('font-size', '8px')
-        .style('fill', '#ffffff')
-        .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+        .attr('preserveAspectRatio', 'xMidYMid meet')
+        .on('error', function() {
+          d3.select(this).style('display', 'none');
+        });
+
+      // Species removed - now only in tooltip
       g.property('labelsInitialized', true);
     }
 
@@ -620,17 +647,24 @@ export function updateLOD(svg, g) {
       .style('fill', '#ffffff')
       .text(d => `${d.category || 'N/A'}`);
 
-    nodesSel.append('text')
-      .attr('class', 'node-label node-species')
-      .attr('x', 0)
-      .attr('y', d => {
-        const lines = d && d._nameLineCount ? d._nameLineCount : 1;
-        return -nodeHeight / 2 + (nodeHeight === 70 ? 55 : 60) + (lines - 1) * 12;
+    // Tech Icon - centered in lower half of node (LOD mode)
+    const iconSize = nodeHeight === 70 ? 24 : 28;
+    nodesSel.append('image')
+      .attr('class', 'node-label node-icon')
+      .attr('x', -iconSize / 2)
+      .attr('y', nodeHeight / 2 - iconSize - 8)
+      .attr('width', iconSize)
+      .attr('height', iconSize)
+      .attr('href', d => {
+        const iconName = d.icon || d.id;
+        return `icons/icons_webp/${iconName}.webp`;
       })
-      .attr('text-anchor', 'middle')
-      .style('font-size', '8px')
-      .style('fill', '#ffffff')
-      .text(d => (d.required_species && d.required_species.length > 0) ? d.required_species.join(', ') : 'Global');
+      .attr('preserveAspectRatio', 'xMidYMid meet')
+      .on('error', function() {
+        d3.select(this).style('display', 'none');
+      });
+
+    // Species removed - now only in tooltip
     g.property('labelsInitialized', true);
   }
 
