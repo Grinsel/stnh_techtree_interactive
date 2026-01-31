@@ -19,10 +19,11 @@ from balance_center_bridge import BalanceCenterBridge
 from component_parser import ComponentParser
 from supplemental_tech_parser import SupplementalTechParser
 from reverse_unlock_parser import ReverseUnlockParser
+from extract_icon_mappings import extract_icon_mappings
 from config import STNH_MOD_ROOT, OUTPUT_ASSETS_DIR, OUTPUT_ROOT_DIR
 
 
-def transform_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser, reverse_unlocks):
+def transform_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser, reverse_unlocks, icon_mappings):
     """
     Transform Balance Center tech format → Website JSON format
 
@@ -32,6 +33,7 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
         loc_loader: LocLoader instance for localization
         component_parser: ComponentParser instance for extracting component effects
         reverse_unlocks: Dict mapping tech_id -> list of things it unlocks
+        icon_mappings: Dict mapping tech_id -> icon filename
 
     Returns:
         Enhanced tech dict with all website-required fields
@@ -40,6 +42,9 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
 
     # Get localized name (fallback to tech_id if not found)
     localized_name = loc_loader.get(tech_id, tech_id)
+
+    # Get icon mapping (fallback to tech_id if not found)
+    icon_name = icon_mappings.get(tech_id, tech_id)
 
     # Basic fields (already present from Balance Center)
     enhanced = {
@@ -50,6 +55,7 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
         'cost': tech.get('cost', 0),
         'prerequisites': tech.get('prerequisites', []),
         'weight': tech.get('weight', 0),
+        'icon': icon_name,  # Icon filename (without extension)
     }
 
     # PHASE 1 ADDITIONS:
@@ -91,7 +97,7 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
     return enhanced
 
 
-def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser, reverse_unlocks):
+def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser, reverse_unlocks, icon_mappings):
     """
     Transform Supplemental Parser tech format → Website JSON format
 
@@ -101,6 +107,7 @@ def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_lo
         loc_loader: LocLoader instance for localization
         component_parser: ComponentParser instance for extracting component effects
         reverse_unlocks: Dict mapping tech_id -> list of things it unlocks
+        icon_mappings: Dict mapping tech_id -> icon filename
 
     Returns:
         Enhanced tech dict with all website-required fields
@@ -109,6 +116,9 @@ def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_lo
 
     # Get localized name (fallback to tech_id if not found)
     localized_name = loc_loader.get(tech_id, tech_id)
+
+    # Get icon mapping (fallback to tech_id if not found)
+    icon_name = icon_mappings.get(tech_id, tech_id)
 
     # Basic fields
     enhanced = {
@@ -119,6 +129,7 @@ def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_lo
         'cost': tech.get('cost', 0),
         'prerequisites': tech.get('prerequisites', []),
         'weight': tech.get('weight', 0),
+        'icon': icon_name,  # Icon filename (without extension)
     }
 
     # Description from localization
@@ -731,6 +742,11 @@ def generate_complete_tech_data():
     reverse_unlocks = reverse_unlock_parser.parse_all()
     print()
 
+    # 1d. Extract Icon Mappings (Icon Integration)
+    print("Step 1d: Extracting icon mappings from tech files...")
+    icon_mappings = extract_icon_mappings()
+    print()
+
     # 2. Extract ALL data
     print("Step 2: Extracting data from Balance Center...")
     data = bridge.get_all_technologies_with_metadata()
@@ -758,7 +774,8 @@ def generate_complete_tech_data():
                 faction_mappings,
                 bridge.loc_loader,
                 component_parser,
-                reverse_unlocks
+                reverse_unlocks,
+                icon_mappings
             )
             techs_enhanced.append(enhanced)
         except Exception as e:
@@ -787,7 +804,8 @@ def generate_complete_tech_data():
                 faction_mappings,
                 bridge.loc_loader,
                 component_parser,
-                reverse_unlocks
+                reverse_unlocks,
+                icon_mappings
             )
             techs_enhanced.append(enhanced)
             missing_count += 1
