@@ -123,9 +123,9 @@ function formatUnlocksGrouped(unlocksByType) {
         const items = unlocksByType[unlockType];
         if (!items || items.length === 0) continue;
 
-        const icon = getUnlockIcon(unlockType);
+        const iconFile = getUnlockIconFile(unlockType);
         html += `<div class="unlock-category">`;
-        html += `<span class="unlock-category-label">${icon} ${unlockType}:</span>`;
+        html += `<span class="unlock-category-label"><img src="icons/unlock_types/webp/${iconFile}.webp" class="unlock-type-img" alt="${unlockType}"> ${unlockType}:</span>`;
 
         items.forEach(item => {
             html += `<div class="unlock-item">${item}</div>`;
@@ -139,47 +139,49 @@ function formatUnlocksGrouped(unlocksByType) {
 }
 
 /**
- * Get icon for unlock type
+ * Get icon filename for unlock type (Stellaris game icons)
+ * Used in both SVG nodes and HTML tooltips/details
  */
-function getUnlockIcon(type) {
+function getUnlockIconFile(type) {
     const icons = {
-        'Building': '🏛️',
-        'Ship Type': '🚀',
-        'Ship Section': '🔧',
-        'Tradition': '📜',
-        'Trait': '🧬',
-        'Ascension Perk': '⭐',
-        'Special Project': '🔬',
-        'Megastructure': '🏗️',
-        'District': '🏘️',
-        'Edict': '📋',
-        'Decision': '⚖️',
-        'Policy': '📑',
-        'Strategic Resource': '💎',
-        'Job': '👔',
-        'Army Type': '⚔️',
-        'Technology': '🔬',
-        'Component': '⚙️',
-        'Starbase Building': '🛰️',
-        'Starbase Module': '🔩',
-        'Anomaly': '❓',
-        'Bypass': '🌀',
-        'Faction Type': '🏛️',
-        'Country Limit': '📊',
-        'Deposit': '⛏️',
-        'Other': '📦'
+        'Building': 'unlock_building',
+        'Ship Type': 'unlock_ship',
+        'Ship Section': 'unlock_ship_section',
+        'Tradition': 'unlock_tradition',
+        'Trait': 'unlock_trait',
+        'Ascension Perk': 'unlock_ascension_perk',
+        'Special Project': 'unlock_special_project',
+        'Megastructure': 'unlock_megastructure',
+        'District': 'unlock_district',
+        'Edict': 'unlock_edict',
+        'Decision': 'unlock_decision',
+        'Policy': 'unlock_policy',
+        'Strategic Resource': 'unlock_strategic_resource',
+        'Job': 'unlock_job',
+        'Army Type': 'unlock_army',
+        'Technology': 'unlock_technology',
+        'Component': 'unlock_component',
+        'Starbase Building': 'unlock_starbase',
+        'Starbase Module': 'unlock_starbase_module',
+        'Anomaly': 'unlock_anomaly',
+        'Bypass': 'unlock_bypass',
+        'Faction Type': 'unlock_faction',
+        'Country Limit': 'unlock_country_limit',
+        'Deposit': 'unlock_deposit',
+        'Other': 'unlock_other'
     };
-    return icons[type] || '📦';
+    return icons[type] || 'unlock_other';
 }
 
 /**
  * Render unlock type icons in bottom-left corner of node
- * Shows one icon per unlock type, max 3 vertically then wraps horizontally
+ * Shows one icon per unlock type, max 2 vertically then wraps horizontally
+ * Uses actual Stellaris game icons from icons/unlock_types/webp/
  */
 function renderUnlockIcons(selection, nodeWidth, nodeHeight) {
-    const iconSize = 9;
-    const padding = 12;
-    const spacing = 13;
+    const iconSize = 12;
+    const padding = 10;
+    const spacing = 14;
     const maxPerColumn = 2;
 
     selection.each(function(d) {
@@ -196,16 +198,16 @@ function renderUnlockIcons(selection, nodeWidth, nodeHeight) {
             const row = i % maxPerColumn;
 
             const x = -nodeWidth / 2 + padding + col * spacing;
-            const y = nodeHeight / 2 - padding - (maxPerColumn - 1 - row) * spacing;
+            const y = nodeHeight / 2 - padding - iconSize - (maxPerColumn - 1 - row) * spacing;
 
-            g.append('text')
+            const iconFile = getUnlockIconFile(type);
+            g.append('image')
                 .attr('class', 'node-label unlock-type-icon')
                 .attr('x', x)
                 .attr('y', y)
-                .attr('font-size', iconSize)
-                .attr('text-anchor', 'start')
-                .attr('dominant-baseline', 'middle')
-                .text(getUnlockIcon(type));
+                .attr('width', iconSize)
+                .attr('height', iconSize)
+                .attr('href', `icons/unlock_types/webp/${iconFile}.webp`);
         });
     });
 }
