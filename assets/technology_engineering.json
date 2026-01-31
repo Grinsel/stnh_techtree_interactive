@@ -3503,7 +3503,8 @@
           "Science Station",
           "Science Station",
           "Science Station",
-          "Starbase"
+          "Starbase",
+          "Kaplan F17 Speed Freighter"
         ],
         "Strategic Resource": [
           "Zro",
@@ -3859,7 +3860,8 @@
       "description": "Ship Type: Assault",
       "unlocks_by_type": {
         "Ship Type": [
-          "Assault"
+          "Assault",
+          "Assault Vessel"
         ]
       }
     },
@@ -4342,7 +4344,9 @@
         ],
         "Ship Type": [
           "Scout Freedom",
-          "Frigate Emette"
+          "Frigate Emette",
+          "Emmette-Class",
+          "Frontier-Class Scout"
         ]
       }
     },
@@ -4436,7 +4440,9 @@
           "Custom"
         ],
         "Ship Type": [
-          "Light Cruiser Intrepid Type"
+          "Light Cruiser Intrepid Type",
+          "Intrepid-Type Light Cruiser",
+          "Neptune-Class"
         ]
       }
     },
@@ -4481,7 +4487,8 @@
           "Yards"
         ],
         "Ship Type": [
-          "Explorer Nx"
+          "Explorer Nx",
+          "NX-Class Explorer"
         ],
         "Country Limit": [
           "Hero Ship Nx Limit"
@@ -4540,7 +4547,9 @@
           "Custom"
         ],
         "Ship Type": [
-          "Carrier Minuteman"
+          "Carrier Minuteman",
+          "Columbia-Class Refit",
+          "Minuteman-Class Transport"
         ]
       }
     },
@@ -4581,7 +4590,9 @@
         ],
         "Ship Type": [
           "Mmv Poseidon",
-          "Heavy Cruiser Yorktown"
+          "Heavy Cruiser Yorktown",
+          "Poseidon-Class Multi-Mission-Ship",
+          "Yorktown-Class Heavy Cruiser"
         ]
       }
     },
@@ -4627,7 +4638,8 @@
           "Imperial Starfleet Historical Agency"
         ],
         "Ship Type": [
-          "Light Cruiser Bonaventure"
+          "Light Cruiser Bonaventure",
+          "Bonaventure-Class Light Cruiser"
         ]
       }
     },
@@ -4670,7 +4682,9 @@
         ],
         "Ship Type": [
           "Scout Malachowski",
-          "Mmv Walker"
+          "Mmv Walker",
+          "Malachowski-Class Scout",
+          "Walker-Class Multi-Mission-Ship"
         ],
         "Tradition": [
           "Ufp Ships 2"
@@ -4719,7 +4733,12 @@
           "Frigate Saladin",
           "Light Cruiser Shepard",
           "Carrier Engle",
-          "Heavy Cruiser Nimitz"
+          "Heavy Cruiser Nimitz",
+          "Engle-Class Light Transport",
+          "Magee-Class",
+          "Nimitz-Class Heavy Cruiser",
+          "Saladin-Class Frigate",
+          "Shepard-Class Light Cruiser"
         ]
       }
     },
@@ -4768,7 +4787,12 @@
           "Explorer Hoover",
           "Explorer Cardenas",
           "Heavy Cruiser Constitution",
-          "Advanced Cruiser Crossfield"
+          "Advanced Cruiser Crossfield",
+          "Cardenas-Class Heavy Explorer",
+          "Class-C Shuttlecraft",
+          "Constitution-Class Heavy Cruiser",
+          "Crossfield-Class Advanced Cruiser",
+          "Hoover Class Explorer"
         ],
         "Country Limit": [
           "Hero Ship Constitution Limit",
@@ -4854,7 +4878,12 @@
         "Ship Type": [
           "Carrier Ptolomy",
           "Explorer Miranda",
-          "Heavy Cruiser Ares"
+          "Heavy Cruiser Ares",
+          "Ares-Class Heavy Cruiser",
+          "Carpenter-Class Refit",
+          "Mercy-Class Refit",
+          "Miranda-Class Explorer",
+          "Ptolemy-Class Transport"
         ],
         "Tradition": [
           "Ufp Ships 3"
@@ -4897,7 +4926,8 @@
           "ship"
         ],
         "Ship Type": [
-          "Light Cruiser Kelvin"
+          "Light Cruiser Kelvin",
+          "Kelvin-Class Light Cruiser"
         ]
       }
     },
@@ -4937,7 +4967,8 @@
           "Custom"
         ],
         "Ship Type": [
-          "Scout Daedalus"
+          "Scout Daedalus",
+          "Daedalus-Class Scout"
         ]
       }
     },
@@ -5041,7 +5072,9 @@
           "ship"
         ],
         "Ship Type": [
-          "Mmv Radiant"
+          "Mmv Radiant",
+          "Constitution Second Stage Overhaul",
+          "Radiant-Class Multi-Mission-Ship"
         ],
         "Ship Section": [
           "MEDIUM_GUN_01"
@@ -5084,7 +5117,8 @@
           "Custom"
         ],
         "Ship Type": [
-          "Scout Oberth"
+          "Scout Oberth",
+          "Oberth-Class Scout"
         ]
       }
     },
@@ -5137,6 +5171,9 @@
       "unlocks_by_type": {
         "Other": [
           "Custom"
+        ],
+        "Ship Type": [
+          "Miranda Second Generation Deep Space Explorer"
         ]
       }
     },
@@ -5202,7 +5239,9 @@
         ],
         "Ship Type": [
           "Flagship Excelsior",
-          "Advanced Cruiser Excelsior"
+          "Advanced Cruiser Excelsior",
+          "Constitution-Class Advanced Flagship",
+          "Excelsior-Class Advanced Cruiser"
         ],
         "Tradition": [
           "Ufp Ships 4"
@@ -5272,7 +5311,12 @@
           "Hero Ship Excelsior",
           "Frigate Akula",
           "Light Cruiser Centaur",
-          "Carrier Sydney"
+          "Carrier Sydney",
+          "Akula-Class Frigate",
+          "Centaur-Class Light Cruiser",
+          "Excelsior-Class Advanced Cruiser",
+          "Lakota-Type Refit",
+          "Sydney-Class Transport"
         ],
         "Country Limit": [
           "Hero Ship Excelsior Limit"
@@ -5329,6 +5373,9 @@
       "unlocks_by_type": {
         "Other": [
           "Custom"
+        ],
+        "Ship Type": [
+          "Miranda Third Generation Heavy Explorer"
         ]
       }
     },
@@ -5376,7 +5423,10 @@
           "Flagship Ambassador",
           "Light Cruiser Curry Type",
           "Mmv Constellation",
-          "Exploration Cruiser Ambassador"
+          "Exploration Cruiser Ambassador",
+          "Ambassador-Class Exploration Cruiser",
+          "Constellation-Class Multi-Mission-Ship",
+          "Curry-Type Light Cruiser"
         ],
         "Country Limit": [
           "Hero Ship Ambassador Limit"
@@ -5456,7 +5506,8 @@
           "Custom"
         ],
         "Ship Type": [
-          "Scout Olympic"
+          "Scout Olympic",
+          "Olympic-Class Emergency Vessel"
         ],
         "Ship Section": [
           "Section Template"
@@ -5505,7 +5556,10 @@
           "Flagship Galaxy",
           "Scout Freedom Tng",
           "Heavy Cruiser Nebula",
-          "Exploration Cruiser Galaxy"
+          "Exploration Cruiser Galaxy",
+          "Freedom-Class Scout",
+          "Galaxy-Class Exploration Cruiser",
+          "Nebula-Class Heavy Cruiser"
         ],
         "Tradition": [
           "Ufp Ships 5"
@@ -5602,7 +5656,13 @@
           "Light Cruiser Niagara",
           "Explorer New Orleans",
           "Explorer Cheyenne",
-          "Mmv Springfield"
+          "Mmv Springfield",
+          "Challenger-Class Frigate",
+          "Cheyenne-Class Explorer",
+          "New Orleans-Class Explorer",
+          "Niagara-Class Light Cruiser",
+          "Resolute-Class Light Cruiser",
+          "Springfield-Class Multi-Mission-Ship"
         ],
         "Ascension Perk": [
           "Starfleet Texas Class"
@@ -5690,7 +5750,10 @@
         ],
         "Ship Type": [
           "Escort Ship Defiant",
-          "Heavy Escort Defiant"
+          "Heavy Escort Defiant",
+          "Defiant-Class Heavy Escort",
+          "Lexington-Type Refit",
+          "Venture-Type Refit"
         ],
         "Country Limit": [
           "Escort Ship Defiant Limit"
@@ -5736,7 +5799,9 @@
         ],
         "Ship Type": [
           "Mmv Akira",
-          "Mmv Norway"
+          "Mmv Norway",
+          "Akira-Class Heavy Long-Range Striker",
+          "Norway-Class Multi-Mission-Ship"
         ],
         "Ship Section": [
           "Section Template"
@@ -5786,7 +5851,12 @@
           "Carrier Iwo Jima",
           "Explorer Intrepid Class",
           "Heavy Cruiser Sovereign",
-          "Exploration Cruiser Luna"
+          "Exploration Cruiser Luna",
+          "Intrepid-Class Explorer",
+          "Iwo-Jima-Class Transport",
+          "Luna-Class Exploration Cruiser",
+          "Nova-Class Scout",
+          "Sovereign-Class Heavy Cruiser"
         ],
         "Country Limit": [
           "Hero Ship Sovereign Limit"
@@ -5833,7 +5903,9 @@
         "Ship Type": [
           "Light Cruiser Steamrunner",
           "Light Cruiser Saber",
-          "Light Cruiser Parliament"
+          "Light Cruiser Parliament",
+          "Saber-Class Heavy Patrol",
+          "Steamrunner-Class Light Cruiser"
         ]
       }
     },
@@ -5942,7 +6014,12 @@
           "Hero Ship Protostar",
           "Scout Protostar",
           "Advanced Cruiser Vesta",
-          "Heavy Escort Prometheus"
+          "Heavy Escort Prometheus",
+          "Alita-Class",
+          "Prometheus-Class Heavy Escort",
+          "Protostar-Class Scout",
+          "Thunderchild-Class Refit",
+          "Vesta-Class Advanced Cruiser"
         ]
       }
     },
@@ -6010,6 +6087,9 @@
         ],
         "Ship Section": [
           "SMALL_GUN_01"
+        ],
+        "Ship Type": [
+          "Vigilant-Class Refit"
         ]
       }
     },
@@ -6069,6 +6149,9 @@
       "unlocks_by_type": {
         "Other": [
           "Custom"
+        ],
+        "Ship Type": [
+          "Galaxy X-Type Refit"
         ]
       }
     },
@@ -6153,7 +6236,9 @@
         "Ship Type": [
           "Frigate Galen",
           "Carrier Samson",
-          "Adv Heavy Cruiser Inquiry"
+          "Adv Heavy Cruiser Inquiry",
+          "Proteus-Class Refit",
+          "Samson-Class Transport"
         ]
       }
     },
@@ -6196,7 +6281,9 @@
         "Ship Type": [
           "Defense Fed 1",
           "Shuttle Shuttlepod",
-          "Carrier Sarajevo"
+          "Carrier Sarajevo",
+          "OTV Type K42 Shuttlepod",
+          "Sarajevo-Class Transport"
         ]
       }
     },
@@ -6270,7 +6357,11 @@
           "Shuttle Class F Shuttle",
           "Attack Wing Galileo",
           "Attack Wing Daqtagh",
-          "Attack Wing Shalimar"
+          "Attack Wing Shalimar",
+          "Class-F Shuttlecraft",
+          "Daqtagh Fighter",
+          "Galileo-Class Fighter",
+          "Shalimar-Class Attack Fighter"
         ]
       }
     },
@@ -6306,7 +6397,8 @@
       "unlocks_by_type": {
         "Ship Type": [
           "Shuttle Class F Shuttle",
-          "Shuttle Type 7 Shuttle"
+          "Shuttle Type 7 Shuttle",
+          "Type-7 Shuttlecraft"
         ]
       }
     },
@@ -6391,7 +6483,8 @@
         ],
         "Ship Type": [
           "Defense Fed 2",
-          "Runabout Danube"
+          "Runabout Danube",
+          "Danube-Class Runabout"
         ]
       }
     },
@@ -6428,7 +6521,8 @@
         "Ship Type": [
           "Attack Wing Galileo",
           "Attack Wing Peregrine",
-          "Attack Wing Bop Wing"
+          "Attack Wing Bop Wing",
+          "Peregrine-Class Fighter"
         ]
       }
     },
@@ -6465,7 +6559,8 @@
       "unlocks_by_type": {
         "Ship Type": [
           "Attack Wing Peregrine",
-          "Attack Wing Gryphon"
+          "Attack Wing Gryphon",
+          "Gryphon-Class Fighter"
         ]
       }
     },
@@ -6517,7 +6612,9 @@
         "Ship Type": [
           "Defense Fed 3",
           "Runabout Danube",
-          "Runabout Venture"
+          "Runabout Venture",
+          "Venture-Class Runabout",
+          "Yellowstone-Class Runabout"
         ]
       }
     },
@@ -6591,7 +6688,8 @@
       "description": "Country Limit: Mobile Throne Charon Limit | Ship Type: Mobile Throne Charon",
       "unlocks_by_type": {
         "Ship Type": [
-          "Mobile Throne Charon"
+          "Mobile Throne Charon",
+          "The Imperial Throne"
         ],
         "Country Limit": [
           "Mobile Throne Charon Limit"
@@ -6637,7 +6735,8 @@
           "Custom"
         ],
         "Ship Type": [
-          "Dreadnought Vengeance"
+          "Dreadnought Vengeance",
+          "Vengeance-Class"
         ]
       }
     },
@@ -6707,7 +6806,8 @@
       "description": "Ship Type: Light Cruiser Talas",
       "unlocks_by_type": {
         "Ship Type": [
-          "Light Cruiser Talas"
+          "Light Cruiser Talas",
+          "Talas-Class Andorian Cruiser"
         ]
       }
     },
@@ -6740,7 +6840,8 @@
       "description": "Ship Type: Light Cruiser T Pol",
       "unlocks_by_type": {
         "Ship Type": [
-          "Light Cruiser T Pol"
+          "Light Cruiser T Pol",
+          "T'Pol-Class Vulcan Cruiser"
         ]
       }
     },
@@ -6773,7 +6874,8 @@
       "description": "Ship Type: Light Cruiser Gral",
       "unlocks_by_type": {
         "Ship Type": [
-          "Light Cruiser Gral"
+          "Light Cruiser Gral",
+          "Gral-Class Light Cruiser"
         ]
       }
     },
@@ -6806,7 +6908,8 @@
       "description": "Ship Type: Explorer Kiri Kin Tha",
       "unlocks_by_type": {
         "Ship Type": [
-          "Explorer Kiri Kin Tha"
+          "Explorer Kiri Kin Tha",
+          "Kiri Kin Tha Vulcan Heavy Explorer"
         ]
       }
     },
@@ -6839,7 +6942,8 @@
       "description": "Ship Type: Stealth Escort Modin",
       "unlocks_by_type": {
         "Ship Type": [
-          "Stealth Escort Modin"
+          "Stealth Escort Modin",
+          "Modi'in-Class Stealth Escort"
         ]
       }
     },
@@ -6898,7 +7002,8 @@
         ],
         "Ship Type": [
           "Advanced Cruiser Obena",
-          "Advanced Cruiser Duderstadt"
+          "Advanced Cruiser Duderstadt",
+          "Duderstadt-Class Advanced Cruiser"
         ]
       }
     },
@@ -6956,6 +7061,10 @@
       "unlocks_by_type": {
         "Other": [
           "Custom"
+        ],
+        "Ship Type": [
+          "Ranger-Class Multi-Mission-Ship",
+          "Shran-Class Refit"
         ]
       }
     },
@@ -7005,7 +7114,10 @@
           "Flagship Polaris",
           "Explorer Pathfinder",
           "Heavy Cruiser Polaris",
-          "Command Cruiser Excalibur"
+          "Command Cruiser Excalibur",
+          "Excalibur-Class Command Cruiser",
+          "Pathfinder-Class Explorer",
+          "Polaris-Class Exp. Heavy Cruiser"
         ]
       }
     },
@@ -7044,7 +7156,9 @@
         ],
         "Ship Type": [
           "Light Cruiser Reliant",
-          "Mobile Carrier Typhon"
+          "Mobile Carrier Typhon",
+          "Reliant-Class Light Cruiser",
+          "Typhon-Class Carrier"
         ]
       }
     },
@@ -7082,7 +7196,8 @@
           "ship"
         ],
         "Ship Type": [
-          "Scout Akyazi"
+          "Scout Akyazi",
+          "Akyazi-Class Scout"
         ]
       }
     },
@@ -7730,7 +7845,8 @@
         ],
         "Ship Type": [
           "Explorer Century",
-          "Explorer Gagarin"
+          "Explorer Gagarin",
+          "Gagarin-Class Tactical Explorer"
         ]
       }
     },
@@ -7768,7 +7884,8 @@
           "ship"
         ],
         "Ship Type": [
-          "Mmv Loknar"
+          "Mmv Loknar",
+          "Loknar-Class Multi-Mission-Ship"
         ]
       }
     },
@@ -7840,6 +7957,9 @@
       "unlocks_by_type": {
         "Other": [
           "Custom"
+        ],
+        "Ship Type": [
+          "Proxima-Class Refit"
         ]
       }
     },
@@ -7949,7 +8069,9 @@
         "Ship Type": [
           "Juggernaut",
           "Gunboat Borghel A",
-          "Bop Borghel"
+          "Bop Borghel",
+          "Borghel Class Bird of Prey",
+          "Borghel-A Modified Gunboat"
         ]
       }
     },
@@ -7997,7 +8119,9 @@
         "Ship Type": [
           "Raptor Somraw",
           "Strike Ship Grethor",
-          "Houses Raptor Somraw"
+          "Houses Raptor Somraw",
+          "Gre'thor-Class Strike Ship",
+          "Somraw Class Raptor"
         ]
       }
     },
@@ -8049,7 +8173,8 @@
         ],
         "Ship Type": [
           "Hero Ship D5",
-          "Raptor D5"
+          "Raptor D5",
+          "D5-Type Raptor"
         ],
         "Country Limit": [
           "Hero Ship D5 Limit"
@@ -8104,7 +8229,10 @@
           "Houses Raider Sech",
           "Houses Raptor Qoj",
           "Houses Battlecruiser Jach",
-          "Houses Warship Jejha"
+          "Houses Warship Jejha",
+          "B1 Series Bird of Prey",
+          "Qoj Class Raptor",
+          "Sech Class Raider"
         ]
       }
     },
@@ -8161,7 +8289,11 @@
           "Battlecruiser Jach",
           "Warship Jejha",
           "Houses Battlecruiser Jach",
-          "Houses Warship Jejha"
+          "Houses Warship Jejha",
+          "B2 Series Bird of Prey",
+          "D6-Type Raider",
+          "Jach Class Battlecruiser",
+          "Jejha Class Warship"
         ]
       }
     },
@@ -8214,7 +8346,10 @@
           "Raptor Jev",
           "Battlecruiser D7",
           "Houses Raptor Somraw",
-          "Houses Battlecruiser D7"
+          "Houses Battlecruiser D7",
+          "D7-Type Battlecruiser",
+          "Hom Cha'Par Class Bird of Prey",
+          "Jev Cha'par Class Raptor"
         ],
         "Country Limit": [
           "Hero Ship D7 Limit"
@@ -8312,7 +8447,9 @@
           "Houses Raider Klalath",
           "Houses Raptor Qoj",
           "Houses Battlecruiser Jach",
-          "Houses Warship Jejha"
+          "Houses Warship Jejha",
+          "K't'inga Class Battlecruiser",
+          "Klalath Class Raider"
         ]
       }
     },
@@ -8360,7 +8497,9 @@
         ],
         "Ship Type": [
           "Gunboat Brel A",
-          "Bop Brel"
+          "Bop Brel",
+          "B'rel Class Bird of Prey",
+          "B'rel-A Modified Gunboat"
         ]
       }
     },
@@ -8410,7 +8549,10 @@
         "Ship Type": [
           "Raptor Hegh",
           "Battlecruiser Norgh",
-          "Warship Roj"
+          "Warship Roj",
+          "Hegh Jop Class Raptor",
+          "Norgh Class Battlecruiser",
+          "Roj Par Class Warship"
         ]
       }
     },
@@ -8472,7 +8614,9 @@
           "ship"
         ],
         "Ship Type": [
-          "Raider Kvort"
+          "Raider Kvort",
+          "B'Rel Advanced Prototype",
+          "K'Vort Class Raider"
         ]
       }
     },
@@ -8524,7 +8668,10 @@
           "Battlecruiser Vorcha",
           "Warship Kvek",
           "Houses Battlecruiser D7",
-          "Houses Battlecruiser Vorcha"
+          "Houses Battlecruiser Vorcha",
+          "Fek'lhr-Class Strike Ship",
+          "K'vek Class Warship",
+          "Vor'Cha Class Battlecruiser"
         ]
       }
     },
@@ -8576,7 +8723,9 @@
           "Bop Pagh",
           "Warship Neghvar",
           "Houses Battlecruiser Vorcha",
-          "Houses Warship Neghvar"
+          "Houses Warship Neghvar",
+          "Negh'Var Class Warship",
+          "Pagh Haw' Class Bird of Prey"
         ],
         "Country Limit": [
           "Hero Ship Chtang Limit"
@@ -8625,7 +8774,8 @@
           "Custom"
         ],
         "Ship Type": [
-          "Flagship Jehjhong"
+          "Flagship Jehjhong",
+          "JeH'jhong Flagship"
         ]
       }
     },
@@ -8704,6 +8854,9 @@
       "unlocks_by_type": {
         "Other": [
           "Custom"
+        ],
+        "Ship Type": [
+          "Kronos One HQ Upgrade"
         ]
       }
     },
@@ -8748,7 +8901,8 @@
           "Custom"
         ],
         "Ship Type": [
-          "Raptor Mehadraw"
+          "Raptor Mehadraw",
+          "Me'Had'Raw Class Raptor"
         ]
       }
     },
@@ -9492,7 +9646,9 @@
         "Ship Type": [
           "Hero Ship Mimicus",
           "Bop Rea",
-          "Interceptor Arrenhe"
+          "Interceptor Arrenhe",
+          "Arrenhe Class Remote Interceptor",
+          "Rea Class Bird of Prey"
         ],
         "Country Limit": [
           "Hero Ship Mimicus Limit"
@@ -9611,7 +9767,8 @@
           "Custom"
         ],
         "Ship Type": [
-          "Interceptor Tvaro"
+          "Interceptor Tvaro",
+          "T'Varo Class Interceptor"
         ]
       }
     },
@@ -9652,7 +9809,8 @@
           "Custom"
         ],
         "Ship Type": [
-          "Warbird Tellus"
+          "Warbird Tellus",
+          "Tellus Class Warbird"
         ]
       }
     },
@@ -9693,7 +9851,9 @@
         ],
         "Ship Type": [
           "Starbird Tshen",
-          "Shrike Cruiser Decius"
+          "Shrike Cruiser Decius",
+          "Decius-Class Shrike Cruiser",
+          "T'shen Class Starbird"
         ]
       }
     },
@@ -9739,7 +9899,8 @@
           "Praetorian Naval Museum"
         ],
         "Ship Type": [
-          "Warbird Stasek"
+          "Warbird Stasek",
+          "S'tasek Class Warbird"
         ]
       }
     },
@@ -9781,7 +9942,8 @@
           "ship"
         ],
         "Ship Type": [
-          "Interceptor Tliss"
+          "Interceptor Tliss",
+          "T'Liss Class Interceptor"
         ]
       }
     },
@@ -9825,7 +9987,10 @@
         "Ship Type": [
           "Bop Stanet",
           "Starbird Debrune",
-          "Battleship Gallant"
+          "Battleship Gallant",
+          "Debrune Class Starbird",
+          "Gallant Wing Class Battleship",
+          "S'Tanet Class Bird of Prey"
         ]
       }
     },
@@ -9865,7 +10030,8 @@
           "Custom"
         ],
         "Ship Type": [
-          "Battleship Praetor"
+          "Battleship Praetor",
+          "Praetor Class Battleship"
         ]
       }
     },
@@ -9907,7 +10073,9 @@
         "Ship Type": [
           "Hero Ship Falchion",
           "Warbird Sharien",
-          "Battleship Pontilus"
+          "Battleship Pontilus",
+          "Pontilus Class Battleship",
+          "S'harien Class Warbird"
         ],
         "Country Limit": [
           "Hero Ship Falchion Limit"
@@ -9953,7 +10121,9 @@
         ],
         "Ship Type": [
           "Warbird Kanassarum",
-          "Starbird Valkis"
+          "Starbird Valkis",
+          "Kanassarum Class Warbird",
+          "Valkis Class Starbird"
         ]
       }
     },
@@ -9996,7 +10166,9 @@
         ],
         "Ship Type": [
           "Bop Jorek",
-          "Interceptor Tmara"
+          "Interceptor Tmara",
+          "Jo'rek Class Bird of Prey",
+          "T'Mara Class Interceptor"
         ]
       }
     },
@@ -10040,7 +10212,8 @@
         ],
         "Ship Type": [
           "Battleship Dderidex",
-          "Shrike Cruiser Vasteme"
+          "Shrike Cruiser Vasteme",
+          "D'Deridex Class Battleship"
         ]
       }
     },
@@ -10088,7 +10261,11 @@
           "Warbird Valdore",
           "Starbird Kaskara",
           "Shuttle Snakehead",
-          "Shrike Cruiser Khanakh"
+          "Shrike Cruiser Khanakh",
+          "Ar'hael Class Bird of Prey",
+          "D'hanakh-Class Shrike Cruiser",
+          "Kaskara Class Starbird",
+          "Valdore Class Warbird"
         ],
         "Country Limit": [
           "Hero Ship Tulwas Limit"
@@ -10134,7 +10311,9 @@
         ],
         "Ship Type": [
           "Sword Scimitar",
-          "Attack Wing Scorpion"
+          "Attack Wing Scorpion",
+          "Scimitar",
+          "Scorpion Attack Fighter"
         ]
       }
     },
@@ -10174,7 +10353,8 @@
           "ship"
         ],
         "Ship Type": [
-          "Interceptor Tdair"
+          "Interceptor Tdair",
+          "T'Dair Class Interceptor"
         ]
       }
     },
@@ -10215,7 +10395,9 @@
         ],
         "Ship Type": [
           "Warbird Vreedex",
-          "Battleship Dkazanak"
+          "Battleship Dkazanak",
+          "D'Kazanak Class Battleship",
+          "Vreedex Class Warbird"
         ]
       }
     },
@@ -10865,7 +11047,13 @@
           "Flagship Neo Constitution",
           "Command Cruiser Odyssey",
           "Exploration Cruiser Neo Constitution",
-          "Exploration Cruiser Ross"
+          "Exploration Cruiser Ross",
+          "Argonaut-Class Artillery Cruiser",
+          "Constitution III-Class Exploration Cruiser",
+          "Odyssey-Class Command Cruiser",
+          "Regency-Class Heavy Cruiser",
+          "Rhode-Island Class Refit",
+          "Ross-Class Exploration Cruiser"
         ],
         "Ship Section": [
           "SMALL_GUN_01"
@@ -10945,7 +11133,10 @@
         ],
         "Ship Type": [
           "Mmv Sagan",
-          "Heavy Cruiser Sutherland"
+          "Heavy Cruiser Sutherland",
+          "Sagan-Class Multi-Mission-Ship",
+          "Sutherland-Class Heavy Cruiser",
+          "Sutherland-Refit Heavy Cruiser"
         ]
       }
     },
@@ -10983,7 +11174,8 @@
           "Custom"
         ],
         "Ship Type": [
-          "Explorer Lamarr"
+          "Explorer Lamarr",
+          "Lamarr-Class Explorer"
         ]
       }
     },
@@ -33260,7 +33452,8 @@
           "ship"
         ],
         "Ship Type": [
-          "Saber"
+          "Saber",
+          "Destroyer"
         ]
       }
     },
@@ -33382,7 +33575,8 @@
           "ship"
         ],
         "Ship Type": [
-          "Steamrunner"
+          "Steamrunner",
+          "Battlecruiser"
         ]
       }
     },
@@ -33423,7 +33617,8 @@
           "ship"
         ],
         "Ship Type": [
-          "Cruiser"
+          "Cruiser",
+          "Battleship"
         ]
       }
     },
@@ -33510,7 +33705,8 @@
         ],
         "Ship Type": [
           "Strike",
-          "Ship"
+          "Ship",
+          "Heavy Raider"
         ]
       }
     },
@@ -33622,7 +33818,8 @@
           "ship"
         ],
         "Ship Type": [
-          "Heavy Cruiser Proxima"
+          "Heavy Cruiser Proxima",
+          "Proxima-Class Heavy Cruiser"
         ]
       }
     },
@@ -33717,7 +33914,9 @@
           "ship"
         ],
         "Ship Type": [
-          "Frigate Discovery"
+          "Frigate Discovery",
+          "Discovery-Class",
+          "Endeavour-Class Refit"
         ]
       }
     },
@@ -33826,7 +34025,8 @@
       "description": "Ship Type: Hero Ship Nx",
       "unlocks_by_type": {
         "Ship Type": [
-          "Hero Ship Nx"
+          "Hero Ship Nx",
+          "NX-Class Explorer"
         ]
       }
     },
@@ -34424,7 +34624,8 @@
       "description": "Unlocks Ship: Nimrod Class | Country Limit: Nimrod Limit | Ship Type: Stealth Escort Nimrod",
       "unlocks_by_type": {
         "Ship Type": [
-          "Stealth Escort Nimrod"
+          "Stealth Escort Nimrod",
+          "Nimrod-Class Stealth Escort"
         ],
         "Country Limit": [
           "Nimrod Limit"
@@ -34505,7 +34706,8 @@
       "description": "Unlocks Ship: Achilles Class | Ship Type: Heavy Cruiser Achilles",
       "unlocks_by_type": {
         "Ship Type": [
-          "Heavy Cruiser Achilles"
+          "Heavy Cruiser Achilles",
+          "Achilles-Class Cruiser"
         ]
       }
     },
@@ -34548,7 +34750,8 @@
       "description": "TECH_UNLOCK_SHIP_FED_KELVINCON_TITLE | Country Limit: Heavy Cruiser Kelvin Constitution Limit | Ship Type: Heavy Cruiser Kelvin Constitution",
       "unlocks_by_type": {
         "Ship Type": [
-          "Heavy Cruiser Kelvin Constitution"
+          "Heavy Cruiser Kelvin Constitution",
+          "Constitution-Class"
         ],
         "Country Limit": [
           "Heavy Cruiser Kelvin Constitution Limit"
@@ -34803,7 +35006,8 @@
       "unlocks_by_type": {
         "Ship Type": [
           "Hero Ship Texas",
-          "Heavy Escort Texas"
+          "Heavy Escort Texas",
+          "Texas-Class Heavy Escort"
         ],
         "Country Limit": [
           "Hero Ship Texas Limit"
@@ -34849,7 +35053,8 @@
       "description": "Unlocks Ship: Deimos Class | Ship Type: Stealth Escort Deimos",
       "unlocks_by_type": {
         "Ship Type": [
-          "Stealth Escort Deimos"
+          "Stealth Escort Deimos",
+          "Deimos-Class Stealth Escort"
         ]
       }
     },
@@ -34892,7 +35097,8 @@
       "description": "Unlocks Ship: Farragut Class | Ship Type: Mmv Farragut",
       "unlocks_by_type": {
         "Ship Type": [
-          "Mmv Farragut"
+          "Mmv Farragut",
+          "Farragut-Class Multi-Mission-Ship"
         ]
       }
     },
@@ -34942,7 +35148,8 @@
       "description": "Unlocks Ship: Shangri-La Class | Ship Type: Heavy Cruiser Shangri La",
       "unlocks_by_type": {
         "Ship Type": [
-          "Heavy Cruiser Shangri La"
+          "Heavy Cruiser Shangri La",
+          "Shangri-La Class Heavy Cruiser"
         ]
       }
     },
@@ -36000,7 +36207,8 @@
       "unlocks_by_type": {
         "Ship Type": [
           "Cruiser",
-          "Cannon"
+          "Cannon",
+          "Assault Cruiser"
         ]
       }
     },
@@ -36046,7 +36254,8 @@
       "description": "Unlocks Ship Type: City Ship | Country Limit: War Limit | Ship Type: War",
       "unlocks_by_type": {
         "Ship Type": [
-          "War"
+          "War",
+          "Voth City Ship"
         ],
         "Country Limit": [
           "War Limit"
@@ -36154,7 +36363,8 @@
       "description": "Unlocks Ship: Kulinor Class  | Ship Type: 01 War Cruiser Letau",
       "unlocks_by_type": {
         "Ship Type": [
-          "01 War Cruiser Letau"
+          "01 War Cruiser Letau",
+          "Letau-Class War Cruiser"
         ]
       }
     },
@@ -36205,7 +36415,8 @@
           "Sword Shrike",
           "01 Cruiser Kimal",
           "01 War Cruiser Ekoor",
-          "01 Adv Cruiser Obsidian"
+          "01 Adv Cruiser Obsidian",
+          "Dominion Super-Carrier"
         ]
       }
     },
@@ -36697,7 +36908,9 @@
       "unlocks_by_type": {
         "Ship Type": [
           "01 Weapons Platform Chintoka",
-          "01 Cruiser Kimal"
+          "01 Cruiser Kimal",
+          "Chintoka-Class Weapons Platform",
+          "Kimal-Class Strike Cruiser"
         ]
       }
     },
@@ -37072,7 +37285,8 @@
       "description": "Unlocks Ship Type: Tactical Cube | Ship Type: Tactical",
       "unlocks_by_type": {
         "Ship Type": [
-          "Tactical"
+          "Tactical",
+          "Tactical Cube"
         ]
       }
     },
@@ -37161,7 +37375,8 @@
       "description": "Unlocks Ship Type: Omega Cube | Country Limit: Super Cube Limit | Ship Type: Cube",
       "unlocks_by_type": {
         "Ship Type": [
-          "Cube"
+          "Cube",
+          "Omega Cube"
         ],
         "Country Limit": [
           "Super Cube Limit"
@@ -37217,7 +37432,12 @@
       "technologies": [],
       "components": [],
       "buildings": [],
-      "description": ""
+      "description": "",
+      "unlocks_by_type": {
+        "Ship Type": [
+          "Omega Scout"
+        ]
+      }
     },
     "faction_availability": {},
     "is_rare": false,
@@ -37268,7 +37488,12 @@
       "technologies": [],
       "components": [],
       "buildings": [],
-      "description": ""
+      "description": "",
+      "unlocks_by_type": {
+        "Ship Type": [
+          "Omega Probe"
+        ]
+      }
     },
     "faction_availability": {},
     "is_rare": false,
@@ -37326,7 +37551,12 @@
       "technologies": [],
       "components": [],
       "buildings": [],
-      "description": ""
+      "description": "",
+      "unlocks_by_type": {
+        "Ship Type": [
+          "Omega Diamond"
+        ]
+      }
     },
     "faction_availability": {},
     "is_rare": false,
@@ -37384,7 +37614,12 @@
       "technologies": [],
       "components": [],
       "buildings": [],
-      "description": ""
+      "description": "",
+      "unlocks_by_type": {
+        "Ship Type": [
+          "Omega Pyramid"
+        ]
+      }
     },
     "faction_availability": {},
     "is_rare": false,
@@ -37442,7 +37677,12 @@
       "technologies": [],
       "components": [],
       "buildings": [],
-      "description": ""
+      "description": "",
+      "unlocks_by_type": {
+        "Ship Type": [
+          "Omega Sphere"
+        ]
+      }
     },
     "faction_availability": {},
     "is_rare": false,
@@ -37476,7 +37716,8 @@
       "unlocks_by_type": {
         "Ship Type": [
           "01 Bio Scout",
-          "01 Bio Frigate"
+          "01 Bio Frigate",
+          "Bio-Scout"
         ]
       }
     },
@@ -37756,7 +37997,8 @@
       "description": "Country Limit: Planet Killer Degra Limit | Ship Type: Planet Killer Degra",
       "unlocks_by_type": {
         "Ship Type": [
-          "Planet Killer Degra"
+          "Planet Killer Degra",
+          "Degra-Class Planet Destroyer"
         ],
         "Country Limit": [
           "Planet Killer Degra Limit"

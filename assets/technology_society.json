@@ -18757,7 +18757,9 @@
         "Ship Type": [
           "Shuttle",
           "Shuttle Kivra",
-          "Shuttle Tajen"
+          "Shuttle Tajen",
+          "Kivra Shuttle",
+          "Tajen-Class Shuttle"
         ],
         "Country Limit": [
           "Shuttle Limit",

@@ -20,10 +20,11 @@ from component_parser import ComponentParser
 from supplemental_tech_parser import SupplementalTechParser
 from reverse_unlock_parser import ReverseUnlockParser
 from extract_icon_mappings import extract_icon_mappings
+from ship_name_parser import build_tech_to_ships_mapping
 from config import STNH_MOD_ROOT, OUTPUT_ASSETS_DIR, OUTPUT_ROOT_DIR
 
 
-def transform_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser, reverse_unlocks, icon_mappings):
+def transform_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser, reverse_unlocks, icon_mappings, ship_names_mapping=None):
     """
     Transform Balance Center tech format → Website JSON format
 
@@ -34,6 +35,7 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
         component_parser: ComponentParser instance for extracting component effects
         reverse_unlocks: Dict mapping tech_id -> list of things it unlocks
         icon_mappings: Dict mapping tech_id -> icon filename
+        ship_names_mapping: Dict mapping tech_id -> list of ship display names
 
     Returns:
         Enhanced tech dict with all website-required fields
@@ -78,6 +80,22 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
     reverse_unlock_data = reverse_unlocks.get(tech_id, [])
     enhanced['unlock_details'] = extract_unlock_details(unlocks, reverse_unlock_data, loc_loader)
 
+    # 4b. Add faction-specific ship names to Ship Type unlocks
+    if ship_names_mapping and tech_id in ship_names_mapping:
+        ship_names = ship_names_mapping[tech_id]
+        if ship_names:
+            # Ensure unlocks_by_type exists
+            if 'unlocks_by_type' not in enhanced['unlock_details']:
+                enhanced['unlock_details']['unlocks_by_type'] = {}
+            # Ensure Ship Type list exists
+            if 'Ship Type' not in enhanced['unlock_details']['unlocks_by_type']:
+                enhanced['unlock_details']['unlocks_by_type']['Ship Type'] = []
+            # Add ship names (avoid duplicates)
+            existing = set(enhanced['unlock_details']['unlocks_by_type']['Ship Type'])
+            for name in ship_names:
+                if name not in existing:
+                    enhanced['unlock_details']['unlocks_by_type']['Ship Type'].append(name)
+
     # 5. Faction availability
     # TODO: Implement determine_faction_availability()
     enhanced['faction_availability'] = determine_faction_availability(tech, faction_mappings)
@@ -97,7 +115,7 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
     return enhanced
 
 
-def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser, reverse_unlocks, icon_mappings):
+def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_loader, component_parser, reverse_unlocks, icon_mappings, ship_names_mapping=None):
     """
     Transform Supplemental Parser tech format → Website JSON format
 
@@ -108,6 +126,7 @@ def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_lo
         component_parser: ComponentParser instance for extracting component effects
         reverse_unlocks: Dict mapping tech_id -> list of things it unlocks
         icon_mappings: Dict mapping tech_id -> icon filename
+        ship_names_mapping: Dict mapping tech_id -> list of ship display names
 
     Returns:
         Enhanced tech dict with all website-required fields
@@ -168,6 +187,19 @@ def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_lo
         unlock_details = merge_unlock_details_with_reverse(unlock_details, reverse_unlock_data)
 
     enhanced['unlock_details'] = unlock_details
+
+    # Add faction-specific ship names to Ship Type unlocks
+    if ship_names_mapping and tech_id in ship_names_mapping:
+        ship_names = ship_names_mapping[tech_id]
+        if ship_names:
+            if 'unlocks_by_type' not in enhanced['unlock_details']:
+                enhanced['unlock_details']['unlocks_by_type'] = {}
+            if 'Ship Type' not in enhanced['unlock_details']['unlocks_by_type']:
+                enhanced['unlock_details']['unlocks_by_type']['Ship Type'] = []
+            existing = set(enhanced['unlock_details']['unlocks_by_type']['Ship Type'])
+            for name in ship_names:
+                if name not in existing:
+                    enhanced['unlock_details']['unlocks_by_type']['Ship Type'].append(name)
 
     # Faction availability (reuse existing function)
     enhanced['faction_availability'] = determine_faction_availability(tech, faction_mappings)
@@ -780,6 +812,15 @@ def generate_complete_tech_data():
     icon_mappings = extract_icon_mappings()
     print()
 
+    # 1e. Build Ship Names Mapping (Faction-specific ship class names)
+    print("Step 1e: Building ship names mapping...")
+    import os
+    ship_sizes_dir = os.path.join(STNH_MOD_ROOT, "common", "ship_sizes")
+    loc_dir = os.path.join(STNH_MOD_ROOT, "localisation", "english")
+    component_dir = os.path.join(STNH_MOD_ROOT, "common", "component_templates")
+    ship_names_mapping = build_tech_to_ships_mapping(ship_sizes_dir, loc_dir, component_dir)
+    print()
+
     # 2. Extract ALL data
     print("Step 2: Extracting data from Balance Center...")
     data = bridge.get_all_technologies_with_metadata()
@@ -808,7 +849,8 @@ def generate_complete_tech_data():
                 bridge.loc_loader,
                 component_parser,
                 reverse_unlocks,
-                icon_mappings
+                icon_mappings,
+                ship_names_mapping
             )
             techs_enhanced.append(enhanced)
         except Exception as e:
@@ -838,7 +880,8 @@ def generate_complete_tech_data():
                 bridge.loc_loader,
                 component_parser,
                 reverse_unlocks,
-                icon_mappings
+                icon_mappings,
+                ship_names_mapping
             )
             techs_enhanced.append(enhanced)
             missing_count += 1

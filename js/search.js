@@ -140,9 +140,20 @@ export function findMatchingTechs(techs, term, nameOnly = false) {
     if (n.id && n.id.toLowerCase().includes(q)) return true;
     if (nameOnly) return false; // Stop here if only searching name/ID
     if (n.category && typeof n.category === 'string' && n.category.toLowerCase().includes(q)) return true;
+    // Search legacy unlocks array
     if (n.unlocks && Array.isArray(n.unlocks)) {
       for (const u of n.unlocks) {
         if (u.label && u.label.toLowerCase().includes(q)) return true;
+      }
+    }
+    // Search unlock_details.unlocks_by_type (ship names, buildings, etc.)
+    if (n.unlock_details && n.unlock_details.unlocks_by_type) {
+      for (const [type, items] of Object.entries(n.unlock_details.unlocks_by_type)) {
+        if (Array.isArray(items)) {
+          for (const item of items) {
+            if (typeof item === 'string' && item.toLowerCase().includes(q)) return true;
+          }
+        }
       }
     }
     return false;
