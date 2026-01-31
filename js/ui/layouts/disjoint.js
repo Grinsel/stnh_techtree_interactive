@@ -66,11 +66,11 @@ export function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies, 
     .force('y', d3.forceY(height / 2).strength(0.1))
     .force('collision', d3.forceCollide().radius(60));
 
-  // Avoid blocking the UI at startup: skip or greatly reduce synchronous pre-ticks
+  // Avoid blocking the UI at startup: reduce pre-ticks when performance mode is on
   const perfToggle = document.getElementById('performance-toggle');
   const perfOn = !!perfToggle?.checked;
-  const preTicks = perfOn ? 0 : 40; // no blocking when performance mode is on
-  for (let i = 0; i < 200; ++i) simulation.tick();
+  const preTicks = perfOn ? 50 : 200;
+  for (let i = 0; i < preTicks; ++i) simulation.tick();
 
   // After initial settle, frame all nodes within the viewport
   zoomToFit(_svg, _g, zoom, nodes, width, height, 300, 0.02, 2);
@@ -161,7 +161,7 @@ export function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies, 
       .attr('x2', (d) => d.target.x)
       .attr('y2', (d) => d.target.y);
     node.attr('transform', (d) => `translate(${d.x},${d.y})`);
-    if (++tickCountDisjoint % 5 === 0) applyLOD();
+    if (++tickCountDisjoint % 15 === 0) applyLOD();
     if (tickCountDisjoint > 80 && simulation.alpha() < 0.03) {
       simulation.stop();
       applyLOD();

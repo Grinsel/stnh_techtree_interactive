@@ -74,11 +74,11 @@ export function renderForceDirectedArrowsGraph(
     .force('center', d3.forceCenter(width / 2, height / 2))
     .force('collision', d3.forceCollide().radius(80));
 
-  // Avoid blocking the UI at startup: skip or greatly reduce synchronous pre-ticks
+  // Avoid blocking the UI at startup: reduce pre-ticks when performance mode is on
   const perfToggle = document.getElementById('performance-toggle');
   const perfOn = !!perfToggle?.checked;
-  const preTicks = perfOn ? 0 : 40; // no blocking when performance mode is on
-  for (let i = 0; i < 50; ++i) simulation.tick();
+  const preTicks = perfOn ? 15 : 50;
+  for (let i = 0; i < preTicks; ++i) simulation.tick();
   // After initial settle, frame all nodes
   zoomToFit(_svg, _g, zoom, nodes, width, height);
 
@@ -209,8 +209,9 @@ export function renderForceDirectedArrowsGraph(
       });
     node.attr('transform', (d) => `translate(${d.x},${d.y})`);
     // Periodically refresh LOD so moving nodes update visibility without zoom
-    if (++tickCountArrows % 5 === 0) applyLOD();
-    if (++tickCountArrows > 60 && simulation.alpha() < 0.03) {
+    tickCountArrows += 1;
+    if (tickCountArrows % 15 === 0) applyLOD();
+    if (tickCountArrows > 60 && simulation.alpha() < 0.03) {
       simulation.stop();
       applyLOD();
     }

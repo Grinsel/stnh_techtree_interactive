@@ -219,9 +219,17 @@ export function createSvgFor(container, onZoom) {
   const g = svg.append("g");
   g.append('g').attr('class','links-layer');
   g.append('g').attr('class','nodes-layer');
+  let rafId = null;
   const zoom = d3.zoom().on("zoom", (event) => {
     g.attr("transform", event.transform);
-    if (typeof onZoom === 'function') onZoom(event);
+    if (typeof onZoom === 'function') {
+      if (rafId == null) {
+        rafId = requestAnimationFrame(() => {
+          onZoom(event);
+          rafId = null;
+        });
+      }
+    }
   });
   svg.call(zoom);
   return { svg, g, zoom, width, height };
@@ -318,6 +326,10 @@ export function renderGraph(layout, nodes, links, selectedSpecies, container, de
   return deps.forceLayout(nodes, links, selectedSpecies, container, deps);
 }
 
+// Approximate char width for 12px bold font; avoids getComputedTextLength when text is clearly short
+const _approxCharWidth = 6.5;
+function _estWidth(str) { return (str || '').length * _approxCharWidth; }
+
 // Helper to wrap SVG text into tspans up to a max number of lines
 export function wrapText(textSelection, width, lineHeight = 12, maxLines = 2) {
   textSelection.each(function(d) {
@@ -337,8 +349,10 @@ export function wrapText(textSelection, width, lineHeight = 12, maxLines = 2) {
       for (let i = 0; i < words.length; i++) {
           const word = words[i];
           line.push(word);
-          tspan.text(line.join(' '));
-          if (tspan.node().getComputedTextLength() > width) {
+          const lineStr = line.join(' ');
+          tspan.text(lineStr);
+          const fitsByEstimate = _estWidth(lineStr) <= width * 0.95;
+          if (!fitsByEstimate && tspan.node().getComputedTextLength() > width) {
               line.pop();
               tspan.text(line.join(' '));
               line = [word];
@@ -532,10 +546,9 @@ export function updateLOD(svg, g) {
   const nodesSel = g.select('.nodes-layer').selectAll('.tech-node');
   const linksLayer = g.select('.links-layer');
 
-  // Only use LOD when graph is large and Performance mode is ON
+  // Use LOD when graph is large (>= 150 nodes); performance toggle can refine behavior in future
   const totalNodes = (data.nodes || []).length;
-  const performanceMode = !!document.getElementById('performance-toggle')?.checked;
-  const useLOD = performanceMode && totalNodes > 200;
+  const useLOD = totalNodes > 150;
 
   if (!useLOD) {
     // Eagerly create heavy DOM once if not already present
@@ -785,22 +798,28 @@ export function updateLOD(svg, g) {
     g.property('linksInitialized', true);
   }
 
-  // LOD logic
+  // LOD logic: precompute visible node IDs once to avoid repeated isVisible calls per element
   const isCircleView = useLOD && k < showCirclesAt;
+  const visibleNodeIds = new Set(
+    (data.nodes || []).filter(n => isVisible(n)).map(n => n.id)
+  );
 
-  g.selectAll('.node-circle').style('display', d => (isCircleView && isVisible(d)) ? null : 'none');
-  g.selectAll('.node-rect, .tier-indicator, .node-label').style('display', d => (isCircleView) ? 'none' : null);
+  const nodeCircles = g.selectAll('.node-circle');
+  const nodeRects = g.selectAll('.node-rect, .tier-indicator, .node-label');
+  nodeCircles.style('display', d => (isCircleView && visibleNodeIds.has(d?.id)) ? null : 'none');
+  nodeRects.style('display', d => (isCircleView) ? 'none' : null);
 
   if (!isCircleView) {
-    g.selectAll('.node-label').style('display', d => (k >= showLabelsAt && isVisible(d)) ? null : 'none');
-    g.selectAll('.tier-indicator').style('display', d => (k >= showTiersAt && isVisible(d)) ? null : 'none');
+    g.selectAll('.node-label').style('display', d => (k >= showLabelsAt && visibleNodeIds.has(d?.id)) ? null : 'none');
+    g.selectAll('.tier-indicator').style('display', d => (k >= showTiersAt && visibleNodeIds.has(d?.id)) ? null : 'none');
   }
 
-  g.selectAll('.link').style('display', d => {
-    // d.source/d.target may be ids before simulation init; guard for objects
-    const s = d && (d.source && d.source.x !== undefined ? d.source : null);
-    const tt = d && (d.target && d.target.x !== undefined ? d.target : null);
-    const endpointsVisible = isVisible(s) || isVisible(tt);
+  linksLayer.selectAll('.link').style('display', d => {
+    const s = d?.source;
+    const tt = d?.target;
+    const sid = s && typeof s === 'object' ? s.id : (typeof s === 'string' ? s : null);
+    const tid = tt && typeof tt === 'object' ? tt.id : (typeof tt === 'string' ? tt : null);
+    const endpointsVisible = (sid && visibleNodeIds.has(sid)) || (tid && visibleNodeIds.has(tid));
     return (k >= showLinksAt && endpointsVisible) ? null : 'none';
   });
 }

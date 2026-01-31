@@ -8,6 +8,7 @@ stnh_techtree_interactive/
 │   ├── ARCHITECTURE.md
 │   ├── DEVELOPMENT.md
 │   ├── FILE_STRUCTURE.md
+│   ├── PERFORMANCE_IMPROVEMENTS.md
 │   └── CLEANUP_RECOMMENDATIONS.md
 │
 ├── js/                             [JavaScript-Module]
