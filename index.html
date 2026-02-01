@@ -501,6 +501,18 @@
             stroke: white !important;
             stroke-width: 3px !important;
         }
+        /* Category highlighting - dim non-matching techs */
+        .tech-node.category-dimmed {
+            opacity: 0.2;
+            transition: opacity 0.3s ease;
+        }
+        .tech-node.category-dimmed rect {
+            filter: saturate(0.3);
+        }
+        .link.category-dimmed {
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+        }
         .tech-node text {
             fill: #dddddd;
             font-size: 10px;
@@ -796,6 +808,13 @@
                         <select id="category-select">
                             <option value="all">All</option>
                         </select>
+                        <div class="search-options" style="margin-top: 8px; margin-bottom: 8px;">
+                            <label for="category-highlight-toggle" style="margin: 0;">Highlight Category</label>
+                            <label class="switch">
+                                <input type="checkbox" id="category-highlight-toggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
                         <label for="start-tier-select" class="filters-divider">Select Tier Range:</label>
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
                             <select id="start-tier-select" style="width: 100%; margin: 0;">
