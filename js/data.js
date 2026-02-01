@@ -5,6 +5,7 @@
 let _techs = null;            // Array<Tech>
 let _species = null;          // Array<string>
 let _factions = null;         // Array<Faction> - NEW Phase 2
+let _empires = null;          // Array<Empire> - Prescripted countries
 let _indexById = null;        // Map<string, Tech>
 
 // --- Types (informal) ---
@@ -60,10 +61,18 @@ export async function loadFactionData() {
   return _factions;
 }
 
+// --- Empires Data Loading (prescripted countries) ---
+export async function loadEmpiresData() {
+  if (Array.isArray(_empires)) return _empires;
+  const res = await fetch('assets/empires.json');
+  _empires = await res.json();
+  return _empires;
+}
+
 export async function initData() {
-  // Best-effort parallel preload (including factions - Phase 2)
-  await Promise.all([loadTechnologyData(), loadSpeciesList(), loadFactionData()]);
-  return { techs: _techs, species: _species, factions: _factions };
+  // Best-effort parallel preload (including factions and empires)
+  await Promise.all([loadTechnologyData(), loadSpeciesList(), loadFactionData(), loadEmpiresData()]);
+  return { techs: _techs, species: _species, factions: _factions, empires: _empires };
 }
 
 // --- Convenience wrappers for consumers ---
@@ -239,6 +248,18 @@ export function calculateShortestPath(startId, endId, techs) {
 export function getAllTechsCached() { return _techs; }
 export function getAllSpeciesCached() { return _species; }
 export function getAllFactionsCached() { return _factions; }  // NEW Phase 2
+export function getAllEmpiresCached() { return _empires; }    // Prescripted countries
+
+/**
+ * Get empire by ID
+ *
+ * @param {string} empireId - Empire ID
+ * @returns {Empire|null} Empire object or null
+ */
+export function getEmpireById(empireId) {
+  if (!_empires || !Array.isArray(_empires)) return null;
+  return _empires.find(e => e.id === empireId) || null;
+}
 
 // --- NEW Phase 2: Faction-Aware Functions ---
 
@@ -342,6 +363,19 @@ export function getTechName(tech, factionId) {
 export function getFactionById(factionId) {
   if (!_factions || !Array.isArray(_factions)) return null;
   return _factions.find(f => f.id === factionId) || null;
+}
+
+/**
+ * Check if a faction has unique ships (faction_ships entries)
+ * Factions without unique ships should only see generic ship names.
+ *
+ * @param {string} factionId - Faction ID
+ * @returns {boolean} True if faction has unique ships
+ */
+export function factionHasUniqueShips(factionId) {
+  if (!factionId || factionId === 'all') return true; // "All" shows everything
+  const faction = getFactionById(factionId);
+  return faction?.has_unique_ships ?? false;
 }
 
 /**

@@ -37019,6 +37019,11 @@
         "Espionage Operation": [
           "Assimilate Ship"
         ]
+      },
+      "faction_ships": {
+        "Borg": [
+          "Probe"
+        ]
       }
     },
     "faction_availability": {},
@@ -37066,6 +37071,11 @@
         ],
         "Espionage Operation": [
           "Assimilate Ship"
+        ]
+      },
+      "faction_ships": {
+        "Borg": [
+          "Scout"
         ]
       }
     },
@@ -37115,6 +37125,11 @@
         ],
         "Espionage Operation": [
           "Assimilate Ship"
+        ]
+      },
+      "faction_ships": {
+        "Borg": [
+          "Pyramid"
         ]
       }
     },
@@ -37171,6 +37186,11 @@
         "Espionage Operation": [
           "Assimilate Ship"
         ]
+      },
+      "faction_ships": {
+        "Borg": [
+          "Sphere"
+        ]
       }
     },
     "faction_availability": {},
@@ -37219,6 +37239,11 @@
         ],
         "Espionage Operation": [
           "Assimilate Ship"
+        ]
+      },
+      "faction_ships": {
+        "Borg": [
+          "Diamond"
         ]
       }
     },
@@ -37269,6 +37294,11 @@
         "Bombardment Stance": [
           "Harvest 2"
         ]
+      },
+      "faction_ships": {
+        "Borg": [
+          "Cube"
+        ]
       }
     },
     "faction_availability": {},
@@ -37312,7 +37342,11 @@
       "description": "Unlocks Ship Type: Tactical Cube | Ship Type: Tactical",
       "unlocks_by_type": {
         "Ship Type": [
-          "Tactical",
+          "Tactical"
+        ]
+      },
+      "faction_ships": {
+        "Borg": [
           "Tactical Cube"
         ]
       }
@@ -37402,11 +37436,15 @@
       "description": "Unlocks Ship Type: Omega Cube | Country Limit: Super Cube Limit | Ship Type: Cube",
       "unlocks_by_type": {
         "Ship Type": [
-          "Cube",
-          "Omega Cube"
+          "Cube"
         ],
         "Country Limit": [
           "Super Cube Limit"
+        ]
+      },
+      "faction_ships": {
+        "Borg": [
+          "Omega Cube"
         ]
       }
     },

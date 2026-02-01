@@ -21,6 +21,7 @@ from supplemental_tech_parser import SupplementalTechParser
 from reverse_unlock_parser import ReverseUnlockParser
 from extract_icon_mappings import extract_icon_mappings
 from ship_name_parser import build_tech_to_faction_ships_mapping
+from prescripted_parser import build_empires_list
 from config import STNH_MOD_ROOT, OUTPUT_ASSETS_DIR, OUTPUT_ROOT_DIR
 
 
@@ -979,6 +980,23 @@ def generate_complete_tech_data():
     # Write factions.json
     write_json_file(factions_metadata, output_dir / 'factions.json')
 
+    # Generate empires.json from prescripted_countries
+    print("Step 5c: Generating empires metadata...")
+    prescripted_dir = Path(STNH_MOD_ROOT) / 'prescripted_countries'
+
+    # Collect factions that have unique ships
+    factions_with_ships = set()
+    for tech in techs_enhanced:
+        faction_ships = tech.get('unlock_details', {}).get('faction_ships', {})
+        factions_with_ships.update(faction_ships.keys())
+
+    empires_list = build_empires_list(prescripted_dir, bridge.loc_loader, factions_with_ships)
+    print(f"  Generated metadata for {len(empires_list)} empires")
+    print()
+
+    # Write empires.json
+    write_json_file(empires_list, output_dir / 'empires.json')
+
     # Write categories.json
     write_json_file(categories_list, output_dir / 'categories.json')
 
@@ -992,6 +1010,7 @@ def generate_complete_tech_data():
     print(f"  - {output_dir / 'technology_engineering.json'} ({len(engineering)} techs)")
     print(f"  - {output_dir / 'technology_society.json'} ({len(society)} techs)")
     print(f"  - {output_dir / 'factions.json'} ({len(factions_metadata)} factions)")
+    print(f"  - {output_dir / 'empires.json'} ({len(empires_list)} empires)")
     print(f"  - {output_dir / 'categories.json'} ({len(categories_list)} categories)")
     print()
 
@@ -1055,6 +1074,12 @@ def generate_factions_metadata(factions, technologies):
 
     metadata = []
 
+    # Collect all factions that have faction_ships entries
+    factions_with_unique_ships = set()
+    for tech in technologies:
+        faction_ships = tech.get('unlock_details', {}).get('faction_ships', {})
+        factions_with_unique_ships.update(faction_ships.keys())
+
     # Species-to-faction mapping for fallback
     species_to_faction = {
         'Federation': 'Federation',
@@ -1109,13 +1134,17 @@ def generate_factions_metadata(factions, technologies):
             'playable': False
         })
 
+        # Check if this faction has unique ships
+        has_unique_ships = info['name'] in factions_with_unique_ships or faction_name in factions_with_unique_ships
+
         metadata.append({
             'id': faction_name.lower().replace(' ', '_'),
             'name': info['name'],
             'short_name': info['short_name'],
             'color': info['color'],
             'playable': info['playable'],
-            'tech_count': tech_count
+            'tech_count': tech_count,
+            'has_unique_ships': has_unique_ships
         })
 
     return metadata

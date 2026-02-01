@@ -1,117 +1,164 @@
 /**
- * Faction Management Module (Phase 2)
+ * Faction/Empire Management Module (Phase 2 + Autocomplete)
  *
- * Handles faction dropdown population and state management
+ * Handles empire autocomplete and faction state management.
+ * Maps prescripted countries (empires) to factions for tech filtering.
  */
 
-import { loadFactionData, getFactionById } from './data.js';
+import { loadFactionData, loadEmpiresData, getFactionById, getEmpireById } from './data.js';
+import { initFactionAutocomplete, setSelectedEmpire } from './ui/faction-autocomplete.js';
 import { saveState } from './state.js';
 
-let currentFaction = 'federation';  // Default: UFP
+let currentFaction = 'all';      // Faction ID for filtering (from graphical_culture)
+let currentEmpire = null;        // Selected empire object
+
+// Mapping from graphical_culture to faction ID
+const graphicalCultureToFaction = {
+  'federation': 'federation',
+  'fed_01': 'federation',
+  'fed_02': 'federation',
+  'klingon': 'klingon',
+  'kdf_01': 'klingon',
+  'romulan': 'romulan',
+  'rom_01': 'romulan',
+  'cardassian': 'cardassian',
+  'cardassian_01': 'cardassian',
+  'dominion': 'dominion',
+  'dom_01': 'dominion',
+  'borg': 'borg',
+  'borg_01': 'borg',
+  'ferengi': 'ferengi',
+  'ferengi_01': 'ferengi',
+  'breen': 'breen',
+  'breen_01': 'breen',
+  'undine': 'undine',
+  'undine_01': 'undine',
+  'xindi': 'xindi',
+  'xindi_01': 'xindi',
+  'voth': 'voth',
+  'voth_01': 'voth',
+  'hirogen': 'hirogen',
+  'hirogen_01': 'hirogen',
+  'kazon': 'kazon',
+  'kazon_01': 'kazon',
+  'krenim': 'krenim',
+  'krenim_01': 'krenim',
+  'vidiian': 'vidiian',
+  'vidiian_01': 'vidiian',
+  'suliban': 'suliban',
+  'suliban_01': 'suliban',
+  'sona': 'sona',
+  'sona_01': 'sona',
+  'talshiar': 'romulan',
+  'tholian': 'tholian',
+  'tholian_01': 'tholian',
+  'terran': 'terran',
+  'terran_01': 'terran',
+};
 
 /**
- * Initialize faction dropdown with data from factions.json
+ * Initialize faction selection with empire autocomplete
  */
 export async function initFactionDropdown() {
-  const factionSelect = document.getElementById('faction-select');
-  if (!factionSelect) {
-    console.warn('[Factions] faction-select element not found');
-    return;
-  }
-
   try {
-    // Load faction data
-    const factions = await loadFactionData();
+    // Load both factions and empires
+    const [factions, empires] = await Promise.all([
+      loadFactionData(),
+      loadEmpiresData()
+    ]);
 
-    // Clear existing options (except "All Factions")
-    while (factionSelect.options.length > 1) {
-      factionSelect.remove(1);
-    }
+    console.log(`[Factions] Loaded ${factions.length} factions, ${empires.length} empires`);
 
-    // Filter to playable factions and sort
-    const playableFactions = factions
-      .filter(f => f.playable)
-      .sort((a, b) => a.name.localeCompare(b.name));
+    // Initialize autocomplete with empire list
+    initFactionAutocomplete(empires, handleEmpireSelect);
 
-    // Add faction options
-    playableFactions.forEach(faction => {
-      const option = document.createElement('option');
-      option.value = faction.id;
-      option.textContent = faction.name;
-      factionSelect.appendChild(option);
-    });
-
-    // IMPORTANT: Set value after all options are added
-    // This ensures Federation is selected, not "All Factions"
-    factionSelect.value = 'federation';
-    currentFaction = 'federation';
-
-    console.log(`[Factions] Loaded ${playableFactions.length} playable factions`);
-
-    // Update faction info display
-    updateFactionInfo('federation');
+    // Set default: no empire selected (all factions)
+    currentFaction = 'all';
+    currentEmpire = null;
+    updateFactionInfo('all');
 
   } catch (error) {
-    console.error('[Factions] Failed to load faction data:', error);
+    console.error('[Factions] Failed to load faction/empire data:', error);
   }
 }
 
 /**
- * Register faction change event handlers
+ * Handle empire selection from autocomplete
+ */
+function handleEmpireSelect(empire) {
+  console.log('[Factions] Selected empire:', empire);
+
+  currentEmpire = empire;
+
+  // Map graphical_culture to faction
+  const gc = empire.graphical_culture || '';
+  const factionId = graphicalCultureToFaction[gc] || gc || 'all';
+  currentFaction = factionId;
+
+  console.log(`[Factions] Mapped ${gc} -> faction: ${factionId}`);
+
+  // Update info display
+  updateFactionInfo(factionId, empire);
+
+  // Save state
+  saveState();
+
+  // Trigger re-render with faction filter
+  if (typeof window.updateVisualization === 'function') {
+    const speciesSelect = document.getElementById('species-select');
+    const selectedSpecies = speciesSelect ? speciesSelect.value : 'all';
+    window.updateVisualization(selectedSpecies, null, false);
+  }
+}
+
+/**
+ * Register faction change event handlers (for programmatic changes)
  */
 export function registerFactionEvents() {
-  const factionSelect = document.getElementById('faction-select');
-  if (!factionSelect) return;
-
-  factionSelect.addEventListener('change', (e) => {
-    const selectedFaction = e.target.value;
-    currentFaction = selectedFaction;
-
-    console.log(`[Factions] Selected faction: ${selectedFaction}`);
-
-    // Update faction info display
-    updateFactionInfo(selectedFaction);
-
-    // Save state
-    saveState();
-
-    // NEW Phase 2.4: Trigger re-render with faction filter
-    if (typeof window.updateVisualization === 'function') {
-      // Get current species filter
-      const speciesSelect = document.getElementById('species-select');
-      const selectedSpecies = speciesSelect ? speciesSelect.value : 'all';
-
-      // Re-render with faction filter applied
-      window.updateVisualization(selectedSpecies, null, false);
-    }
-  });
+  // No dropdown events needed - autocomplete handles its own events
+  // This function kept for API compatibility
 }
 
 /**
  * Update faction info display
  */
-function updateFactionInfo(factionId) {
+function updateFactionInfo(factionId, empire = null) {
   const factionTechCount = document.getElementById('faction-tech-count');
   if (!factionTechCount) return;
 
-  if (factionId === 'all') {
+  if (factionId === 'all' || !factionId) {
     factionTechCount.textContent = 'Showing all factions';
     return;
   }
 
+  // Show empire info if available
+  if (empire) {
+    const shipsInfo = empire.has_unique_ships ? ' (unique ships)' : '';
+    factionTechCount.textContent = `${empire.name}${shipsInfo}`;
+    return;
+  }
+
+  // Fallback to faction info
   const faction = getFactionById(factionId);
   if (faction) {
-    factionTechCount.textContent = `${faction.tech_count} technologies available`;
+    factionTechCount.textContent = `${faction.name} - ${faction.tech_count} technologies`;
   } else {
-    factionTechCount.textContent = '';
+    factionTechCount.textContent = `Faction: ${factionId}`;
   }
 }
 
 /**
- * Get current selected faction
+ * Get current selected faction (for filtering)
  */
 export function getCurrentFaction() {
   return currentFaction;
+}
+
+/**
+ * Get current selected empire
+ */
+export function getCurrentEmpire() {
+  return currentEmpire;
 }
 
 /**
@@ -119,10 +166,31 @@ export function getCurrentFaction() {
  */
 export function setCurrentFaction(factionId) {
   currentFaction = factionId;
+  updateFactionInfo(factionId);
+}
 
-  const factionSelect = document.getElementById('faction-select');
-  if (factionSelect) {
-    factionSelect.value = factionId;
-    updateFactionInfo(factionId);
+/**
+ * Set current empire by ID (programmatically, e.g., from URL params)
+ */
+export function setCurrentEmpireById(empireId) {
+  const empire = getEmpireById(empireId);
+  if (empire) {
+    handleEmpireSelect(empire);
+    setSelectedEmpire(empireId);
+  }
+}
+
+/**
+ * Clear selection (show all factions)
+ */
+export function clearFactionSelection() {
+  currentFaction = 'all';
+  currentEmpire = null;
+  updateFactionInfo('all');
+
+  // Clear autocomplete input
+  const input = document.getElementById('faction-search');
+  if (input) {
+    input.value = '';
   }
 }

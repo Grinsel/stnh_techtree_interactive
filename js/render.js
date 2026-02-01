@@ -1,7 +1,7 @@
 // Render module: shared rendering helpers
 // TODO: migrate renderStraightLinks, renderNodeBase, renderTierIndicator, renderNodeLabels, tooltip helpers, wrapText
 
-import { getTechName, isFactionExclusive } from './data.js';  // NEW Phase 2
+import { getTechName, isFactionExclusive, factionHasUniqueShips } from './data.js';  // NEW Phase 2
 
 /**
  * Map species ID to faction name for faction_ships lookup
@@ -496,23 +496,30 @@ export function formatTooltip(d, currentFactionId = 'all') {
         // Clone unlocks_by_type to avoid modifying original data
         const unlocksByType = JSON.parse(JSON.stringify(d.unlock_details.unlocks_by_type));
 
-        // Add faction-specific ships if faction is selected
+        // Add faction-specific ships if faction is selected AND faction has unique ships
+        // Factions without unique ships (like Breen) should only see generic ship names
         if (d.unlock_details.faction_ships && currentFactionId && currentFactionId !== 'all') {
-            // Map species IDs to faction names (e.g., 'FED' -> 'Federation')
-            const factionName = mapSpeciesToFactionName(currentFactionId);
-            const factionShips = d.unlock_details.faction_ships[factionName];
-            if (factionShips && factionShips.length > 0) {
-                if (!unlocksByType['Ship Type']) {
-                    unlocksByType['Ship Type'] = [];
-                }
-                // Add faction ships (avoid duplicates)
-                const existing = new Set(unlocksByType['Ship Type']);
-                for (const ship of factionShips) {
-                    if (!existing.has(ship)) {
-                        unlocksByType['Ship Type'].push(ship);
+            // Check if this faction has its own unique ships
+            const hasUniqueShips = factionHasUniqueShips(currentFactionId);
+
+            if (hasUniqueShips) {
+                // Map species IDs to faction names (e.g., 'FED' -> 'Federation')
+                const factionName = mapSpeciesToFactionName(currentFactionId);
+                const factionShips = d.unlock_details.faction_ships[factionName];
+                if (factionShips && factionShips.length > 0) {
+                    if (!unlocksByType['Ship Type']) {
+                        unlocksByType['Ship Type'] = [];
+                    }
+                    // Add faction ships (avoid duplicates)
+                    const existing = new Set(unlocksByType['Ship Type']);
+                    for (const ship of factionShips) {
+                        if (!existing.has(ship)) {
+                            unlocksByType['Ship Type'].push(ship);
+                        }
                     }
                 }
             }
+            // If hasUniqueShips is false, we don't add any faction_ships - only generic ships shown
         }
 
         // Use new grouped format

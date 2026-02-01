@@ -206,6 +206,89 @@
             font-family: var(--font);
             box-sizing: border-box;
         }
+        /* Faction Autocomplete Styles */
+        .faction-autocomplete {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .faction-autocomplete input {
+            width: 100%;
+            padding: 8px 10px;
+            background: #232b3d;
+            color: #eaf2ff;
+            border: 1px solid #2a3451;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--font);
+            box-sizing: border-box;
+        }
+        .faction-autocomplete input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 320px;
+            overflow-y: auto;
+            background: #1a1e27;
+            border: 1px solid var(--primary);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+        .autocomplete-dropdown.hidden {
+            display: none;
+        }
+        .autocomplete-group-header {
+            padding: 6px 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--primary);
+            background: #232b3d;
+            border-bottom: 1px solid #2a3451;
+            position: sticky;
+            top: 0;
+        }
+        .autocomplete-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #2a345166;
+        }
+        .autocomplete-item:hover,
+        .autocomplete-item.selected {
+            background: #3c4b7a;
+        }
+        .autocomplete-item .empire-name {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .autocomplete-item .ships-icon {
+            color: #ffd700;
+            margin-left: 8px;
+            font-size: 0.9rem;
+        }
+        .autocomplete-empty {
+            padding: 12px;
+            text-align: center;
+            color: #a0b0c0;
+            font-style: italic;
+        }
+        .autocomplete-hint {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            color: #a0b0c0;
+            background: #232b3d;
+            border-bottom: 1px solid #2a3451;
+        }
         #filters button {
             width: 100%;
             padding: 8px 10px;
@@ -672,10 +755,11 @@
                     <h2>Information</h2>
                     <div id="tech-counter">Displayed Technologies: 0</div>
                     <div id="filters">
-                        <label for="faction-select">Select Faction:</label>
-                        <select id="faction-select">
-                            <option value="all">All Factions</option>
-                        </select>
+                        <label for="faction-search">Select Empire:</label>
+                        <div class="faction-autocomplete">
+                            <input type="text" id="faction-search" placeholder="Search empires..." autocomplete="off">
+                            <div id="faction-dropdown" class="autocomplete-dropdown hidden"></div>
+                        </div>
                         <div id="faction-info" style="margin-top: 4px; margin-bottom: 12px; font-size: 0.95rem; color: #a0b0c0;">
                             <span id="faction-tech-count">Loading factions...</span>
                         </div>

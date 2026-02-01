@@ -39,6 +39,11 @@ GRAPHICAL_CULTURE_TO_FACTION = {
     'dom_02': 'Dominion',
     'borg_01': 'Borg',
     'borg_02': 'Borg',
+    'borg_yellow_01': 'Borg',
+    'borg_red_01': 'Borg',
+    'borg_blue_01': 'Borg',
+    'borg_purple_01': 'Borg',
+    'borg_orange_01': 'Borg',
     'ferengi_01': 'Ferengi',
     'ferengi_02': 'Ferengi',
     'bajoran_01': 'Bajoran',
@@ -91,33 +96,56 @@ COUNTRY_FLAG_TO_FACTION = {
     'gorn_hegemony': 'Gorn',
 }
 
+# Scripted triggers like is_borg_empire = yes
+SCRIPTED_TRIGGER_TO_FACTION = {
+    'is_borg_empire': 'Borg',
+    'is_federation_empire': 'Federation',
+    'is_klingon_empire': 'Klingon',
+    'is_romulan_empire': 'Romulan',
+    'is_cardassian_empire': 'Cardassian',
+    'is_dominion_empire': 'Dominion',
+    'is_ferengi_empire': 'Ferengi',
+    'is_terran_empire': 'Terran',
+}
+
 
 def extract_faction_from_block(block_content):
     """
     Extract faction from a ship_sizes block.
 
     Checks:
-    1. graphical_culture = { "fed_01" } - only if single culture
+    1. graphical_culture = { "fed_01" } - single or multiple mapping to same faction
     2. potential_country = { has_country_flag = xxx }
+    3. potential_country = { is_*_empire = yes }
 
-    If graphical_culture has MULTIPLE values, this is a generic ship
-    available for all listed factions - return None.
+    If graphical_culture has MULTIPLE values mapping to DIFFERENT factions,
+    this is a generic ship - return None.
 
     Returns:
         str or None: Faction name or None if generic
     """
-    # Try graphical_culture first - but only if there's exactly ONE
+    # Try graphical_culture first
     gc_match = re.search(r'graphical_culture\s*=\s*\{([^}]+)\}', block_content)
     if gc_match:
         gc_content = gc_match.group(1)
-        # Count quoted values - if more than one, it's generic
         all_cultures = re.findall(r'"([^"]+)"', gc_content)
+
         if len(all_cultures) == 1:
             gc = all_cultures[0]
             if gc in GRAPHICAL_CULTURE_TO_FACTION:
                 return GRAPHICAL_CULTURE_TO_FACTION[gc]
         elif len(all_cultures) > 1:
-            # Multiple graphical cultures = generic ship for all factions
+            # Check if ALL cultures map to the SAME faction
+            factions = set()
+            for gc in all_cultures:
+                if gc in GRAPHICAL_CULTURE_TO_FACTION:
+                    factions.add(GRAPHICAL_CULTURE_TO_FACTION[gc])
+
+            # If exactly one faction -> not generic (e.g., all Borg variants)
+            if len(factions) == 1:
+                return factions.pop()
+
+            # Multiple factions or unknown cultures -> generic
             return None
 
     # Try potential_country with has_country_flag
@@ -126,6 +154,13 @@ def extract_faction_from_block(block_content):
         flag = pc_match.group(1)
         if flag in COUNTRY_FLAG_TO_FACTION:
             return COUNTRY_FLAG_TO_FACTION[flag]
+
+    # Try potential_country with is_*_empire = yes triggers
+    empire_match = re.search(r'potential_country\s*=\s*\{[^}]*(is_\w+_empire)\s*=\s*yes', block_content, re.DOTALL)
+    if empire_match:
+        trigger = empire_match.group(1)
+        if trigger in SCRIPTED_TRIGGER_TO_FACTION:
+            return SCRIPTED_TRIGGER_TO_FACTION[trigger]
 
     return None
 
