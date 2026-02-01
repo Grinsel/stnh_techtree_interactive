@@ -1,4 +1,8 @@
-// Category Highlighting Module
+// DEPRECATED: Use filter-highlight.js instead!
+// This file is kept for backwards compatibility only.
+// The new filter-highlight.js supports both Category AND Unlock highlighting.
+
+// Category Highlighting Module (DEPRECATED)
 // Dims techs not matching the selected category
 
 let _categoryHighlightActive = false;

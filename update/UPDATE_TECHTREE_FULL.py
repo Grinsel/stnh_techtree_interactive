@@ -261,7 +261,9 @@ def generate_tech_data(logger: UpdateLogger) -> bool:
     print("=" * 70)
 
     logger.start_phase("Tech-Generierung")
+    all_success = True
 
+    # Generate main tech JSON files
     success, duration, _ = run_script(
         "create_tech_json_new.py",
         "Generate complete tech JSON files with all data",
@@ -299,11 +301,28 @@ def generate_tech_data(logger: UpdateLogger) -> bool:
                     duration,
                     output=output_stats if output_stats else None)
 
+    if not success:
+        all_success = False
+
+    # Generate unlock types JSON (for UI filter dropdown)
+    success2, duration2, _ = run_script(
+        "generate_unlock_types.py",
+        "Generate unlock types list for UI filter",
+        logger
+    )
+    logger.log_step("generate_unlock_types.py",
+                    "success" if success2 else "error",
+                    duration2)
+
+    if not success2:
+        all_success = False
+        logger.add_warning("Unlock types generation failed - UI filter may not work")
+
     if output_stats:
         logger.set_statistics(**output_stats)
 
-    logger.end_phase(success=success)
-    return success
+    logger.end_phase(success=all_success)
+    return all_success
 
 
 def verify_icons(logger: UpdateLogger) -> bool:
