@@ -1,6 +1,6 @@
 import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController, formatTooltip, createSvgFor, getAreaColor } from './js/render.js';
 import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculateAllPaths, loadTechnologyData, getAllTechsCached, isTechDataLoaded, filterTechsByFaction, isFactionExclusive } from './js/data.js';  // NEW Phase 2: added filterTechsByFaction, isFactionExclusive
-import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter, loadCategoryFilter } from './js/filters.js';
+import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter, loadCategoryFilter, loadUnlockFilter } from './js/filters.js';
 import { handleSearch as executeSearch } from './js/search.js';
 import { renderForceDirectedArrowsGraph as arrowsLayout } from './js/ui/layouts/arrows.js';
 import { renderForceDirectedGraph as forceLayout } from './js/ui/layouts/force.js';
@@ -17,7 +17,7 @@ import { renderPopupGraph } from './js/ui/popup.js';
 import { attachEventHandlers } from './js/ui/events.js';
 import { updateHistoryButtons } from './js/ui/history.js';
 import { initFactionDropdown, registerFactionEvents, getCurrentFaction } from './js/factions.js';  // NEW Phase 2
-import { initCategoryHighlight, isCategoryHighlightActive, getHighlightedCategory, setCategoryHighlightState, applyCategoryHighlight, clearCategoryHighlight, updateTechs as updateCategoryHighlightTechs } from './js/ui/category-highlight.js';
+import { initFilterHighlight, isFilterHighlightActive, getHighlightedCategory, getHighlightedUnlock, setFilterHighlightState, applyFilterHighlight, clearFilterHighlight, updateTechs as updateFilterHighlightTechs } from './js/ui/filter-highlight.js';
 
 // Global SVG and group so LOD can access current transform and selections
 let svg = null;
@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tooltip = document.getElementById('tooltip');
     const areaSelect = document.getElementById('area-select');
     const categorySelect = document.getElementById('category-select');
+    const unlockSelect = document.getElementById('unlock-select');
     const resetButton = document.getElementById('reset-button');
     const showTierButton = document.getElementById('show-tier-button');
     const techCounter = document.getElementById('tech-counter');
@@ -407,7 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Array.isArray(data)) {
                 allTechs = data;
                 // Initialize category highlighting with tech data
-                initCategoryHighlight(data);
+                initFilterHighlight(data);
             }
             // If data is already loaded, just re-render with current filters
             const currentState = loadState();
@@ -459,8 +460,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function applyFilters({ selectedSpecies, activeTechId }) {
         const selectedArea = areaSelect.value;
-        // When category highlighting is active, ignore category filter (show all techs, dim non-matching)
-        const selectedCategory = isCategoryHighlightActive() ? 'all' : categorySelect.value;
+        // When filter highlighting is active, ignore category and unlock filters (show all techs, dim non-matching)
+        const selectedCategory = isFilterHighlightActive() ? 'all' : categorySelect.value;
+        const selectedUnlock = isFilterHighlightActive() ? 'all' : unlockSelect.value;
         const isExclusive = factionExclusiveToggle.checked;
 
         // Base species/area filtering via data module (no active focus here yet)
@@ -471,6 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isExclusive,
             area: selectedArea,
             category: selectedCategory,
+            unlock: selectedUnlock,
             tierRange: { startTier: 0, endTier: 99 },
             activeTechId: null,
         });
@@ -728,7 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateHistoryButtons({ backButton, forwardButton, navigationHistory, historyIndex });
         techCounter.textContent = `Displayed Technologies: ${filteredTechs.length}`;
         // Update category highlighting with current visible techs
-        updateCategoryHighlightTechs(filteredTechs);
+        updateFilterHighlightTechs(filteredTechs);
         if (!isTierBasedLayout) {
             lastLayout = selectedLayout;
         }
@@ -854,80 +857,128 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('[Phase 2] Faction system initialized');
     }).catch(err => console.error('[Phase 2] Faction initialization failed:', err));
 
-    // Initialize category highlighting event handlers
-    const categoryHighlightToggle = document.getElementById('category-highlight-toggle');
-    let _categoryChangeHandledByHighlight = false; // Flag to prevent double-render
+    // Initialize filter highlighting event handlers (for Category AND Unlock)
+    const filterHighlightToggle = document.getElementById('filter-highlight-toggle');
+    let _filterChangeHandledByHighlight = false; // Flag to prevent double-render
 
-    if (categoryHighlightToggle && categorySelect) {
+    if (filterHighlightToggle && categorySelect && unlockSelect) {
         // Toggle handler - can be activated at any time
-        categoryHighlightToggle.addEventListener('change', (e) => {
+        filterHighlightToggle.addEventListener('change', (e) => {
             const selectedCategory = categorySelect.value;
+            const selectedUnlock = unlockSelect.value;
 
             if (e.target.checked) {
                 // Activate highlight mode
-                // If a category is selected, apply highlighting immediately
-                // If "all" is selected, just enable the mode (highlighting applies when category is chosen)
-                if (selectedCategory !== 'all') {
-                    setCategoryHighlightState(true, selectedCategory);
+                // If any filter is selected, apply highlighting immediately
+                const hasCategory = selectedCategory !== 'all';
+                const hasUnlock = selectedUnlock !== 'all';
+
+                if (hasCategory || hasUnlock) {
+                    setFilterHighlightState(true, selectedCategory, selectedUnlock);
                     window.updateVisualization(speciesSelect.value, null, false);
                 } else {
-                    // Just mark highlight mode as "ready" - will activate on category selection
-                    setCategoryHighlightState(true, null);
+                    // Just mark highlight mode as "ready" - will activate when filter is chosen
+                    setFilterHighlightState(true, null, null);
                 }
             } else {
-                // Clear highlighting and re-render with current category filter
-                clearCategoryHighlight();
+                // Clear highlighting and re-render with current filters
+                clearFilterHighlight();
                 window.updateVisualization(speciesSelect.value, null, false);
             }
         });
 
         // When category changes while highlight toggle is checked
         categorySelect.addEventListener('change', (e) => {
-            if (categoryHighlightToggle.checked) {
+            if (filterHighlightToggle.checked) {
                 const newCategory = e.target.value;
+                const currentUnlock = unlockSelect.value;
 
-                if (newCategory === 'all') {
-                    // Clear highlighting but keep toggle on (ready for next category)
-                    setCategoryHighlightState(true, null);
-                    clearCategoryHighlight();
-                    _categoryChangeHandledByHighlight = true;
-                    // Don't re-render - just clear the dimming classes
-                } else if (isCategoryHighlightActive()) {
+                // Update highlight state with new category
+                setFilterHighlightState(true, newCategory, currentUnlock);
+
+                if (isFilterHighlightActive()) {
                     // Already in highlight mode with techs rendered - just switch CSS classes
-                    setCategoryHighlightState(true, newCategory);
-                    applyCategoryHighlight(newCategory);
-                    _categoryChangeHandledByHighlight = true;
+                    applyFilterHighlight();
+                    _filterChangeHandledByHighlight = true;
                     // No re-render needed!
-                } else {
-                    // First category selection after toggle was enabled - need to render all techs
-                    setCategoryHighlightState(true, newCategory);
-                    _categoryChangeHandledByHighlight = true;
+                } else if (newCategory !== 'all' || currentUnlock !== 'all') {
+                    // First filter selection after toggle was enabled - need to render all techs
+                    _filterChangeHandledByHighlight = true;
                     window.updateVisualization(speciesSelect.value, null, false);
+                } else {
+                    // Both filters are "all" - just clear highlighting
+                    clearFilterHighlight();
+                    _filterChangeHandledByHighlight = true;
+                }
+            }
+        });
+
+        // When unlock changes while highlight toggle is checked
+        unlockSelect.addEventListener('change', (e) => {
+            if (filterHighlightToggle.checked) {
+                const currentCategory = categorySelect.value;
+                const newUnlock = e.target.value;
+
+                // Update highlight state with new unlock
+                setFilterHighlightState(true, currentCategory, newUnlock);
+
+                if (isFilterHighlightActive()) {
+                    // Already in highlight mode with techs rendered - just switch CSS classes
+                    applyFilterHighlight();
+                    _filterChangeHandledByHighlight = true;
+                    // No re-render needed!
+                } else if (currentCategory !== 'all' || newUnlock !== 'all') {
+                    // First filter selection after toggle was enabled - need to render all techs
+                    _filterChangeHandledByHighlight = true;
+                    window.updateVisualization(speciesSelect.value, null, false);
+                } else {
+                    // Both filters are "all" - just clear highlighting
+                    clearFilterHighlight();
+                    _filterChangeHandledByHighlight = true;
                 }
             }
         });
     }
 
     // Load species filter options at startup
-    let categoriesLoaded = false;
+    let filtersLoaded = false;
     loadSpeciesFilter(speciesSelect, {
         onLoaded: () => {
-            if (!categoriesLoaded) {
-                categoriesLoaded = true;
+            if (!filtersLoaded) {
+                filtersLoaded = true;
+                // Load category filter
                 loadCategoryFilter(categorySelect, {
                     onLoaded: () => {
-                        const initialState = loadState();
-                        applyState(initialState);
-                        // Add event listener for category select after it's populated
-                        categorySelect.addEventListener('change', () => {
-                            // Skip if category highlighting handler already handled this change
-                            if (_categoryChangeHandledByHighlight) {
-                                _categoryChangeHandledByHighlight = false;
-                                saveState();
-                                return;
+                        // Load unlock filter after category
+                        loadUnlockFilter(unlockSelect, {
+                            onLoaded: () => {
+                                const initialState = loadState();
+                                applyState(initialState);
+
+                                // Add event listener for category select after it's populated
+                                categorySelect.addEventListener('change', () => {
+                                    // Skip if filter highlighting handler already handled this change
+                                    if (_filterChangeHandledByHighlight) {
+                                        _filterChangeHandledByHighlight = false;
+                                        saveState();
+                                        return;
+                                    }
+                                    window.updateVisualization(speciesSelect.value, null, false);
+                                    saveState();
+                                });
+
+                                // Add event listener for unlock select after it's populated
+                                unlockSelect.addEventListener('change', () => {
+                                    // Skip if filter highlighting handler already handled this change
+                                    if (_filterChangeHandledByHighlight) {
+                                        _filterChangeHandledByHighlight = false;
+                                        saveState();
+                                        return;
+                                    }
+                                    window.updateVisualization(speciesSelect.value, null, false);
+                                    saveState();
+                                });
                             }
-                            window.updateVisualization(speciesSelect.value, null, false);
-                            saveState();
                         });
                     }
                 });

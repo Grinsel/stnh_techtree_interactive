@@ -33,10 +33,19 @@ export function filterTechsByCategory(techs, category) {
   return (techs || []).filter(t => Array.isArray(t.category) && t.category.includes(category));
 }
 
-export function filterTechs({ techs, species = 'all', isExclusive = false, area = 'all', category = 'all', tierRange = { startTier: 0, endTier: 99 }, activeTechId = null }) {
+export function filterTechsByUnlock(techs, unlockType) {
+  if (!unlockType || unlockType === 'all') return techs;
+  return (techs || []).filter(t => {
+    const unlocks = t.unlock_details?.unlocks_by_type;
+    return unlocks && Object.keys(unlocks).includes(unlockType);
+  });
+}
+
+export function filterTechs({ techs, species = 'all', isExclusive = false, area = 'all', category = 'all', unlock = 'all', tierRange = { startTier: 0, endTier: 99 }, activeTechId = null }) {
   let result = techs || [];
   result = filterTechsByArea(result, area);
   result = filterTechsByCategory(result, category);
+  result = filterTechsByUnlock(result, unlock);
   result = filterTechsBySpecies(result, species, isExclusive);
   result = filterConnected(result, activeTechId);
   result = filterTechsByTier(result, tierRange);
@@ -93,6 +102,29 @@ export function loadCategoryFilter(categorySelectEl, { onLoaded } = {}) {
     })
     .catch(error => {
       console.error('Error loading category list:', error);
+      return [];
+    });
+}
+
+// UI helper: populate unlock <select> from assets/unlock_types.json and notify when done
+export function loadUnlockFilter(unlockSelectEl, { onLoaded } = {}) {
+  if (!unlockSelectEl) return Promise.resolve([]);
+  return fetch('assets/unlock_types.json')
+    .then(response => response.json())
+    .then(unlockList => {
+      unlockList.forEach(unlock => {
+        const option = document.createElement('option');
+        option.value = unlock;
+        option.textContent = unlock;  // Already formatted (e.g., "Ship Type")
+        unlockSelectEl.appendChild(option);
+      });
+      if (typeof onLoaded === 'function') {
+        try { onLoaded(unlockList); } catch (_) {}
+      }
+      return unlockList;
+    })
+    .catch(error => {
+      console.error('Error loading unlock types list:', error);
       return [];
     });
 }
