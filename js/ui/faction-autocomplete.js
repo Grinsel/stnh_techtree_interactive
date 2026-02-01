@@ -8,6 +8,15 @@ let _onSelect = null;
 let _selectedIndex = -1;
 let _currentMatches = [];
 
+// Special display names and search aliases
+const EMPIRE_DISPLAY_NAMES = {
+  'undinevanguard': 'Undine/8472'
+};
+
+const EMPIRE_SEARCH_ALIASES = {
+  'undinevanguard': ['undine', 'undine vanguard', '8472', 'species 8472']
+};
+
 /**
  * Initialize the faction autocomplete component
  *
@@ -66,21 +75,51 @@ function handleInput(e) {
     return;
   }
 
-  // Filter empires by name or short_name
-  _currentMatches = _empires.filter(emp =>
-    emp.name.toLowerCase().includes(query) ||
-    (emp.short_name && emp.short_name.toLowerCase().includes(query))
-  ).slice(0, 20); // Max 20 results
+  // Filter empires by name, short_name, or aliases
+  _currentMatches = _empires.filter(emp => {
+    // Check name
+    if (emp.name.toLowerCase().includes(query)) return true;
+    // Check short_name
+    if (emp.short_name && emp.short_name.toLowerCase().includes(query)) return true;
+    // Check aliases
+    const aliases = EMPIRE_SEARCH_ALIASES[emp.id];
+    if (aliases && aliases.some(alias => alias.includes(query))) return true;
+    return false;
+  }).slice(0, 20); // Max 20 results
 
   _selectedIndex = -1;
   renderDropdown(_currentMatches);
 }
 
 /**
- * Show all empires (grouped by quadrant)
+ * Get display name for an empire (with special overrides)
+ */
+function getDisplayName(emp) {
+  return EMPIRE_DISPLAY_NAMES[emp.id] || emp.name;
+}
+
+/**
+ * Show major powers + random minor empires when no filter is active
  */
 function showAllEmpires() {
-  _currentMatches = _empires.slice(0, 30); // Show first 30
+  // Always show all major powers (except Undine)
+  const majors = _empires.filter(emp =>
+    emp.quadrant === 'major' && emp.id !== 'undinevanguard'
+  );
+
+  // Get random minor empires from each quadrant
+  const quadrants = ['alpha', 'beta', 'gamma', 'delta'];
+  const minors = [];
+
+  for (const q of quadrants) {
+    const quadrantEmpires = _empires.filter(emp => emp.quadrant === q);
+    // Pick 2 random empires from each quadrant
+    const shuffled = quadrantEmpires.sort(() => Math.random() - 0.5);
+    minors.push(...shuffled.slice(0, 2));
+  }
+
+  // Combine majors + minors
+  _currentMatches = [...majors, ...minors];
   _selectedIndex = -1;
   renderDropdown(_currentMatches, true);
 }
@@ -97,8 +136,8 @@ function renderDropdown(matches, showHint = false) {
 
   let html = '';
 
-  if (showHint && _empires.length > 30) {
-    html += `<div class="autocomplete-hint">Showing ${matches.length} of ${_empires.length} empires. Type to filter...</div>`;
+  if (showHint) {
+    html += `<div class="autocomplete-hint">Type to search all ${_empires.length} empires...</div>`;
   }
 
   // Group by quadrant for better organization
@@ -133,7 +172,7 @@ function renderDropdown(matches, showHint = false) {
 
       html += `
         <div class="autocomplete-item ${selectedClass}" data-index="${idx}">
-          <span class="empire-name">${escapeHtml(emp.name)}</span>
+          <span class="empire-name">${escapeHtml(getDisplayName(emp))}</span>
           ${shipsIcon}
         </div>
       `;
@@ -226,7 +265,7 @@ function scrollToSelected() {
  * Select an empire and trigger callback
  */
 function selectEmpire(empire) {
-  _input.value = empire.name;
+  _input.value = getDisplayName(empire);
   hideDropdown();
 
   if (_onSelect && typeof _onSelect === 'function') {
@@ -259,7 +298,7 @@ function escapeHtml(text) {
 export function setSelectedEmpire(empireId) {
   const empire = _empires.find(e => e.id === empireId);
   if (empire && _input) {
-    _input.value = empire.name;
+    _input.value = getDisplayName(empire);
   }
 }
 
