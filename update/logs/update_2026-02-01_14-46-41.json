@@ -1,0 +1,153 @@
+{
+  "session": {
+    "start_time": "2026-02-01T14:46:41.553850",
+    "end_time": "2026-02-01T14:46:53.975003",
+    "duration_seconds": 12.42,
+    "success": true
+  },
+  "environment": {
+    "python_version": "3.14.0",
+    "platform": "Windows",
+    "platform_version": "10.0.26200",
+    "working_directory": "C:\\Users\\marcj\\git09\\stnh_techtree_interactive\\update",
+    "stnh_mod_path": "C:\\Users\\marcj\\git01\\New-Horizons-Development",
+    "techtree_path": "C:\\Users\\marcj\\git09\\stnh_techtree_interactive"
+  },
+  "phases": [
+    {
+      "name": "Validierung",
+      "start_time": "2026-02-01T14:46:41.595811",
+      "end_time": "2026-02-01T14:46:41.639204",
+      "duration_ms": 43,
+      "steps": [
+        {
+          "script": "config.py",
+          "status": "success",
+          "duration_ms": 43,
+          "timestamp": "2026-02-01T14:46:41.639199",
+          "output": {
+            "paths_valid": true,
+            "balance_center_available": false
+          }
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "Daten-Caching",
+      "start_time": "2026-02-01T14:46:41.639216",
+      "end_time": "2026-02-01T14:46:42.226399",
+      "duration_ms": 587,
+      "steps": [
+        {
+          "script": "parse_localisation.py",
+          "status": "success",
+          "duration_ms": 556,
+          "timestamp": "2026-02-01T14:46:42.195303"
+        },
+        {
+          "script": "create_trigger_map.py",
+          "status": "success",
+          "duration_ms": 31,
+          "timestamp": "2026-02-01T14:46:42.226391"
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "Icon-Vorbereitung",
+      "start_time": "2026-02-01T14:46:42.226413",
+      "end_time": "2026-02-01T14:46:42.344322",
+      "duration_ms": 117,
+      "steps": [
+        {
+          "script": "extract_icon_mappings.py",
+          "status": "success",
+          "duration_ms": 117,
+          "timestamp": "2026-02-01T14:46:42.344313"
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "Tech-Generierung",
+      "start_time": "2026-02-01T14:46:42.344334",
+      "end_time": "2026-02-01T14:46:52.653303",
+      "duration_ms": 10308,
+      "steps": [
+        {
+          "script": "create_tech_json_new.py",
+          "status": "success",
+          "duration_ms": 10227,
+          "timestamp": "2026-02-01T14:46:52.605684",
+          "output": {
+            "techs_physics": 739,
+            "techs_engineering": 634,
+            "techs_society": 618,
+            "techs_total": 1991,
+            "factions": 35
+          }
+        },
+        {
+          "script": "generate_unlock_types.py",
+          "status": "success",
+          "duration_ms": 47,
+          "timestamp": "2026-02-01T14:46:52.653291"
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "Icon-Verifikation",
+      "start_time": "2026-02-01T14:46:52.653998",
+      "end_time": "2026-02-01T14:46:53.974968",
+      "duration_ms": 1320,
+      "steps": [
+        {
+          "script": "verify_all_icons.py",
+          "status": "success",
+          "duration_ms": 1316,
+          "timestamp": "2026-02-01T14:46:53.974955",
+          "output": {
+            "dds_files_to_convert": 0,
+            "webp_icons_available": 1659
+          }
+        }
+      ],
+      "success": true
+    },
+    {
+      "name": "Abschluss",
+      "start_time": "2026-02-01T14:46:53.974988",
+      "end_time": "2026-02-01T14:46:53.975001",
+      "duration_ms": 0,
+      "steps": [
+        {
+          "script": "finalization",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-01T14:46:53.974999"
+        }
+      ],
+      "success": true
+    }
+  ],
+  "statistics": {
+    "techs_physics": 739,
+    "techs_engineering": 634,
+    "techs_society": 618,
+    "techs_total": 1991,
+    "factions": 35,
+    "dds_files_to_convert": 0,
+    "icons_webp_available": 1659,
+    "icon_coverage_percent": 83.32
+  },
+  "manual_steps_required": [
+    "Test locally in browser",
+    "Commit and push changes"
+  ],
+  "errors": [],
+  "warnings": [
+    "Balance Center not available, using fallback parser"
+  ]
+}

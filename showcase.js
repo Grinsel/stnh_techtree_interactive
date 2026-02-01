@@ -164,8 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastSearchedTechId = null;
     let selectionStartNode = null;
     let selectionEndNode = null;
-    let navigationHistory = [];
-    let historyIndex = -1;
+    let navigationHistory = [null]; // null = Hauptbaum-Ansicht
+    let historyIndex = 0;
     let isTreeInitialized = false;
     let allTechs = [];
     let nodes = [];
@@ -423,9 +423,14 @@ document.addEventListener('DOMContentLoaded', () => {
             window.currentFocusId = initialFocusValid ? currentState.focus : null;
             activeTechId = window.currentFocusId;
 
+            // History immer mit Hauptbaum (null) starten
+            navigationHistory = [null];
+            historyIndex = 0;
+
+            // Falls URL einen Focus hat, diesen zur History hinzufügen
             if (activeTechId) {
-                navigationHistory = [activeTechId];
-                historyIndex = 0;
+                navigationHistory.push(activeTechId);
+                historyIndex = 1;
             }
 
             updateVisualization(currentState.species, activeTechId, false);
@@ -816,11 +821,12 @@ document.addEventListener('DOMContentLoaded', () => {
             loadAndRenderTree();
             return;
         }
-        if (addToHistory && highlightId && highlightId !== activeTechId) {
+        // History-Update: auch null (Hauptbaum) tracken für Zurück/Vor Navigation
+        if (addToHistory && highlightId !== activeTechId) {
             if (historyIndex < navigationHistory.length - 1) {
                 navigationHistory = navigationHistory.slice(0, historyIndex + 1);
             }
-            navigationHistory.push(highlightId);
+            navigationHistory.push(highlightId); // highlightId kann null (Hauptbaum) oder tech-ID sein
             historyIndex = navigationHistory.length - 1;
         }
 

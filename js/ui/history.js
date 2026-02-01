@@ -5,8 +5,12 @@
 
 export function updateHistoryButtons({ backButton, forwardButton, navigationHistory, historyIndex }) {
   if (!backButton || !forwardButton || !Array.isArray(navigationHistory)) return;
-  backButton.style.display = navigationHistory.length > 1 ? 'inline-block' : 'none';
-  forwardButton.style.display = navigationHistory.length > 1 ? 'inline-block' : 'none';
+
+  // Buttons IMMER sichtbar
+  backButton.style.display = 'inline-block';
+  forwardButton.style.display = 'inline-block';
+
+  // Disabled-State basierend auf Position in History
   backButton.disabled = historyIndex <= 0;
   forwardButton.disabled = historyIndex >= navigationHistory.length - 1;
 }
