@@ -20,7 +20,7 @@ from component_parser import ComponentParser
 from supplemental_tech_parser import SupplementalTechParser
 from reverse_unlock_parser import ReverseUnlockParser
 from extract_icon_mappings import extract_icon_mappings
-from ship_name_parser import build_tech_to_ships_mapping
+from ship_name_parser import build_tech_to_faction_ships_mapping
 from config import STNH_MOD_ROOT, OUTPUT_ASSETS_DIR, OUTPUT_ROOT_DIR
 
 
@@ -80,21 +80,32 @@ def transform_tech_to_website_format(tech, faction_mappings, loc_loader, compone
     reverse_unlock_data = reverse_unlocks.get(tech_id, [])
     enhanced['unlock_details'] = extract_unlock_details(unlocks, reverse_unlock_data, loc_loader)
 
-    # 4b. Add faction-specific ship names to Ship Type unlocks
+    # 4b. Add faction-specific ship names
+    # ship_names_mapping is now: {faction: [ship_names], ...} where '_generic' = no faction
     if ship_names_mapping and tech_id in ship_names_mapping:
-        ship_names = ship_names_mapping[tech_id]
-        if ship_names:
+        faction_ships_data = ship_names_mapping[tech_id]
+        if faction_ships_data:
             # Ensure unlocks_by_type exists
             if 'unlocks_by_type' not in enhanced['unlock_details']:
                 enhanced['unlock_details']['unlocks_by_type'] = {}
-            # Ensure Ship Type list exists
-            if 'Ship Type' not in enhanced['unlock_details']['unlocks_by_type']:
-                enhanced['unlock_details']['unlocks_by_type']['Ship Type'] = []
-            # Add ship names (avoid duplicates)
-            existing = set(enhanced['unlock_details']['unlocks_by_type']['Ship Type'])
-            for name in ship_names:
-                if name not in existing:
-                    enhanced['unlock_details']['unlocks_by_type']['Ship Type'].append(name)
+
+            # Generic ships go to Ship Type (for backwards compatibility)
+            if '_generic' in faction_ships_data:
+                if 'Ship Type' not in enhanced['unlock_details']['unlocks_by_type']:
+                    enhanced['unlock_details']['unlocks_by_type']['Ship Type'] = []
+                existing = set(enhanced['unlock_details']['unlocks_by_type']['Ship Type'])
+                for name in faction_ships_data['_generic']:
+                    if name not in existing:
+                        enhanced['unlock_details']['unlocks_by_type']['Ship Type'].append(name)
+
+            # Faction-specific ships go to faction_ships
+            faction_ships = {}
+            for faction, ships in faction_ships_data.items():
+                if faction != '_generic' and ships:
+                    faction_ships[faction] = ships
+
+            if faction_ships:
+                enhanced['unlock_details']['faction_ships'] = faction_ships
 
     # 5. Faction availability
     # TODO: Implement determine_faction_availability()
@@ -188,18 +199,30 @@ def transform_supplemental_tech_to_website_format(tech, faction_mappings, loc_lo
 
     enhanced['unlock_details'] = unlock_details
 
-    # Add faction-specific ship names to Ship Type unlocks
+    # Add faction-specific ship names
     if ship_names_mapping and tech_id in ship_names_mapping:
-        ship_names = ship_names_mapping[tech_id]
-        if ship_names:
+        faction_ships_data = ship_names_mapping[tech_id]
+        if faction_ships_data:
             if 'unlocks_by_type' not in enhanced['unlock_details']:
                 enhanced['unlock_details']['unlocks_by_type'] = {}
-            if 'Ship Type' not in enhanced['unlock_details']['unlocks_by_type']:
-                enhanced['unlock_details']['unlocks_by_type']['Ship Type'] = []
-            existing = set(enhanced['unlock_details']['unlocks_by_type']['Ship Type'])
-            for name in ship_names:
-                if name not in existing:
-                    enhanced['unlock_details']['unlocks_by_type']['Ship Type'].append(name)
+
+            # Generic ships go to Ship Type
+            if '_generic' in faction_ships_data:
+                if 'Ship Type' not in enhanced['unlock_details']['unlocks_by_type']:
+                    enhanced['unlock_details']['unlocks_by_type']['Ship Type'] = []
+                existing = set(enhanced['unlock_details']['unlocks_by_type']['Ship Type'])
+                for name in faction_ships_data['_generic']:
+                    if name not in existing:
+                        enhanced['unlock_details']['unlocks_by_type']['Ship Type'].append(name)
+
+            # Faction-specific ships go to faction_ships
+            faction_ships = {}
+            for faction, ships in faction_ships_data.items():
+                if faction != '_generic' and ships:
+                    faction_ships[faction] = ships
+
+            if faction_ships:
+                enhanced['unlock_details']['faction_ships'] = faction_ships
 
     # Faction availability (reuse existing function)
     enhanced['faction_availability'] = determine_faction_availability(tech, faction_mappings)
@@ -818,7 +841,7 @@ def generate_complete_tech_data():
     ship_sizes_dir = os.path.join(STNH_MOD_ROOT, "common", "ship_sizes")
     loc_dir = os.path.join(STNH_MOD_ROOT, "localisation", "english")
     component_dir = os.path.join(STNH_MOD_ROOT, "common", "component_templates")
-    ship_names_mapping = build_tech_to_ships_mapping(ship_sizes_dir, loc_dir, component_dir)
+    ship_names_mapping = build_tech_to_faction_ships_mapping(ship_sizes_dir, loc_dir, component_dir)
     print()
 
     # 2. Extract ALL data

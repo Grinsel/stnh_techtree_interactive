@@ -4,6 +4,47 @@
 import { getTechName, isFactionExclusive } from './data.js';  // NEW Phase 2
 
 /**
+ * Map species ID to faction name for faction_ships lookup
+ * Species IDs in species.json are already in the correct format (e.g., 'Federation', 'Klingon')
+ * This function handles any edge cases or normalization needed
+ */
+function mapSpeciesToFactionName(speciesId) {
+    if (!speciesId || speciesId === 'all') return null;
+
+    // Direct mapping for common variations
+    const mappings = {
+        'federation': 'Federation',
+        'klingon': 'Klingon',
+        'romulan': 'Romulan',
+        'cardassian': 'Cardassian',
+        'dominion': 'Dominion',
+        'borg': 'Borg',
+        'ferengi': 'Ferengi',
+        'vulcan': 'Vulcan',
+        'andorian': 'Andorian',
+        'tellarite': 'Tellarite',
+        'bajoran': 'Bajoran',
+        'terran': 'Terran',
+        'xindi': 'Xindi',
+        'breen': 'Breen',
+        'tholian': 'Tholian',
+        'hirogen': 'Hirogen',
+        'undine': 'Undine',
+        'vidiian': 'Vidiian',
+        "son'a": "Son'a",
+    };
+
+    // Try lowercase lookup first
+    const lower = speciesId.toLowerCase();
+    if (mappings[lower]) {
+        return mappings[lower];
+    }
+
+    // If already in correct format (e.g., 'Federation'), return as-is
+    return speciesId;
+}
+
+/**
  * Phase 3: Format effects with grouping by category
  */
 function formatEffectsGrouped(effects) {
@@ -452,8 +493,30 @@ export function formatTooltip(d, currentFactionId = 'all') {
     let unlocksHtml = '';
 
     if (d.unlock_details && d.unlock_details.unlocks_by_type) {
+        // Clone unlocks_by_type to avoid modifying original data
+        const unlocksByType = JSON.parse(JSON.stringify(d.unlock_details.unlocks_by_type));
+
+        // Add faction-specific ships if faction is selected
+        if (d.unlock_details.faction_ships && currentFactionId && currentFactionId !== 'all') {
+            // Map species IDs to faction names (e.g., 'FED' -> 'Federation')
+            const factionName = mapSpeciesToFactionName(currentFactionId);
+            const factionShips = d.unlock_details.faction_ships[factionName];
+            if (factionShips && factionShips.length > 0) {
+                if (!unlocksByType['Ship Type']) {
+                    unlocksByType['Ship Type'] = [];
+                }
+                // Add faction ships (avoid duplicates)
+                const existing = new Set(unlocksByType['Ship Type']);
+                for (const ship of factionShips) {
+                    if (!existing.has(ship)) {
+                        unlocksByType['Ship Type'].push(ship);
+                    }
+                }
+            }
+        }
+
         // Use new grouped format
-        unlocksHtml = formatUnlocksGrouped(d.unlock_details.unlocks_by_type);
+        unlocksHtml = formatUnlocksGrouped(unlocksByType);
     } else if (d.unlock_details && d.unlock_details.description) {
         // Fallback to description string (legacy)
         unlocksHtml = d.unlock_details.description;

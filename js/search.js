@@ -156,6 +156,17 @@ export function findMatchingTechs(techs, term, nameOnly = false) {
         }
       }
     }
+    // Search unlock_details.faction_ships (faction-specific ship names)
+    // Always search ALL factions, regardless of current filter
+    if (n.unlock_details && n.unlock_details.faction_ships) {
+      for (const [faction, ships] of Object.entries(n.unlock_details.faction_ships)) {
+        if (Array.isArray(ships)) {
+          for (const ship of ships) {
+            if (typeof ship === 'string' && ship.toLowerCase().includes(q)) return true;
+          }
+        }
+      }
+    }
     return false;
   });
 }

@@ -6446,7 +6446,11 @@
       "buildings": [],
       "other": [],
       "description": "",
-      "unlocks_by_type": {}
+      "unlocks_by_type": {
+        "Ship Type": [
+          "Type-7 Shuttlecraft"
+        ]
+      }
     },
     "faction_availability": {},
     "is_rare": false,
@@ -6735,7 +6739,11 @@
           "Custom"
         ],
         "Ship Type": [
-          "Dreadnought Vengeance",
+          "Dreadnought Vengeance"
+        ]
+      },
+      "faction_ships": {
+        "Federation": [
           "Vengeance-Class"
         ]
       }
@@ -33620,6 +33628,11 @@
           "Cruiser",
           "Battleship"
         ]
+      },
+      "faction_ships": {
+        "Cardassian": [
+          "Galor-Class Battleship"
+        ]
       }
     },
     "faction_availability": {},
@@ -36363,7 +36376,11 @@
       "description": "Unlocks Ship: Kulinor Class  | Ship Type: 01 War Cruiser Letau",
       "unlocks_by_type": {
         "Ship Type": [
-          "01 War Cruiser Letau",
+          "01 War Cruiser Letau"
+        ]
+      },
+      "faction_ships": {
+        "Cardassian": [
           "Letau-Class War Cruiser"
         ]
       }
@@ -36417,6 +36434,12 @@
           "01 War Cruiser Ekoor",
           "01 Adv Cruiser Obsidian",
           "Dominion Super-Carrier"
+        ]
+      },
+      "faction_ships": {
+        "Cardassian": [
+          "Dominion Super-Carrier",
+          "Hutet-Class Super-Carrier"
         ]
       }
     },
@@ -36908,7 +36931,11 @@
       "unlocks_by_type": {
         "Ship Type": [
           "01 Weapons Platform Chintoka",
-          "01 Cruiser Kimal",
+          "01 Cruiser Kimal"
+        ]
+      },
+      "faction_ships": {
+        "Cardassian": [
           "Chintoka-Class Weapons Platform",
           "Kimal-Class Strike Cruiser"
         ]
@@ -37716,7 +37743,11 @@
       "unlocks_by_type": {
         "Ship Type": [
           "01 Bio Scout",
-          "01 Bio Frigate",
+          "01 Bio Frigate"
+        ]
+      },
+      "faction_ships": {
+        "Undine": [
           "Bio-Scout"
         ]
       }
@@ -37997,11 +38028,15 @@
       "description": "Country Limit: Planet Killer Degra Limit | Ship Type: Planet Killer Degra",
       "unlocks_by_type": {
         "Ship Type": [
-          "Planet Killer Degra",
-          "Degra-Class Planet Destroyer"
+          "Planet Killer Degra"
         ],
         "Country Limit": [
           "Planet Killer Degra Limit"
+        ]
+      },
+      "faction_ships": {
+        "Xindi": [
+          "Degra-Class Planet Destroyer"
         ]
       }
     },
