@@ -128,3 +128,83 @@ export function loadUnlockFilter(unlockSelectEl, { onLoaded } = {}) {
       return [];
     });
 }
+
+// --- Adaptive Filter Functions ---
+
+/**
+ * Get available unlock types for techs matching a category
+ * @param {Array} techs - All technologies
+ * @param {string} category - Selected category (or 'all')
+ * @returns {Set} Set of available unlock type names
+ */
+function getAvailableUnlocks(techs, category) {
+  const unlocks = new Set();
+  const filtered = category && category !== 'all'
+    ? techs.filter(t => Array.isArray(t.category) && t.category.includes(category))
+    : techs;
+
+  filtered.forEach(t => {
+    const types = t.unlock_details?.unlocks_by_type;
+    if (types) Object.keys(types).forEach(u => unlocks.add(u));
+  });
+  return unlocks;
+}
+
+/**
+ * Get available categories for techs matching an unlock type
+ * @param {Array} techs - All technologies
+ * @param {string} unlock - Selected unlock type (or 'all')
+ * @returns {Set} Set of available category names
+ */
+function getAvailableCategories(techs, unlock) {
+  const categories = new Set();
+  const filtered = unlock && unlock !== 'all'
+    ? techs.filter(t => {
+        const types = t.unlock_details?.unlocks_by_type;
+        return types && Object.keys(types).includes(unlock);
+      })
+    : techs;
+
+  filtered.forEach(t => {
+    if (Array.isArray(t.category)) {
+      t.category.forEach(c => categories.add(c));
+    }
+  });
+  return categories;
+}
+
+/**
+ * Update dropdown options based on current filter selection.
+ * Disables options that would produce no results when combined with the other filter.
+ * @param {Object} params
+ * @param {Array} params.techs - All technologies to consider
+ * @param {HTMLSelectElement} params.categorySelect - Category dropdown element
+ * @param {HTMLSelectElement} params.unlockSelect - Unlock dropdown element
+ * @param {string} params.currentCategory - Currently selected category
+ * @param {string} params.currentUnlock - Currently selected unlock type
+ */
+export function updateAdaptiveFilters({
+  techs,
+  categorySelect,
+  unlockSelect,
+  currentCategory,
+  currentUnlock
+}) {
+  if (!categorySelect || !unlockSelect || !Array.isArray(techs)) return;
+
+  // Update unlock options based on selected category
+  const availableUnlocks = getAvailableUnlocks(techs, currentCategory);
+  Array.from(unlockSelect.options).forEach(opt => {
+    if (opt.value === 'all') return; // "All" always enabled
+    opt.disabled = !availableUnlocks.has(opt.value);
+    opt.style.color = opt.disabled ? '#666' : '';
+  });
+
+  // Update category options based on selected unlock
+  const availableCategories = getAvailableCategories(techs, currentUnlock);
+  Array.from(categorySelect.options).forEach(opt => {
+    if (opt.value === 'all') return; // "All" always enabled
+    opt.disabled = !availableCategories.has(opt.value);
+    opt.style.color = opt.disabled ? '#666' : '';
+  });
+}

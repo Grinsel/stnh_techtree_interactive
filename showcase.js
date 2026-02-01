@@ -1,6 +1,6 @@
 import { updateLOD, calculateAndRenderPath as calculateAndRenderPathController, formatTooltip, createSvgFor, getAreaColor } from './js/render.js';
 import { buildLinksFromPrereqs, getConnectedTechIds, getPrerequisites as getPrerequisitesData, calculateAllPaths, loadTechnologyData, getAllTechsCached, isTechDataLoaded, filterTechsByFaction, isFactionExclusive } from './js/data.js';  // NEW Phase 2: added filterTechsByFaction, isFactionExclusive
-import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter, loadCategoryFilter, loadUnlockFilter } from './js/filters.js';
+import { filterTechsByTier as filterTechsByTierData, filterTechs, loadSpeciesFilter, loadCategoryFilter, loadUnlockFilter, updateAdaptiveFilters } from './js/filters.js';
 import { handleSearch as executeSearch } from './js/search.js';
 import { renderForceDirectedArrowsGraph as arrowsLayout } from './js/ui/layouts/arrows.js';
 import { renderForceDirectedGraph as forceLayout } from './js/ui/layouts/force.js';
@@ -961,16 +961,30 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const initialState = loadState();
                                 applyState(initialState);
 
+                                // Helper: update adaptive filter options
+                                function refreshAdaptiveFilters() {
+                                    const sourceTechs = getAllTechsCached() || allTechs;
+                                    updateAdaptiveFilters({
+                                        techs: sourceTechs,
+                                        categorySelect,
+                                        unlockSelect,
+                                        currentCategory: categorySelect.value,
+                                        currentUnlock: unlockSelect.value
+                                    });
+                                }
+
                                 // Add event listener for category select after it's populated
                                 categorySelect.addEventListener('change', () => {
                                     // Skip if filter highlighting handler already handled this change
                                     if (_filterChangeHandledByHighlight) {
                                         _filterChangeHandledByHighlight = false;
                                         saveState();
+                                        refreshAdaptiveFilters();
                                         return;
                                     }
                                     window.updateVisualization(speciesSelect.value, null, false);
                                     saveState();
+                                    refreshAdaptiveFilters();
                                 });
 
                                 // Add event listener for unlock select after it's populated
@@ -979,11 +993,16 @@ document.addEventListener('DOMContentLoaded', () => {
                                     if (_filterChangeHandledByHighlight) {
                                         _filterChangeHandledByHighlight = false;
                                         saveState();
+                                        refreshAdaptiveFilters();
                                         return;
                                     }
                                     window.updateVisualization(speciesSelect.value, null, false);
                                     saveState();
+                                    refreshAdaptiveFilters();
                                 });
+
+                                // Initial adaptive filter setup
+                                refreshAdaptiveFilters();
                             }
                         });
                     }
