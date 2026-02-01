@@ -72,6 +72,7 @@ Das Master-Script `UPDATE_TECHTREE_FULL.py` führt 6 Phasen aus:
 | `balance_center_bridge.py` | Bridge zum Balance Center Parser |
 | `component_parser.py` | Extrahiert Komponenten-Effekte |
 | `reverse_unlock_parser.py` | Findet was jede Tech freischaltet |
+| `ship_name_parser.py` | Extrahiert Fraktions-Schiffsnamen aus ship_sizes |
 | `supplemental_tech_parser.py` | Fängt vom Balance Center verpasste Techs |
 | `parse_localisation.py` | Cached Lokalisierungsstrings |
 | `create_trigger_map.py` | Erstellt Fraktions-Mappings |
@@ -183,6 +184,10 @@ Das Master-Script `UPDATE_TECHTREE_FULL.py` führt 6 Phasen aus:
       "Building": [...],
       "Ship Type": [...],
       "Component": [...]
+    },
+    "faction_ships": {
+      "Cardassian": ["Galor-Class Battleship"],
+      "Federation": ["Vengeance-Class"]
     }
   },
   "description": "...",
@@ -236,3 +241,6 @@ Dies wird korrekt behandelt.
 | 2026-01 | `UPDATE_TECHTREE_FULL.py` mit JSON-Logging |
 | 2026-01 | Unlock-Type Icons (Stellaris Game Icons) |
 | 2026-01 | Ordner von `scripts/` zu `update/` umbenannt |
+| 2026-02 | `ship_name_parser.py` fuer Fraktions-Schiffsnamen |
+| 2026-02 | `faction_ships` Struktur in Tech-JSON fuer fraktionsspezifische Schiffe |
+| 2026-02 | JS-Suche durchsucht alle faction_ships, Tooltip filtert nach Fraktion |
