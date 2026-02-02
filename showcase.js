@@ -18,6 +18,7 @@ import { attachEventHandlers } from './js/ui/events.js';
 import { updateHistoryButtons } from './js/ui/history.js';
 import { initFactionDropdown, registerFactionEvents, getCurrentFaction } from './js/factions.js';  // NEW Phase 2
 import { initFilterHighlight, isFilterHighlightActive, getHighlightedCategory, getHighlightedUnlock, setFilterHighlightState, applyFilterHighlight, clearFilterHighlight, updateTechs as updateFilterHighlightTechs } from './js/ui/filter-highlight.js';
+import { initPathHighlight, setRenderedNodes, setActiveTechId as setPathHighlightActiveTech, handleTechHover, handleTechHoverDecoupled, handleTechMouseOut, clearPathHighlight, setHighlightDirection, getHighlightDirection } from './js/ui/path-highlight.js';
 
 // Global SVG and group so LOD can access current transform and selections
 let svg = null;
@@ -185,58 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Path Highlighting ---
-    function findPathToActive(startNodeId, activeNodeId, allNodes) {
-        if (!startNodeId || !activeNodeId) return { nodes: [], links: [] };
-
-        const nodeMap = new Map(allNodes.map(n => [n.id, n]));
-        const allPathNodes = new Set();
-        const allPathLinks = new Set();
-
-        function findAllPathsRecursive(currentNodeId, currentPathNodes, currentPathLinks, visited) {
-            const currentNode = nodeMap.get(currentNodeId);
-            if (!currentNode || visited.has(currentNodeId)) {
-                return;
-            }
-
-            visited.add(currentNodeId);
-            currentPathNodes.add(currentNodeId);
-
-            if (currentNodeId === activeNodeId) {
-                currentPathNodes.forEach(nodeId => allPathNodes.add(nodeId));
-                currentPathLinks.forEach(linkId => allPathLinks.add(linkId));
-            } else if (currentNode.prerequisites) {
-                for (const prereqId of currentNode.prerequisites) {
-                    if (nodeMap.has(prereqId)) {
-                        const newPathLinks = new Set(currentPathLinks);
-                        newPathLinks.add(`${prereqId}-${currentNodeId}`);
-                        findAllPathsRecursive(prereqId, new Set(currentPathNodes), newPathLinks, new Set(visited));
-                    }
-                }
-            }
-        }
-
-        findAllPathsRecursive(startNodeId, new Set(), new Set(), new Set());
-
-        return { nodes: Array.from(allPathNodes), links: Array.from(allPathLinks) };
-    }
-
-    function highlightPath(path) {
-        if (!g) return;
-        clearHighlight(); // Clear any previous highlight
-        g.selectAll('.link')
-            .filter(d => path.links.includes(`${d.source.id}-${d.target.id}`))
-            .classed('path-highlight', true);
-        
-        g.selectAll('.tech-node')
-            .filter(d => path.nodes.includes(d.id))
-            .classed('path-highlight', true);
-    }
-
-    function clearHighlight() {
-        if (!g) return;
-        g.selectAll('.link.path-highlight').classed('path-highlight', false);
-        g.selectAll('.tech-node.path-highlight').classed('path-highlight', false);
-    }
+    // Now handled by js/ui/path-highlight.js module
+    // Functions: handleTechHover, handleTechMouseOut, clearPathHighlight
 
 
     // --- History Navigation ---
@@ -407,8 +358,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTechnologyData().then(data => {
             if (Array.isArray(data)) {
                 allTechs = data;
-                // Initialize category highlighting with tech data
+                // Initialize highlighting modules with tech data
                 initFilterHighlight(data);
+                initPathHighlight(data);
             }
             // If data is already loaded, just re-render with current filters
             const currentState = loadState();
@@ -654,12 +606,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 // NEW Phase 2: Pass current faction to tooltip
                 tooltipEl.innerHTML = formatTooltip(d, getCurrentFaction());
 
-                if (activeTechId && d.id !== activeTechId) {
-                    const path = findPathToActive(d.id, activeTechId, nodes);
-                    if (path.nodes.length > 0) {
-                        highlightPath(path);
-                    }
-                }
+                // DECOUPLED path highlighting - shows ALL prerequisites or dependents
+                // Works independently of activeTechId
+                setRenderedNodes(nodes);
+                handleTechHoverDecoupled(d.id, _g, {
+                    nodeWidth,
+                    nodeHeight,
+                    getAreaColor
+                });
             })
             .on('mousemove', (event) => {
                 const treeRect = techTreeContainerEl.getBoundingClientRect();
@@ -673,7 +627,8 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .on('mouseout', () => {
                 tooltipEl.style.display = 'none';
-                clearHighlight();
+                // Clear path highlighting and remove ghost nodes
+                handleTechMouseOut();
             })
             .on('click', (event, d) => {
                 window.currentFocusId = d.id;
@@ -1099,4 +1054,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initially hide the toggle button
     document.getElementById('toggle-layout-button').style.display = 'none';
+
+    // Path direction toggle button
+    const pathDirectionBtn = document.getElementById('path-direction-btn');
+    if (pathDirectionBtn) {
+        pathDirectionBtn.addEventListener('click', () => {
+            const current = getHighlightDirection();
+            const newDir = current === 'prerequisites' ? 'dependents' : 'prerequisites';
+            setHighlightDirection(newDir);
+
+            // Update button text and styling
+            if (newDir === 'prerequisites') {
+                pathDirectionBtn.textContent = '← Prereqs';
+                pathDirectionBtn.classList.remove('active-dependents');
+            } else {
+                pathDirectionBtn.textContent = 'Dependents →';
+                pathDirectionBtn.classList.add('active-dependents');
+            }
+        });
+    }
 });

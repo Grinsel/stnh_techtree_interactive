@@ -492,14 +492,64 @@
         .tech-node rect {
             stroke-width: 4px;
         }
+        /* Path highlighting - dimmed non-path elements */
+        .tech-node.path-dimmed {
+            opacity: 0.15;
+            transition: opacity 0.2s ease;
+        }
+        .tech-node.path-dimmed rect {
+            filter: saturate(0.2);
+        }
+        .link.path-dimmed {
+            opacity: 0.05;
+            transition: opacity 0.2s ease;
+        }
+        /* Path highlighting - highlighted path elements */
         .link.path-highlight {
-            stroke: white !important;
+            stroke: cyan !important;
             stroke-width: 3px !important;
             stroke-opacity: 1 !important;
         }
         .tech-node.path-highlight rect {
-            stroke: white !important;
+            stroke: cyan !important;
             stroke-width: 3px !important;
+        }
+        /* Ghost nodes (missing prerequisites) */
+        .ghost-node {
+            pointer-events: none;
+        }
+        .ghost-node rect {
+            fill-opacity: 0.4 !important;
+            stroke-dasharray: 5,5 !important;
+        }
+        .ghost-link {
+            stroke-dasharray: 5,5 !important;
+            stroke-opacity: 0.6 !important;
+        }
+        /* Path direction toggle button */
+        #path-direction-btn {
+            background: #2a3a5a;
+            color: #8af;
+            border: 1px solid #3c80ff88;
+            padding: 7px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: var(--font);
+            transition: background 0.15s, border 0.15s;
+        }
+        #path-direction-btn:hover {
+            background: #3c4b7a;
+            border-color: #3c80ff;
+        }
+        #path-direction-btn.active-dependents {
+            background: #5a3a2a;
+            color: #fa8;
+            border-color: #ff803c88;
+        }
+        #path-direction-btn.active-dependents:hover {
+            background: #7a4b3a;
+            border-color: #ff803c;
         }
         /* Category highlighting - dim non-matching techs */
         .tech-node.category-dimmed {
@@ -894,6 +944,7 @@
                     <option value="disjoint-force-directed">Disjoint force-directed</option>
                 </select>
                 <button id="toggle-layout-button">Toggle Tiers</button>
+                <button id="path-direction-btn" title="Toggle: Prerequisites ↔ Dependents">← Prereqs</button>
                 <label for="performance-toggle" style="margin: 0;">Performance mode</label>
                 <label class="switch">
                     <input type="checkbox" id="performance-toggle" checked>
