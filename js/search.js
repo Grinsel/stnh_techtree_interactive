@@ -99,8 +99,11 @@ export function runSearch({
     .attr('class', 'tech-node')
     .on('mouseover', (event, d) => {
       if (!tooltipEl) return;
-      tooltipEl.style.display = 'block';
-      tooltipEl.innerHTML = formatTooltip(d);
+      const tooltipToggle = document.getElementById('tooltip-toggle');
+      if (!tooltipToggle || tooltipToggle.checked) {
+        tooltipEl.style.display = 'block';
+        tooltipEl.innerHTML = formatTooltip(d);
+      }
     })
     .on('mousemove', (event) => {
       if (!tooltipEl) return;

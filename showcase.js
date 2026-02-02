@@ -602,9 +602,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr('class', 'tech-node')
             .attr('transform', d => `translate(${d.x},${d.y})`)
             .on('mouseover', (event, d) => {
-                tooltipEl.style.display = 'block';
-                // NEW Phase 2: Pass current faction to tooltip
-                tooltipEl.innerHTML = formatTooltip(d, getCurrentFaction());
+                // Tooltip nur anzeigen wenn Toggle aktiv
+                const tooltipToggle = document.getElementById('tooltip-toggle');
+                if (!tooltipToggle || tooltipToggle.checked) {
+                    tooltipEl.style.display = 'block';
+                    tooltipEl.innerHTML = formatTooltip(d, getCurrentFaction());
+                }
 
                 // DECOUPLED path highlighting - shows ALL prerequisites or dependents
                 // Works independently of activeTechId

@@ -83,8 +83,11 @@ export function renderDisjointForceDirectedGraph(nodes, links, selectedSpecies, 
     .attr('class', 'tech-node')
     .call(drag(simulation))
     .on('mouseover', (event, d) => {
-      tooltipEl.style.display = 'block';
-      tooltipEl.innerHTML = formatTooltip(d);
+      const tooltipToggle = document.getElementById('tooltip-toggle');
+      if (!tooltipToggle || tooltipToggle.checked) {
+        tooltipEl.style.display = 'block';
+        tooltipEl.innerHTML = formatTooltip(d);
+      }
     })
     .on('mousemove', (event) => {
       const treeRect = techTreeContainerEl.getBoundingClientRect();
