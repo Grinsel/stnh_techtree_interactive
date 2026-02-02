@@ -1,7 +1,7 @@
 # STNH Techtree Interactive - Aktuelle TODOs
 
-**Stand:** 2025-01-30 nach Abschluss von Plan Phase 1-3
-**Status:** Plan abgeschlossen, bereit für nächste Schritte
+**Stand:** 2025-02-02 nach UI-Verbesserungen
+**Status:** Neue Features implementiert, bereit für Deployment
 
 ---
 
@@ -17,6 +17,19 @@
 - ✅ Finale Dokumentation erstellt
 
 **Ergebnis:** 85-90% Vollständigkeit erreicht! 🎉
+
+### UI-Verbesserungen (2025-02-02)
+- ✅ **Adaptive Filter Dropdowns**: Category ↔ Unlock Filter deaktivieren inkompatible Optionen
+- ✅ **Filter Highlighting**: Toggle zum Hervorheben statt Filtern (Category + Unlock)
+- ✅ **Path Highlighting (entkoppelt)**: Zeigt alle Prerequisites/Dependents beim Hover
+- ✅ **Richtungs-Toggle**: Umschalten zwischen "← Prerequisites" und "Dependents →"
+- ✅ **Ghost-Nodes**: Gefilterte Techs werden als Ghost-Nodes in der Kette angezeigt
+- ✅ **Tooltip-Toggle**: Ein/Ausschalten des Tooltips für bessere Übersicht
+- ✅ **Navigation Fix**: Back/Forward Buttons immer sichtbar
+
+**Neue Module:**
+- `js/ui/path-highlight.js` - Prereq/Dependent Highlighting
+- `js/ui/filter-highlight.js` - Category/Unlock Highlighting
 
 ---
 

@@ -245,6 +245,47 @@ Tier 0  Tier 1  Tier 2  Tier 3  Tier 4  Tier 5
 
 **Algorithmus:** Simple Grid-Positionierung (Rows × Columns)
 
+## UI-Highlighting-Module
+
+### Path-Highlight (path-highlight.js)
+
+**Zweck:** Zeigt bei Hover alle Prerequisites oder Dependents einer Tech
+
+**Features:**
+- **Entkoppelt**: Funktioniert unabhängig von der aktiven (gelben) Tech
+- **Bidirektional**: Toggle zwischen Prerequisites (←) und Dependents (→)
+- **Ghost-Nodes**: Gefilterte Techs werden als Ghost-Nodes angezeigt
+- **Dimming**: Nicht-relevante Nodes werden ausgeblendet
+
+**Algorithmus:**
+```javascript
+// Prerequisites: Rekursive Sammlung aller Voraussetzungen
+getAllPrerequisites(techId) → Set<techId>
+
+// Dependents: Alle Techs die diese Tech als Prereq haben
+getAllDescendants(techId) → Set<techId>
+```
+
+### Filter-Highlight (filter-highlight.js)
+
+**Zweck:** Hebt Techs hervor die Category/Unlock-Filter matchen
+
+**Features:**
+- Toggle "Highlight Filters" in Sidebar
+- Zeigt ALLE Techs, dimmt nicht-matchende
+- Kombiniert Category + Unlock Filter
+- Kein Re-Rendering nötig - nur CSS-Klassen
+
+### Tooltip-Toggle
+
+**Zweck:** Ein/Ausschalten des Tooltips beim Hover
+
+**Location:** `#view-legend` unter den Zoom-Buttons
+
+**Implementierung:** Alle mouseover-Handler prüfen `#tooltip-toggle.checked`
+
+---
+
 ## UI-Interaktionen
 
 ### Event-System (events.js)

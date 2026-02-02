@@ -28,6 +28,8 @@ stnh_techtree_interactive/
 │       ├── history.js
 │       ├── popup.js
 │       ├── tooltip.js
+│       ├── path-highlight.js      [NEU - Prereq/Dependent Highlighting]
+│       ├── filter-highlight.js    [NEU - Category/Unlock Highlighting]
 │       └── layouts/
 │           ├── force.js
 │           ├── arrows.js
@@ -391,6 +393,46 @@ export function showPathInPopup(techs, links, startId, endId)
 **Zweck:** Placeholder für zukünftige Tooltip-Logik
 
 **Hinweis:** Derzeit ist Tooltip-Logik in `render.js::formatTooltip()` implementiert.
+
+---
+
+#### `path-highlight.js` (NEU)
+**Status:** ✅ AKTIV - ESSENTIELL
+**Zweck:** Prerequisite/Dependent Highlighting beim Hover
+
+**Funktionen:**
+- `initPathHighlight(allTechs)` - Initialisierung mit Tech-Daten
+- `calculateHighlight(hoveredId)` - Berechnet alle Prereqs ODER Dependents
+- `handleTechHoverDecoupled(hoveredId, g, options)` - Hover-Handler
+- `setHighlightDirection(direction)` - 'prerequisites' oder 'dependents'
+- `addGhostNodes(missingNodes, g, options)` - Ghost-Nodes für gefilterte Techs
+- `applyPathHighlight(nodes, links)` - CSS-Klassen für Dimming/Highlighting
+- `clearPathHighlight()` - Entfernt Highlighting und Ghost-Nodes
+
+**Features:**
+- Entkoppelt von activeTechId - funktioniert auf jeder Tech
+- Richtungs-Toggle (← Prerequisites / Dependents →)
+- Ghost-Nodes für nicht-gerenderte Techs in der Kette
+- Dimming aller nicht-relevanten Nodes
+
+---
+
+#### `filter-highlight.js` (NEU)
+**Status:** ✅ AKTIV - ESSENTIELL
+**Zweck:** Category/Unlock Filter Highlighting
+
+**Funktionen:**
+- `initFilterHighlight(allTechs)` - Initialisierung
+- `setFilterHighlightState(active, category, unlock)` - State setzen
+- `applyFilterHighlight()` - CSS-Klassen anwenden
+- `clearFilterHighlight()` - Highlighting entfernen
+- `isFilterHighlightActive()` - Status prüfen
+
+**Features:**
+- "Highlight Filters" Toggle in Sidebar
+- Zeigt alle Techs, dimmt nicht-matchende
+- Kombiniert Category + Unlock Filter
+- Schnelles Umschalten ohne Re-Rendering
 
 ---
 
