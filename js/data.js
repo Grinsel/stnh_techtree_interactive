@@ -1,5 +1,5 @@
 // Data module: prepares and caches data for rendering.
-// UI-agnostic: no DOM or d3 usage here.
+// UI-agnostic: no DOM or d3 usage here. 
 
 // --- In-memory caches ---
 let _techs = null;            // Array<Tech>
