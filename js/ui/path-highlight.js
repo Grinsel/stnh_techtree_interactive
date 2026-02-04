@@ -248,47 +248,55 @@ export function addGhostNodes(missingNodes, g, options = {}) {
   if (!missingNodes?.length || !g || g.empty()) return [];
 
   const { nodeWidth = 140, nodeHeight = 80, getAreaColor } = options;
+  const padY = 40;
 
-  // Calculate positions for ghost nodes based on their tier
+  // Collect positions from existing rendered nodes
   const existingNodes = g.selectAll('.tech-node').data();
   const tierPositions = {};
 
   existingNodes.forEach(n => {
     const tier = n.tier || 0;
     if (!tierPositions[tier]) {
-      tierPositions[tier] = { x: n.x, nodes: [], maxY: n.y };
+      tierPositions[tier] = { x: n.x, maxY: n.y };
     }
-    tierPositions[tier].nodes.push(n);
     tierPositions[tier].maxY = Math.max(tierPositions[tier].maxY, n.y);
   });
+
+  // Global baseline: below ALL existing nodes across ALL tiers
+  const allMaxY = Object.values(tierPositions).map(t => t.maxY);
+  const globalMaxY = allMaxY.length > 0 ? Math.max(...allMaxY) : 200;
+  const ghostBaseY = globalMaxY + nodeHeight + 60;
+
+  // Track ghost count per tier for stacking
+  const ghostCountPerTier = {};
 
   // Create ghost node group
   const ghostGroup = g.append('g').attr('class', 'ghost-nodes-layer');
 
   missingNodes.forEach(node => {
     const tier = node.tier || 0;
-    let x, y;
+    if (!ghostCountPerTier[tier]) ghostCountPerTier[tier] = 0;
 
+    let x;
     if (tierPositions[tier]) {
-      // Place at same X as other nodes in this tier, below them
       x = tierPositions[tier].x;
-      y = tierPositions[tier].maxY + nodeHeight + 40;
-      tierPositions[tier].maxY = y;
     } else {
-      // No existing nodes in this tier - estimate position
+      // Estimate X for tiers with no existing nodes
       const tierKeys = Object.keys(tierPositions).map(Number).sort((a, b) => a - b);
       if (tierKeys.length > 0) {
         const nearestTier = tierKeys.reduce((prev, curr) =>
           Math.abs(curr - tier) < Math.abs(prev - tier) ? curr : prev
         );
         x = tierPositions[nearestTier].x + (tier - nearestTier) * (nodeWidth + 70);
-        y = 200;
       } else {
         x = 200 + tier * (nodeWidth + 70);
-        y = 200;
       }
-      tierPositions[tier] = { x, nodes: [], maxY: y };
+      tierPositions[tier] = { x, maxY: ghostBaseY };
     }
+
+    // Stack ghost nodes below the global baseline (aligned across tiers)
+    const y = ghostBaseY + ghostCountPerTier[tier] * (nodeHeight + padY);
+    ghostCountPerTier[tier]++;
 
     // Store position on node for link calculation
     node.x = x;
